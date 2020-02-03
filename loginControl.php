@@ -6,9 +6,10 @@
 	$getMail = $_POST["mailField"];
 	$getPassword = $_POST["passField"];
 
-	if($getMail == null || $getPassword == null || $getMail == " " || $getPassword == " ")
+	if(isNullorOnlySpace($getPassword) || isNullorOnlySpace($getMail))
 	{
-		echo "Giriş hatası ile karşılaşıldı";
+		echo "Giriş bilgileri doğru değil. Geri Yönlendiriliyorsunuz...";
+		redirectWithTimer("login");
 	}
 	else
 	{
