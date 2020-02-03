@@ -24,11 +24,13 @@ error_reporting(E_ERROR | E_PARSE);
 
 //Ana dizinde değişiklik yapmadan alt sayfalarda geliştirme modu
 //-------------------------------------------------------------------
-$url1="external/tkeskin/";
-$url2="external/ekamis/";
-$url3="external/mmor/";
-$url4="external/aboga/";
-$url5="external/eunlu/";
+$url1 = "external/tkeskin/";
+$url2 = "external/ekamis/";
+$url3 = "external/mmor/";
+$url4 = "external/aboga/";
+$url5 = "external/eunlu/";
+
+$urlSelection = $url1;
 
 
 function allowDMode()
@@ -39,12 +41,12 @@ function allowDMode()
 
 function isDevelopmentModeOn()
 {
-	global $url1;
+	global $urlSelection;
 
 	if(allowDMode())
 	{
 		//define('URL', url1);
-		return $url1;
+		return $urlSelection;
 	}
 	else
 	{
@@ -54,20 +56,20 @@ function isDevelopmentModeOn()
 }
 //-------------------------------------------------------------------
 
-
+//Ara sayfalarda link geçişleri için.
 function getLink($URL)
 {
-	global $url1;
+	global $urlSelection;
 
 	if(allowDMode())
 	{
 		if($URL == "index")
 		{
-			return $url1;
+			return $urlSelection;
 		}
 		else
 		{
-			return $url1."".$URL;
+			return $urlSelection."".$URL;
 		}
 		//define('URL', url1);
 	}
@@ -84,7 +86,6 @@ function getLink($URL)
 		//define('URL', "/");
 	}
 }
-
 
 
 
@@ -193,14 +194,16 @@ function loginControl($getMail, $getPassword)
 	}
 	else
 	{
-		echo "Giriş bilgileri doğru değil.";
-		//echo "<br><br><a href=\"". redirectTo("login") ."\">Geri dön.</a>";
-		////echo "<br><br><a href=\"".redirectWithTimer("external/tkeskin/login")."\">Geri Dön</a>";
+		echo "Giriş bilgileri doğru değil. Geri Yönlendiriliyorsunuz...";
+		redirectWithTimer("login");
+		
+		/*
 		echo "<br><br><a href=\"login?goBack\">Geri Dön</a>";
 		if(isset($_GET["goBack"]))
 		{
 			redirectTo("index");
 		}
+		*/
 	}
 }
 
@@ -287,5 +290,21 @@ function userRegistration($getUserName, $getPassword, $getEmail, $getFirstName, 
 	}
 	$conn->close();
 }
+
+
+function isNullorOnlySpace($userInput)
+{
+	if(is_null($userInput) or ctype_space($userInput))
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
+
+
+
 
 ?>
