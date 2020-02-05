@@ -6,17 +6,26 @@ body
 
 .header
 {
-
+  display:block;
+  /*! position: relative !important; */
+  /*! float: left; */
 }
 
 .footer
 {
 
+	height: 30px;
+	background-color: #616161;
 }
 
 .content
 {
 	
+	background-color: yellow;
+	/*! position: relative; */
+	height: 100px;
+	display: block;
+	box-sizing: border-box;
 }
 
 
@@ -66,4 +75,32 @@ body
 	margin-left:3px;
 	margin-right:3px;	
 	
+}
+
+
+.headerInline
+{
+	width: 100%;
+	/*! float: left; */
+	background-color:
+	gray;
+	height: 35px;
+	position: relative !important;
+	box-sizing: border-box;
+		display: table;
+}
+
+.linkBar
+{
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.userBar
+{
+	text-align:right;
+	width:300px;
+	display: table-cell;
+	vertical-align: middle;
+	padding-right: 10px;
 }
