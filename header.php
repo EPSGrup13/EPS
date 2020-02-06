@@ -15,7 +15,10 @@
 		<?php
 			if(isSessionActive())
 			{
-				echo $_SESSION["firstName"]. " " .$_SESSION["lastName"]. " &nbsp;&nbsp;Bakiye: " .$_SESSION["balance"]."₺";
+				getSessionDisplayName();
+				echo " &nbsp;&nbsp;";
+				getUserBalance();
+				
 				//echo "&nbsp;&nbsp;<a href=\"external/tkeskin/?logout\">logout</a>";
 				echo "&nbsp;&nbsp;<a href=\"".getLink("?logout")."\">logout</a>";
 				//echo "<a href=\"?logout\">logout</a>";
