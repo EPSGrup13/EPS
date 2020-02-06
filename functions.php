@@ -54,7 +54,7 @@ function isDevelopmentModeOn()
 		return "";
 	}
 }
-//-------------------------------------------------------------------
+
 
 //Ara sayfalarda link geçişleri için.
 function getLink($URL)
@@ -86,6 +86,7 @@ function getLink($URL)
 		//define('URL', "/");
 	}
 }
+//-------------------------------------------------------------------
 
 
 
@@ -147,6 +148,8 @@ function redirectTo($pageURL)
 	}
 }
 
+//Yönlendirilecek sayfalara zaman ekler. Kullanımı redirectTo ile aynı.
+//Mevcut durumda hatalı üye girişi, 404 vb. sayfalarda kullanılmakta.
 function redirectWithTimer($pageURL)
 {
 	//$getURL=trim($pageURL,".php");
@@ -163,6 +166,8 @@ function redirectWithTimer($pageURL)
 	}
 }
 
+
+//Kullanıcı giriş bilgilerini doğrular ve session oluşturur.
 function loginControl($getMail, $getPassword)
 {
 	global $conn;
@@ -205,6 +210,33 @@ function loginControl($getMail, $getPassword)
 		}
 		*/
 	}
+	$conn->close();
+}
+
+function getAllCities()
+{
+	global $conn;
+
+	$sql = "SELECT city_id, city_name FROM City";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0)
+	{
+		echo "<div class=\"cityFrame\">";
+		while($row = $result->fetch_assoc())
+		{
+
+			echo "<div class=\"city\">";
+				echo "<div class=\"cityNum\">".$row["city_id"]."</div>";
+				echo "<div class=\"cityName\">".$row["city_name"]."</div>";
+			echo "</div>";
+
+		}
+		echo "</div>";
+	}
+	else
+	{
+		echo "Hata ile karşılaşıldı.";
+	}
 }
 
 
@@ -214,6 +246,7 @@ function convertPassToMD5($password)
 	return $password;
 }
 
+//Mevcutta session var mı diye kontrol eder.
 function isSessionActive()
 {
 	if(isset($_SESSION["userName"]) && isset($_SESSION["userPassword"]) && isset($_SESSION["userType"]) && isset($_SESSION["userStatus"]) && isset($_SESSION["balance"]) && isset($_SESSION["firstName"]) && isset($_SESSION["lastName"]) && isset($_SESSION["email"]))
@@ -227,6 +260,8 @@ function isSessionActive()
 	return $isActive;
 }
 
+
+//Mevcut session'ı sonlandırır.
 function destroyUserSession()
 {
 	session_unset();
@@ -292,6 +327,7 @@ function userRegistration($getUserName, $getPassword, $getEmail, $getFirstName, 
 }
 
 
+//Formdan gönderilmiş olan verilerin boş olmadığından veya space karakteri ile dolu olmadığından emin olmak için.
 function isNullorOnlySpace($userInput)
 {
 	if(is_null($userInput) or ctype_space($userInput))
@@ -302,6 +338,20 @@ function isNullorOnlySpace($userInput)
 	{
 		return FALSE;
 	}
+}
+
+//Kullanıcı girişi yapmış kişinin ismini ve soyismini gönderir.
+//kullanmadan önce isSessionActive() kullanmak gerekir, session yoksa problem çıkacaktır.
+function getSessionDisplayName()
+{
+	echo $_SESSION["firstName"]. " " .$_SESSION["lastName"];
+}
+
+//Kullanıcı girişi yapmış kişinin bakiyesini gönderir.
+//kullanmadan önce isSessionActive() kullanmak gerekir, session yoksa problem çıkacaktır.
+function getUserBalance()
+{
+	echo "Bakiye: " .$_SESSION["balance"]."₺";
 }
 
 
