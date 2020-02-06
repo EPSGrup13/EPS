@@ -7,7 +7,9 @@
 
 
 
-
+<?php
+	getAllCities();
+?>
 
 
 </div>
