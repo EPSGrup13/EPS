@@ -217,7 +217,7 @@ function getAllCities()
 {
 	global $conn;
 
-	$sql = "SELECT city_id, city_name FROM City";
+	$sql = "SELECT City.city_id, Slug.slug_title, Slug.slug_url FROM City INNER JOIN Slug ON City.slug_id = Slug.slug_id";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0)
 	{
@@ -227,7 +227,7 @@ function getAllCities()
 
 			echo "<div class=\"city\">";
 				echo "<div class=\"cityNum\">".$row["city_id"]."</div>";
-				echo "<div class=\"cityName\">".$row["city_name"]."</div>";
+				echo "<div class=\"cityName\"><a href=\"".isDevelopmentModeOn()."".$row["slug_url"]."/parklar\">".$row["slug_title"]."</a></div>";
 			echo "</div>";
 
 		}
@@ -237,6 +237,7 @@ function getAllCities()
 	{
 		echo "Hata ile karşılaşıldı.";
 	}
+	$conn->close();
 }
 
 
@@ -352,6 +353,41 @@ function getSessionDisplayName()
 function getUserBalance()
 {
 	echo "Bakiye: " .$_SESSION["balance"]."₺";
+}
+
+
+function getParks($city)
+{
+	global $conn;
+
+	echo $city." otoparkları: <br><br>";
+
+	$sql = "SELECT Park.park_id, Park.parkName, Park.maxNumCars, Park.currentNumCars, Park.province_id, Province.province_name, Park.person_id, Person.firstName, Person.lastName, Province.city_id, City.city_name FROM Park INNER JOIN Person ON Park.person_id = Person.person_id INNER JOIN Province ON Park.province_id = Province.province_id INNER JOIN City ON Province.city_id = City.city_id WHERE City.city_id IN (SELECT slug_id FROM Slug WHERE slug_url = '$city')";
+
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0)
+	{
+		while($row = $result->fetch_assoc())
+		{
+			echo "Park id: ".$row["park_id"]. "<br>";
+			echo "Park Adı: ".$row["parkName"]. "<br>";
+			echo "Maksimum Araç Sayısı: ".$row["maxNumCars"]. "<br>";
+			echo "Mevcut Araç Sayısı: ".$row["currentNumCars"]. "<br>";
+			echo "İlçe id: ".$row["province_id"]. "<br>";
+			echo "İlçe adı: ".$row["province_name"]. "<br>";
+			echo "Park Sahibi id: ".$row["person_id"]. "<br>";
+			echo "Park Sahibi: ".$row["firstName"]." ".$row["lastName"]. "<br>";
+			echo "İl id: ".$row["city_id"]. "<br>";
+			echo "İl Adı: ".$row["city_name"]. "<br>";
+
+			echo "<br><br><br>";
+		}
+	}
+	else
+	{
+		echo "Otopark Bulunamadı.";
+	}
+	$conn->close();
 }
 
 
