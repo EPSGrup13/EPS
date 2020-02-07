@@ -5,5 +5,11 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d 
 RewriteCond %{REQUEST_FILENAME}\.php -f 
 RewriteRule ^(.*)$ $1.php
+#tip1-link
+#RewriteRule ^([0-9a-zA-Z-_]+)$ parks.php?city=$1 [L,QSA]
+#tip2-link
+RewriteRule ^parklar/([0-9a-zA-Z-_]+)$ parks.php?city=$1 [L,QSA]
+#tip3-link
+RewriteRule ^([0-9a-zA-Z-_]+)/parklar$ parks.php?city=$1 [L,QSA]
 
 ErrorDocument 404 /404.php
