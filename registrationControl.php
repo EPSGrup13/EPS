@@ -11,7 +11,7 @@
 
 	if(isNullorOnlySpace($getUserName) || isNullorOnlySpace($getPassword) || isNullorOnlySpace($getEmail) || isNullorOnlySpace($getFirstName) || isNullorOnlySpace($getLastName))
 	{
-		echo "Tüm alanları eksiksiz doldurunuz. Geril Yönlendiriliyorsunuz...";
+		echo "Tüm alanları eksiksiz doldurunuz. Geri Yönlendiriliyorsunuz...";
 		redirectWithTimer("registration");
 	}
 	else
