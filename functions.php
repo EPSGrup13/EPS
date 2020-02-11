@@ -174,7 +174,7 @@ function loginControl($getMail, $getPassword)
 	//Kullanıcıdan gelen inputu kontrol ederek sorguya göndereceğiz.
 	$mailCheck = mysqli_real_escape_string($conn,$getMail);
 	$passwordCheck = mysqli_real_escape_string($conn,$getPassword);
-	$sql = "SELECT User.userName, User.userPassword, User.userType, User.userStatus, User.balance, Person.firstName, Person.lastName, Person.email FROM User  INNER JOIN Person ON User.person_id = Person.person_id WHERE (Person.email = \"$mailCheck\" AND User.userPassword = \"$passwordCheck\") OR (User.userName = \"$mailCheck\" AND User.userPassword = \"$passwordCheck\")";
+	$sql = "SELECT User.userName, User.userPassword, User.userType, User.userStatus, User.balance, User.person_id, Person.firstName, Person.lastName, Person.email FROM User  INNER JOIN Person ON User.person_id = Person.person_id WHERE (Person.email = \"$mailCheck\" AND User.userPassword = \"$passwordCheck\") OR (User.userName = \"$mailCheck\" AND User.userPassword = \"$passwordCheck\")";
 	$result = $conn->query($sql);
 
 	if ($result->num_rows > 0)
@@ -190,6 +190,7 @@ function loginControl($getMail, $getPassword)
 			$_SESSION["userType"] = $row["userType"];
 			$_SESSION["userStatus"] = $row["userStatus"];
 			$_SESSION["balance"] = $row["balance"];
+			$_SESSION["person_id"] = $row["person_id"];
 			$_SESSION["firstName"] = $row["firstName"];
 			$_SESSION["lastName"] = $row["lastName"];
 			$_SESSION["email"] = $row["email"];
@@ -345,7 +346,7 @@ function isNullorOnlySpace($userInput)
 //kullanmadan önce isSessionActive() kullanmak gerekir, session yoksa problem çıkacaktır.
 function getSessionDisplayName()
 {
-	echo $_SESSION["firstName"]. " " .$_SESSION["lastName"];
+	echo "<a href=\"".isDevelopmentModeOn()."settings/profile\">".$_SESSION["firstName"]. " " .$_SESSION["lastName"]."</a>";
 }
 
 //Kullanıcı girişi yapmış kişinin bakiyesini gönderir.
@@ -360,7 +361,7 @@ function getParks($city)
 {
 	global $conn;
 
-	echo $city." otoparkları: <br><br>";
+	echo getCityTitle($city)." otoparkları: <br><br>";
 
 	$sql = "SELECT Park.park_id, Park.parkName, Park.maxNumCars, Park.currentNumCars, Park.province_id, Province.province_name, Park.person_id, Person.firstName, Person.lastName, Province.city_id, City.city_name FROM Park INNER JOIN Person ON Park.person_id = Person.person_id INNER JOIN Province ON Park.province_id = Province.province_id INNER JOIN City ON Province.city_id = City.city_id WHERE City.city_id IN (SELECT slug_id FROM Slug WHERE slug_url = '$city')";
 
@@ -369,17 +370,30 @@ function getParks($city)
 	{
 		while($row = $result->fetch_assoc())
 		{
-			echo "Park id: ".$row["park_id"]. "<br>";
-			echo "Park Adı: ".$row["parkName"]. "<br>";
-			echo "Maksimum Araç Sayısı: ".$row["maxNumCars"]. "<br>";
-			echo "Mevcut Araç Sayısı: ".$row["currentNumCars"]. "<br>";
-			echo "İlçe id: ".$row["province_id"]. "<br>";
-			echo "İlçe adı: ".$row["province_name"]. "<br>";
-			echo "Park Sahibi id: ".$row["person_id"]. "<br>";
-			echo "Park Sahibi: ".$row["firstName"]." ".$row["lastName"]. "<br>";
-			echo "İl id: ".$row["city_id"]. "<br>";
-			echo "İl Adı: ".$row["city_name"]. "<br>";
+			//echo "Park id: ".$row["park_id"]. "<br>";
+			$parkId = $row["park_id"];
+			echo "Park : ".$row["parkName"]. "<br>"; //Park Adı
+			//echo "Maksimum Araç Sayısı: ".$row["maxNumCars"]. "<br>";
+			//echo "Mevcut Araç Sayısı: ".$row["currentNumCars"]. "<br>";
+			//echo "İlçe id: ".$row["province_id"]. "<br>";
+			echo "İlçe : ".$row["province_name"]. "<br>"; //İlçe Adı
+			//echo "Park Sahibi id: ".$row["person_id"]. "<br>";
+			//echo "Park Sahibi: ".$row["firstName"]." ".$row["lastName"]. "<br>";
+			//echo "İl id: ".$row["city_id"]. "<br>";
+			//echo "İl Adı: ".$row["city_name"]. "<br>";
 
+			//maksimum araç sayısı - mevcut araç sayısı = boş yer sayısı.
+			$availablePark = (int)$row["maxNumCars"] - (int)$row["currentNumCars"];
+			if($availablePark == 0) //boş yer yok ise kırmızı dolu, var ise sayısını yeşil yazdırır.
+			{
+				echo "Park <span class=\"color2\">dolu</span>";
+			}
+			else
+			{
+				echo "Boş yer sayısı: <span class=\"color1\">".$availablePark."</span><br>";
+				echo "<a href=\"reservation/".getParkTitle($parkId)."\">Rezervasyon Yap</a>";
+
+			}
 			echo "<br><br><br>";
 		}
 	}
@@ -388,6 +402,88 @@ function getParks($city)
 		echo "Otopark Bulunamadı.";
 	}
 	$conn->close();
+}
+
+//getParks'da kullanılmak üzere oluşturulmuş bir fonksiyondur, kullanıcıya db'deki değil, normal il adını göstermek içindir.
+function getCityTitle($citySlugURL)
+{
+	global $conn;
+
+	$sql = "SELECT slug_title FROM Slug WHERE slug_url = '$citySlugURL'";
+
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0)
+	{
+		while($row = $result->fetch_assoc())
+		{
+			return $row["slug_title"];
+		}
+	}
+	else
+	{
+		echo "Hata ile karşılaşıldı";
+	}
+	$conn->close();
+}
+
+function getParkTitle($parkId)
+{
+	global $conn;
+
+	$sql = "SELECT Park.park_id, Park.slug_id, Slug.slug_id, Slug.slug_url FROM Park INNER JOIN Slug ON Park.slug_id = Slug.slug_id WHERE Park.park_id = '$parkId'";
+
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0)
+	{
+		while($row = $result->fetch_assoc())
+		{
+			return $row["slug_url"];
+		}
+	}
+	else
+	{
+		echo "Hata ile karşılaşıldı";
+	}
+	$conn->close();
+}
+
+
+function userProfile($person_id)
+{
+	if(isSessionActive())
+	{
+		global $conn;
+
+		$sql = "SELECT Person.firstName, Person.lastName, Person.phoneNo, Person.email, Person.city_id, User.balance, City.city_name, Wehicle.full_plate FROM Person INNER JOIN User ON Person.person_id = User.person_id INNER JOIN City ON Person.city_id = City.city_id INNER JOIN Wehicle ON Person.person_id = Wehicle.person_id WHERE Person.person_id = '$person_id'";
+
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0)
+		{
+			while($row = $result->fetch_assoc())
+			{
+				echo "İsim: ". $row["firstName"]."<br>";
+				echo "Soyisim: ". $row["lastName"]."<br>";
+				echo "Telefon No: ". $row["phoneNo"]."<br>";
+				echo "Email: ". $row["email"]."<br>";
+				//echo "İl id: ". $row["city_id"]."<br>";
+				echo "Bakiye: ". $row["balance"]."<br>";
+				echo "İl: ". $row["city_name"]."<br>";
+				echo "Plaka: ". $row["full_plate"]."<br>";
+
+				echo "<br>";
+			}
+		}
+		else
+		{
+			echo "Hata ile karşılaşıldı";
+		}
+		$conn->close();
+	}
+	else
+	{
+		destroyUserSession();
+		redirectTo("index");
+	}
 }
 
 
