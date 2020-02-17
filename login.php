@@ -5,9 +5,10 @@
 
 
 <div class="loginBox">
+<div class="loginDiv">
 
 <?php
-	echo "<form action=\"".getLink("loginControl")."\" method=\"post\" style=\"position: absolute;top: 50%;margin-top: -55px;\">";
+	echo "<form action=\"".getLink("loginControl")."\" method=\"post\">";
 ?>
 	<center>
 	<div class="loginBoxRow">
@@ -31,4 +32,5 @@
 	</center>
 
 	</form>
+</div>
 </div>
