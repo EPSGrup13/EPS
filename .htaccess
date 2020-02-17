@@ -8,7 +8,7 @@ RewriteRule ^(.*)$ $1.php
 #tip1-link
 #RewriteRule ^([0-9a-zA-Z-_]+)$ parks.php?city=$1 [L,QSA]
 #tip2-link
-RewriteRule ^parklar/([0-9a-zA-Z-_]+)$ parks.php?city=$1 [L,QSA]
+#RewriteRule ^parklar/([0-9a-zA-Z-_]+)$ parks.php?city=$1 [L,QSA]
 #tip3-link
 RewriteRule ^([0-9a-zA-Z-_]+)/parklar$ parks.php?city=$1 [L,QSA]
 RewriteRule ^settings/profile$ profile.php [L,QSA]
