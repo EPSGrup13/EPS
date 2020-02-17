@@ -12,7 +12,8 @@ error_reporting(E_ERROR | E_PARSE);
 	$conn = new mysqli($servername, $username, $password, $dbname);
 	if ($conn->connect_error)
 	{
-	    die("DB Bağlantı hatası");
+		reportErrorLog("DB bağlantı hatası", 1001); //db bağlanamadığından db bağlantı hatası için hata girişi yapamayacak fakat farklı hatalar için sisteme girişte sıkıntı olmayacak, bu özel durum için sadece mail gönderimi yapılacak.
+	    die("DB bağlantı hatası, Sisteme bilgi gönderildi.");
 	}
 	/*else
 	{
@@ -117,7 +118,9 @@ function checkDirectAccessToIncludeFile()
 {
 	if(!defined('LOADED'))
 	{
+		reportErrorLog("Include edilen sayfalardan birine dışarıdan erişilmeye çalışıldı.", 1014);
 		die("Bu sayfaya direk erişim yapamazsınız!");
+		redirectWithTimer("index");
 	}
 }
 
@@ -194,6 +197,11 @@ function loginControl($getMail, $getPassword)
 			$_SESSION["firstName"] = $row["firstName"];
 			$_SESSION["lastName"] = $row["lastName"];
 			$_SESSION["email"] = $row["email"];
+			if((int)$_SESSION["userType"] === 2)
+			{
+				reportAuth($_SESSION["userName"],$_SESSION["firstName"],$_SESSION["lastName"],$_SESSION["person_id"]);
+				//echo $_SESSION["userType"]; //test
+			}
 			redirectTo("index");
 			//redirectTo("external/tkeskin/");
 		}
@@ -236,7 +244,9 @@ function getAllCities()
 	}
 	else
 	{
-		echo "Hata ile karşılaşıldı.";
+		reportErrorLog("getAllCities fonksiyonunda veri çekilirken sorun oluştu", 1012);
+		echo "Verileri çekerken sorun oluştu."; //bu sayfa direk index olduğundan redirect yapılmayacak.
+		//redirectWithTimer("index");
 	}
 	$conn->close();
 }
@@ -321,7 +331,10 @@ function userRegistration($getUserName, $getPassword, $getEmail, $getFirstName, 
 			}
 			else
 			{
-			    echo "Error: " . $sql1 . " and ". $sql2 . "<br>" . $conn->error;
+			    //echo "Error: " . $sql1 . " and ". $sql2 . "<br>" . $conn->error;
+				reportErrorLog("Kullanıcı kaydı yapılırken sorun oluştu", 1013);
+				echo "Kayıt oluşturulurken sorun oluştu. Geri yönlendiriliyorsunuz...";
+				redirectWithTimer("index");
 			}
 		}
 	}
@@ -400,6 +413,8 @@ function getParks($city)
 	else
 	{
 		echo "Otopark Bulunamadı.";
+		reportErrorLog("getParks fonksiyonunda veri çekilirken sorun oluştu", 1015);
+		//redirectWithTimer("index"); //otopark bulunamadı yazısı olduğundan dolayı yenileme işlemi yapılmadı.
 	}
 	$conn->close();
 }
@@ -421,7 +436,9 @@ function getCityTitle($citySlugURL)
 	}
 	else
 	{
-		echo "Hata ile karşılaşıldı";
+		reportErrorLog("getCityTitle fonksiyonunda veri çekilirken sorun oluştu", 1010);
+		echo "Verileri çekerken sorun oluştu. Geri yönlendiriliyorsunuz...";
+		redirectWithTimer("index");
 	}
 	$conn->close();
 }
@@ -442,7 +459,9 @@ function getParkTitle($parkId)
 	}
 	else
 	{
-		echo "Hata ile karşılaşıldı";
+		reportErrorLog("getParkTitle fonksiyonunda veri çekilirken sorun oluştu", 1016);
+		echo "Verileri çekerken sorun oluştu. Geri yönlendiriliyorsunuz...";
+		redirectWithTimer("index");
 	}
 	$conn->close();
 }
@@ -475,14 +494,215 @@ function userProfile($person_id)
 		}
 		else
 		{
-			echo "Hata ile karşılaşıldı";
+			reportErrorLog("User Profile verilerini çekerken sorun oluştu", 1008);
+			echo "Verileri çekerken sorun oluştu. Geri yönlendiriliyorsunuz...";
+			redirectWithTimer("index");
 		}
 		$conn->close();
 	}
 	else
 	{
+		reportErrorLog("userProfile fonksiyonunda session olmadan profil bilgileri çekilmeye çalışıldı", 1009);
 		destroyUserSession();
 		redirectTo("index");
+	}
+}
+
+
+function reportAuth($userName, $firstName, $lastName, $person_id)
+{
+	$timezone=0;
+	date_default_timezone_set('Europe/Istanbul');
+	$get_time=date("Y/m/d h:i:s a", time() + 3600*($timezone+date("I")));
+	$ip = isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+
+	global $conn;
+
+	$sql = "INSERT INTO AuthLog (userName, firstName, lastName, authDate, ip, person_id) VALUES ('$userName','$firstName','$lastName','$get_time','$ip', '$person_id')";
+
+	if (!($conn->query($sql) === TRUE))
+	{
+		reportErrorLog("ReportAuth AuthLog'a kayıt yaparken sorun oluştu", 1005);
+	}
+
+	//$conn->close(); //loginControl kendisi kapatacak connection'ı.
+
+	//---------------------------------------------------------------------------------
+
+	$to = "handlerrors@gmail.com";
+	$subject = "Login";
+	$message = "
+	<html>
+		<head>
+			<meta charset=\"UTF-8\">
+			<title>Error</title>
+			<style>
+				.alignTh
+				{
+					text-align:left;
+					padding-right:4px;
+				}
+				.alignTd
+				{
+
+				}
+			</style>
+		</head>
+	<body>
+		<center>
+		<p>Yetkili bir kişinin hesabına giriş yapıldı!</p>
+			<table>
+				<tr>
+					<th class='alignTh'>Kullanıcı </th>
+					<td class='alignTd'>".$userName."</td>
+				</tr>
+				<tr>
+					<th class='alignTh'>İsim </th>
+					<td class='alignTd'>".$firstName."</td>
+				</tr>
+				<tr>
+					<th class='alignTh'>Soyisim: </th>
+					<td class='alignTd'>".$lastName."</td>
+				</tr>
+				<tr>
+					<th class='alignTh'>Tarih: </th>
+					<td class='alignTd'>".$get_time."</td>
+				</tr>
+				<tr>
+					<th class='alignTh'>ip: </th>
+					<td class='alignTd'>".$ip."</td>
+				</tr>
+				<tr>
+					<th class='alignTh'>Kişi id: </th>
+					<td class='alignTd'>".$person_id."</td>
+				</tr>
+			</table>
+		</center>
+	</body>
+	</html>
+	";
+
+	// Always set content-type when sending HTML email
+	$headers = "MIME-Version: 1.0" . "\r\n"; 
+	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+	//$headers .= "From: admin@epark.com" . "\r\n";
+	$headers .= "From: Admin ePark <admin@epark.com>" . "\r\n";
+
+	//mail($to, $subject, $message, $headers) or die();
+	if(!mail($to, $subject, $message, $headers))
+	{ 
+		reportErrorLog("ReportAuth mail gönderiminde sorun oluştu", 1004);
+	}
+}
+
+
+function reportErrorLog($message, $code)
+{
+	$timezone=0;
+	date_default_timezone_set('Europe/Istanbul');
+	$get_time=date("Y/m/d h:i:s a", time() + 3600*($timezone+date("I")));
+	$ip = isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+
+	global $conn;
+
+	$sql = "INSERT INTO ErrorLog (message, code, errorDate, ip) VALUES ('$message','$code','$get_time','$ip')";
+
+	if ($conn->query($sql) === TRUE)
+	{
+		$sql2 = "SELECT error_id FROM ErrorLog ORDER BY error_id DESC LIMIT 1;";
+		$result = $conn->query($sql2);
+		if ($result->num_rows > 0)
+		{
+			while($row = $result->fetch_assoc())
+			{
+				$errId = $row["error_id"];
+			}
+		}
+	}
+	else
+	{
+		reportErrorLog("ReportErrorLog ErrorLog'a kayıt yaparken sorun oluştu", 1006);
+	}
+
+
+	$conn->close();
+
+	//---------------------------------------------------------------------------------
+
+
+	$to = "handlerrors@gmail.com";
+	//-----
+	//DB bağlantı hatası vermesi durumunda hatayı engelleyebilmek için.
+	if(isset($errId))
+	{
+		$subject = "Error ".$errId;
+	}
+	else
+	{
+		$subject = "Error x";
+	}
+	//----
+	$message = "
+	<html>
+		<head>
+			<meta charset=\"UTF-8\">
+			<title>Error</title>
+			<style>
+				.alignTh
+				{
+					text-align:left;
+					padding-right:4px;
+				}
+				.alignTd
+				{
+
+				}
+			</style>
+		</head>
+	<body>
+		<center>
+		<p>Bir hata ile karşılaşıldı!</p>
+			<table>
+				<tr>
+					<th class='alignTh'>Hata: </th>
+					<td class='alignTd'>".$message."</td>
+				</tr>
+				<tr>
+					<th class='alignTh'>Hata Kodu: </th>
+					<td class='alignTd'>".$code."</td>
+				</tr>
+				<tr>
+					<th class='alignTh'>Tarih: </th>
+					<td class='alignTd'>".$get_time."</td>
+				</tr>
+				<tr>
+					<th class='alignTh'>ip: </th>
+					<td class='alignTd'>".$ip."</td>
+				</tr>
+			</table>
+		</center>
+	</body>
+	</html>
+	";
+
+	// HTML email için content-type
+	$headers = "MIME-Version: 1.0" . "\r\n"; 
+	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+	//$headers .= "From: admin@epark.com" . "\r\n";
+	$headers .= "From: Admin ePark <admin@epark.com>" . "\r\n";
+
+	//mail($to, $subject, $message, $headers) or die();
+	if(mail($to, $subject, $message, $headers))
+	{ 
+		//echo 'Email has sent successfully.';
+		//suppress;
+	}
+	else
+	{ 
+		//echo 'Email sending failed.';
+		//suppress;
 	}
 }
 

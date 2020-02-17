@@ -1,0 +1,12 @@
+1001 Database bağlantı hatası.
+1004 AuthReport mail gönderimi hatası.
+1005 AuthReport table veri girişi hatası.
+1006 ReportErrorLog table veri girişi hatası
+1008 userProfile fonksiyonu table'dan veri çekme hatası.
+1009 userProfile fonksiyonu yetkisiz dışarıdan erişim denemesi.
+1010 getCityTitle fonksiyonu table'dan veri çekme hatası.
+1012 getAllCities fonksiyonu table'dan veri çekme hatası.
+1013 userRegistration fonksiyonu table veri girişi hatası.
+1014 checkDirectAccessToInclude include sayfalarına dışarıdan erişim denemesi.
+1015 getParks fonksiyonu table'dan veri çekme hatası
+1016 getParkTitle fonksiyonu table'dan veri çekme hatası.
