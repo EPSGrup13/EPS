@@ -404,7 +404,7 @@ function getParks($city)
 			else
 			{
 				echo "Boş yer sayısı: <span class=\"color1\">".$availablePark."</span><br>";
-				echo "<a href=\"reservation/".getParkTitle($parkId)."\">Rezervasyon Yap</a>";
+				echo "<a href=\"".isDevelopmentModeOn()."rezervasyon/".getParkTitle($parkId)."\">Rezervasyon Yap</a>";
 
 			}
 			echo "<br><br><br>";
@@ -443,6 +443,8 @@ function getCityTitle($citySlugURL)
 	$conn->close();
 }
 
+
+//getParks fonksiyonunda rezervasyon butonunun içerisine park'ın benzersiz linkini koyabilmek için.
 function getParkTitle($parkId)
 {
 	global $conn;
@@ -704,6 +706,43 @@ function reportErrorLog($message, $code)
 		//echo 'Email sending failed.';
 		//suppress;
 	}
+}
+
+
+function getParkDetails($parkSlugURL)
+{
+	global $conn;
+
+	$sql = "SELECT Slug.slug_title, Slug.slug_id, Park.maxNumCars, Park.currentNumCars FROM Slug INNER JOIN Park ON Slug.slug_id = Park.slug_id WHERE slug_url = '$parkSlugURL'";
+
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0)
+	{
+		while($row = $result->fetch_assoc())
+		{
+			echo "Park Adı: ". $row["slug_title"]."<br>";
+
+			//maksimum araç sayısı - mevcut araç sayısı = boş yer sayısı.
+			$availablePark = (int)$row["maxNumCars"] - (int)$row["currentNumCars"];
+			if($availablePark == 0) //boş yer yok ise kırmızı dolu, var ise sayısını yeşil yazdırır.
+			{
+				echo "Park <span class=\"color2\">dolu</span>";
+			}
+			else
+			{
+				echo "Boş yer sayısı: <span class=\"color1\">".$availablePark."</span><br>";
+
+			}
+			echo "<br><br><br>";
+		}
+	}
+	else
+	{
+		reportErrorLog("getParkDetails fonksiyonunda veri çekilirken sorun oluştu", 1017);
+		echo "Verileri çekerken sorun oluştu. Geri yönlendiriliyorsunuz...";
+		redirectWithTimer("index"); //otopark bulunamadı yazısı olduğundan dolayı yenileme işlemi yapılmadı.
+	}
+	$conn->close();
 }
 
 
