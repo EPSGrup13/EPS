@@ -10,3 +10,4 @@
 1014 checkDirectAccessToInclude include sayfalarına dışarıdan erişim denemesi.
 1015 getParks fonksiyonu table'dan veri çekme hatası
 1016 getParkTitle fonksiyonu table'dan veri çekme hatası.
+1017 getParkDetails fonksiyonu table'dan veri çekme hatası.
