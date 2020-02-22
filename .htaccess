@@ -11,6 +11,7 @@ RewriteRule ^(.*)$ $1.php
 #RewriteRule ^parklar/([0-9a-zA-Z-_]+)$ parks.php?city=$1 [L,QSA]
 #tip3-link
 RewriteRule ^([0-9a-zA-Z-_]+)/parklar$ parks.php?city=$1 [L,QSA]
+RewriteRule ^rezervasyon/([0-9a-zA-Z-_]+)$ reservation.php?park=$1 [L,QSA]
 RewriteRule ^settings/profile$ profile.php [L,QSA]
 
 ErrorDocument 404 /404.php
