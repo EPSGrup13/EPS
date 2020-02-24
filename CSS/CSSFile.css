@@ -47,17 +47,8 @@ body
 {
 	
 	background-color: yellow;
-	/*! position: relative; */
-	/*! height: 100px; */
 	display: block;
 	box-sizing: border-box;
-	/*! overflow: auto; */
-	/*! min-height: 100%; */
-	/*! position: relative; */
-	/*! height: auto !important; */
-	/*! height: 100%; */
-	/*! margin: 0 auto -66px; */ /* -30px -> footer height */
-	/*! padding: 0 0 30px; */ /* 30px -> footer height */
 	min-height: calc(100% - 65px);
 }
 
@@ -148,22 +139,9 @@ body
 
 .cityFrame
 {
-		background-color: yellow;
-	/*! position: relative; */
-	/*! height: 100px; */
-	display: block;
-	box-sizing: border-box;
-	/*! overflow: auto; */
-	/*! min-height: 100%; */
-	/*! position: relative; */
-	height: auto !important;
-	height: 100%;
-	margin: 0 auto -30px; /* -30px -> footer height */
-	/*! padding: 0 0 30px; */ /* 30px -> footer height */
-	
 	display:flex;
 	flex-wrap:wrap;
-		justify-content: flex-start;
+	justify-content: flex-start;
 }
 
 .city
