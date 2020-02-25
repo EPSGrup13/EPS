@@ -716,6 +716,8 @@ function getParkDetails($parkSlugURL)
 	$get_time = date("Y-m-d");
 	$localDateType = date("d l");
 
+	$parkArray = array();
+
 	global $conn;
 
 	$sql = "SELECT Slug.slug_title, Slug.slug_id, Park.maxNumCars, Park.currentNumCars, parkStatus.h12, parkStatus.h13, parkStatus.h14, parkStatus.h15, parkStatus.h16, parkStatus.h17, parkStatus.h18, parkStatus.h19, parkStatus.h20, parkStatus.h21, parkStatus.h22, parkStatus.h23, parkStatus.h00, parkStatus.h01, parkStatus.h02, parkStatus.h03, parkStatus.h04, parkStatus.h05, parkStatus.h06, parkStatus.h07, parkStatus.h08, parkStatus.h09, parkStatus.h10, parkStatus.h11, parkStatus.recDate FROM Slug INNER JOIN Park ON Slug.slug_id = Park.slug_id INNER JOIN parkStatus ON Park.park_id = parkStatus.park_id WHERE slug_url = '$parkSlugURL' AND recDate = '$get_time'";
@@ -725,58 +727,25 @@ function getParkDetails($parkSlugURL)
 	{
 		while($row = $result->fetch_assoc())
 		{
-			echo "Park Adı: ". $row["slug_title"]."<br>";
+			//echo "Park Adı: ". $row["slug_title"]."<br>";
 
 			//maksimum araç sayısı - mevcut araç sayısı = boş yer sayısı.
 			$availablePark = (int)$row["maxNumCars"] - (int)$row["currentNumCars"];
 			if($availablePark == 0) //boş yer yok ise kırmızı dolu, var ise sayısını yeşil yazdırır.
 			{
-				echo "Park <span class=\"color2\">dolu</span>";
+				//echo "Park <span class=\"color2\">dolu</span>";
 			}
 			else
 			{
-				echo "Boş yer sayısı: <span class=\"color1\">".$availablePark."</span><br>";
+				//echo "Boş yer sayısı: <span class=\"color1\">".$availablePark."</span><br>";
 
 			}
-			echo "Tarih: ".$localDateType."<br>";
+			//echo "Tarih: ".$localDateType."<br>";
 
-			echo "<form style=\"display:table;width:500px;background-color:gray;\">";
-			echo "<div style=\"display:table-cell;\">";
+			array_push($parkArray,$row["h01"],$row["h02"],$row["h03"],$row["h04"],$row["h05"],$row["h06"],$row["h07"],$row["h08"],$row["h09"],$row["h10"],$row["h11"],$row["h12"],$row["h13"],$row["h14"],$row["h15"],$row["h16"],$row["h17"],$row["h18"],$row["h19"],$row["h20"],$row["h21"],$row["h22"],$row["h23"],$row["h00"]);
+			array_push($parkArray,$row["slug_title"],$row["maxNumCars"],$row["currentNumCars"],$localDateType);
 
-			echo "<div style=\"display:table-row;\">01:00: ". parkDetailCheckBox($row["h01"]);
-			echo "<div style=\"display:table-row;\">02:00: ". parkDetailCheckBox($row["h02"]);
-			echo "<div style=\"display:table-row;\">03:00: ". parkDetailCheckBox($row["h03"]);
-			echo "<div style=\"display:table-row;\">04:00: ". parkDetailCheckBox($row["h04"]);
-			echo "<div style=\"display:table-row;\">05:00: ". parkDetailCheckBox($row["h05"]);
-			echo "<div style=\"display:table-row;\">06:00: ". parkDetailCheckBox($row["h06"]);
-			echo "<div style=\"display:table-row;\">07:00: ". parkDetailCheckBox($row["h07"]);
-			echo "<div style=\"display:table-row;\">08:00: ". parkDetailCheckBox($row["h08"]);
-			echo "<div style=\"display:table-row;\">09:00: ". parkDetailCheckBox($row["h09"]);
-			echo "<div style=\"display:table-row;\">10:00: ". parkDetailCheckBox($row["h10"]);
-			echo "<div style=\"display:table-row;\">11:00: ". parkDetailCheckBox($row["h11"]);
-			echo "<div style=\"display:table-row;\">12:00: ". parkDetailCheckBox($row["h12"]);
-			echo "</div>";
-
-			echo "<div style=\"display:table-cell;\">";
-			echo "<div style=\"display:table-row;\">13:00: ". parkDetailCheckBox($row["h13"]);
-			echo "<div style=\"display:table-row;\">14:00: ". parkDetailCheckBox($row["h14"]);
-			echo "<div style=\"display:table-row;\">15:00: ". parkDetailCheckBox($row["h15"]);
-			echo "<div style=\"display:table-row;\">16:00: ". parkDetailCheckBox($row["h16"]);
-			echo "<div style=\"display:table-row;\">17:00: ". parkDetailCheckBox($row["h17"]);
-			echo "<div style=\"display:table-row;\">18:00: ". parkDetailCheckBox($row["h18"]);
-			echo "<div style=\"display:table-row;\">19:00: ". parkDetailCheckBox($row["h19"]);
-			echo "<div style=\"display:table-row;\">20:00: ". parkDetailCheckBox($row["h20"]);
-			echo "<div style=\"display:table-row;\">21:00: ". parkDetailCheckBox($row["h21"]);
-			echo "<div style=\"display:table-row;\">22:00: ". parkDetailCheckBox($row["h22"]);
-			echo "<div style=\"display:table-row;\">23:00: ". parkDetailCheckBox($row["h23"]);
-			echo "<div style=\"display:table-row;\">00:00: ". parkDetailCheckBox($row["h00"]);
-			echo "</div>";
-
-
-			echo "<div style=\"display:table-row\"> <input type=\"submit\" value=\"Submit\"> </div>";
-			echo "</form>";
-
-			echo "<br><br><br>";
+			//echo "<br><br><br>";
 		}
 	}
 	else
@@ -786,14 +755,15 @@ function getParkDetails($parkSlugURL)
 		redirectWithTimer("index"); //otopark bulunamadı yazısı olduğundan dolayı yenileme işlemi yapılmadı.
 	}
 	$conn->close();
+	return $parkArray;
 }
 
 
-function parkDetailCheckBox($timeStatus)
+function parkDetailCheckBox($timeStatus, $time)
 {
 	if($timeStatus === "BOŞ")
 	{
-		return "<input type=\"checkbox\" value=\"test1\"></div>"; //gönderildiği yer echo'da olduğundan echo değil, return kullanıldı.
+		return "<input type=\"checkbox\" value=\"".$time."\" name=\"time[]\"></div>"; //gönderildiği yer echo'da olduğundan echo değil, return kullanıldı.
 	}
 	else
 	{
