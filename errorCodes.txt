@@ -11,3 +11,8 @@
 1015 getParks fonksiyonu table'dan veri çekme hatası
 1016 getParkTitle fonksiyonu table'dan veri çekme hatası.
 1017 getParkDetails fonksiyonu table'dan veri çekme hatası.
+1018 dbFeedback fonksiyonunda mail gönderme hatası.
+1019 dbFeedback fonksiyonu yeni tarih veri girişi hatası.
+1020 refreshDB sayfasında status veri girişinde hata.
+1021 refreshDB sayfasında veri çekme hatası.
+1022 getWehicles fonksiyonu veri çekme hatası.

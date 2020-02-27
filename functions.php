@@ -359,14 +359,21 @@ function isNullorOnlySpace($userInput)
 //kullanmadan önce isSessionActive() kullanmak gerekir, session yoksa problem çıkacaktır.
 function getSessionDisplayName()
 {
-	echo "<a href=\"".isDevelopmentModeOn()."settings/profile\">".$_SESSION["firstName"]. " " .$_SESSION["lastName"]."</a>";
+	return $_SESSION["firstName"]. " " .$_SESSION["lastName"];
 }
 
 //Kullanıcı girişi yapmış kişinin bakiyesini gönderir.
 //kullanmadan önce isSessionActive() kullanmak gerekir, session yoksa problem çıkacaktır.
 function getUserBalance()
 {
-	echo "Bakiye: " .$_SESSION["balance"]."₺";
+	return $_SESSION["balance"]."₺";
+}
+
+//Kullanıcının yetki seviyesini gönderir
+//Kullanmadan önce isSessionActive() kullanmak gerekir, session yok ise hata verecektir.
+function getUserLevel()
+{
+	return (int)$_SESSION["userType"];
 }
 
 
@@ -475,11 +482,12 @@ function userProfile($person_id)
 	{
 		global $conn;
 
-		$sql = "SELECT Person.firstName, Person.lastName, Person.phoneNo, Person.email, Person.city_id, User.balance, City.city_name, Wehicle.full_plate FROM Person INNER JOIN User ON Person.person_id = User.person_id INNER JOIN City ON Person.city_id = City.city_id INNER JOIN Wehicle ON Person.person_id = Wehicle.person_id WHERE Person.person_id = '$person_id'";
+		$sql = "SELECT Person.firstName, Person.lastName, Person.phoneNo, Person.email, Person.city_id, User.balance, City.city_name FROM Person INNER JOIN User ON Person.person_id = User.person_id INNER JOIN City ON Person.city_id = City.city_id WHERE Person.person_id = '$person_id'";
 
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0)
 		{
+
 			while($row = $result->fetch_assoc())
 			{
 				echo "İsim: ". $row["firstName"]."<br>";
@@ -489,9 +497,16 @@ function userProfile($person_id)
 				//echo "İl id: ". $row["city_id"]."<br>";
 				echo "Bakiye: ". $row["balance"]."<br>";
 				echo "İl: ". $row["city_name"]."<br>";
-				echo "Plaka: ". $row["full_plate"]."<br>";
 
 				echo "<br>";
+
+			}
+			//print_r(getWehicles($person_id));
+			$wehiclesArray = getWehicles($person_id);
+			$lenWehiclesArray = count($wehiclesArray);
+			for($i = 0; $i < $lenWehiclesArray; $i++)
+			{
+				echo "Plaka: ".$wehiclesArray[$i]."<br>";
 			}
 		}
 		else
@@ -504,10 +519,37 @@ function userProfile($person_id)
 	}
 	else
 	{
-		reportErrorLog("userProfile fonksiyonunda session olmadan profil bilgileri çekilmeye çalışıldı", 1009);
+		reportErrorLog("userProfile fonksiyonunda session olmadan profil bilgileri çekilmeye çalışıldı / session bittikten sonra girilmeye çalışılmışta olabilir", 1009);
 		destroyUserSession();
 		redirectTo("index");
 	}
+}
+
+function getWehicles($person_id)
+{
+	global $conn;
+	$wehicles = array();
+
+	$sql = "SELECT full_plate FROM Wehicle WHERE person_id = '$person_id'";
+
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0)
+	{
+
+		while($row = $result->fetch_assoc())
+		{
+			//echo "Plaka: ". $row["full_plate"]."<br>";
+			array_push($wehicles, $row["full_plate"]);
+		}
+	}
+	else
+	{
+		reportErrorLog("getWehicles fonksiyonunda verileri çekerken sorun oluştu", 1022);
+		echo "Verileri çekerken sorun oluştu. Geri yönlendiriliyorsunuz...";
+		redirectWithTimer("index");
+	}
+	$conn->close(); //tekrar gözden geçirilecek.
+	return $wehicles;
 }
 
 
@@ -696,15 +738,66 @@ function reportErrorLog($message, $code)
 	$headers .= "From: Admin ePark <admin@epark.com>" . "\r\n";
 
 	//mail($to, $subject, $message, $headers) or die();
-	if(mail($to, $subject, $message, $headers))
+	if(!mail($to, $subject, $message, $headers))
 	{ 
 		//echo 'Email has sent successfully.';
 		//suppress;
 	}
-	else
+}
+
+
+function dbFeedback()
+{
+	$timezone=0;
+	date_default_timezone_set('Europe/Istanbul');
+	$get_time=date("Y/m/d h:i:s a", time() + 3600*($timezone+date("I")));
+	$spcDate = $get_time = date("Y-m-d");
+
+	global $conn;
+
+	$sql = "INSERT INTO dbFeedback (fbDate) VALUES ('$get_time')";
+
+
+	if (!($conn->query($sql) === TRUE))
+	{
+		reportErrorLog("dbFeedback fonksiyonunda yeni tarih için insert yapılırken sorun oluştu", 1019);
+	}
+
+
+	//$conn->close(); // refreshDB.php kapattıracak connection'ı.
+
+	//---------------------------------------------------------------------------------
+
+
+	$to = "handlerrors@gmail.com";
+	$subject = $spcDate." Tarihli DB Yenilemesi";
+	$message = "
+		<html>
+		<head>
+			<meta charset=\"UTF-8\">
+			<title>DB Yenilemesi</title>
+			<style>
+			</style>
+		</head>
+	<body>
+		<center>
+		<br><br>
+		<p>DB ".$get_time." tarihi için yenilendi.</p>
+		</center>
+	</body>
+	</html>
+	";
+
+	// HTML email için content-type
+	$headers = "MIME-Version: 1.0" . "\r\n"; 
+	$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+
+	$headers .= "From: Admin ePark <admin@epark.com>" . "\r\n";
+
+	if(!mail($to, $subject, $message, $headers))
 	{ 
-		//echo 'Email sending failed.';
-		//suppress;
+		reportErrorLog("dbFeedback fonksiyonunda mail gönderiminde sorun oluştu", 1018);
 	}
 }
 
@@ -759,9 +852,9 @@ function getParkDetails($parkSlugURL)
 }
 
 
-function parkDetailCheckBox($timeStatus, $time)
+function parkDetailCheckBox($parkStatus, $time)
 {
-	if($timeStatus === "BOŞ")
+	if($parkStatus === "BOŞ")
 	{
 		return "<input type=\"checkbox\" value=\"".$time."\" name=\"time[]\"></div>"; //gönderildiği yer echo'da olduğundan echo değil, return kullanıldı.
 	}
@@ -770,6 +863,7 @@ function parkDetailCheckBox($timeStatus, $time)
 		return "<span class=\"color2\">DOLU</span></div>";
 	}
 }
+
 
 
 

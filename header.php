@@ -6,22 +6,36 @@
 
 <div class="header">
 
-	<div class="headerInline">
+	<div class="headerInline bg-dark">
 
 		<div class="linkBar">
+			<?php echo "<a href=\"".isDevelopmentModeOn()."\">Ana Sayfa</a>"; ?>
 		</div>
 
 		<div class="userBar">
 		<?php
 			if(isSessionActive())
 			{
-				getSessionDisplayName();
-				echo " &nbsp;&nbsp;";
-				getUserBalance();
+				echo "<div class=\"up\"><a href=\"".isDevelopmentModeOn()."settings/profile\" class=\"uprofile\">".getSessionDisplayName()."</a>";
+				if(getUserLevel() === 1)
+				{
+
+					echo "<div class=\"uprofile-content\">
+							<a href=\"javascript:void(0)\">Park Detayları</a>
+
+						  </div></div>";
+				}
+				else
+				{
+					echo "<div class=\"uprofile-content\">
+							<a href=\"javascript:void(0)\">link1</a>
+
+						  </div></div>";
+				}
+
+				echo "&nbsp;&nbsp;Bakiye: ".getUserBalance();
 				
-				//echo "&nbsp;&nbsp;<a href=\"external/tkeskin/?logout\">logout</a>";
-				echo "&nbsp;&nbsp;<a href=\"".getLink("?logout")."\">logout</a>";
-				//echo "<a href=\"?logout\">logout</a>";
+				echo "&nbsp;&nbsp;<a href=\"".getLink("?logout")."\">Çıkış</a>";
 				if(isset($_GET["logout"]))
 				{
 					destroyUserSession();
