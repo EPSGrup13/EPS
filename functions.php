@@ -864,6 +864,18 @@ function parkDetailCheckBox($parkStatus, $time)
 	}
 }
 
+//include 'htmlStart.php'; , 'functions.php' veya getHeader(); satırlarından sonra eklenmelidir.
+//Kllanıcı girişi gerektiren sayfalarda, giriş yapılmamış ise login sayfasına yönlendirir.
+function pageProtection()
+{
+	if(!isSessionActive())
+	{
+		session_unset();
+		session_destroy();
+		redirectTo("login");
+	}
+}
+
 
 
 

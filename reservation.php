@@ -1,6 +1,7 @@
 <?php
 	include 'htmlStart.php';
 	getHeader();
+	pageProtection();
 
 	$getSlugParkURL = $_GET["park"];
 
