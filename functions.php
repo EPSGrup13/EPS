@@ -530,7 +530,7 @@ function getWehicles($person_id)
 	global $conn;
 	$wehicles = array();
 
-	$sql = "SELECT full_plate FROM Wehicle WHERE person_id = '$person_id'";
+	$sql = "SELECT full_plate, is_main FROM Wehicle WHERE person_id = '$person_id'";
 
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0)
@@ -539,7 +539,14 @@ function getWehicles($person_id)
 		while($row = $result->fetch_assoc())
 		{
 			//echo "Plaka: ". $row["full_plate"]."<br>";
-			array_push($wehicles, $row["full_plate"]);
+			if((int)$row["is_main"] === 1)
+			{
+				array_push($wehicles, $row["full_plate"]." (Seçili)");
+			}
+			else
+			{
+				array_push($wehicles, $row["full_plate"]);
+			}
 		}
 	}
 	else
@@ -751,7 +758,7 @@ function dbFeedback()
 	$timezone=0;
 	date_default_timezone_set('Europe/Istanbul');
 	$get_time=date("Y/m/d h:i:s a", time() + 3600*($timezone+date("I")));
-	$spcDate = $get_time = date("Y-m-d");
+	$spcDate = date("Y-m-d");
 
 	global $conn;
 
@@ -835,7 +842,7 @@ function getParkDetails($parkSlugURL)
 			}
 			//echo "Tarih: ".$localDateType."<br>";
 
-			array_push($parkArray,$row["h01"],$row["h02"],$row["h03"],$row["h04"],$row["h05"],$row["h06"],$row["h07"],$row["h08"],$row["h09"],$row["h10"],$row["h11"],$row["h12"],$row["h13"],$row["h14"],$row["h15"],$row["h16"],$row["h17"],$row["h18"],$row["h19"],$row["h20"],$row["h21"],$row["h22"],$row["h23"],$row["h00"]);
+			array_push($parkArray,$row["h00"],$row["h01"],$row["h02"],$row["h03"],$row["h04"],$row["h05"],$row["h06"],$row["h07"],$row["h08"],$row["h09"],$row["h10"],$row["h11"],$row["h12"],$row["h13"],$row["h14"],$row["h15"],$row["h16"],$row["h17"],$row["h18"],$row["h19"],$row["h20"],$row["h21"],$row["h22"],$row["h23"]);
 			array_push($parkArray,$row["slug_title"],$row["maxNumCars"],$row["currentNumCars"],$localDateType);
 
 			//echo "<br><br><br>";
@@ -854,6 +861,7 @@ function getParkDetails($parkSlugURL)
 
 function parkDetailCheckBox($parkStatus, $time)
 {
+	//echo $parkStatus." ".$time; //test
 	if($parkStatus === "BOŞ")
 	{
 		return "<input type=\"checkbox\" value=\"".$time."\" name=\"time[]\"></div>"; //gönderildiği yer echo'da olduğundan echo değil, return kullanıldı.
@@ -876,8 +884,87 @@ function pageProtection()
 	}
 }
 
+/*Önce kullanıcılar için rezervasyon geçmişi için kayıt tutar, daha sonra ilgili park için
+*güncelleme yapar.
+*/
+function completeReservation($park_url, $getTime, $person_id)
+{
+	$timezone=0;
+	date_default_timezone_set('Europe/Istanbul');
+	$spcDate = date("Y-m-d");
+
+	//print_r($getTime); //test
+
+	$pStatusId = parkStatusIdForReservation($park_url);
+	echo $pStatusId; //test
+
+	global $conn;
+
+	for($i = 0; $i < count($getTime); $i++)
+	{
+		$sql = "INSERT INTO Reservation (reservation_hour, reservation_date, full_plate, person_id, parkStatus_id) VALUES ('$getTime[$i]','$spcDate', (SELECT full_plate FROM Wehicle WHERE is_main = 1 AND person_id = '$person_id'), '$person_id', '$pStatusId')";
+
+		//eski query.
+		//$sql = "INSERT INTO Reservation (reservation_hour, reservation_date, full_plate, person_id) VALUES ('$getTime[$i]','$spcDate', (SELECT full_plate FROM Wehicle WHERE is_main = 1 AND person_id = '$person_id'), '$person_id')";
+
+		if (!($conn->query($sql) === TRUE))
+		{
+			reportErrorLog("completeReservation fonksiyonunda saatleri tek tek girerken sorun oluştu", 1023);
+		}
+	}
 
 
 
+	$splitTime = "";
+
+	for($i = 0; $i < count($getTime); $i++)
+	{
+		$temp = "parkStatus.h";
+		$temp = $temp . substr($getTime[$i], 0, 2); //start, length
+
+		$splitTime = $splitTime . $temp . "='$person_id', ";
+	}
+
+	$splitTime = substr($splitTime, 0, (strlen($splitTime) - 2));
+	//echo $splitTime; //test
+
+	$sql = "UPDATE parkStatus INNER JOIN Park ON parkStatus.park_id = Park.park_id INNER JOIN Slug ON Park.slug_id = Slug.slug_id SET ".$splitTime." WHERE Slug.slug_url = '$park_url' AND parkStatus.recDate = '$spcDate'";
+	//echo $sql; //test for query.
+
+	if (!($conn->query($sql) === TRUE))
+	{
+		reportErrorLog("completeReservation fonksiyonunda parkStatus için saatleri güncellerken sorun oluştu", 1024);
+	}
+
+	$conn->close();
+	redirectTo("index");
+}
+
+
+//completeReservation fonksiyonunda günlük park kayıtlarının tutulduğu tabloya veri göndermek için.
+function parkStatusIdForReservation($park_url)
+{
+	$timezone=0;
+	date_default_timezone_set('Europe/Istanbul');
+	$spcDate = date("Y-m-d");
+
+	global $conn;
+
+	$sql = "SELECT parkStatus.parkStatus_id FROM parkStatus INNER JOIN Park ON parkStatus.park_id = Park.park_id INNER JOIN Slug ON Park.slug_id = Slug.slug_id WHERE Slug.slug_url = '$park_url' AND parkStatus.recDate = '$spcDate'";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0)
+	{
+		while($row = $result->fetch_assoc())
+		{
+			$val = $row["parkStatus_id"];
+		}
+	}
+	else
+	{
+		reportErrorLog("parkStatusIdForReservation fonksiyonunda veri çekilirken sorun oluştu", 1025);
+	}
+	//$conn->close(); //connection diğer fonksiyon içerisinde kapatılacak.
+	return $val;
+}
 
 ?>
