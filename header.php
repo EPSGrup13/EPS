@@ -17,7 +17,7 @@
 			if(isSessionActive())
 			{
 				echo "<div class=\"up\"><a href=\"".isDevelopmentModeOn()."settings/profile\" class=\"uprofile\">".getSessionDisplayName()."</a>";
-				if(getUserLevel() === 1)
+				if(getUserLevel() === 1) //Otopark sahibi değil ise.
 				{
 
 					echo "<div class=\"uprofile-content\">
@@ -43,9 +43,7 @@
 			}
 			else
 			{
-				//echo "test";
 				echo "<a href=\"".getLink("login")."\">Giriş Yap</a>";
-				//echo "<a href=\"/external/tkeskin/login\">Giriş Yap</a>";
 			}
 		?>
 		</div>
