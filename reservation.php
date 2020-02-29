@@ -3,7 +3,11 @@
 	getHeader();
 	pageProtection();
 
+	//----
+	#opt 1145
 	$getSlugParkURL = $_GET["park"];
+	$_SESSION["park_url"] = $getSlugParkURL;
+	//----
 
 
 	$parkArray = array();
@@ -24,8 +28,9 @@
 	unset($parkArray[count($parkArray)-1]);
 
 
-
-	//print_r($parkArray);
+	/*echo count($parkArray); //test
+	print_r($parkArray); //test
+	print_r($timeArray); //test*/
 ?>
 
 <div class="content">
@@ -59,13 +64,15 @@ echo "<form action=\"".getLink("reservationControl")."\" method=\"post\" style=\
 			<div style=\"display:table-cell;\">
 			<div style=\"display:table-row;\">".$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i]);
 		}
-		echo "<div style=\"display:table-row;\">".$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i]);
+		else
+		{
+			echo "<div style=\"display:table-row;\">".$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i]);
+		}
 	}
 ?>
 </div>
 
 </form>
-
 
 </div>
 

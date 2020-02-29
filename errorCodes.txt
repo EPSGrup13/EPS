@@ -16,3 +16,6 @@
 1020 refreshDB sayfasında status veri girişinde hata.
 1021 refreshDB sayfasında veri çekme hatası.
 1022 getWehicles fonksiyonu veri çekme hatası.
+1023 completeReservation fonksiyonunda saatleri girerken hata.
+1024 completeReservation'da parkStatus saat güncellemesi yapılırken hata.
+1025 parkStatusIdForReservation fonksiyonu veri çekme hatası.
