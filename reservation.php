@@ -60,7 +60,7 @@ echo "<form action=\"".getLink("reservationControl")."\" method=\"post\" style=\
 	{
 		if($i == (count($parkArray)/2)+1)
 		{
-			echo "<div style=\"display:table-row\"><input type=\"submit\" value=\"Submit\"></div></div>
+			echo "<div style=\"display:table-row\"><input type=\"submit\" value=\"Kayıt\"></div></div>
 			<div style=\"display:table-cell;\">
 			<div style=\"display:table-row;\">".$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i]);
 		}

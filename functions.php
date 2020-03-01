@@ -515,7 +515,8 @@ function userProfile($person_id)
 			echo "Verileri çekerken sorun oluştu. Geri yönlendiriliyorsunuz...";
 			redirectWithTimer("index");
 		}
-		$conn->close();
+		//$conn->close(); //reservationHistory fonksiyonunda kapatıldı.
+		//userProfile conn, 1 - getWehicles conn, 1 #opt 1010
 	}
 	else
 	{
@@ -555,7 +556,7 @@ function getWehicles($person_id)
 		echo "Verileri çekerken sorun oluştu. Geri yönlendiriliyorsunuz...";
 		redirectWithTimer("index");
 	}
-	$conn->close(); //tekrar gözden geçirilecek.
+	//$conn->close(); //tekrar gözden geçirilecek. #opt 1010
 	return $wehicles;
 }
 
@@ -904,9 +905,6 @@ function completeReservation($park_url, $getTime, $person_id)
 	{
 		$sql = "INSERT INTO Reservation (reservation_hour, reservation_date, full_plate, person_id, parkStatus_id) VALUES ('$getTime[$i]','$spcDate', (SELECT full_plate FROM Wehicle WHERE is_main = 1 AND person_id = '$person_id'), '$person_id', '$pStatusId')";
 
-		//eski query.
-		//$sql = "INSERT INTO Reservation (reservation_hour, reservation_date, full_plate, person_id) VALUES ('$getTime[$i]','$spcDate', (SELECT full_plate FROM Wehicle WHERE is_main = 1 AND person_id = '$person_id'), '$person_id')";
-
 		if (!($conn->query($sql) === TRUE))
 		{
 			reportErrorLog("completeReservation fonksiyonunda saatleri tek tek girerken sorun oluştu", 1023);
@@ -963,8 +961,53 @@ function parkStatusIdForReservation($park_url)
 	{
 		reportErrorLog("parkStatusIdForReservation fonksiyonunda veri çekilirken sorun oluştu", 1025);
 	}
-	//$conn->close(); //connection diğer fonksiyon içerisinde kapatılacak.
+	//$conn->close(); //connection completeReservation fonksiyonu içerisinde kapatılacak.
 	return $val;
 }
+
+
+function reservationHistory($person_id)
+{
+	$timezone=0;
+	date_default_timezone_set('Europe/Istanbul');
+	$spcDate = date("Y-m-d"); //date("d.m.Y");
+
+	$history = array();
+
+	global $conn;
+
+	$sql = "SELECT Reservation.reservation_hour, Reservation.reservation_date, Reservation.full_plate, Slug.slug_title FROM Reservation INNER JOIN parkStatus ON Reservation.parkStatus_id = parkStatus.parkStatus_id INNER JOIN Park ON parkStatus.park_id = Park.park_id INNER JOIN Slug ON Park.slug_id = Slug.slug_id ORDER BY Reservation.reservation_date DESC, Reservation.reservation_hour ASC LIMIT 10";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0)
+	{
+		//echo "Park Adı\tSaat\tTarih\tPlaka<br>";
+		while($row = $result->fetch_assoc())
+		{
+			$history = array_merge($history, array(array($row["slug_title"], $row["reservation_hour"], $row["reservation_date"], $row["full_plate"])));
+		}
+	}
+	else
+	{
+		echo "Rezervasyon Geçmişi bulunamadı.";
+		reportErrorLog("Rezervasyon geçmişi bulunamadı.", 1026);
+	}
+	$conn->close(); // userProfile'dan sonra kullanılıyor.
+	return $history;
+}
+
+
+#Örnek olarak 2020-02-01 (yıl, tarih, gün) olan tarihi 01-02-2020 (gün, ay, tarih) formatına çevirir.
+function reArrangeDate($date)
+{
+	$newType = "";
+	$newType = substr($date, 8, 2); // başlangıç, length
+	$newType = $newType .".". substr($date, 5, 2);
+	$newType = $newType .".". substr($date, 0, 4);
+	echo $newType;
+}
+
+
+
+
 
 ?>

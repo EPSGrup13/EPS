@@ -17,7 +17,7 @@
 			if(isSessionActive())
 			{
 				echo "<div class=\"up\"><a href=\"".isDevelopmentModeOn()."settings/profile\" class=\"uprofile\">".getSessionDisplayName()."</a>";
-				if(getUserLevel() === 1) //Otopark sahibi değil ise.
+				if(getUserLevel() === 1) //Otopark sahibi ise.
 				{
 
 					echo "<div class=\"uprofile-content\">
