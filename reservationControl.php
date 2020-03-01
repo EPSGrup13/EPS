@@ -12,7 +12,7 @@
 	unset($_SESSION["park_url"]);
 	//----
 
-	print_r($getTime);
+	//print_r($getTime);
 
 	completeReservation($parkURL, $getTime, $_SESSION["person_id"]);
 
