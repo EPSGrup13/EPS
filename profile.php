@@ -16,18 +16,26 @@ echo "<div class=\"ou-profile\">";
 	//echo "<br>";
 
 	echo "<div class=\"rsv\">";
-		echo "Park Adı\tSaat\tTarih\tPlaka<br>";
 
 		$history = reservationHistory($_SESSION["person_id"]);
 		//print_r($history); //output test
-		for($i = 0; $i < count($history); $i++)
+		if(is_array($history))
 		{
-			for($j = 0; $j < 3; $j++)
+			echo "Park Adı\tSaat\tTarih\tPlaka<br>";
+			for($i = 0; $i < count($history); $i++)
 			{
-				echo $history[$i][$j]." ";
+				for($j = 0; $j < 3; $j++)
+				{
+					echo $history[$i][$j]." ";
+				}
+				echo "<br>";
 			}
-			echo "<br>";
 		}
+		else
+		{
+			echo $history;
+		}
+
 	echo "</div>";
 echo "</div>";
 
