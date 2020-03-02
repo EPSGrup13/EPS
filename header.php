@@ -21,7 +21,7 @@
 				{
 
 					echo "<div class=\"uprofile-content\">
-							<a href=\"javascript:void(0)\">Park Detayları</a>
+							<a href=\"".isDevelopmentModeOn()."parkdetayi\">Park Detayları</a>
 
 						  </div></div>";
 				}
