@@ -228,6 +228,35 @@ a:hover
 .up:hover .uprofile {}
 
 
+.ou-profile
+{
+	width:100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start; /* kartların farklı boyutlarda olabilmesi için.*/
+}
+
+.profile
+{
+    width: 49%;
+    position:relative;
+    background-color:green;
+    padding: 10 15px;
+	margin: 10px 3px 10px 5px;
+	flex: 1 auto;
+}
+
+.rsv
+{
+    width: 49%;
+    position:relative;
+    background-color:blueviolet;
+    padding: 10 15px;
+	margin: 10px 5px 10px 3px;
+	flex: 1 auto;
+}
+
+
 /*şuanda kullanılmıyor*/
 .bl
 {
