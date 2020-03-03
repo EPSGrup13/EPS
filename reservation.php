@@ -3,6 +3,8 @@
 	getHeader();
 	pageProtection();
 
+	$checkWehicles = numOfWehicles($_SESSION["person_id"]);
+
 	//----
 	#opt 1145
 	$getSlugParkURL = $_GET["park"];
@@ -18,6 +20,7 @@
 
 	//print_r($parkArray);
 
+	//Arraydeki son 3 veriyi çekerek siler, daha sonraki veriler işlenecek verilerdir.
 	$localDateType = $parkArray[count($parkArray)-1];
 	unset($parkArray[count($parkArray)-1]);
 	$currentNumCars = $parkArray[count($parkArray)-1];
@@ -60,8 +63,9 @@ echo "<form action=\"".getLink("reservationControl")."\" method=\"post\" style=\
 	{
 		if($i == (count($parkArray)/2)+1)
 		{
-			echo "<div style=\"display:table-row\"><input type=\"submit\" value=\"Kayıt\"></div></div>
-			<div style=\"display:table-cell;\">
+			echo "<div style=\"display:table-row;\">";
+			echo "</div></div>
+			<div style=\"display:table-cell;min-width:50%;\">
 			<div style=\"display:table-row;\">".$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i]);
 		}
 		else
@@ -71,6 +75,20 @@ echo "<form action=\"".getLink("reservationControl")."\" method=\"post\" style=\
 	}
 ?>
 </div>
+
+<?php
+	echo "<div style=\"display:table-row\">";
+	if($checkWehicles)
+	{
+		echo "<input type=\"submit\" value=\"Kayıt\">";
+	}
+	else
+	{
+		echo "<input type=\"submit\" value=\"Kayıt\" disabled>
+		<br>Sistemde kayıtlı aracınız olmadan rezervasyon yapamassınız.";
+	}
+	echo "</div>";
+?>
 
 </form>
 
