@@ -13,5 +13,7 @@ RewriteRule ^(.*)$ $1.php
 RewriteRule ^([0-9a-zA-Z-_]+)/parklar$ parks.php?city=$1 [L,QSA]
 RewriteRule ^rezervasyon/([0-9a-zA-Z-_]+)$ reservation.php?park=$1 [L,QSA]
 RewriteRule ^settings/profile$ profile.php [L,QSA]
+RewriteRule ^parkdetayi$ parkDetails.php [L,QSA]
+RewriteRule ^parkdetayi/([0-9a-zA-Z-_]+)$ records.php?date=$1 [L,QSA]
 
 ErrorDocument 404 /404.php

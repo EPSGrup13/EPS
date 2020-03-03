@@ -3,8 +3,14 @@
 	session_start();
 	pageProtection();
 
+	if(!isset($_POST["time"]))
+	{
+		destroyUserSession();
+	}
+
 	$getTime = array();
 	$getTime = $_POST["time"];
+
 
 	//----
 	#opt 1145

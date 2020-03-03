@@ -1,3 +1,3 @@
-		<script type="text/javascript" src="JS/JSFile.js"></script>
+		<?php echo jsSource(); ?>
 	</body>
 </html>

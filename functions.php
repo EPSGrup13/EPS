@@ -72,7 +72,6 @@ function getLink($URL)
 		{
 			return $urlSelection."".$URL;
 		}
-		//define('URL', url1);
 	}
 	else
 	{
@@ -84,7 +83,6 @@ function getLink($URL)
 		{
 			return "/".$URL;
 		}
-		//define('URL', "/");
 	}
 }
 //-------------------------------------------------------------------
@@ -155,7 +153,6 @@ function redirectTo($pageURL)
 //Mevcut durumda hatalı üye girişi, 404 vb. sayfalarda kullanılmakta.
 function redirectWithTimer($pageURL)
 {
-	//$getURL=trim($pageURL,".php");
 	if($pageURL == "index")
 	{
 		header("Refresh: 3; URL=/".isDevelopmentModeOn());
@@ -163,7 +160,6 @@ function redirectWithTimer($pageURL)
 	}
 	else
 	{
-		//header("Refresh: 3; URL=/".$pageURL."/");
 		header("Refresh: 3; URL=/".isDevelopmentModeOn()."".$pageURL);// /");
 		exit();
 	}
@@ -184,8 +180,6 @@ function loginControl($getMail, $getPassword)
 	{
 		while($row = $result->fetch_assoc())
 		{
-			//output testi
-			//echo $row["userName"] . " " . $row["userPassword"] . " " . $row["userType"] . " " . $row["userStatus"] . " " . $row["balance"] . " " . $row["firstName"] . " " . $row["lastName"] . " " . $row["email"];
 
 			session_start();
 			$_SESSION["userName"] = $row["userName"];
@@ -203,7 +197,6 @@ function loginControl($getMail, $getPassword)
 				//echo $_SESSION["userType"]; //test
 			}
 			redirectTo("index");
-			//redirectTo("external/tkeskin/");
 		}
 	}
 	else
@@ -226,7 +219,7 @@ function getAllCities()
 {
 	global $conn;
 
-	$sql = "SELECT City.city_id, Slug.slug_title, Slug.slug_url FROM City INNER JOIN Slug ON City.slug_id = Slug.slug_id";
+	$sql = "SELECT City.city_id, Slug.slug_title, Slug.slug_url FROM City INNER JOIN Slug ON City.slug_id = Slug.slug_id WHERE City.city_id < 82";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0)
 	{
@@ -498,21 +491,6 @@ function userProfile($person_id)
 				echo "İl: ". $row["city_name"]."<br>";
 
 				echo "<br>";
-
-			}
-			//print_r(getWehicles($person_id));
-			$wehiclesArray = getWehicles($person_id);
-			if(is_array($wehiclesArray))
-			{
-				$lenWehiclesArray = count($wehiclesArray);
-				for($i = 0; $i < $lenWehiclesArray; $i++)
-				{
-					echo "Plaka: ".$wehiclesArray[$i]."<br>";
-				}
-			}
-			else
-			{
-				echo $wehiclesArray;
 			}
 		}
 		else
@@ -565,6 +543,43 @@ function getWehicles($person_id)
 	}
 	//$conn->close(); //tekrar gözden geçirilecek. #opt 1010
 	return $wehicles;
+}
+
+
+//Sistemde kullanıcıya ait araç olup olmadığını sorgular.
+function numOfWehicles($person_id)
+{
+	global $conn;
+
+	/*$sql = "SELECT full_plate FROM Wehicle WHERE person_id = '$person_id'";
+
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0)
+	{
+
+		while($row = $result->fetch_assoc())
+		{
+			return "Plaka: ". $row["full_plate"]."<br>";
+		}
+	}
+	else
+	{
+		return "hata";
+	}*/
+
+
+
+	$sql = "SELECT full_plate FROM Wehicle WHERE person_id = '$person_id'";
+
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 }
 
 
@@ -898,6 +913,7 @@ function completeReservation($park_url, $getTime, $person_id)
 		if (!($conn->query($sql) === TRUE))
 		{
 			reportErrorLog("completeReservation fonksiyonunda saatleri tek tek girerken sorun oluştu", 1023);
+			destroyUserSession();
 		}
 	}
 
@@ -922,6 +938,7 @@ function completeReservation($park_url, $getTime, $person_id)
 	if (!($conn->query($sql) === TRUE))
 	{
 		reportErrorLog("completeReservation fonksiyonunda parkStatus için saatleri güncellerken sorun oluştu", 1024);
+		destroyUserSession();
 	}
 
 	$conn->close();
@@ -1064,6 +1081,22 @@ function isParkOwner()
 	}
 }
 
+
+function jsSource()
+{
+	$jsLink = isDevelopmentModeOn()."JS/JSFile.js";
+	$jsSrc = "<script type=\"text/javascript\" src=\"".$jsLink."\"></script>";
+
+	return $jsSrc;
+}
+
+function cssSource()
+{
+	$cssLink = isDevelopmentModeOn()."CSS/CSSFile.css";
+	$cssHref = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".$cssLink."\"/>";
+
+	return $cssHref;
+}
 
 
 
