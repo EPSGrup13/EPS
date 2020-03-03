@@ -1,16 +1,5 @@
 <?php
 	include 'functions.php';
-	if(isDevelopmentModeOn())
-	{
-		$cssLink = isDevelopmentModeOn()."CSS/CSSFile.css";
-		$cssHref = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".$cssLink."\"/>";
-	}
-	else
-	{
-		$cssLink = "CSS/CSSFile.css";
-		$cssHref = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".$cssLink."\"/>";
-	}
-
 ?>
 <html>
 		<head>
@@ -20,7 +9,6 @@
 			<title>
 			</title>
 
-			<meta name="viewport" content="width=device-width, initial-scale=1">
-			<?php echo $cssHref ?> <!-- dinamik link rel -->
+			<?php echo cssSource(); ?> <!-- dinamik link rel -->
 		</head>
 	<body class="font1">
