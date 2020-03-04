@@ -1,6 +1,7 @@
 <?php
 	include_once('functions.php');
 	checkDirectAccessToIncludeFile();
+	maintenanceMode();
 	session_start();
 ?>
 
