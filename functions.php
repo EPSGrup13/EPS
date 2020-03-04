@@ -117,8 +117,7 @@ function checkDirectAccessToIncludeFile()
 	if(!defined('LOADED'))
 	{
 		reportErrorLog("Include edilen sayfalardan birine dışarıdan erişilmeye çalışıldı.", 1014);
-		die("Bu sayfaya direk erişim yapamazsınız!");
-		redirectWithTimer("index");
+		redirectTo("index");
 	}
 }
 
@@ -1096,6 +1095,40 @@ function cssSource()
 	$cssHref = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".$cssLink."\"/>";
 
 	return $cssHref;
+}
+
+function basicSelectQueries($query, $selection)
+{
+	global $conn;
+
+	$sql = $query;
+
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0)
+	{
+		while($row = $result->fetch_assoc())
+		{
+			//$conn->close();
+			return array($row[$selection]);
+		}
+	}
+	else
+	{
+		$conn->close();
+		return false;
+	}
+}
+
+function maintenanceMode()
+{
+	$get = "setting_value";
+	$query = "SELECT ".$get." FROM Settings WHERE setting_name = 'bakim_durumu'";
+
+	$data = basicSelectQueries($query, $get);
+	if(is_array($data) and (int)$data[0] === 1)
+	{
+		redirectTo("maintenance");
+	}
 }
 
 
