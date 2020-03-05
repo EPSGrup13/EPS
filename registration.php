@@ -1,5 +1,7 @@
 <?php
+	define('LOADED', TRUE);
 	include 'htmlStart.php';
+	maintenanceMode(); //header olmadığından ek olarak eklendi.
 	session_start();
 ?>
 
@@ -20,3 +22,5 @@
 		echo "<a href=\"".getLink("login")."\">Geri Dön</a>";
 ?>
 	</form>
+
+<?php closeConn(); ?>

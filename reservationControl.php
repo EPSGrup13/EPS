@@ -22,6 +22,6 @@
 
 	completeReservation($parkURL, $getTime, $_SESSION["person_id"]);
 
-
+	closeConn();
 
 ?>

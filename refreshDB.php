@@ -27,5 +27,5 @@
 		reportErrorLog("getParkDetails fonksiyonunda veri çekilirken sorun oluştu", 1021);
 	}
 	dbFeedback();
-	$conn->close();
+	closeConn();
 ?>

@@ -1,5 +1,7 @@
 <?php
+	define('LOADED', TRUE);
 	include  'htmlStart.php';
+	maintenanceMode(); //header olmadığından ek olarak eklendi.
 	session_start();
 ?>
 
@@ -34,3 +36,5 @@
 	</form>
 </div>
 </div>
+
+<?php closeConn(); ?>
