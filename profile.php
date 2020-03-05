@@ -1,4 +1,5 @@
 <?php
+	define('LOADED', TRUE);
 	include 'htmlStart.php';
 	getHeader();
 	pageProtection();
@@ -38,7 +39,7 @@ echo "<div class=\"ou-profile\">";
 			echo "Park Adı\tSaat\tTarih\tPlaka<br>";
 			for($i = 0; $i < count($history); $i++)
 			{
-				for($j = 0; $j < 3; $j++)
+				for($j = 0; $j < 4; $j++)
 				{
 					echo $history[$i][$j]." ";
 				}

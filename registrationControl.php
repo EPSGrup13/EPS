@@ -19,6 +19,6 @@
 		userRegistration($getUserName,convertPassToMD5($getPassword),$getEmail,$getFirstName,$getLastName,$getPhoneNo);
 	}
 
-
+	closeConn();
 
 ?>

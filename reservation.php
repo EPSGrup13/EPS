@@ -1,4 +1,5 @@
 <?php
+	define('LOADED', TRUE);
 	include 'htmlStart.php';
 	getHeader();
 	pageProtection();

@@ -16,4 +16,6 @@
 		loginControl($getMail,convertPassToMD5($getPassword));
 	}
 
+
+	closeConn();
 ?>

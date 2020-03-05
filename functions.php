@@ -117,7 +117,7 @@ function checkDirectAccessToIncludeFile()
 	if(!defined('LOADED'))
 	{
 		reportErrorLog("Include edilen sayfalardan birine dışarıdan erişilmeye çalışıldı.", 1014);
-		redirectTo("index");
+		redirectTo("404");
 	}
 }
 
@@ -211,7 +211,7 @@ function loginControl($getMail, $getPassword)
 		}
 		*/
 	}
-	$conn->close();
+	//#$conn->close();
 }
 
 function getAllCities()
@@ -240,7 +240,7 @@ function getAllCities()
 		reportErrorLog("getAllCities fonksiyonunda veri çekilirken sorun oluştu", 1012);
 		//redirectWithTimer("index");
 	}
-	$conn->close();
+	//#$conn->close();
 }
 
 
@@ -329,7 +329,7 @@ function userRegistration($getUserName, $getPassword, $getEmail, $getFirstName, 
 			}
 		}
 	}
-	$conn->close();
+	//#$conn->close();
 }
 
 
@@ -414,7 +414,7 @@ function getParks($city)
 		reportErrorLog("getParks fonksiyonunda veri çekilirken sorun oluştu / veya daha otopark girilmemiş bir ile erişim sağlandı", 1015);
 		//redirectWithTimer("index"); //otopark bulunamadı yazısı olduğundan dolayı yenileme işlemi yapılmadı.
 	}
-	$conn->close();
+	//#$conn->close();
 }
 
 //getParks'da kullanılmak üzere oluşturulmuş bir fonksiyondur, kullanıcıya db'deki değil, normal il adını göstermek içindir.
@@ -438,7 +438,7 @@ function getCityTitle($citySlugURL)
 		reportErrorLog("getCityTitle fonksiyonunda veri çekilirken sorun oluştu", 1010);
 		redirectWithTimer("index");
 	}
-	$conn->close();
+	//#$conn->close();
 }
 
 
@@ -463,7 +463,7 @@ function getParkTitle($parkId)
 		reportErrorLog("getParkTitle fonksiyonunda veri çekilirken sorun oluştu", 1016);
 		redirectWithTimer("index");
 	}
-	$conn->close();
+	//#$conn->close();
 }
 
 
@@ -683,7 +683,7 @@ function reportErrorLog($message, $code)
 
 	if ($conn->query($sql) === TRUE)
 	{
-		$sql2 = "SELECT error_id FROM ErrorLog ORDER BY error_id DESC LIMIT 1;";
+		$sql2 = "SELECT error_id FROM ErrorLog ORDER BY error_id DESC LIMIT 1";
 		$result = $conn->query($sql2);
 		if ($result->num_rows > 0)
 		{
@@ -695,11 +695,14 @@ function reportErrorLog($message, $code)
 	}
 	else
 	{
-		reportErrorLog("ReportErrorLog ErrorLog'a kayıt yaparken sorun oluştu", 1006);
+		//reportErrorLog("ReportErrorLog ErrorLog'a kayıt yaparken sorun oluştu", 1006);
+		//sorun var ise kendisine geri döndürünce yine sorun oluşacaktır.
+		//die(); // #opt 1160
+		//die(); footerın yüklenmesini engellediğinden kaldırıldı.
 	}
 
 
-	$conn->close();
+	//$conn->close();
 
 	//---------------------------------------------------------------------------------
 
@@ -859,7 +862,7 @@ function getParkDetails($parkSlugURL)
 		reportErrorLog("getParkDetails fonksiyonunda veri çekilirken sorun oluştu", 1017);
 		redirectWithTimer("index"); //otopark bulunamadı yazısı olduğundan dolayı yenileme işlemi yapılmadı.
 	}
-	$conn->close();
+	//#$conn->close();
 	return $parkArray;
 }
 
@@ -940,7 +943,7 @@ function completeReservation($park_url, $getTime, $person_id)
 		destroyUserSession();
 	}
 
-	$conn->close();
+	//#$conn->close();
 	redirectTo("index");
 }
 
@@ -997,7 +1000,7 @@ function reservationHistory($person_id)
 		return "Rezervasyon Geçmişi bulunamadı.";
 		//reportErrorLog("Rezervasyon geçmişi bulunamadı.", 1026);
 	}
-	$conn->close(); // userProfile'dan sonra kullanılıyor.
+	//#$conn->close(); // userProfile'dan sonra kullanılıyor.
 	return $history;
 }
 
@@ -1038,7 +1041,7 @@ function reportList($person_id)
 		reportErrorLog("reportList fonksiyonunda verileri çekerken sorun oluştu.", 1028);
 		redirectWithTimer("index");
 	}
-	$conn->close();
+	//#$conn->close();
 	return $list;
 }
 
@@ -1068,7 +1071,7 @@ function parkHistory($person_id, $date)
 		reportErrorLog("parkHistory fonksiyonunda verileri çekerken sorun oluştu.", 1027);
 		redirectWithTimer("index");
 	}
-	$conn->close();
+	//#$conn->close();
 	return $details;
 }
 
@@ -1114,7 +1117,7 @@ function basicSelectQueries($query, $selection)
 	}
 	else
 	{
-		$conn->close();
+		//#$conn->close();
 		return false;
 	}
 }
@@ -1129,6 +1132,14 @@ function maintenanceMode()
 	{
 		redirectTo("maintenance");
 	}
+}
+
+function closeConn()
+{
+	global $conn;
+	//unset($conn);
+	$conn->close();
+
 }
 
 

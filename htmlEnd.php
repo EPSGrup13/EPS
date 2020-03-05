@@ -1,3 +1,6 @@
-		<?php echo jsSource(); ?>
+		<?php
+		echo jsSource(); 
+		closeConn();
+		?>
 	</body>
 </html>
