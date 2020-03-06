@@ -833,7 +833,7 @@ function dbFeedback()
 	}
 }
 
-
+//rezervasyon sayfasındaki detaylı listelemek için verileri gönderir.
 function getParkDetails($parkSlugURL)
 {
 	$timezone = 0;
@@ -867,16 +867,17 @@ function getParkDetails($parkSlugURL)
 }
 
 
+//Gönderilmiş olan rezervasyon saati dolu ise onu vurgular.
 function parkDetailCheckBox($parkStatus, $time)
 {
 	//echo $parkStatus." ".$time; //test
 	if($parkStatus === "BOŞ")
 	{
-		return "<input type=\"checkbox\" value=\"".$time."\" name=\"time[]\"></div>"; //gönderildiği yer echo'da olduğundan echo değil, return kullanıldı.
+		return "<input type=\"checkbox\" value=\"".$time."\" name=\"time[]\">"; //gönderildiği yer echo'da olduğundan echo değil, return kullanıldı.
 	}
 	else
 	{
-		return "<span class=\"color2\">DOLU</span></div>";
+		return "<span class=\"color2\">DOLU</span>";
 	}
 }
 
@@ -975,6 +976,7 @@ function parkStatusIdForReservation($park_url)
 }
 
 
+//Profilde rezervasyon geçmişini göstermek için kişinin bilgilerini gönderir.
 function reservationHistory($person_id)
 {
 	$timezone=0;
@@ -985,14 +987,13 @@ function reservationHistory($person_id)
 
 	global $conn;
 
-	$sql = "SELECT Reservation.reservation_hour, Reservation.reservation_date, Reservation.full_plate, Slug.slug_title FROM Reservation INNER JOIN parkStatus ON Reservation.parkStatus_id = parkStatus.parkStatus_id INNER JOIN Park ON parkStatus.park_id = Park.park_id INNER JOIN Slug ON Park.slug_id = Slug.slug_id WHERE Reservation.person_id = '$person_id' ORDER BY Reservation.reservation_date DESC, Reservation.reservation_hour ASC LIMIT 10";
+	$sql = "SELECT Reservation.reservation_hour, Reservation.reservation_date, Reservation.full_plate, Slug.slug_title FROM Reservation INNER JOIN parkStatus ON Reservation.parkStatus_id = parkStatus.parkStatus_id INNER JOIN Park ON parkStatus.park_id = Park.park_id INNER JOIN Slug ON Park.slug_id = Slug.slug_id WHERE Reservation.person_id = '$person_id' ORDER BY Reservation.reservation_date DESC, Reservation.reservation_id DESC, Reservation.reservation_hour ASC LIMIT 10";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0)
 	{
-		//echo "Park Adı\tSaat\tTarih\tPlaka<br>";
 		while($row = $result->fetch_assoc())
 		{
-			$history = array_merge($history, array(array($row["slug_title"], $row["reservation_hour"], $row["reservation_date"], $row["full_plate"])));
+			$history = array_merge($history, array(array($row["slug_title"], $row["reservation_hour"], reArrangeDate($row["reservation_date"]), $row["full_plate"])));
 		}
 	}
 	else
@@ -1012,10 +1013,11 @@ function reArrangeDate($date)
 	$newType = substr($date, 8, 2); // başlangıç, length
 	$newType = $newType .".". substr($date, 5, 2);
 	$newType = $newType .".". substr($date, 0, 4);
-	echo $newType;
+	return $newType;
 }
 
 
+//Otoparkçı için kendisine ait olan otoparkın günlük raporlarını listeler
 function reportList($person_id)
 {
 	$timezone=0;
@@ -1026,7 +1028,7 @@ function reportList($person_id)
 
 	global $conn;
 
-	$sql = "SELECT parkStatus.recDate FROM parkStatus INNER JOIN Park ON Park.park_id = parkStatus.park_id INNER JOIN Person ON Park.person_id = Person.person_id WHERE Person.person_id = '$person_id' ORDER BY parkStatus.recDate DESC";
+	$sql = "SELECT parkStatus.recDate FROM parkStatus INNER JOIN Park ON Park.park_id = parkStatus.park_id INNER JOIN Person ON Park.person_id = Person.person_id WHERE Park.person_id = '$person_id' ORDER BY parkStatus.recDate DESC";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0)
 	{
@@ -1039,12 +1041,15 @@ function reportList($person_id)
 	{
 		echo "Park Detayları bulunamadı.";
 		reportErrorLog("reportList fonksiyonunda verileri çekerken sorun oluştu.", 1028);
-		redirectWithTimer("index");
+		//redirectWithTimer("index");
 	}
 	//#$conn->close();
 	return $list;
 }
 
+
+/*Park raporları için detay kısmı, hangi saatte boş veya kim rezervasyon yapmış onun bilgilerini gönderir. rezervasyon yapmış olan kişinin person_id'sini göndererek ileride işlem yaptırılmasını sağlar.
+*/
 function parkHistory($person_id, $date)
 {
 	$timezone=0;
@@ -1055,13 +1060,13 @@ function parkHistory($person_id, $date)
 
 	global $conn;
 
-	$sql = "SELECT Park.maxNumCars, Park.currentNumCars, parkStatus.recDate, parkStatus.h12, parkStatus.h13, parkStatus.h14, parkStatus.h15, parkStatus.h16, parkStatus.h17, parkStatus.h18, parkStatus.h19, parkStatus.h20, parkStatus.h21, parkStatus.h22, parkStatus.h23, parkStatus.h00, parkStatus.h01, parkStatus.h02, parkStatus.h03, parkStatus.h04, parkStatus.h05, parkStatus.h06, parkStatus.h07, parkStatus.h08, parkStatus.h09, parkStatus.h10, parkStatus.h11 FROM Park INNER JOIN parkStatus ON Park.park_id = parkStatus.park_id INNER JOIN Person ON Park.person_id = Person.person_id WHERE Person.person_id = '$person_id' AND parkStatus.recDate = '$date' ORDER BY parkStatus.recDate DESC";
+	$sql = "SELECT Park.maxNumCars, Park.currentNumCars, Park.parkName, parkStatus.parkStatus_id, parkStatus.recDate, parkStatus.h12, parkStatus.h13, parkStatus.h14, parkStatus.h15, parkStatus.h16, parkStatus.h17, parkStatus.h18, parkStatus.h19, parkStatus.h20, parkStatus.h21, parkStatus.h22, parkStatus.h23, parkStatus.h00, parkStatus.h01, parkStatus.h02, parkStatus.h03, parkStatus.h04, parkStatus.h05, parkStatus.h06, parkStatus.h07, parkStatus.h08, parkStatus.h09, parkStatus.h10, parkStatus.h11 FROM Park INNER JOIN parkStatus ON Park.park_id = parkStatus.park_id INNER JOIN Person ON Park.person_id = Person.person_id WHERE Park.person_id = '$person_id' AND parkStatus.recDate = '$date' ORDER BY parkStatus.recDate DESC";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0)
 	{
 		while($row = $result->fetch_assoc())
 		{
-			$details = array_merge($details, array(array($row["h12"],$row["h13"],$row["h14"])));
+			$details = array_merge($details, array($row["h00"],$row["h01"],$row["h02"],$row["h03"],$row["h04"],$row["h05"],$row["h06"],$row["h07"],$row["h08"],$row["h09"],$row["h10"],$row["h11"],$row["h12"],$row["h13"],$row["h14"],$row["h15"],$row["h16"],$row["h17"],$row["h18"],$row["h19"],$row["h20"],$row["h21"],$row["h22"],$row["h23"], $row["parkName"], $date, $row["parkStatus_id"]));
 
 		}
 	}
@@ -1069,12 +1074,44 @@ function parkHistory($person_id, $date)
 	{
 		echo "Park Detayları bulunamadı.";
 		reportErrorLog("parkHistory fonksiyonunda verileri çekerken sorun oluştu.", 1027);
-		redirectWithTimer("index");
+		//redirectWithTimer("index");
 	}
 	//#$conn->close();
 	return $details;
 }
 
+/*Park raporları günlük listelendiğinde, o gün yapılmış olan rezervasyonları saat,park ve tarih olarak eşleştirerek o parka rezervasyon yaptırmış olan kişinin bilgilerini çeker.
+*/
+function parkHistoryPersonFilter($person_id, $date, $hour, $statusId)
+{
+	$timezone=0;
+	date_default_timezone_set('Europe/Istanbul');
+
+	$personDetails = array();
+
+	global $conn;
+
+	$sql = "SELECT Reservation.full_plate, Person.firstName, Person.lastName FROM Reservation INNER JOIN Person ON Reservation.person_id = Person.person_id WHERE Reservation.person_id = '$person_id' AND Reservation.reservation_date = '$date' AND Reservation.reservation_hour = '$hour' AND Reservation.parkStatus_id = '$statusId'";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0)
+	{
+		while($row = $result->fetch_assoc())
+		{
+			array_push($personDetails, $row["firstName"], $row["lastName"], $row["full_plate"]);
+		}
+	}
+	else
+	{
+		echo "Park Detayları bulunamadı.";
+		reportErrorLog("parkHistoryPersonFilter fonksiyonunda verileri çekerken sorun oluştu.", 1029);
+		//redirectWithTimer("index");
+	}
+	//#$conn->close();
+	return $personDetails;
+}
+
+
+//Park sahibi mi diye kontrol eder, yetkilendirme sayfaları için kullanılmakta. (örnek olarak records.php)
 function isParkOwner()
 {
 	if(!getUserLevel() === 1)
@@ -1084,6 +1121,7 @@ function isParkOwner()
 }
 
 
+//Dinamik js kaynak yönlendirme fonksiyonu
 function jsSource()
 {
 	$jsLink = isDevelopmentModeOn()."JS/JSFile.js";
@@ -1092,6 +1130,8 @@ function jsSource()
 	return $jsSrc;
 }
 
+
+//Dinamik css kaynak yönlendirme fonksiyonu
 function cssSource()
 {
 	$cssLink = isDevelopmentModeOn()."CSS/CSSFile.css";
@@ -1100,6 +1140,8 @@ function cssSource()
 	return $cssHref;
 }
 
+
+//Basit select sorguları için dinamik fonksiyon.
 function basicSelectQueries($query, $selection)
 {
 	global $conn;
@@ -1111,17 +1153,17 @@ function basicSelectQueries($query, $selection)
 	{
 		while($row = $result->fetch_assoc())
 		{
-			//$conn->close();
 			return array($row[$selection]);
 		}
 	}
 	else
 	{
-		//#$conn->close();
 		return false;
 	}
 }
 
+
+//Siteye girildiğinde bakım modunda olup olmadığını kontrol eder, bakım modu 1 ise bakım sayfasına yönlendirilir. (diğer sayfalara erişim kesilir)
 function maintenanceMode()
 {
 	$get = "setting_value";
@@ -1134,6 +1176,8 @@ function maintenanceMode()
 	}
 }
 
+
+//Database bağlantısını kapatmak için dinamik yöntem
 function closeConn()
 {
 	global $conn;
