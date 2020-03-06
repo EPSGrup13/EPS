@@ -17,7 +17,7 @@ $list = reportList($_SESSION["person_id"]);
 
 for($i = 0; $i < count($list); $i++)
 {
-	echo "<a href=\"".isDevelopmentModeOn()."parkdetayi/".$list[$i]. "\">". $list[$i]."</a> Tarihli rapor.<br>";
+	echo "<a href=\"".isDevelopmentModeOn()."parkdetayi/".$list[$i]. "\">". reArrangeDate($list[$i])."</a> Tarihli rapor.<br>";
 }
 ?>
 
