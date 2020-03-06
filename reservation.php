@@ -62,16 +62,15 @@ echo "<form action=\"".getLink("reservationControl")."\" method=\"post\" style=\
 
 	for($i = 0; $i < count($parkArray); $i++)
 	{
-		if($i == (count($parkArray)/2)+1)
+		if($i == (count($parkArray)/2))
 		{
-			echo "<div style=\"display:table-row;\">";
-			echo "</div></div>
+			echo "</div>
 			<div style=\"display:table-cell;min-width:50%;\">
-			<div style=\"display:table-row;\">".$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i]);
+			<div style=\"display:table-row;\">".$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i])."</div>";
 		}
 		else
 		{
-			echo "<div style=\"display:table-row;\">".$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i]);
+			echo "<div style=\"display:table-row;\">".$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i])."</div>";
 		}
 	}
 ?>

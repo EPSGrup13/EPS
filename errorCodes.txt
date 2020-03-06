@@ -22,3 +22,4 @@
 1026 Rezervasyon geçmişinde gösterim.
 1027 ParkHistory fonksiyonunda verileri çekerken hata.
 1028 reportList fonksiyonunda verileri çekerken hata.
+1029 parkHistoryPersonFilter fonksiyonunda verileri çekerken hata.
