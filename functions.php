@@ -202,16 +202,7 @@ function loginControl($getMail, $getPassword)
 	{
 		echo "Giriş bilgileri doğru değil. Geri Yönlendiriliyorsunuz...";
 		redirectWithTimer("login");
-		
-		/*
-		echo "<br><br><a href=\"login?goBack\">Geri Dön</a>";
-		if(isset($_GET["goBack"]))
-		{
-			redirectTo("index");
-		}
-		*/
 	}
-	//#$conn->close();
 }
 
 function getAllCities()
@@ -372,7 +363,7 @@ function getParks($city)
 {
 	global $conn;
 
-	echo getCityTitle($city)." otoparkları: <br><br>";
+	$parkArray = array();
 
 	$sql = "SELECT Park.park_id, Park.parkName, Park.maxNumCars, Park.currentNumCars, Park.province_id, Province.province_name, Park.person_id, Person.firstName, Person.lastName, Province.city_id, City.city_name FROM Park INNER JOIN Person ON Park.person_id = Person.person_id INNER JOIN Province ON Park.province_id = Province.province_id INNER JOIN City ON Province.city_id = City.city_id WHERE City.city_id IN (SELECT slug_id FROM Slug WHERE slug_url = '$city')";
 
@@ -381,37 +372,14 @@ function getParks($city)
 	{
 		while($row = $result->fetch_assoc())
 		{
-			//echo "Park id: ".$row["park_id"]. "<br>";
-			$parkId = $row["park_id"];
-			echo "Park : ".$row["parkName"]. "<br>"; //Park Adı
-			//echo "Maksimum Araç Sayısı: ".$row["maxNumCars"]. "<br>";
-			//echo "Mevcut Araç Sayısı: ".$row["currentNumCars"]. "<br>";
-			//echo "İlçe id: ".$row["province_id"]. "<br>";
-			echo "İlçe : ".$row["province_name"]. "<br>"; //İlçe Adı
-			//echo "Park Sahibi id: ".$row["person_id"]. "<br>";
-			//echo "Park Sahibi: ".$row["firstName"]." ".$row["lastName"]. "<br>";
-			//echo "İl id: ".$row["city_id"]. "<br>";
-			//echo "İl Adı: ".$row["city_name"]. "<br>";
-
-			//maksimum araç sayısı - mevcut araç sayısı = boş yer sayısı.
-			$availablePark = (int)$row["maxNumCars"] - (int)$row["currentNumCars"];
-			if($availablePark == 0) //boş yer yok ise kırmızı dolu, var ise sayısını yeşil yazdırır.
-			{
-				echo "Park <span class=\"color2\">dolu</span>";
-			}
-			else
-			{
-				echo "Boş yer sayısı: <span class=\"color1\">".$availablePark."</span><br>";
-				echo "<a href=\"".isDevelopmentModeOn()."rezervasyon/".getParkTitle($parkId)."\">Rezervasyon Yap</a>";
-
-			}
-			echo "<br><br><br>";
+			$parkArray = array_merge($parkArray, array(array($row["park_id"], $row["parkName"], $row["province_name"], $row["maxNumCars"], $row["currentNumCars"])));
 		}
+		return $parkArray;
 	}
 	else
 	{
-		echo "Otopark Bulunamadı.";
 		reportErrorLog("getParks fonksiyonunda veri çekilirken sorun oluştu / veya daha otopark girilmemiş bir ile erişim sağlandı", 1015);
+		return "Otopark Bulunamadı.";
 		//redirectWithTimer("index"); //otopark bulunamadı yazısı olduğundan dolayı yenileme işlemi yapılmadı.
 	}
 	//#$conn->close();
@@ -532,6 +500,7 @@ function getWehicles($person_id)
 				array_push($wehicles, $row["full_plate"]);
 			}
 		}
+		return $wehicles;
 	}
 	else
 	{
@@ -541,7 +510,6 @@ function getWehicles($person_id)
 		return "Sisteme kayıtlı aracınız bulunmamaktadır.";
 	}
 	//$conn->close(); //tekrar gözden geçirilecek. #opt 1010
-	return $wehicles;
 }
 
 
@@ -549,24 +517,6 @@ function getWehicles($person_id)
 function numOfWehicles($person_id)
 {
 	global $conn;
-
-	/*$sql = "SELECT full_plate FROM Wehicle WHERE person_id = '$person_id'";
-
-	$result = $conn->query($sql);
-	if ($result->num_rows > 0)
-	{
-
-		while($row = $result->fetch_assoc())
-		{
-			return "Plaka: ". $row["full_plate"]."<br>";
-		}
-	}
-	else
-	{
-		return "hata";
-	}*/
-
-
 
 	$sql = "SELECT full_plate FROM Wehicle WHERE person_id = '$person_id'";
 
@@ -855,6 +805,7 @@ function getParkDetails($parkSlugURL)
 			array_push($parkArray,$row["h00"],$row["h01"],$row["h02"],$row["h03"],$row["h04"],$row["h05"],$row["h06"],$row["h07"],$row["h08"],$row["h09"],$row["h10"],$row["h11"],$row["h12"],$row["h13"],$row["h14"],$row["h15"],$row["h16"],$row["h17"],$row["h18"],$row["h19"],$row["h20"],$row["h21"],$row["h22"],$row["h23"]);
 			array_push($parkArray,$row["slug_title"],$row["maxNumCars"],$row["currentNumCars"],$localDateType);
 		}
+		return $parkArray;
 	}
 	else
 	{
@@ -863,7 +814,6 @@ function getParkDetails($parkSlugURL)
 		redirectWithTimer("index"); //otopark bulunamadı yazısı olduğundan dolayı yenileme işlemi yapılmadı.
 	}
 	//#$conn->close();
-	return $parkArray;
 }
 
 
@@ -966,13 +916,13 @@ function parkStatusIdForReservation($park_url)
 		{
 			$val = $row["parkStatus_id"];
 		}
+		return $val;
 	}
 	else
 	{
 		reportErrorLog("parkStatusIdForReservation fonksiyonunda veri çekilirken sorun oluştu", 1025);
 	}
 	//$conn->close(); //connection completeReservation fonksiyonu içerisinde kapatılacak.
-	return $val;
 }
 
 
@@ -995,6 +945,7 @@ function reservationHistory($person_id)
 		{
 			$history = array_merge($history, array(array($row["slug_title"], $row["reservation_hour"], reArrangeDate($row["reservation_date"]), $row["full_plate"])));
 		}
+		return $history;
 	}
 	else
 	{
@@ -1002,7 +953,6 @@ function reservationHistory($person_id)
 		//reportErrorLog("Rezervasyon geçmişi bulunamadı.", 1026);
 	}
 	//#$conn->close(); // userProfile'dan sonra kullanılıyor.
-	return $history;
 }
 
 
@@ -1036,15 +986,15 @@ function reportList($person_id)
 		{
 			$list = array_merge($list, array($row["recDate"]));
 		}
+		return $list;
 	}
 	else
 	{
-		echo "Park Detayları bulunamadı.";
 		reportErrorLog("reportList fonksiyonunda verileri çekerken sorun oluştu.", 1028);
+		return "Park Detayları bulunamadı.";
 		//redirectWithTimer("index");
 	}
 	//#$conn->close();
-	return $list;
 }
 
 
@@ -1069,15 +1019,15 @@ function parkHistory($person_id, $date)
 			$details = array_merge($details, array($row["h00"],$row["h01"],$row["h02"],$row["h03"],$row["h04"],$row["h05"],$row["h06"],$row["h07"],$row["h08"],$row["h09"],$row["h10"],$row["h11"],$row["h12"],$row["h13"],$row["h14"],$row["h15"],$row["h16"],$row["h17"],$row["h18"],$row["h19"],$row["h20"],$row["h21"],$row["h22"],$row["h23"], $row["parkName"], $date, $row["parkStatus_id"]));
 
 		}
+		return $details;
 	}
 	else
 	{
-		echo "Park Detayları bulunamadı.";
 		reportErrorLog("parkHistory fonksiyonunda verileri çekerken sorun oluştu.", 1027);
+		return "Park Detayları bulunamadı.";
 		//redirectWithTimer("index");
 	}
 	//#$conn->close();
-	return $details;
 }
 
 /*Park raporları günlük listelendiğinde, o gün yapılmış olan rezervasyonları saat,park ve tarih olarak eşleştirerek o parka rezervasyon yaptırmış olan kişinin bilgilerini çeker.
@@ -1099,15 +1049,15 @@ function parkHistoryPersonFilter($person_id, $date, $hour, $statusId)
 		{
 			array_push($personDetails, $row["firstName"], $row["lastName"], $row["full_plate"]);
 		}
+		return $personDetails;
 	}
 	else
 	{
-		echo "Park Detayları bulunamadı.";
 		reportErrorLog("parkHistoryPersonFilter fonksiyonunda verileri çekerken sorun oluştu.", 1029);
+		return "Park Detayları bulunamadı.";
 		//redirectWithTimer("index");
 	}
 	//#$conn->close();
-	return $personDetails;
 }
 
 
