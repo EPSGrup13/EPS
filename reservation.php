@@ -13,7 +13,7 @@
 	//----
 
 
-	$parkArray = array();
+	//$parkArray = array();
 	$parkArray = getParkDetails($getSlugParkURL);
 
 	$timeArray = array();
