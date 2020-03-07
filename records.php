@@ -17,66 +17,56 @@
 
 
 <?php
-$details = array();
+//$details = array();
 $details = parkHistory($_SESSION["person_id"], $getDate);
 
 
-$statusId = $details[count($details) - 1];
-unset($details[count($details) - 1]);
-
-
-$recDate = $details[count($details) - 1];
-unset($details[count($details) - 1]);
-
-echo $details[count($details) - 1];
-unset($details[count($details) - 1]);
-echo "<br>Tarih: " .reArrangeDate($recDate). "<br><br>";
-
-$personDetails = array();
-
-
-for($i = 0; $i < count($details); $i++)
+if(is_array($details))
 {
+	$statusId = $details[count($details) - 1];
+	unset($details[count($details) - 1]);
 
-	if($details[$i] === "BOŞ")
-	{
-		echo $timeArray[$i]. " " .$details[$i]."<br>";
-	}
-	else
-	{
-		$personDetails = parkHistoryPersonFilter((int)($details[$i]), $recDate, $timeArray[$i], $statusId);
 
-		echo $timeArray[$i]. " ";
-		for($j = 0; $j < count($personDetails); $j++)
+	$recDate = $details[count($details) - 1];
+	unset($details[count($details) - 1]);
+
+	echo $details[count($details) - 1];
+	unset($details[count($details) - 1]);
+	echo "<br>Tarih: " .reArrangeDate($recDate). "<br><br>";
+
+	$personDetails = array();
+
+	for($i = 0; $i < count($details); $i++)
+	{
+
+		if($details[$i] === "BOŞ")
 		{
-			echo $personDetails[$j]." ";
-		}
-		echo "<br>";
-		//echo $details[$i]."<br>";
-	}
-}
-
-//eski versiyon incelemeden sonra kaldırılacak.
-/*for($i = 0; $i < count($details); $i++)
-{
-	for($j = 0; $j < 26; $j++)
-	{
-		if($details[$i][$j] === "BOŞ")
-		{
-			echo $details[$i][$j]."<br>";
+			echo $timeArray[$i]. " " .$details[$i]."<br>";
 		}
 		else
 		{
-			//$personDetails = parkHistoryPersonFilter((int)($details[$i][$j]));
-			//for($k = 0; $k < count($personDetails); $k++)
-			//{
-			//	echo $personDetails[$k]." ";
-			//}
-			echo $details[$i][$j]."<br>";
+			$personDetails = parkHistoryPersonFilter((int)($details[$i]), $recDate, $timeArray[$i], $statusId);
+			if(is_array($personDetails))
+			{
+				echo $timeArray[$i]. " ";
+				for($j = 0; $j < count($personDetails); $j++)
+				{
+					echo $personDetails[$j]." ";
+				}
+				echo "<br>";
+			}
+			else
+			{
+				echo $timeArray[$i]. " " .$personDetails. "<br>";
+			}
 		}
 	}
-	echo "<br>";
-}*/
+}
+else
+{
+	echo $details;
+}
+
 ?>
 
 
