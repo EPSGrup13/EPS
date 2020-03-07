@@ -12,13 +12,21 @@
 
 
 <?php
-$list = array();
+//$list = array();
 $list = reportList($_SESSION["person_id"]);
 
-for($i = 0; $i < count($list); $i++)
+if(is_array($list))
 {
-	echo "<a href=\"".isDevelopmentModeOn()."parkdetayi/".$list[$i]. "\">". reArrangeDate($list[$i])."</a> Tarihli rapor.<br>";
+	for($i = 0; $i < count($list); $i++)
+	{
+		echo "<a href=\"".isDevelopmentModeOn()."parkdetayi/".$list[$i]. "\">". reArrangeDate($list[$i])."</a> Tarihli rapor.<br>";
+	}
 }
+else
+{
+	echo $list;
+}
+
 ?>
 
 
