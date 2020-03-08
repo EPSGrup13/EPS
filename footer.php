@@ -3,6 +3,6 @@
 	checkDirectAccessToIncludeFile();
 ?>
 
-<div class="footer">
+<div class="footer bg-dark">
 
 </div>

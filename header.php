@@ -14,6 +14,13 @@
 		</div>
 
 		<div class="userBar">
+
+<label class="switch">
+  <input type="checkbox" onclick="darkMode()" id="dm">
+  <span class="slider round"></span>
+</label>
+
+			
 		<?php
 			if(isSessionActive())
 			{
