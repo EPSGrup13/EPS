@@ -1,6 +1,6 @@
-input[type=text]
+/*input[type=text]
 {
-	/*width: 100%;*/
+	//width: 100%;
 	width: 250px;
 	padding: 6px 10px;
 	margin: 8px 0;
@@ -9,7 +9,7 @@ input[type=text]
 
 input[type=password]
 {
-	/*width: 100%;*/
+	//width: 100%;
 	width: 250px;
 	padding:6px 10px;
 	margin: 8px 0;
@@ -20,13 +20,13 @@ body
 {
 	margin:0px;
 	height: 100%;
-	/*! padding: 10px; */
-	/*! padding-bottom: 30px; */ /* 30px -> footer height */
-}
+	//! padding: 10px;
+	//! padding-bottom: 30px;  // 30px -> footer height 
+}*/
 
 a
 {
-    color: black;
+    color: white;
     text-decoration: none;
 }
 
@@ -51,20 +51,24 @@ a:hover
 .footer
 {
 
-	height: 30px;
+	height: 48px;
 	/*! position: absolute; */
 	/*! bottom: 0px; */
 	width: 100%;
+	/*min-width:586px;*/
 	z-index: auto;
+	display:table;
 }
 
 .content /* wrapper */
 {
-	
-	background-color: yellow;
+	/*background-color: yellow;*/
+	color:white;
 	display: block;
 	box-sizing: border-box;
-	min-height: calc(100% - 65px);
+	min-height: calc(100% - 95px);
+	/*min-width: 586px;*/
+	padding-bottom:10px;
 }
 
 
@@ -129,27 +133,56 @@ a:hover
 
 .headerInline
 {
+	min-height: 47px;
 	width: 100%;
 	/*! float: left; */
-	height: 35px;
 	position: relative !important;
 	box-sizing: border-box;
 	display: table;
 }
 
-.linkBar
+.linkBar1
 {
 	display: table-cell;
 	vertical-align: middle;
+	width:90px;
+	padding-right:8px;
+}
+
+.linkBar2
+{
+    display: table-cell;
+    vertical-align: middle;
+    min-width:170px;
+}
+
+
+.linkBar2 a
+{
+        /* display: block; */ /*block olur ise aldığı divi kaplar*/
+        padding: 13px 13px;
+        font: 15px tahoma, arial; /*menü elemanlarının yazı boyutları yazı tipi için */
+        color: rgb(255, 255, 255); /*menü elemanlarının renkleri için */
+        text-decoration: none; /*link verildikten sonra altlarında çıkan çizgileri yok etmek için */
+}
+.linkBar2 a:hover
+{
+        background: rgba(194, 196, 202, 0.5); /*menü elemanı üzerine gelindiğinde renk alması için*/
+    transition-duration: 0.5s; /*menü elemanı üzerine gelindiğinde efektli renk alması için*/
+    -webkit-transition-duration: 0.5s; /*tarayıcılara uyması için */
+    -moz-transition-duration: 0.5s; /*tarayıcılara uyması için */
+    -ms-transition-duration: 0.5s; /*tarayıcılara uyması için */
+    -o-transition-duration: 0.5s; /*tarayıcılara uyması için */
+    border-radius: 15px;
 }
 
 .userBar
 {
 	text-align:right;
-	width:300px;
+	/*min-width: 300px;*/
+	width: 300px;
 	display: table-cell;
 	vertical-align: middle;
-	padding-right: 10px;
 }
 
 
@@ -158,12 +191,11 @@ a:hover
 {
 	display:flex;
 	flex-wrap:wrap;
-	justify-content: flex-start;
+	justify-content: center;
 }
 
 .city
 {
-	text-align:left;
 	min-width:130px;
 	height:30px;
 	display:table;
@@ -171,11 +203,16 @@ a:hover
 	padding-bottom:2px;*/
 	padding-left:18px;
 	padding-right:18px;
+	border: 1px solid rgba(255, 255, 255, 0.205);
+	text-align: center;
+	padding: 15px;
+	margin: 1px;
+	background-color: rgba(163, 69, 124, 0.452);
 }
 
 .cityNum
 {
-  display:table-cell;
+	display:table-cell;
 	width:15px;
 	max-width:15px;
 	min-width:15px;
@@ -186,14 +223,22 @@ a:hover
 .cityName
 {
 	font-size:10pt;
-  display:table-cell;
+	display:table-cell;
 	/*padding:2px 5px 2px 2px;*/
+}
+
+.profileColor
+{
+    background-color: rgb(243, 208, 67);
+    /* color: white; */
+     padding: 13px;
 }
 
 .uprofile
 {
-  border: none;
-}
+	border: none;
+	display: inline-block; /*drop button hizası dışarıda kalması için*/
+	}
 
 .up
 {
@@ -201,12 +246,22 @@ a:hover
   display: inline-block;
 }
 
+.dba
+{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding-top: 13px;
+    padding-bottom: 13px;
+    background-color: #2d2d2d;
+}
+
 .uprofile-content
 {
   display: none;
   position: absolute;
   background-color: #f1f1f1;
-  min-width: 140px;
+  min-width: 170px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
 }
@@ -217,7 +272,7 @@ a:hover
   padding: 8px 12px;
   text-decoration: none;
   display: block;
-  text-align:left;
+  text-align:center;
 }
 
 .uprofile-content a:hover {background-color: #ddd;}
@@ -237,20 +292,20 @@ a:hover
 
 .profile
 {
-    width: 49%;
-    position:relative;
-    background-color:green;
-    padding: 10 15px;
+	width: 49%;
+	position:relative;
+	background-color:green;
+	padding: 10 15px;
 	margin: 10px 3px 10px 5px;
 	flex: 1 auto;
 }
 
 .rsv
 {
-    width: 49%;
-    position:relative;
-    background-color:blueviolet;
-    padding: 10 15px;
+	width: 49%;
+	position:relative;
+	background-color:blueviolet;
+	padding: 10 15px;
 	margin: 10px 5px 10px 3px;
 	flex: 1 auto;
 }
@@ -266,26 +321,80 @@ a:hover
 
 
 
+.app-logo
+{
+    display: table-cell;
+    float: right;
+    padding: 6px 6px 0px 0px;
+}
+
+.logo-size1
+{
+    width: 110px;
+    height: 40px;
+}
+
+.b-type-link
+{
+  width: 35%;
+  padding: 10px;
+  background-color: rgb(243, 208, 67);
+  border:none;
+  border-radius: 10px;
+
+  display:table-cell;
+  color:white;
+  margin-left:15px;
+  text-align:center;
+}
+
+.submit-button
+{
+  width:40%;
+  padding: 10px;
+  background-color: rgb(243, 208, 67);
+  border:none;
+  border-radius: 10px;
+
+  display:table-cell;
+  color:white;
+  margin-right:15px;
+  font-size:16px;
+
+}
+
+.button-row
+{
+  display:flex;
+  justify-content: center;
+  width:100%;
+  padding: 0px 0px 16px 0px;
+}
 
 
 
 
 
 
-.switch {
+
+
+.switch
+{
   position: relative;
   display: inline-block;
   width: 51px;
   height: 25px;
 }
 
-.switch input {
+.switch input
+{
   opacity: 0;
   width: 0;
   /* height: 0; */
 }
 
-.slider {
+.slider
+{
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -295,6 +404,10 @@ a:hover
   background-color: #ccc;
   -webkit-transition: .4s;
   transition: .4s;
+  max-width: 51px;
+  max-height: 25px;
+  margin: auto;
+/* display: block;*/
 }
 
 .slider:before {
@@ -347,21 +460,21 @@ input:checked + .slider:before {
 @media only screen and (max-width: 600px)
 {
 	input[type=text]
-	{
-	  width: 100%;
+    {
+	  width: 90%;
 	  padding: 3px 6px;
 	  margin: 8px 0;
 	  box-sizing: border-box;
-	  max-width:200px;
+	  /*max-width:200px;*/
 	}
 
 	input[type=password]
 	{
-	  width: 100%;
+	  width: 90%;
 	  padding:3px 6px;
 	  margin: 8px 0;
 	  box-sizing: border-box;
-	  max-width:200px;
+		/*max-width:200px;*/
 	}
 
 	.loginBox
@@ -384,6 +497,7 @@ input:checked + .slider:before {
 		width:100%;
 		margin-top:-60px;
 	}
+
 	.loginBoxRow
 	{
 		display: table-row;
@@ -398,7 +512,6 @@ input:checked + .slider:before {
 
 	.loginBoxRight
 	{
-
 		display: table-cell;
 	}
 }

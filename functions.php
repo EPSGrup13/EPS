@@ -135,14 +135,12 @@ function redirectTo($pageURL)
 	//index'e gidiyorsa direk /ePark/ index'e gider zaten
 	if($pageURL == "index")
 	{
-		//header("Location: /"); //
 		header("Location: /".isDevelopmentModeOn());
 		exit();
 	}
 	//index haricindeki url için ePark/url şeklinde gönderir.
 	else
 	{
-		//header("Location: /".$pageURL."");
 		header("Location: /".isDevelopmentModeOn()."".$pageURL);
 		exit();
 	}
@@ -213,7 +211,9 @@ function getAllCities()
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0)
 	{
+		echo "<center><h3> Bulunduğunuz şehri seçiniz </h3><center>";
 		echo "<div class=\"cityFrame\">";
+
 		while($row = $result->fetch_assoc())
 		{
 
