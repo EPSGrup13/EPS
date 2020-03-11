@@ -180,7 +180,7 @@ a:hover
 {
 	text-align:right;
 	/*min-width: 300px;*/
-	width: 300px;
+	/*width: 300px;*/
 	display: table-cell;
 	vertical-align: middle;
 }
@@ -447,6 +447,95 @@ input:checked + .slider:before {
 
 
 
+.alt
+{
+  display: flex;
+  justify-content: space-evenly;
+  /* display: block; */
+  margin-top: 40px;
+}
+
+.ust
+{
+  display: flex;
+  padding: 10px;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 200px;
+}
+
+.isim1
+{
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right:5px;
+}
+
+.reservationSec
+{
+  word-wrap: break-word;
+  overflow: scroll;
+  height: calc(100% - 46px);
+  overflow-x: hidden;
+  /*overflow-y: visible;*/
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.reservationSec::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.reservationSec
+{
+    -ms-overflow-style: none;
+}
+
+.plateSec
+{
+  height: 80px;
+  word-wrap: break-word;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.plateSec::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.plateSec
+{
+    -ms-overflow-style: none;
+}
+
+.detailsSec
+{
+  height: 135px;
+  word-wrap: break-word;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.detailsSec::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE and Edge */
+.detailsSec
+{
+    -ms-overflow-style: none;
+}
+
+.contact
+{
+  display:flex;
+  justify-content: center;
+}
+
+
+
 
 
 
@@ -526,15 +615,6 @@ input:checked + .slider:before {
 
 
 
-
-
-
-
-
-
-
-
-
 /*Front End grubu css başlangıcı*/
 
 body
@@ -546,11 +626,23 @@ body
     background-size: cover; /*resmin boyutunu ayarlamak için*/
     margin: 0px;
     padding: 0px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    height:100%;
+}
+
+.nav-bg
+{
+    background: #9da4aac4;
+}
+
+.footer-bg
+{
+    background: #3a3f44;
 }
 
 nav{
-    background: #9da4aac4; /*menü arkaplan rengi*/
+    min-height:47px;
+    /*min-width: 586px;*/
     text-align: left; /*Yazıları ortalamak için */
     width: 100%; /*sayfayı tamamen kaplaması için*/
     opacity: 0.9;
@@ -592,26 +684,36 @@ nav li a:hover
     height: 400px; /*form kutu yüksekliği*/
     background: rgba(255, 255, 255, 0.685); /*form arkaplan rengi*/
     position: absolute; /*forma koordinat belirleyerek sayfada bir yere yerleştirmek*/
-    transform: translate(550px,100px);
-    
+    left: 50%;
+    top: 50%;
+    margin-top: -200px;
+    margin-left: -200px;
+    /* display: table; */
 }
 
 #formkapsamkayit{
     background: rgba(255, 255, 255, 0.685); /*form arkaplan rengi*/
-    position: absolute; /*forma koordinat belirleyerek sayfada bir yere yerleştirmek*/
-    width: 450px; 
-    height: 520px;  
-    transform: translate(500px,45px);
+    position: absolute;
+    width: 450px;
+    height: 500px;
+    left: 50%;
+    top: 50%;
+    margin-top: -250;
+    margin-left: -260;
     
 }
 
 #formkapsamiletisim{
     background: rgba(255, 255, 255, 0.685); /*form arkaplan rengi*/
     position: absolute; /*forma koordinat belirleyerek sayfada bir yere yerleştirmek*/
-    width: 850px; 
-    height: 520px; 
-    transform: translate(380px,45px);
-    
+    width: 850px;
+    height: 520px;
+    /* transform: translate(380px,45px); */
+    display: table;
+    top: 50%;
+    left: 50%;
+    margin-top: -260px;
+    margin-left: -425px;
 }
 
 #formkapsamsifresifirlama{
@@ -627,29 +729,29 @@ nav li a:hover
     width: 900px; /*form kutu genişliği*/
     height: 600px; /*form kutu yüksekliği*/
     background: rgba(255, 255, 255, 0.685); /*form arkaplan rengi*/
-    position: absolute; /*forma koordinat belirleyerek sayfada bir yere yerleştirmek*/
-    transform: translate(300px,90px);
-    top: -15px;
-    
-    
+    /* position: absolute; */ /*forma koordinat belirleyerek sayfada bir yere yerleştirmek*/
+    /* transform: translate(300px,90px); */
+    /* top: -15px; */
+    display: table;
+    padding: 15px;
 }
 
 /*Form içerisindeki icon ile ilgili kısım*/
-#formkapsamimggiris{ 
-    width: 70px; 
+#formkapsamimggiris{
+    width: 70px;
     height: 70px;
-    position: absolute;
-    top: 10px;
-    left: 165px;
-
+    margin: auto; /*ortalama*/
+    display:block; /*mozilla için ortalama*/
+    /*display: table-cell;*/
+    margin-top: 35px;
 }
 
 #formkapsamimgkayit{ 
-    width: 70px; 
+    width: 70px;
     height: 70px;
-    position: absolute;
-    left: 190px;
-    top: 10px; 
+    display: block;
+    margin: auto;
+    margin-top: 20px;
 
 }
 
@@ -667,36 +769,30 @@ nav li a:hover
     width: 100%;
     text-align: center;
     position: relative;
-    top: 70px;
     margin-bottom: 50px;
     color: rgb(255, 255, 255);
     font-size: 20px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-
 }
 
 #formkapsamhkayit{
-    width: 100%;
+    display: block;
     text-align: center;
-    position: relative;
-    top: 70px;
-    margin-bottom: 50px;
     color: rgb(255, 255, 255);
     font-size: 20px;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-
 }
 
 #formkapsamhiletisim{
-    width: 100%;
+    margin-top: 12px;
+    /* width: 100%; */
     text-align: center;
-    position: relative;
-    top: 20px;
-    margin-bottom: 50px;
+    /* position: relative; */
+    /* display: table-row; */
+    /* top: 20px; */
+    /* margin-bottom: 50px; */
     color: rgb(255, 255, 255);
     font-size: 20px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-
 }
 
 #formkapsamhsifresifirlama{
@@ -713,11 +809,9 @@ nav li a:hover
 
 .formkapsaminput
 {
-    top:40px;
-    width: 80%;
+    width: 90%;
     left: 5%;
     position: relative;
-    padding:10px;
     background: none;
     outline: none;
     border: 1px solid rgba(255, 255, 255, 0.411);
@@ -727,9 +821,28 @@ nav li a:hover
     border-left: 3px solid rgb(110, 19, 82);
     border-radius: 5px;
     transition: border-color .8s ease-out;
-
-    
 }
+
+
+.formTextArea
+{
+  width: 90%;
+  left: 5%;
+  position: relative;
+  background: none;
+  outline: none;
+  border: 1px solid rgba(255, 255, 255, 0.411);
+  margin-bottom: 15px;
+  color: rgb(255, 255, 255);
+  padding:8px 20px;
+  border-left: 3px solid rgb(110, 19, 82);
+  border-radius: 5px;
+  transition: border-color .8s ease-out;
+  max-height: 160px;
+  max-width: 384px;
+}
+
+
 
 /* Chrome/Opera/Safari için placeholder renk değişikliği */
 ::-webkit-input-placeholder 
@@ -756,8 +869,6 @@ nav li a:hover
     color: white;
     float: left;
     margin: 10px;
-    top:45px;
-
 }
 
 #formkapsambuttonkayit
@@ -808,7 +919,7 @@ nav li a:hover
 
 }
 
-#logo{
+/*#logo{
     width: 90px;
     height: 40px;
     float: left;
@@ -818,9 +929,9 @@ nav li a:hover
     position: absolute;
     right:0px;
     bottom:0px;    
-}
+}*/
 
-footer
+/*footer
 {
     position:absolute; 
     bottom:0; 
@@ -835,7 +946,7 @@ footer p
     font-family: tahoma,arial; 
     font-size: 10px; 
     padding: 8px;
-}
+}*/
 
 .formkapsam ::placeholder
 {
@@ -848,20 +959,20 @@ footer p
 
 .iletisimsoldiv
 {
-    width: 50%;
-    height: 60%;
-    float: left;
-    margin: 5px;
-    
+    /* width: 452px; */
+    /* height: 60%; */
+    /* float: left; */
+    /* margin: 5px; */
 }
 
 .iletisimsagdiv
 {
+    margin-top: 40px;
     width: 50%;
-    height: 60%;
-    float: right;
-    position: absolute;
-    transform: translate(420px, 45px);
+    /* height: 60%; */
+    /* float: right; */
+    /* position: absolute; */
+    /* transform: translate(420px, 45px); */
 }
 
 .iletisimsocialmedia
@@ -877,11 +988,13 @@ footer p
 
 #verticle {
     border-left: 1px solid rgb(166, 172, 184);
-    height: 380px;
-    position: absolute;
-    left: 50%;
-    margin-left: -4px;
-    top: 100px;
+    /* height: 380px; */
+    /* position: absolute; */
+    /* left: 50%; */
+    /* margin-left: -4px; */
+    /* top: 100px; */
+    /* margin-right: 10px; */
+    margin-left: 10px;
 }
 
 
@@ -946,32 +1059,32 @@ footer p
 
 .profilimkullanicifoto
 {
-    border:1px solid rgba(112, 112, 129, 0.692); 
-    width: 200px; 
-    height: 200px; 
-    border-radius: 100px; 
-    position: absolute; 
-    left: 40px; 
-    top: 20px;
+    border:1px solid rgba(112, 112, 129, 0.692);
+    width: 200px;
+    height: 200px;
+    border-radius: 100px;
+    /* position: absolute; */
+    /* left: 40px; */
+    /* top: 20px; */
+    /* display: table-cell; */
 }
 
 .profilimkullanicismiguncelleme
 {
-    width:30px; 
-    height:30px; 
-    position: absolute; 
-    top: 8px; left: 85px;
+    width:30px;
+    height:30px;
+    /* position: absolute; */
+    /* top: 8px; */
+    /* left: 85px; */
 }
 
 .profilimrezervasyonlarımdiv
 {
-    border:1px solid black; 
-    width: 550px; 
-    height: 200px; 
-    position: absolute; 
-    left: 300px; 
-    top: 40px; 
+    border:1px solid black;
+    width: 550px;
+    height: 200px;
     border-radius: 10px;
+    height: 100%;
 }
 
 .profilimrezervasyonlarımicdiv
@@ -989,104 +1102,118 @@ footer p
 
 .profilimrezervasyonlarımyazisi
 {
-    width: 50px; 
-    height: 30px; 
-    position: absolute; 
-    top: 10px; 
-    left: 200px;
+    width: 50px;
+    height: 30px;
+    /* position: absolute; */
+    /* top: 10px; */
+    /* left: 200px; */
 }
 
 .profilimbilgilerdiv
 {
-    border:1px solid black; 
-    width: 400px; 
-    height: 300px; 
-    position: absolute; 
-    left: 40px; 
-    top: 270px; 
+    border:1px solid black;
+    width: 400px;
+    height: 300px;
+    /* position: absolute; */
+    /* left: 40px; */
+    /* top: 270px; */
     border-radius: 10px;
+    /* display: table-cell; */
 }
 
 .profilimaracbilgileridiv
 {
-    background-color:rgba(173, 173, 182, 0.74); 
-    width: 400px; 
-    height: 40px; 
-    margin: 0px; 
-    padding: 0px; 
-    border-top-left-radius: 10px; 
-    border-top-right-radius: 10px; 
-    text-align: center; 
+    background-color:rgba(173, 173, 182, 0.74);
+    width: 400px;
+    height: 40px;
+    margin: 0px;
+    padding: 0px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
     border-bottom: 1px solid rgb(243, 208, 67);
 }
 
 .profilimaracbilgileriyazisi
 {
-    width: 100px; 
-    height: 30px; 
-    position: absolute; 
-    top: 10px; 
-    left: 140px;
+    /* width: 100px; */
+    /* height: 30px; */
+    /* position: absolute; */
+    /* top: 10px; */
+    /* left: 140px; */
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
 }
 
 .profilimduzenlemeimg
 {
-    width:30px; 
-    height:30px; 
-    position: absolute; 
+    width:30px;
+    height:30px;
+    /* position: absolute; */
 }
 
 .profilimiletisimbilgilerdiv
 {
-    background-color:rgba(173, 173, 182, 0.74); 
-    width: 400px; 
-    height: 40px; 
-    margin: 0px; 
-    padding: 0px; 
-    text-align: center; 
+    background-color:rgba(173, 173, 182, 0.74);
+    width: 400px;
+    height: 37px;
+    margin: 0px;
+    padding: 0px;
+    text-align: center;
     border-bottom: 1px solid rgb(243, 208, 67);
 }
 
 .profilimiletisimbilgileryazisi
 {
-    width: 130px; 
-    height: 30px; 
-    position: absolute; 
-    top: 137px; 
-    left: 130px;
+    /* width: 130px; */
+    /* height: 30px; */
+    /* position: absolute; */
+    /* top: 137px; */
+    /* left: 130px; */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }
 
 .profilimpaneldiv
 {
-    border:1px solid black; 
-    width: 400px; 
-    height: 210px; 
-    position: absolute; 
-    left: 450px; 
-    top: 270px; 
+    border:1px solid black;
+    width: 400px;
+    height: 210px;
+    /* position: absolute; */
+    /* left: 450px; */
+    /* top: 270px; */
     border-radius: 10px;
+    /* display: table-row; */
+    margin-bottom: 17px;
 }
 
 .profilimpanelicdiv
 {
-    background-color:rgba(173, 173, 182, 0.74); 
-    width: 400px; 
-    height: 40px; 
-    margin: 0px; 
-    padding: 0px; 
-    border-top-left-radius: 10px; 
-    border-top-right-radius: 10px; 
-    text-align: center; 
+    background-color:rgba(173, 173, 182, 0.74);
+    width: 400px;
+    height: 40px;
+    margin: 0px;
+    padding: 0px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    text-align: center;
     border-bottom: 1px solid rgb(243, 208, 67);
+    /* text-align: center; */
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .profilimpanelyazisi
 {
-    width: 50px; 
-    height: 30px; 
-    position: absolute; 
-    top: 10px; 
-    left: 165px;
+    /* width: 50px; */
+    /* height: 30px; */
+    /* position: absolute; */
+    /* top: 10px; */
+    /* left: 165px; */
 }
 
 .profilimpanelsecenekleri
@@ -1098,27 +1225,30 @@ footer p
 
 .profilimyeniaracdiv
 {
-    border:1px solid black; 
-    width: 400px; 
-    height: 70px; 
-    position: absolute; 
-    left: 450px; 
-    top: 498px; 
+    border:1px solid black;
+    width: 400px;
+    height: 70px;
+    /* position: absolute; */
+    /* left: 450px; */
+    /* top: 498px; */
     border-radius: 10px;
+    /* display: table-row; */
+    display: flex;
+    margin-top: 17px;
 }
 
 .profilimyeniaracekleyazisi
 {
-    padding-left: 5px; 
-    position: absolute; 
-    top: 10px;
+    /* padding-left: 5px; */
+    /* position: absolute; */
+    /* top: 10px; */
 }
 
 .profilimyeniaracekleimg
 {
-    width:25px; 
-    height:25px; 
-    position: absolute; 
-    top: 21px; 
-    left: 112px;
+    width:25px;
+    height:25px;
+    /* position: absolute; */
+    /* top: 21px; */
+    /* left: 112px; */
 }
