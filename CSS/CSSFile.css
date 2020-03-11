@@ -515,3 +515,610 @@ input:checked + .slider:before {
 		display: table-cell;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Front End grubu css başlangıcı*/
+
+body
+{
+    background-image: url("https://www.labdoo.org/sites/default/files/1604-lubuntu-default-wallpaper-neutral.png"); /*web site arkaplan*/
+    background-repeat: no-repeat; /* arkaplan tekrar etmemesi için */
+    background-attachment: fixed; /*Sayfayı hareket ettirince arkaplanın sabit kalması için */
+    background-position: center; /*arkaplanı sayfaya ortalamak için*/
+    background-size: cover; /*resmin boyutunu ayarlamak için*/
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav{
+    background: #9da4aac4; /*menü arkaplan rengi*/
+    text-align: left; /*Yazıları ortalamak için */
+    width: 100%; /*sayfayı tamamen kaplaması için*/
+    opacity: 0.9;
+}
+
+nav ul{
+    list-style: none; /*liste elemanlarını başlarındaki noktaları kaldırmak için*/
+    margin:0px; /*menüyü en üste yapıştırmak için*/
+    padding: 0px; /*menüyü en üste yapıştırmak için*/
+}
+nav li{
+    display:inline-block;
+}
+
+nav li a{
+    display: block;
+    padding: 13px 20px;
+    font: 15px tahoma, arial; /*menü elemanlarının yazı boyutları yazı tipi için */
+    color: rgb(255, 255, 255); /*menü elemanlarının renkleri için */
+    text-decoration: none; /*link verildikten sonra altlarında çıkan çizgileri yok etmek için */
+
+}
+
+nav li a:hover
+{
+    background: rgba(194, 196, 202, 0.5); /*menü elemanı üzerine gelindiğinde renk alması için*/
+    transition-duration: 0.5s; /*menü elemanı üzerine gelindiğinde efektli renk alması için*/
+    -webkit-transition-duration: 0.5s; /*tarayıcılara uyması için */
+    -moz-transition-duration: 0.5s; /*tarayıcılara uyması için */
+    -ms-transition-duration: 0.5s; /*tarayıcılara uyması için */
+    -o-transition-duration: 0.5s; /*tarayıcılara uyması için */
+    border-radius: 15px;
+}
+
+/*Her sayfadaki form kutusunun boyut ve konumu için */
+
+#formkapsamgiris{
+    width: 400px; /*form kutu genişliği*/
+    height: 400px; /*form kutu yüksekliği*/
+    background: rgba(255, 255, 255, 0.685); /*form arkaplan rengi*/
+    position: absolute; /*forma koordinat belirleyerek sayfada bir yere yerleştirmek*/
+    transform: translate(550px,100px);
+    
+}
+
+#formkapsamkayit{
+    background: rgba(255, 255, 255, 0.685); /*form arkaplan rengi*/
+    position: absolute; /*forma koordinat belirleyerek sayfada bir yere yerleştirmek*/
+    width: 450px; 
+    height: 520px;  
+    transform: translate(500px,45px);
+    
+}
+
+#formkapsamiletisim{
+    background: rgba(255, 255, 255, 0.685); /*form arkaplan rengi*/
+    position: absolute; /*forma koordinat belirleyerek sayfada bir yere yerleştirmek*/
+    width: 850px; 
+    height: 520px; 
+    transform: translate(380px,45px);
+    
+}
+
+#formkapsamsifresifirlama{
+    width: 400px; /*form kutu genişliği*/
+    height: 300px; /*form kutu yüksekliği*/
+    background: rgba(255, 255, 255, 0.685); /*form arkaplan rengi*/
+    position: absolute; /*forma koordinat belirleyerek sayfada bir yere yerleştirmek*/
+    transform: translate(550px,100px);
+    
+}
+
+#formkapsamprofilim{
+    width: 900px; /*form kutu genişliği*/
+    height: 600px; /*form kutu yüksekliği*/
+    background: rgba(255, 255, 255, 0.685); /*form arkaplan rengi*/
+    position: absolute; /*forma koordinat belirleyerek sayfada bir yere yerleştirmek*/
+    transform: translate(300px,90px);
+    top: -15px;
+    
+    
+}
+
+/*Form içerisindeki icon ile ilgili kısım*/
+#formkapsamimggiris{ 
+    width: 70px; 
+    height: 70px;
+    position: absolute;
+    top: 10px;
+    left: 165px;
+
+}
+
+#formkapsamimgkayit{ 
+    width: 70px; 
+    height: 70px;
+    position: absolute;
+    left: 190px;
+    top: 10px; 
+
+}
+
+#formkapsamimgsifresifirlama{ 
+    width: 70px; 
+    height: 70px;
+    position: absolute;
+    top: 10px;
+    left: 165px;
+
+}
+
+/*Form içerisindeki h3 etiketi için yapılan düzenlemeler için*/
+#formkapsamhgiris{
+    width: 100%;
+    text-align: center;
+    position: relative;
+    top: 70px;
+    margin-bottom: 50px;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+#formkapsamhkayit{
+    width: 100%;
+    text-align: center;
+    position: relative;
+    top: 70px;
+    margin-bottom: 50px;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+#formkapsamhiletisim{
+    width: 100%;
+    text-align: center;
+    position: relative;
+    top: 20px;
+    margin-bottom: 50px;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+#formkapsamhsifresifirlama{
+    width: 100%;
+    text-align: center;
+    position: relative;
+    top: 70px;
+    margin-bottom: 50px;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+
+.formkapsaminput
+{
+    top:40px;
+    width: 80%;
+    left: 5%;
+    position: relative;
+    padding:10px;
+    background: none;
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.411);
+    margin-bottom: 15px;
+    color: rgb(255, 255, 255);
+    padding:8px 20px;
+    border-left: 3px solid rgb(110, 19, 82);
+    border-radius: 5px;
+    transition: border-color .8s ease-out;
+
+    
+}
+
+/* Chrome/Opera/Safari için placeholder renk değişikliği */
+::-webkit-input-placeholder 
+{ 
+        color: white !important;  
+} 
+
+.formkapsaminput:focus
+{
+    border-bottom: 1px solid rgba(74, 54, 113, 0.692);
+    outline:none;
+    border-left: 3px solid #888;
+} 
+
+#formkapsambuttongiris
+{
+    width: 42%;
+    left: 3%;
+    position: relative;
+    padding: 10px;
+    background-color:rgb(243, 208, 67);
+    border-radius: 10px;
+    border: none;
+    color: white;
+    float: left;
+    margin: 10px;
+    top:45px;
+
+}
+
+#formkapsambuttonkayit
+{
+    width: 42%;
+    left: 4%;
+    position: relative;
+    padding: 10px;
+    background-color:rgb(243, 208, 67);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    float: left;
+    margin: 10px;
+    top:45px;
+
+}
+
+#formkapsambuttoniletisim
+{
+    width: 42%;
+    left: 4%;
+    position: relative;
+    padding: 10px;
+    background-color:rgb(243, 208, 67);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    float: left;
+    margin: 10px;
+    top:45px;
+
+}
+
+#formkapsambuttonsifresifirlama
+{
+    width: 42%;
+    left: 25%;
+    position: relative;
+    padding: 10px;
+    background-color:rgb(243, 208, 67);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    float: left;
+    margin: 10px;
+    top:45px;
+
+}
+
+#logo{
+    width: 90px;
+    height: 40px;
+    float: left;
+}
+
+#app{
+    position: absolute;
+    right:0px;
+    bottom:0px;    
+}
+
+footer
+{
+    position:absolute; 
+    bottom:0; 
+    width:100%; 
+    height:48px; 
+    background:#3a3f44;
+}
+
+footer p
+{
+    color: white; 
+    font-family: tahoma,arial; 
+    font-size: 10px; 
+    padding: 8px;
+}
+
+.formkapsam ::placeholder
+{
+    color:white;
+    font-size: 16px;
+    font-family: tahoma, arial;
+    font: bold;
+
+}
+
+.iletisimsoldiv
+{
+    width: 50%;
+    height: 60%;
+    float: left;
+    margin: 5px;
+    
+}
+
+.iletisimsagdiv
+{
+    width: 50%;
+    height: 60%;
+    float: right;
+    position: absolute;
+    transform: translate(420px, 45px);
+}
+
+.iletisimsocialmedia
+{
+    width: 30%;
+    left: -150px;
+    bottom: -40px;
+    position: relative;
+    padding: 10px;
+    float: left;
+    margin: 10px;
+}
+
+#verticle {
+    border-left: 1px solid rgb(166, 172, 184);
+    height: 380px;
+    position: absolute;
+    left: 50%;
+    margin-left: -4px;
+    top: 100px;
+}
+
+
+#tablegiris td
+{
+    border: 1px solid rgba(255, 255, 255, 0.205);
+    text-align: center;
+    padding: 20px;
+    margin: 25px;
+}
+
+#tablegiris td a
+{
+    text-decoration: none;
+    color: white;
+
+}
+
+
+#tablegiris td:hover
+{
+    background-color: rgba(194, 196, 202, 0.5);
+}
+
+/*Dropdown list için */
+.dropbtn {
+    background-color: rgb(243, 208, 67);
+    color: white;
+    padding: 13px;
+    margin: 0px;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 135px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a { /*Açılır menüde gelen seçenekler için*/
+    color: black; /*Yazıların rengi siyah olsun*/
+    padding: 5px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #f1f1f1} /*Açılır menüde seçeneklerin üstüne gelince oluşan hover*/
+  
+  .dropdown:hover .dropdown-content {display: block;} /*Açılır menüde seçeneklerin alt alta gelmesi için*/
+  
+/*Profilim sayfası css kodları*/
+
+.profilimkullanicifoto
+{
+    border:1px solid rgba(112, 112, 129, 0.692); 
+    width: 200px; 
+    height: 200px; 
+    border-radius: 100px; 
+    position: absolute; 
+    left: 40px; 
+    top: 20px;
+}
+
+.profilimkullanicismiguncelleme
+{
+    width:30px; 
+    height:30px; 
+    position: absolute; 
+    top: 8px; left: 85px;
+}
+
+.profilimrezervasyonlarımdiv
+{
+    border:1px solid black; 
+    width: 550px; 
+    height: 200px; 
+    position: absolute; 
+    left: 300px; 
+    top: 40px; 
+    border-radius: 10px;
+}
+
+.profilimrezervasyonlarımicdiv
+{
+    background-color:rgba(173, 173, 182, 0.74); 
+    width: 550px; 
+    height: 40px; 
+    margin: 0px; 
+    padding: 0px; 
+    border-top-left-radius: 10px; 
+    border-top-right-radius: 10px; 
+    text-align: center; 
+    border-bottom: 1px solid rgb(243, 208, 67);
+}
+
+.profilimrezervasyonlarımyazisi
+{
+    width: 50px; 
+    height: 30px; 
+    position: absolute; 
+    top: 10px; 
+    left: 200px;
+}
+
+.profilimbilgilerdiv
+{
+    border:1px solid black; 
+    width: 400px; 
+    height: 300px; 
+    position: absolute; 
+    left: 40px; 
+    top: 270px; 
+    border-radius: 10px;
+}
+
+.profilimaracbilgileridiv
+{
+    background-color:rgba(173, 173, 182, 0.74); 
+    width: 400px; 
+    height: 40px; 
+    margin: 0px; 
+    padding: 0px; 
+    border-top-left-radius: 10px; 
+    border-top-right-radius: 10px; 
+    text-align: center; 
+    border-bottom: 1px solid rgb(243, 208, 67);
+}
+
+.profilimaracbilgileriyazisi
+{
+    width: 100px; 
+    height: 30px; 
+    position: absolute; 
+    top: 10px; 
+    left: 140px;
+}
+
+.profilimduzenlemeimg
+{
+    width:30px; 
+    height:30px; 
+    position: absolute; 
+}
+
+.profilimiletisimbilgilerdiv
+{
+    background-color:rgba(173, 173, 182, 0.74); 
+    width: 400px; 
+    height: 40px; 
+    margin: 0px; 
+    padding: 0px; 
+    text-align: center; 
+    border-bottom: 1px solid rgb(243, 208, 67);
+}
+
+.profilimiletisimbilgileryazisi
+{
+    width: 130px; 
+    height: 30px; 
+    position: absolute; 
+    top: 137px; 
+    left: 130px;
+}
+
+.profilimpaneldiv
+{
+    border:1px solid black; 
+    width: 400px; 
+    height: 210px; 
+    position: absolute; 
+    left: 450px; 
+    top: 270px; 
+    border-radius: 10px;
+}
+
+.profilimpanelicdiv
+{
+    background-color:rgba(173, 173, 182, 0.74); 
+    width: 400px; 
+    height: 40px; 
+    margin: 0px; 
+    padding: 0px; 
+    border-top-left-radius: 10px; 
+    border-top-right-radius: 10px; 
+    text-align: center; 
+    border-bottom: 1px solid rgb(243, 208, 67);
+}
+
+.profilimpanelyazisi
+{
+    width: 50px; 
+    height: 30px; 
+    position: absolute; 
+    top: 10px; 
+    left: 165px;
+}
+
+.profilimpanelsecenekleri
+{
+    text-decoration: none; 
+    color: black; 
+    padding-left: 5px;
+}
+
+.profilimyeniaracdiv
+{
+    border:1px solid black; 
+    width: 400px; 
+    height: 70px; 
+    position: absolute; 
+    left: 450px; 
+    top: 498px; 
+    border-radius: 10px;
+}
+
+.profilimyeniaracekleyazisi
+{
+    padding-left: 5px; 
+    position: absolute; 
+    top: 10px;
+}
+
+.profilimyeniaracekleimg
+{
+    width:25px; 
+    height:25px; 
+    position: absolute; 
+    top: 21px; 
+    left: 112px;
+}
