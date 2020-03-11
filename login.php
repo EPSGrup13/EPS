@@ -5,36 +5,40 @@
 	session_start();
 ?>
 
+<body>
 
-<div class="loginBox">
-<div class="loginDiv">
+    <nav>
+        <ul>
+            <div><a href="giris.html"><img src="https://i.hizliresim.com/oyQbo2.png" id="logo"/></a></div>
+            <li><a href="giris.html">Anasayfa</a></li>
+            <li><a href="#">Rezervasyon Yap</a></li>
+            <li><a href="#">Nerelerdeyiz</a></li>
+            <li><a href="iletisim.html">İletişim</a></li>
+            <li style="float:right;"><div class="dropdown">
+                <button class="dropbtn">Giriş Yap</button>
+                </div>
+            </li>
+        </ul>
+    </nav>
 
-<?php
-	echo "<form action=\"".getLink("loginControl")."\" method=\"post\">";
-?>
-	<center>
-	<div class="loginBoxRow">
-		<div class="loginBoxLeft">Email: </div>
-		<div class="loginBoxRight"><input type="text" name="mailField" required="" size="25"></div>
-	</div>
-		
-	<div class="loginBoxRow">
-		<div class="loginBoxLeft">Şifre: </div>
-		<div class="loginBoxRight"><input type="password" name="passField" required="" size="25"></div>
-	</div>
-	</center>
-		
-	<br>
+    <div id="formkapsamgiris">
+    <img id="formkapsamimggiris" src="https://i.hizliresim.com/gb4jdQ.png"/>
+    <h3 id="formkapsamhgiris">Kullanıcı Girişi</h3>
+    <form method="POST" action="">
+        <div><input class="formkapsaminput" type="text" name="mailField" placeholder="E-mail"></div>
+        <div><input class="formkapsaminput" type="password" name="passField" placeholder="Şifre"></div>
+        <div><input id="formkapsambuttongiris" type="submit" value="Giriş Yap"></div>
+        <div><button id="formkapsambuttongiris"><a href = "kayit.html" style="text-decoration: none; color: white;">Kayıt Ol</a></button></div>
+        <div><p><a style="text-decoration: none; color: white; text-align: center; font-size: 15px; position: absolute; left: 140px; bottom: 70px; " href="sifresifirlama.html">Şifremi Unuttum!</a></p></div>
+    </form>
+    </div>
+    
+    <footer>
+        <p>Copyright © 2019 - 2020 epark.com | Tüm hakları saklıdır</p>
+        <div id="app"><a href="#"><img src="https://i.hizliresim.com/0rVv8Y.png" style="width: 110px; height: 40px;"/></a></div>   
+    </footer>
 
-	<center>
-		<?php 
-			echo "<a href=\"".getLink("registration")."\">Yeni Üye</a>";
-		?>
-			<input type="submit" value="Giriş" style="margin-left: 20px;">
-	</center>
 
-	</form>
-</div>
-</div>
+</body>
 
 <?php closeConn(); ?>
