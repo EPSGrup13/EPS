@@ -949,7 +949,7 @@ function reservationHistory($person_id)
 	}
 	else
 	{
-		return "Rezervasyon Geçmişi bulunamadı.";
+		return "Rezervasyon geçmişiniz bulunmamaktadır.";
 		//reportErrorLog("Rezervasyon geçmişi bulunamadı.", 1026);
 	}
 	//#$conn->close(); // userProfile'dan sonra kullanılıyor.
