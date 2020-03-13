@@ -11,13 +11,13 @@
 
 		<div class="linkBar1">
 			<?php
-			echo "<a href=\"".isDevelopmentModeOn()."\"><img src=\"https://i.hizliresim.com/oyQbo2.png\" class=\"logo-size1\"></a>";
+			echo "<a href=\"".isDevelopmentModeOn()."\"><img src=\"".isDevelopmentModeOn()."images/epark-logo.png\" class=\"logo-size1\"></a>";
 			?>
 		</div>
 
 		<div class="linkBar2">
 			<?php
-			echo "<a href=\"".isDevelopmentModeOn()."\">Ana Sayfa</a>";
+			echo "<a href=\"".isDevelopmentModeOn()."cities\">Rezervasyon</a>";
 			echo "<a href=\"".isDevelopmentModeOn()."contact\">İletişim</a>";
 			?>
 		</div>
