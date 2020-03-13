@@ -66,7 +66,7 @@ function setStyles()
 		sessionStorage.setItem("darkMode", false);
 		sessionStorage.bg = 0;
 
-		document.body.style.background = "url('https://www.labdoo.org/sites/default/files/1604-lubuntu-default-wallpaper-neutral.png')";
+		document.body.style.background = "url('/images/bgimg1.png')";
 
 		document.body.style.color = "Black";
 		getHeader.removeAttribute("style");
@@ -86,3 +86,17 @@ function setStyles()
 }
 
 isChecked();
+
+
+/*index.php için, rel external olanlar _blank açtırılıyor.*/
+function YeniSekme() {
+    if (!document.getElementsByTagName) return;
+    var linkler = document.getElementsByTagName("a");
+    var linklerAdet = linkler.length;
+    for (var i = 0; i < linklerAdet; i++) {
+        var tekLink = linkler[i];
+        if (tekLink.getAttribute("href") && tekLink.getAttribute("rel") == "external") {
+            tekLink.target = "_blank";
+        }
+    }
+}
