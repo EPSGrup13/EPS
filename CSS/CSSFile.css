@@ -619,7 +619,7 @@ input:checked + .slider:before {
 
 body
 {
-    background-image: url("https://www.labdoo.org/sites/default/files/1604-lubuntu-default-wallpaper-neutral.png"); /*web site arkaplan*/
+    background-image: url("/images/bgimg1.png"); /*web site arkaplan*/
     background-repeat: no-repeat; /* arkaplan tekrar etmemesi için */
     background-attachment: fixed; /*Sayfayı hareket ettirince arkaplanın sabit kalması için */
     background-position: center; /*arkaplanı sayfaya ortalamak için*/
