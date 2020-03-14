@@ -42,6 +42,8 @@ include_once('functions.php');
 
             <li><a href="javascript:void(0)">Nerelerdeyiz</a></li>
 
+            <li><a href="#">Otoparkımız Ol</a></li>
+
             <li><a href="<?php echo isDevelopmentModeOn(); ?>contact">İletişim</a></li>
 
         </ul>
@@ -239,12 +241,15 @@ include_once('functions.php');
         </div>
     </div>
 
+    <article>
+        <p class="yukari-buton"></p>
+    </article>
         
     <?php echo jsSource(); ?>
     <script>
         window.onload = YeniSekme;
     </script>
-
+    
 </body>
 
 </html>
