@@ -250,6 +250,7 @@
     <script>
         window.onload = YeniSekme;
     </script>
+    <script src="/js/yukari-buton.js"></script>
     
 </body>
 
