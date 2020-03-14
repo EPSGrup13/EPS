@@ -21,8 +21,12 @@
 
 	//print_r($parkArray);
 
-	//Arraydeki son 3 veriyi çekerek siler, daha sonraki veriler işlenecek verilerdir.
-	$localDateType = $parkArray[count($parkArray)-1];
+	//Arraydeki son 5 veriyi çekerek siler, daha sonraki veriler işlenecek verilerdir.
+	$localF = $parkArray[count($parkArray)-1];
+	unset($parkArray[count($parkArray)-1]);
+	$localL = $parkArray[count($parkArray)-1];
+	unset($parkArray[count($parkArray)-1]);
+	$localD = $parkArray[count($parkArray)-1];
 	unset($parkArray[count($parkArray)-1]);
 	$currentNumCars = $parkArray[count($parkArray)-1];
 	unset($parkArray[count($parkArray)-1]);
@@ -51,7 +55,7 @@
 		echo "Boş yer sayısı: <span class=\"color1\">".$availablePark."</span><br>";
 
 	}
-	echo "Tarih: ". $localDateType;
+	echo "Tarih: ". $localD ." ". vMon_tr($localF) ." ". vDay_tr($localL);
 
 
 echo "<form action=\"".getLink("reservationControl")."\" method=\"post\" style=\"display:table;width:500px;background-color:gray;\">";
