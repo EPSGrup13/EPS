@@ -3,6 +3,11 @@
 	checkDirectAccessToIncludeFile();
 	maintenanceMode();
 	session_start();
+
+    if(isset($_GET["logout"]))
+    {
+        destroyUserSession();
+    }
 ?>
 
 <nav class="nav-bg">
@@ -60,11 +65,7 @@
 
 				echo "&nbsp;&nbsp;<font color=\"white\">Bakiye: ".getUserBalance(). "</font>";
 				
-				echo "&nbsp;&nbsp;<a href=\"".getLink("?logout")."\" class=\"profileColor\" style=\"display:inline-block;\">Çıkış</a>";
-				if(isset($_GET["logout"]))
-				{
-					destroyUserSession();
-				}
+				echo "&nbsp;&nbsp;<a href=\"".getLink("cities?logout")."\" class=\"profileColor\" style=\"display:inline-block;\">Çıkış</a>";
 			}
 			else
 			{

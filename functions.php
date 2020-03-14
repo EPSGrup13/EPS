@@ -193,7 +193,7 @@ function loginControl($getMail, $getPassword)
 				reportAuth($_SESSION["userName"],$_SESSION["firstName"],$_SESSION["lastName"],$_SESSION["person_id"]);
 				//echo $_SESSION["userType"]; //test
 			}
-			redirectTo("index");
+			redirectTo("cities");
 		}
 	}
 	else
@@ -261,7 +261,7 @@ function destroyUserSession()
 {
 	session_unset();
 	session_destroy();
-	redirectTo("index");
+	redirectTo("cities");
 }
 
 function defineUserAuth()
@@ -437,6 +437,8 @@ function getParkTitle($parkId)
 
 function userProfile($person_id)
 {
+	$profileArray = array();
+
 	if(isSessionActive())
 	{
 		global $conn;
@@ -449,16 +451,16 @@ function userProfile($person_id)
 
 			while($row = $result->fetch_assoc())
 			{
-				echo "İsim: ". $row["firstName"]."<br>";
+				/*echo "İsim: ". $row["firstName"]."<br>";
 				echo "Soyisim: ". $row["lastName"]."<br>";
 				echo "Telefon No: ". $row["phoneNo"]."<br>";
 				echo "Email: ". $row["email"]."<br>";
 				//echo "İl id: ". $row["city_id"]."<br>";
 				echo "Bakiye: ". $row["balance"]."<br>";
-				echo "İl: ". $row["city_name"]."<br>";
-
-				echo "<br>";
+				echo "İl: ". $row["city_name"]."<br>";*/
+				array_push($profileArray, $row["phoneNo"],$row["email"], $row["balance"],$row["city_name"], $row["lastName"], $row["firstName"]);
 			}
+			return $profileArray;
 		}
 		else
 		{
@@ -589,7 +591,7 @@ function reportAuth($userName, $firstName, $lastName, $person_id)
 				</tr>
 				<tr>
 					<th class='alignTh'>Tarih: </th>
-					<td class='alignTd'>".$get_time."</td>
+					<td class='alignTd'>".reArrangeDate($get_time)."</td>
 				</tr>
 				<tr>
 					<th class='alignTh'>ip: </th>
@@ -700,7 +702,7 @@ function reportErrorLog($message, $code)
 				</tr>
 				<tr>
 					<th class='alignTh'>Tarih: </th>
-					<td class='alignTd'>".$get_time."</td>
+					<td class='alignTd'>".reArrangeDate($get_time)."</td>
 				</tr>
 				<tr>
 					<th class='alignTh'>ip: </th>
@@ -764,7 +766,7 @@ function dbFeedback()
 	<body>
 		<center>
 		<br><br>
-		<p>DB ".$get_time." tarihi için yenilendi.</p>
+		<p>DB ".reArrangeDate($get_time)." tarihi için yenilendi.</p>
 		</center>
 	</body>
 	</html>
@@ -789,7 +791,9 @@ function getParkDetails($parkSlugURL)
 	$timezone = 0;
 	date_default_timezone_set('Europe/Istanbul');
 	$get_time = date("Y-m-d");
-	$localDateType = date("d l");
+	$localD = date("d");
+	$localL = date("l");
+	$localF = date("F");
 
 	$parkArray = array();
 
@@ -803,7 +807,7 @@ function getParkDetails($parkSlugURL)
 		while($row = $result->fetch_assoc())
 		{
 			array_push($parkArray,$row["h00"],$row["h01"],$row["h02"],$row["h03"],$row["h04"],$row["h05"],$row["h06"],$row["h07"],$row["h08"],$row["h09"],$row["h10"],$row["h11"],$row["h12"],$row["h13"],$row["h14"],$row["h15"],$row["h16"],$row["h17"],$row["h18"],$row["h19"],$row["h20"],$row["h21"],$row["h22"],$row["h23"]);
-			array_push($parkArray,$row["slug_title"],$row["maxNumCars"],$row["currentNumCars"],$localDateType);
+			array_push($parkArray,$row["slug_title"],$row["maxNumCars"],$row["currentNumCars"],$localD, $localL, $localF);
 		}
 		return $parkArray;
 	}
@@ -895,7 +899,7 @@ function completeReservation($park_url, $getTime, $person_id)
 	}
 
 	//#$conn->close();
-	redirectTo("index");
+	redirectTo("cities");
 }
 
 
@@ -1134,6 +1138,22 @@ function closeConn()
 	//unset($conn);
 	$conn->close();
 
+}
+
+function vDay_tr($day)
+{
+	$days_tr = array("Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi");
+	$days_en = array("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday");
+
+	return $days_tr[array_search($day, $days_en)];
+}
+
+function vMon_tr($mon)
+{
+	$mos_tr = array("Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık");
+	$mos_en = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+
+	return $mos_tr[array_search($mon, $mos_en)];
 }
 
 
