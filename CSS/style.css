@@ -329,3 +329,15 @@ li a:hover {
     color: #f1f1f8;
     opacity: 0.6;
 }
+
+
+.yukari-buton {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 50px;
+    right: 80px;
+    display: none;
+    text-indent: -9999px;
+    background: url("/images/yukari-ok.png") no-repeat;
+}
