@@ -1,0 +1,343 @@
+.baslik {
+    background: url('../images/eps-arkaplan2.png') center center no-repeat;
+    background-size: cover;
+}
+
+.baslik .baslik-icerik {
+    padding-top: 8.5rem;
+    padding-bottom: 7rem;
+    text-align: center;
+}
+
+.baslik .container {
+    margin-bottom: 3rem;
+}
+
+.baslik h1 {
+    margin-bottom: 1rem;
+}
+
+.baslik .p-aciklama {
+    margin-bottom: 2rem;
+}
+
+.baslik .buton {
+    margin-right: 0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.baslik .baslik-icerik {
+    padding-top: 11rem;
+}
+
+.baslik .baslik-icerik {
+    padding-top: 13rem;
+    padding-bottom: 10rem;
+    text-align: left;
+}
+
+
+
+.p-aciklama {
+    color: #f1f1f8;
+    font: 400 1rem/1.5rem "Open Sans", sans-serif;
+}
+
+
+
+/**Üst Menü css başlangıç **/
+ul {
+    list-style-type: none;
+
+    margin: 0;
+
+    padding: 0;
+
+    overflow: hidden;
+
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+
+    padding: 12px 14px;
+
+    background-color: #2f2c3d;
+}
+
+ul {
+    list-style-type: none;
+
+    margin: 0;
+
+    padding: 0;
+
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+
+    padding: 12px 16px;
+
+    background-color: transparent;
+
+    color: white;
+
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: white;
+}
+
+/**üst Menu css bitiş **/
+
+
+
+.buton {
+    display: inline-block;
+    padding: 1.375rem 2.625rem 1.375rem 2.625rem;
+    border: 0.125rem solid #00c9db;
+    border-radius: 2rem;
+    background-color: #00c9db;
+    color: #fff;
+    font: 700 0.75rem/0 "Montserrat", sans-serif;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.buton:hover {
+    background-color: transparent;
+    color: #00c9db;
+    text-decoration: none;
+}
+
+
+
+.ozellikler-bolumu {
+    padding-top: 6.5rem;
+    padding-bottom: 4.25rem;
+    background-color: #2f2c3d;
+}
+
+.ozellikler-bolumu h2 {
+    margin-bottom: 1.125rem;
+    text-align: center;
+}
+
+.ozellikler-bolumu .p-aciklama {
+    margin-bottom: 3.125rem;
+}
+
+.ozellikler-bolumu .nav-tabs {
+    margin-right: auto;
+    margin-bottom: 2.5rem;
+    margin-left: auto;
+    justify-content: center;
+    border-bottom: none;
+}
+
+.ozellikler-bolumu .nav-link {
+    margin-bottom: 1rem;
+    padding: 0.5rem 1.375rem 0.25rem 1.375rem;
+    border: none;
+    border-bottom: 0.1875rem solid #f1f1f8;
+    border-radius: 0;
+    color: #f1f1f8;
+    font: 700 1rem/1.75rem "Montserrat", sans-serif;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    /*geçiş efekti*/
+}
+
+.ozellikler-bolumu .nav-link.active,
+.ozellikler-bolumu .nav-link:hover {
+    border-bottom: 0.1875rem solid #00c9db;
+    background-color: transparent;
+    color: #00c9db;
+}
+
+.ozellikler-bolumu .nav-link {
+    margin-right: 0.375rem;
+    font-size: 1rem;
+}
+
+.ozellikler-bolumu .tab-content {
+    width: 100%;
+}
+
+.ozellikler-bolumu .card {
+    /*card bs*/
+    border: none;
+    background: transparent;
+}
+
+.ozellikler-bolumu .bosluk {
+    padding: 1rem 0 1.25rem 0;
+}
+
+.ozellikler-bolumu .konu {
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.ozellikler-bolumu .ozellikler .simge {
+    display: inline-block;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 50%;
+    background-color: #00c9db;
+    text-align: center;
+    vertical-align: top;
+}
+
+.ozellikler-bolumu .ozellikler .simge .fas,
+.ozellikler-bolumu .ozellikler .simge .far {
+    color: white;
+    font-size: 1.75rem;
+    line-height: 3.5rem;
+}
+
+.ozellikler-bolumu #ozellik-1 .sol-bolum .yazi-aciklama {
+    display: inline-block;
+    width: 75%;
+}
+
+.ozellikler-bolumu #ozellik-1 .sol-bolum .simge {
+    float: left;
+    margin-right: 1rem;
+}
+
+.ozellikler-bolumu #ozellik-1 img {
+    display: block;
+    margin: 2rem auto 3rem auto;
+}
+
+.ozellikler-bolumu #ozellik-1 .sag-bolum .yazi-aciklama {
+    display: inline-block;
+    width: 75%;
+}
+
+.ozellikler-bolumu #ozellik-1 .sag-bolum .simge {
+    float: left;
+    margin-right: 1rem;
+}
+
+.ozellikler-bolumu .row .nav-tabs .nav-item:hover {
+    color: white;
+}
+
+.ozellikler-bolumu #ozellik-1 .sag-bolum {
+    margin-top: 24px;
+    margin-left: 2rem;
+    padding: 10px;
+}
+
+.ozellikler-bolumu #ozellik-1 .sol-bolum {
+    margin-top: 43px;
+    margin-right: 2rem;
+    padding: 10px;
+}
+
+
+.mobil-arayuz-jpg {
+    max-width: 100%;
+    height: auto;
+}
+
+
+
+
+.ozellikler-p {
+    color: white;
+    text-align: justify;
+}
+
+#ust-menu {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10000;
+    left: 0;
+    right: 0;
+    display: block;
+}
+
+
+/* EPS sol üst başlangıç */
+.clr {
+    clear: both;
+    display: block;
+}
+
+.clr .marka .proje-isim {
+
+    color: white;
+    text-decoration: underline
+}
+
+.clr .marka .proje-isim:hover {
+    text-decoration: none;
+
+}
+
+/* EPS sol üst bitiş */
+
+
+
+/* footer başlangıç */
+.footer .footer-boy {
+    margin-bottom: 2.25rem;
+}
+
+.footer h4 {
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.footer p {
+    color: white;
+}
+
+.footer {
+    padding-top: 1.5rem;
+    padding-bottom: 2.25rem;
+    background-color: #3e3b4d;
+}
+
+/* footer bitiş */
+
+
+
+.copyright-bolumu {
+    padding-top: 1rem;
+    padding-bottom: 0.5rem;
+    background-color: #2f2c3d;
+    text-align: center;
+}
+
+.copyright-bolumu .p-small {
+    color: #f1f1f8;
+    opacity: 0.6;
+}
+
+
+.yukari-buton {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 50px;
+    right: 80px;
+    display: none;
+    text-indent: -9999px;
+    background: url("/images/yukari-ok.png") no-repeat;
+}
