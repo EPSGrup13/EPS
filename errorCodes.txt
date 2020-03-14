@@ -1,3 +1,7 @@
+Aşağıdaki kodlar ve yanlarında bulunan bilgilendirmeler herhangi bir sorun ile karşılaşıldığında,
+sistem önceden belirlenmiş olan maile hata kodunu gönderdiğinde sorunun hangi kısımdan kaynaklandığını
+anlayabilmek adına eklenmiştir.
+
 1001 Database bağlantı hatası.
 1004 AuthReport mail gönderimi hatası.
 1005 AuthReport table veri girişi hatası.
