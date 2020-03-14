@@ -3,6 +3,13 @@
 	include 'htmlStart.php';
 	getHeader();
 	pageProtection();
+
+	$profileArray = userProfile($_SESSION["person_id"]);
+	$userName = $profileArray[count($profileArray) - 1];
+	unset($profileArray[count($profileArray) - 1]);
+	$lastName = $profileArray[count($profileArray) - 1];
+	unset($profileArray[count($profileArray) - 1]);
+
 ?>
 
 <div class="content">
@@ -11,13 +18,13 @@
 		       <div class="profilimkullanicifoto">
 			       <img src="https://i.hizliresim.com/p7PP6q.png" style="width: 180px; height: 180px;display: block; margin: auto; padding-top: 10px;">
 			       <div style="display:flex; justify-content:center; margin-top:16px;">
-			        	<div class="isim1">İsim Soyisim</div>
+			        	<div class="isim1"><?php echo $userName. " ". $lastName ?></div>
 		            	<img src="https://i.hizliresim.com/agyN64.png" class="profilimduzenlemeimg" style="top: 4px; left: 360px; margin-left: 5px;"/>
 		            </div>
 		       </div>
 		    <div class="profilimrezervasyonlarımdiv">
 		        <div class="profilimrezervasyonlarımicdiv">
-		            <div class="profilimrezervasyonlarımyazisi">Rezervasyonlarım</div>
+		            Rezervasyonlarım
 		        </div>
 		        <div class="reservationSec">
 			        <?php
@@ -50,8 +57,12 @@
 		    <div class="profilimbilgilerdiv">
 		        <div class="profilimaracbilgileridiv">
 		            <div class="profilimaracbilgileriyazisi">
-		            	Araç Bilgileri
-			        	<img src="https://i.hizliresim.com/agyN64.png" class="profilimkullanicismiguncelleme"/>
+		            	<div class="lText1">
+		            		Araç Bilgileri
+		            	</div>
+		            	<div class="rIcon">
+			        		<img src="https://i.hizliresim.com/agyN64.png" class="profilimkullanicismiguncelleme"/>
+			        	</div>
 		            </div>
 		        </div>
 
@@ -76,13 +87,21 @@
 
 		        <div class="profilimiletisimbilgilerdiv">
 		            <div class="profilimiletisimbilgileryazisi">
-		            	İletişim Bilgileri
-		            	<img src="https://i.hizliresim.com/agyN64.png" class="profilimduzenlemeimg" style="top: 4px; left: 360px;"/>
+		            	<div class="lText1">
+		            		İletişim Bilgileri
+		            	</div>
+		            	<div class="rIcon">
+		            		<img src="https://i.hizliresim.com/agyN64.png" class="profilimduzenlemeimg" style="top: 4px; left: 360px;"/>
+		            	</div>
 		            </div>
 		        </div>
 		        <div class="detailsSec">
 			        <?php
-					userProfile($_SESSION["person_id"]);
+			        	$matchText = array("Telefon No: ", "Email: ", "Bakiye: ", "İl: ");
+						for($i = 0; $i < count($profileArray); $i++)
+						{
+							echo $matchText[$i]. " " .$profileArray[$i]. "<br>";
+						}
 					?>
 				</div>
 		    </div>
@@ -93,15 +112,19 @@
 			        <div class="profilimpanelicdiv">
 			            <div class="profilimpanelyazisi">Panel</div>
 			        </div>
-			        <p><a href="eskirezervasyonlarim.html" class="profilimpanelsecenekleri">Eski Rezervasyonlarım</a></p>
-			        <p><a href="odemelerim.html" class="profilimpanelsecenekleri">Ödemelerim</a></p>
-			        <p><a href="faturalarim.html" class="profilimpanelsecenekleri">Faturalarım</a></p>
-			        <p><a href="yorumlarim.html" class="profilimpanelsecenekleri">Yorumlarım</a></p>
+			        <p><a href="javascript:void(0)" class="profilimpanelsecenekleri">Eski Rezervasyonlarım</a></p>
+			        <p><a href="javascript:void(0)" class="profilimpanelsecenekleri">Ödemelerim</a></p>
+			        <p><a href="javascript:void(0)" class="profilimpanelsecenekleri">Faturalarım</a></p>
+			        <p><a href="javascript:void(0)" class="profilimpanelsecenekleri">Yorumlarım</a></p>
 			    </div> 
 
 			    <div class="profilimyeniaracdiv">
-			        Yeni Araç Ekle
-			        <img src="https://i.hizliresim.com/PCeHt1.png" class="profilimyeniaracekleimg"/>
+			    	<div class="newCar1">
+			        	Yeni Araç Ekle
+			    	</div>
+			    	<div class="rIcon">
+			        	<img src="https://i.hizliresim.com/PCeHt1.png" class="profilimyeniaracekleimg"/>
+			    	</div>
 			    </div>
 			</div>
 		</div>
