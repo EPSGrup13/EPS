@@ -1,27 +1,27 @@
 /*input[type=text]
 {
-	//width: 100%;
-	width: 250px;
-	padding: 6px 10px;
-	margin: 8px 0;
-	box-sizing: border-box;
+  //width: 100%;
+  width: 250px;
+  padding: 6px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
 }
 
 input[type=password]
 {
-	//width: 100%;
-	width: 250px;
-	padding:6px 10px;
-	margin: 8px 0;
-	box-sizing: border-box;
+  //width: 100%;
+  width: 250px;
+  padding:6px 10px;
+  margin: 8px 0;
+  box-sizing: border-box;
 }
 
 body
 {
-	margin:0px;
-	height: 100%;
-	//! padding: 10px;
-	//! padding-bottom: 30px;  // 30px -> footer height 
+  margin:0px;
+  height: 100%;
+  //! padding: 10px;
+  //! padding-bottom: 30px;  // 30px -> footer height 
 }*/
 
 a
@@ -51,30 +51,30 @@ a:hover
 .footer
 {
 
-	height: 48px;
-	/*! position: absolute; */
-	/*! bottom: 0px; */
-	width: 100%;
-	/*min-width:586px;*/
-	z-index: auto;
-	display:table;
+  height: 48px;
+  /*! position: absolute; */
+  /*! bottom: 0px; */
+  width: 100%;
+  /*min-width:586px;*/
+  z-index: auto;
+  display:table;
 }
 
 .content /* wrapper */
 {
-	/*background-color: yellow;*/
-	color:white;
-	display: block;
-	box-sizing: border-box;
-	min-height: calc(100% - 95px);
-	/*min-width: 586px;*/
-	padding-bottom:10px;
+  /*background-color: yellow;*/
+  color:white;
+  display: block;
+  box-sizing: border-box;
+  min-height: calc(100% - 95px);
+  /*min-width: 586px;*/
+  padding-bottom:10px;
 }
 
 
 .bg-dark
 {
-	background-color:gray;
+  background-color:gray;
 }
 
 .font1
@@ -84,12 +84,12 @@ a:hover
 
 .color1
 {
-	color:green;
+  color:green;
 }
 
 .color2
 {
-	color:red;
+  color:red;
 }
 
 .loginBox
@@ -114,39 +114,39 @@ a:hover
 }
 .loginBoxRow
 {
-	display: table-row;
+  display: table-row;
 }
 
 .loginBoxLeft
 {
-	text-align:left;
-	padding-right:5px;
-	display: table-cell;
+  text-align:left;
+  padding-right:5px;
+  display: table-cell;
 }
 
 .loginBoxRight
 {
 
-	display: table-cell;
+  display: table-cell;
 }
 
 
 .headerInline
 {
-	min-height: 47px;
-	width: 100%;
-	/*! float: left; */
-	position: relative !important;
-	box-sizing: border-box;
-	display: table;
+  min-height: 47px;
+  width: 100%;
+  /*! float: left; */
+  position: relative !important;
+  box-sizing: border-box;
+  display: table;
 }
 
 .linkBar1
 {
-	display: table-cell;
-	vertical-align: middle;
-	width:90px;
-	padding-right:8px;
+  display: table-cell;
+  vertical-align: middle;
+  width:90px;
+  padding-right:8px;
 }
 
 .linkBar2
@@ -178,53 +178,53 @@ a:hover
 
 .userBar
 {
-	text-align:right;
-	/*min-width: 300px;*/
-	/*width: 300px;*/
-	display: table-cell;
-	vertical-align: middle;
+  text-align:right;
+  /*min-width: 300px;*/
+  /*width: 300px;*/
+  display: table-cell;
+  vertical-align: middle;
 }
 
 
 
 .cityFrame
 {
-	display:flex;
-	flex-wrap:wrap;
-	justify-content: center;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content: center;
 }
 
 .city
 {
-	min-width:130px;
-	height:30px;
-	display:table;
-	/*padding-top:2px;
-	padding-bottom:2px;*/
-	padding-left:18px;
-	padding-right:18px;
-	border: 1px solid rgba(255, 255, 255, 0.205);
-	text-align: center;
-	padding: 15px;
-	margin: 1px;
-	background-color: rgba(163, 69, 124, 0.452);
+  min-width:130px;
+  height:30px;
+  display:table;
+  /*padding-top:2px;
+  padding-bottom:2px;*/
+  padding-left:18px;
+  padding-right:18px;
+  border: 1px solid rgba(255, 255, 255, 0.205);
+  text-align: center;
+  padding: 15px;
+  margin: 1px;
+  background-color: rgba(163, 69, 124, 0.452);
 }
 
 .cityNum
 {
-	display:table-cell;
-	width:15px;
-	max-width:15px;
-	min-width:15px;
-	padding-right:15px;
-	/*padding:2px 5px 2px 2px;*/
+  display:table-cell;
+  width:15px;
+  max-width:15px;
+  min-width:15px;
+  padding-right:15px;
+  /*padding:2px 5px 2px 2px;*/
 }
 
 .cityName
 {
-	font-size:10pt;
-	display:table-cell;
-	/*padding:2px 5px 2px 2px;*/
+  font-size:10pt;
+  display:table-cell;
+  /*padding:2px 5px 2px 2px;*/
 }
 
 .profileColor
@@ -236,9 +236,9 @@ a:hover
 
 .uprofile
 {
-	border: none;
-	display: inline-block; /*drop button hizası dışarıda kalması için*/
-	}
+  border: none;
+  display: inline-block; /*drop button hizası dışarıda kalması için*/
+  }
 
 .up
 {
@@ -284,39 +284,39 @@ a:hover
 
 .ou-profile
 {
-	width:100%;
-	display: flex;
-	justify-content: space-between;
-	align-items: flex-start; /* kartların farklı boyutlarda olabilmesi için.*/
+  width:100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; /* kartların farklı boyutlarda olabilmesi için.*/
 }
 
 .profile
 {
-	width: 49%;
-	position:relative;
-	background-color:green;
-	padding: 10 15px;
-	margin: 10px 3px 10px 5px;
-	flex: 1 auto;
+  width: 49%;
+  position:relative;
+  background-color:green;
+  padding: 10 15px;
+  margin: 10px 3px 10px 5px;
+  flex: 1 auto;
 }
 
 .rsv
 {
-	width: 49%;
-	position:relative;
-	background-color:blueviolet;
-	padding: 10 15px;
-	margin: 10px 5px 10px 3px;
-	flex: 1 auto;
+  width: 49%;
+  position:relative;
+  background-color:blueviolet;
+  padding: 10 15px;
+  margin: 10px 5px 10px 3px;
+  flex: 1 auto;
 }
 
 
 /*şuanda kullanılmıyor*/
 .bl
 {
-	padding:4px 12px;
-	text-align:left;
-	background-color:gray;
+  padding:4px 12px;
+  text-align:left;
+  background-color:gray;
 }
 
 
@@ -467,13 +467,12 @@ input:checked + .slider:before {
 .isim1
 {
   text-align: center;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-right:5px;
+  margin: 5px 5px 5px 44px;
 }
 
 .reservationSec
 {
+  padding: 4px 0px 0px 8px;
   word-wrap: break-word;
   overflow: scroll;
   height: calc(100% - 46px);
@@ -494,6 +493,7 @@ input:checked + .slider:before {
 
 .plateSec
 {
+  padding: 4px 0px 0px 8px;
   height: 80px;
   word-wrap: break-word;
   overflow: scroll;
@@ -512,6 +512,7 @@ input:checked + .slider:before {
 
 .detailsSec
 {
+  padding: 4px 0px 0px 8px;
   height: 135px;
   word-wrap: break-word;
   overflow: scroll;
@@ -534,6 +535,20 @@ input:checked + .slider:before {
   justify-content: center;
 }
 
+.newCar1
+{
+
+}
+
+.lText1
+{
+  margin-top:5px;
+}
+
+.rIcon
+{
+  margin-left: 15px;
+}
 
 
 
@@ -548,61 +563,61 @@ input:checked + .slider:before {
 /*media başlangıcı*/
 @media only screen and (max-width: 600px)
 {
-	input[type=text]
+  input[type=text]
     {
-	  width: 90%;
-	  padding: 3px 6px;
-	  margin: 8px 0;
-	  box-sizing: border-box;
-	  /*max-width:200px;*/
-	}
+    width: 90%;
+    padding: 3px 6px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    /*max-width:200px;*/
+  }
 
-	input[type=password]
-	{
-	  width: 90%;
-	  padding:3px 6px;
-	  margin: 8px 0;
-	  box-sizing: border-box;
-		/*max-width:200px;*/
-	}
+  input[type=password]
+  {
+    width: 90%;
+    padding:3px 6px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    /*max-width:200px;*/
+  }
 
-	.loginBox
-	{
-		border:1px solid black;
-		width:350px;
-		height:200px;
-		position: absolute;
-		top:50%;
-		margin-top:-100px;
-		left:50%;
-		margin-left:-175px;
-	}
+  .loginBox
+  {
+    border:1px solid black;
+    width:350px;
+    height:200px;
+    position: absolute;
+    top:50%;
+    margin-top:-100px;
+    left:50%;
+    margin-left:-175px;
+  }
 
-	.loginDiv
-	{
-		position: relative;
-		top:50%;
-		height:100%;
-		width:100%;
-		margin-top:-60px;
-	}
+  .loginDiv
+  {
+    position: relative;
+    top:50%;
+    height:100%;
+    width:100%;
+    margin-top:-60px;
+  }
 
-	.loginBoxRow
-	{
-		display: table-row;
-	}
+  .loginBoxRow
+  {
+    display: table-row;
+  }
 
-	.loginBoxLeft
-	{
-		text-align:left;
-		padding-right:5px;
-		display: table-cell;
-	}
+  .loginBoxLeft
+  {
+    text-align:left;
+    padding-right:5px;
+    display: table-cell;
+  }
 
-	.loginBoxRight
-	{
-		display: table-cell;
-	}
+  .loginBoxRight
+  {
+    display: table-cell;
+  }
 }
 
 
@@ -729,7 +744,11 @@ nav li a:hover
     width: 900px; /*form kutu genişliği*/
     height: 600px; /*form kutu yüksekliği*/
     background: rgba(255, 255, 255, 0.685); /*form arkaplan rengi*/
-    /* position: absolute; */ /*forma koordinat belirleyerek sayfada bir yere yerleştirmek*/
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -315px;
+    margin-left: -450px;
     /* transform: translate(300px,90px); */
     /* top: -15px; */
     display: table;
@@ -1097,7 +1116,6 @@ footer p
     border-top-left-radius: 10px; 
     border-top-right-radius: 10px; 
     text-align: center; 
-    border-bottom: 1px solid rgb(243, 208, 67);
 }
 
 .profilimrezervasyonlarımyazisi
@@ -1123,28 +1141,30 @@ footer p
 
 .profilimaracbilgileridiv
 {
-    background-color:rgba(173, 173, 182, 0.74);
+    background-color: rgba(173, 173, 182, 0.74);
     width: 400px;
-    height: 40px;
+    /* height: 37px; */
     margin: 0px;
-    padding: 0px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    /* padding: 0px; */
     text-align: center;
     border-bottom: 1px solid rgb(243, 208, 67);
+    /* display: flex; */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .profilimaracbilgileriyazisi
 {
-    /* width: 100px; */
+    /* width: 130px; */
     /* height: 30px; */
     /* position: absolute; */
-    /* top: 10px; */
-    /* left: 140px; */
+    /* top: 137px; */
+    /* left: 130px; */
     display: flex;
     justify-content: center;
-    height: 100%;
     width: 100%;
+    /* height: 100%; */
+    padding: 4px 0px 8px 0px;
 }
 
 .profilimduzenlemeimg
@@ -1156,18 +1176,19 @@ footer p
 
 .profilimiletisimbilgilerdiv
 {
-    background-color:rgba(173, 173, 182, 0.74);
+    background-color: rgba(173, 173, 182, 0.74);
     width: 400px;
-    height: 37px;
+    /* height: 37px; */
     margin: 0px;
-    padding: 0px;
+    /* padding: 0px; */
     text-align: center;
     border-bottom: 1px solid rgb(243, 208, 67);
+    /* display: flex; */
 }
 
 .profilimiletisimbilgileryazisi
 {
-    /* width: 130px; */
+    /*width: 130px; */
     /* height: 30px; */
     /* position: absolute; */
     /* top: 137px; */
@@ -1175,7 +1196,8 @@ footer p
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
+    padding: 4px 0px 8px 0px;
 }
 
 .profilimpaneldiv
@@ -1226,8 +1248,8 @@ footer p
 .profilimyeniaracdiv
 {
     border:1px solid black;
-    width: 400px;
-    height: 70px;
+    width: 380px;
+    /*height: 70px;*/
     /* position: absolute; */
     /* left: 450px; */
     /* top: 498px; */
@@ -1235,6 +1257,7 @@ footer p
     /* display: table-row; */
     display: flex;
     margin-top: 17px;
+    padding: 23px 10px 23px 10px;
 }
 
 .profilimyeniaracekleyazisi
