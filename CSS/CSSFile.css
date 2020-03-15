@@ -6,7 +6,6 @@
   margin: 8px 0;
   box-sizing: border-box;
 }
-
 input[type=password]
 {
   //width: 100%;
@@ -15,7 +14,6 @@ input[type=password]
   margin: 8px 0;
   box-sizing: border-box;
 }
-
 body
 {
   margin:0px;
@@ -254,6 +252,7 @@ a:hover
     padding-top: 13px;
     padding-bottom: 13px;
     background-color: #2d2d2d;
+    color: white;
 }
 
 .uprofile-content
@@ -550,6 +549,11 @@ input:checked + .slider:before {
   margin-left: 15px;
 }
 
+.citiesTop
+{
+  padding: 15px 0px 15px 0px;
+  font-size: 20px;
+}
 
 
 
@@ -943,7 +947,6 @@ nav li a:hover
     height: 40px;
     float: left;
 }
-
 #app{
     position: absolute;
     right:0px;
@@ -958,7 +961,6 @@ nav li a:hover
     height:48px; 
     background:#3a3f44;
 }
-
 footer p
 {
     color: white; 
