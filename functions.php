@@ -206,24 +206,17 @@ function loginControl($getMail, $getPassword)
 function getAllCities()
 {
 	global $conn;
+	$citiesArray = array();
 
 	$sql = "SELECT City.city_id, Slug.slug_title, Slug.slug_url FROM City INNER JOIN Slug ON City.slug_id = Slug.slug_id WHERE City.city_id < 82";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0)
 	{
-		echo "<center><h3> Bulunduğunuz şehri seçiniz </h3><center>";
-		echo "<div class=\"cityFrame\">";
-
 		while($row = $result->fetch_assoc())
 		{
-
-			echo "<div class=\"city\">";
-				echo "<div class=\"cityNum\">".$row["city_id"]."</div>";
-				echo "<div class=\"cityName\"><a href=\"".isDevelopmentModeOn()."".$row["slug_url"]."/parklar\">".$row["slug_title"]."</a></div>";
-			echo "</div>";
-
+			$citiesArray = array_merge($citiesArray, array(array($row["city_id"], $row["slug_url"], $row["slug_title"])));
 		}
-		echo "</div>";
+		return $citiesArray;
 	}
 	else
 	{
@@ -451,13 +444,6 @@ function userProfile($person_id)
 
 			while($row = $result->fetch_assoc())
 			{
-				/*echo "İsim: ". $row["firstName"]."<br>";
-				echo "Soyisim: ". $row["lastName"]."<br>";
-				echo "Telefon No: ". $row["phoneNo"]."<br>";
-				echo "Email: ". $row["email"]."<br>";
-				//echo "İl id: ". $row["city_id"]."<br>";
-				echo "Bakiye: ". $row["balance"]."<br>";
-				echo "İl: ". $row["city_name"]."<br>";*/
 				array_push($profileArray, $row["phoneNo"],$row["email"], $row["balance"],$row["city_name"], $row["lastName"], $row["firstName"]);
 			}
 			return $profileArray;
