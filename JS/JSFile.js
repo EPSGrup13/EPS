@@ -44,7 +44,7 @@ function setStyles()
 		sessionStorage.setItem("darkMode", true);
 		sessionStorage.bg = 1;
 
-		document.body.style.color = "White";
+		/*document.body.style.color = "White";*/
 		getHeader.className = "nav";
 
 		document.body.style.background = "none";
@@ -54,12 +54,13 @@ function setStyles()
 		getFooter.style.backgroundColor = sessionStorage.getItem("hdrColor");
 		getContent.style.backgroundColor = sessionStorage.getItem("bgColor");
 
-		let aList = document.getElementsByTagName("a");
+		//Color normalde de beyaz olduğundan bir süreliğine deaktif edilmiştir.
+		/*let aList = document.getElementsByTagName("a");
 		for(i=0;i<aList.length;i++)
 		{
 			//console.log(aList[i]);
 			aList[i].style.color = "White";
-		}
+		}*/
 	}
 	else //darkmode açılacak.
 	{
@@ -68,20 +69,14 @@ function setStyles()
 
 		document.body.style.background = "url('/images/bgimg1.png')";
 
-		document.body.style.color = "Black";
+		//Color normalde de beyaz olduğundan bir süreliğine deaktif edilmiştir.
+		/*document.body.style.color = "Black";*/
 		getHeader.removeAttribute("style");
 		getFooter.removeAttribute("style");
 		getHeader.className = "nav nav-bg";
 		getFooter.className = "footer footer-bg";
 		getContent.className = "content";
 		getContent.removeAttribute("style");
-
-		let aList = document.getElementsByTagName("a");
-		for(i=3;i<aList.length;i++) //3. linkten itibaren başlayacak, 1. logo 2.link 3.link şeklinde. (header içinde)
-		{
-			//console.log(aList[i]);
-			aList[i].style.color = "White";
-		}
 	}
 }
 
@@ -100,23 +95,3 @@ function YeniSekme() {
         }
     }
 }
-
-
-/*Yukarı butonu*/
-
-$(document).ready(function () {
-    $(window).scroll(function () {
-        if ($(this).scrollTop() > 100) {
-            $('.yukari-buton').fadeIn();
-        } else {
-            $('.yukari-buton').fadeOut();
-        }
-    });
-
-    $('.yukari-buton').click(function () {
-        $("html, body").animate({
-            scrollTop: 0
-        }, 600);
-        return false;
-    });
-});
