@@ -196,7 +196,6 @@
         </div>
     </div>
 
-
     <div class="footer">
         <div class="container">
             <!-- container bs -->
@@ -231,7 +230,6 @@
         </div>
     </div>
 
-
     <div class="copyright-bolumu">
         <div class="container">
             <div>
@@ -247,10 +245,12 @@
     </article>
         
     <?php echo jsSource(); ?>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="JS/jquery-3.4.1.min.map"></script>
+    <script src="JS/yukari-buton.js"></script>
     <script>
         window.onload = YeniSekme;
     </script>
-    <script src="/js/yukari-buton.js"></script>
     
 </body>
 
