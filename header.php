@@ -23,7 +23,7 @@
 		<div class="linkBar2">
 			<?php
 			echo "<a href=\"".isDevelopmentModeOn()."cities\">Rezervasyon</a>";
-			echo "<a href=\"".isDevelopmentModeOn()."otoparkol\">Otoparkımız Ol</a>";
+			echo "<a href=\"javascript:void(0)\">Otoparkımız Ol</a>";
 			echo "<a href=\"".isDevelopmentModeOn()."contact\">İletişim</a>";
 			?>
 		</div>
