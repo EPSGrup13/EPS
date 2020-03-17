@@ -341,3 +341,68 @@ li a:hover {
     text-indent: -9999px;
     background: url("/images/yukari-ok.png") no-repeat;
 }
+
+
+/* Mobil Açılır Menü Başlangıç */
+
+@media screen and (max-width: 500px) {
+    ul li {
+        float: none;
+        display: block;
+    }
+
+    li a:hover {
+        background-color: white;
+    }
+}
+
+@media (max-width:768px) {
+    .menu .mobil-menu {
+        display: block;
+    }
+
+    .menu ul {
+        display: none;
+    }
+
+    .menu ul li {
+        float: none;
+        margin-right: 0;
+        border-bottom: 1px solid #00c9db;
+        /*1px solid #333; */
+    }
+
+    .menu ul li:last-child {
+        border-bottom: none
+    }
+
+    li a:hover {
+        background-color: white;
+    }
+
+    .fa-bars {
+        margin: 10px;
+        float: right;
+    }
+}
+
+@media (min-width:768px) {
+    .menu .mobil-menu {
+        display: none;
+    }
+
+    .menu ul {
+        display: block !important;
+    }
+
+    .fa-bars {
+        margin: 10px;
+        float: right;
+    }
+
+    li a:hover {
+        background-color: white;
+    }
+}
+
+/* Mobil Açılır Menü Bitiş */

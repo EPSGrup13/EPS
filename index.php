@@ -9,7 +9,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <!-- initial-scale mobil yakınlaştırma izin verme -->
     <meta name="language" content="Turkish">
     <!-- SEO için Meta Etiketleri -->
     <meta name="description"
@@ -35,6 +35,7 @@
         </a></div>
 -->
     <div class="menu" style="float: right;">
+        <div class="mobil-menu"><i class="fa fa-bars fa-2x" aria-hidden="true" style="color: white;"></i></div>
         <ul style="float: right;">
 
             <li><a href="<?php echo isDevelopmentModeOn(); ?>">Anasayfa</a></li>
@@ -46,6 +47,8 @@
             <li><a href="#">Otoparkımız Ol</a></li>
 
             <li><a href="<?php echo isDevelopmentModeOn(); ?>contact">İletişim</a></li>
+
+            <li><a href="#">Giriş Yap</a></li>
 
         </ul>
     </div>
@@ -250,6 +253,13 @@
     <script src="JS/yukari-buton.js"></script>
     <script>
         window.onload = YeniSekme;
+    </script>
+        <script>
+        $(function () {
+            $(".mobil-menu").click(function () {
+                $(this).next("ul").toggle(200);
+            });
+        });
     </script>
     
 </body>
