@@ -863,6 +863,7 @@ nav li a:hover
   transition: border-color .8s ease-out;
   max-height: 160px;
   max-width: 384px;
+  min-width: 384px;
 }
 
 
