@@ -97,6 +97,12 @@ li a {
 
 li a:hover {
     background-color: white;
+    transition-duration: 1.0s; /*efekt*/
+    -webkit-transition-duration: 1.0s; /*tarayıcı uyumu için */
+    -moz-transition-duration: 1.0s; /*tarayıcı uyumu için */
+    -ms-transition-duration: 1.0s; /*tarayıcı uyumu için */
+    -o-transition-duration: 1.0s; /*tarayıcı uyumu için */
+    border-radius: 10px;
 }
 
 /**üst Menu css bitiş **/
@@ -356,7 +362,7 @@ li a:hover {
     }
 }
 
-@media (max-width:768px) {
+@media (max-width:769px) {
     .menu .mobil-menu {
         display: block;
     }
@@ -386,7 +392,7 @@ li a:hover {
     }
 }
 
-@media (min-width:768px) {
+@media (min-width:769px) {
     .menu .mobil-menu {
         display: none;
     }
