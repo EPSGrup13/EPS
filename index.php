@@ -253,8 +253,7 @@
     <script src="JS/yukari-buton.js"></script>
     <script>
         window.onload = YeniSekme;
-    </script>
-        <script>
+        
         $(function () {
             $(".mobil-menu").click(function () {
                 $(this).next("ul").toggle(200);
