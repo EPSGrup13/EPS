@@ -24,7 +24,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="/CSS/all.css">
     <link rel="stylesheet" href="/CSS/style.css">
-    <link rel="icon" href="/images/logo-icon.png">
 </head>
 
 <body>
@@ -48,7 +47,7 @@
 
             <li><a href="<?php echo isDevelopmentModeOn(); ?>contact">İletişim</a></li>
 
-            <li><a href="#">Giriş Yap</a></li>
+            <li><a href="<?php echo getLink("login") ?>">Giriş Yap</a></li>
 
         </ul>
     </div>
@@ -247,7 +246,9 @@
         <p class="yukari-buton"></p>
     </article>
         
-    <?php echo jsSource(); ?>
+    <?php
+        print_js_or_css(jsSource());
+    ?>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="JS/jquery-3.4.1.min.map"></script>
     <script src="JS/yukari-buton.js"></script>

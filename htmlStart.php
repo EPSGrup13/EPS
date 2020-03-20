@@ -10,6 +10,9 @@
 			<title>
 			</title>
 
-			<?php echo cssSource(); ?> <!-- dinamik link rel -->
+ 			<!-- dinamik link rel -->
+			<?php 
+				print_js_or_css(cssSource());
+			?>
 		</head>
 	<body class="font1">

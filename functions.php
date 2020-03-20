@@ -265,6 +265,21 @@ function defineUserAuth()
 
 function userRegistration($getUserName, $getPassword, $getEmail, $getFirstName, $getLastName, $getPhoneNo)
 {
+	$array1 = array();
+	array_push($array1, "status");
+	array_push($array1, "message");
+
+	$array2 = array();
+	array_push($array2,"success");
+	array_push($array2,"failed");
+
+	$array3 = array();
+	array_push($array3,"email zaten var");
+	array_push($array3,"kullanici adi zaten var");
+	array_push($array3,"kayit olusturuldu");
+	array_push($array3,"kayit yapilirken sorun olustu");
+
+
 	$timezone=0;
 	$get_time=date("Y/m/d h:i:s a", time() + 3600*($timezone+date("I")));
 
@@ -281,8 +296,9 @@ function userRegistration($getUserName, $getPassword, $getEmail, $getFirstName, 
 	$result1 = $conn->query($sql01);
 	if ($result1->num_rows > 0) //Eğer öyle bir mail varsa mail unique olduğundan kullanıcı kaydı oluşturmasını engellemek için.
 	{
-		echo "Bu email zaten kullanılmakta... Geri Yönlendiriliyorsunuz.";
-		redirectWithTimer("registration");
+
+		$arr = array($array1[0]=>$array2[1], $array1[1]=>$array3[0]);
+	    return json_encode($arr);
 	}
 	else //Eğer öyle bir mail yok ise
 	{
@@ -290,8 +306,9 @@ function userRegistration($getUserName, $getPassword, $getEmail, $getFirstName, 
 		$result2 = $conn->query($sql02);
 		if ($result2->num_rows > 0) //Eğer öyle bir kullanıcı adı var ise kullanıcı kaydı oluşturtma
 		{
-			echo "Bu kullanıcı adı zaten kullanılmakta... Geri Yönlendiriliyorsunuz.";
-			redirectWithTimer("registration");
+
+			$arr = array($array1[0]=>$array2[1], $array1[1]=>$array3[1]);
+		    return json_encode($arr);
 		}
 		else //eğer öyle bir kullanıcı adı da yok ise artık iki tabloya da veri girilebilir.
 		{
@@ -300,16 +317,16 @@ function userRegistration($getUserName, $getPassword, $getEmail, $getFirstName, 
 
 			if ($conn->query($sql1) === TRUE && $conn->query($sql2) === TRUE)
 			{
-			    echo "Kullanıcı Oluşturuldu. Giriş Sayfasına Yönlendiriliyorsunuz.";
-		    	redirectWithTimer("login");
+
+    			$arr = array($array1[0]=>$array2[0], $array1[1]=>$array3[2]);
+			    return json_encode($arr);
 
 			}
 			else
 			{
-			    //echo "Error: " . $sql1 . " and ". $sql2 . "<br>" . $conn->error;
-				echo "Kayıt oluşturulurken sorun oluştu. Geri yönlendiriliyorsunuz...";
-				reportErrorLog("Kullanıcı kaydı yapılırken sorun oluştu", 1013);
-				redirectWithTimer("index");
+			    reportErrorLog("Kullanıcı kaydı yapılırken sorun oluştu", 1013);
+				$arr = array($array1[0]=>$array2[1], $array1[1]=>$array3[3]);
+			    return json_encode($arr);
 			}
 		}
 	}
@@ -1064,20 +1081,39 @@ function isParkOwner()
 //Dinamik js kaynak yönlendirme fonksiyonu
 function jsSource()
 {
-	$jsLink = isDevelopmentModeOn()."JS/JSFile.js";
-	$jsSrc = "<script type=\"text/javascript\" src=\"".$jsLink."\"></script>";
+	$jsArray = array();
 
-	return $jsSrc;
+	$jsLink1 = isDevelopmentModeOn()."JS/JSFile.js";
+	$jsSrc1 = "<script src=\"".$jsLink1."\"></script>";
+
+	array_push($jsArray, $jsSrc1);
+
+	return $jsArray;
 }
 
 
 //Dinamik css kaynak yönlendirme fonksiyonu
 function cssSource()
 {
-	$cssLink = isDevelopmentModeOn()."CSS/CSSFile.css";
-	$cssHref = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".$cssLink."\"/>";
+	$cssArray = array();
 
-	return $cssHref;
+	$cssLink1 = isDevelopmentModeOn()."CSS/CSSFile.css";
+	$cssHref1 = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".$cssLink1."\"/>";
+
+	array_push($cssArray, $cssHref1);
+
+	return $cssArray;
+}
+
+function print_js_or_css($givenSourceArray)
+{
+	$genArray = array();
+	$genArray = $givenSourceArray;
+
+    for($i = 0; $i < count($genArray); $i++)
+    {
+        echo $genArray[$i];
+    }
 }
 
 
