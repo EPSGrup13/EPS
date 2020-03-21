@@ -412,3 +412,62 @@ li a:hover {
 }
 
 /* Mobil Açılır Menü Bitiş */
+
+
+
+/* Gizlilik Politikası Başlangıç */
+
+
+#gizlilik {
+    background-image: url('/images/eps-arkaplan2-10yüzde.png') !important;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#gizlilik-kutu {
+    background: rgba(0, 0, 0, 0);
+    position: absolute;
+    width: 850px;
+    height: 520px;
+    display: table;
+    top: 60%;
+    left: 50%;
+    margin-top: -260px;
+    margin-left: -730px;
+    text-align: left;
+    font-family: "Montserrat", sans-serif;
+}
+
+#gizlilik-p {
+    font-family: "Montserrat", sans-serif;
+    text-align: justify;
+    color: white;
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+#gizlilik-kutu-2 {
+    background: rgba(0, 0, 0, 0);
+    position: absolute;
+    width: 580px;
+    height: 520px;
+    display: table;
+    top: 60%;
+    left: 50%;
+    margin-top: -260px;
+    margin-left: 150px;
+    text-align: left;
+    font-family: "Montserrat", sans-serif;
+}
+
+#gizlilik-p-2 {
+    font-family: "Montserrat", sans-serif;
+    text-align: justify;
+    color: white;
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+
+/* Gizlilik Politikası Bitiş */
