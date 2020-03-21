@@ -4,7 +4,7 @@
 	getHeader();
 
 	$citiesArray = array();
-	$citiesArray = getAllCities();
+	$citiesArray = getAllCities(82);
 ?>
 
 <div class="content">
