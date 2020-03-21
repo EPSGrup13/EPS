@@ -42,8 +42,6 @@
 
             <li><a href="<?php echo isDevelopmentModeOn(); ?>cities">Rezervasyon Yap</a></li>
 
-            <li><a href="javascript:void(0)">Nerelerdeyiz</a></li>
-
             <li><a href="javascript:void(0)">Otoparkımız Ol</a></li>
 
             <li><a href="<?php echo isDevelopmentModeOn(); ?>contact">İletişim</a></li>
@@ -232,6 +230,7 @@
                                     <li><a href="javascript:void(0)">Şartlar ve Koşullar</a></li>
                                     <li><a href="javascript:void(0)">Hakkımızda</a></li>
                                     <li><a href="javascript:void(0)">Gizlilik Politikası</a></li>
+                                    <li><a href="javascript:void(0)">S.S.S</a></li>
                                     <li><a href="javascript:void(0)">İndir</a></li>
                                 </ul>
                             </div>
