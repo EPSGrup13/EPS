@@ -32,7 +32,7 @@ function registration()
         }
         //xmlHttp.open("post", "registrationTest.php");
         //xmlHttp.open("post", "registrationTest");
-        xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/registrationControl");
+        xmlHttp.open("post", "registrationControl");
         xmlHttp.send(formData);
 }
 
@@ -74,7 +74,7 @@ function formValidation()
 	validate(registration);
 }
 
-// METOD 2 - Dinamik
+// Dinamik olan metod tercih edildi
 function validate(callback)
 {
 	let counter = 0;
@@ -117,86 +117,52 @@ function validate(callback)
 	}
 }
 
+// registration sonu --------------------------------------------------------------------------------
 
-
-
-// METOD 1 -- test yapıldıktan sonra duruma göre kaldırılacak.
-/*
-function validate(callback)
+//id'yi seçmek için
+/*function editProfile()
 {
-	const getForm = document.forms["registrationForm"];
-	//console.log(getForm); //output test
-	if(getForm["userName"].value != "" && getForm["pass"].value != "" && getForm["fName"].value != "" && getForm["lName"].value != "" && getForm["email"].value != "" && getForm["pNo"].value != "")
+    var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function()
+        {
+            if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            {
+            	console.log(xmlHttp.responseText);
+            }
+        }
+        //xmlHttp.open("post", "registrationTest.php");
+        //xmlHttp.open("post", "registrationTest");
+        xmlHttp.open("GET", "http://epark.sinemakulup.com/external/tkeskin/settings/profile/save");
+        xmlHttp.send();
+}*/
+
+function editProfile()
+{
+	const getSelection = document.getElementById("cities");
+    var formData = new FormData();
+	for(i = 0; i < getSelection.children.length; i++)
 	{
-		callback();
+		//console.log(getSelection.children[i]); //output test
+		if(getSelection.children[i].selected)
+		{
+			console.log("seçili il: ", getSelection.children[i]);
+			console.log("name: ", getSelection.children[i].name ,"id: ", getSelection.children[i].value);
+			formData.append("cities", getSelection.children[i].value);
+			console.log(formData.get("cities"));
+		}
 	}
-	else
+
+	const getInputs = document.getElementsByClassName("profileInput");
+	for(i = 0; i < getInputs.length; i++)
 	{
-		if(getForm["userName"].value == "");
+		if(getInputs[i].name == "pNo" || getInputs[i].name == "email" || getInputs[i].name == "city")
 		{
-			//console.log(getForm["userName"].getAttribute("name"));
-			//console.log(getForm["userName"].className);
-			const parent = getForm["userName"].parentNode;
-			console.log("parent: ", parent);
-
-			const getChildren = parent.children;
-			console.log("children:", getChildren);
-			if(getChildren.length == 1)
-			{
-				const mkElement = document.createElement("span");
-				mkElement.className = "mArea";
-				let mkChild = document.createTextNode("Bu alanı boş bırakamassınız");
-				mkElement.appendChild(mkChild);
-
-				getForm["userName"].parentNode.appendChild(mkElement);
-				getForm["userName"].style = "border: 1px solid red;";
-			}
-			detectArea("userName");
-		}
-		if(getForm["pass"].value == "");
-		{
-			
-		}
-		if(getForm["fName"].value == "");
-		{
-			
-		}
-		if(getForm["lName"].value == "");
-		{
-			
-		}
-		if(getForm["email"].value == "");
-		{
-			
-		}
-		if(getForm["pNo"].value == "");
-		{
-			
+			console.log("name: ", getInputs[i].name, " value: ", getInputs[i].value)
 		}
 	}
 }
 
-function detectArea(area)
-{
-	//console.log(getForm["userName"].getAttribute("name"));
-	//console.log(getForm["userName"].className);
-	const parent = getForm[area].parentNode;
-	console.log("parent: ", parent);
-
-	const getChildren = parent.children;
-	console.log("children:", getChildren);
-	if(getChildren.length == 1)
-	{
-		const mkElement = document.createElement("span");
-		mkElement.className = "mArea";
-		let mkChild = document.createTextNode("Bu alanı boş bırakamassınız");
-		mkElement.appendChild(mkChild);
-
-		getForm[area].parentNode.appendChild(mkElement);
-		getForm[area].style = "border: 1px solid red;";
-	}
-}*/
-// registration sonu --------------------------------------------------------------------------------
+// editProfile sonu -----------------------------------------------------------------------------------
 
 function darkMode()
 {
@@ -280,7 +246,12 @@ function setStyles()
 	}
 }
 
-isChecked();
+if(document.getElementsByClassName("dba")[0] != undefined)
+{
+	isChecked();
+}
+
+
 // Ayrılmış alan ------------------------------------------------------------------
 
 

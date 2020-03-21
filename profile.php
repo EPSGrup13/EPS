@@ -18,8 +18,8 @@
 		       <div class="profilimkullanicifoto">
 			       <img src="https://i.hizliresim.com/p7PP6q.png" style="width: 180px; height: 180px;display: block; margin: auto; padding-top: 10px;">
 			       <div style="display:flex; justify-content:center; margin-top:16px;">
-			        	<div class="isim1"><?php echo $userName. " ". $lastName ?></div>
-		            	<img src="https://i.hizliresim.com/agyN64.png" class="profilimduzenlemeimg" style="top: 4px; left: 360px; margin-left: 5px;"/>
+			        	<div class="isim1"><?php echo $userName. " " .$lastName; ?></div>
+		            	<a href="javascript:void(0)"><img src="https://i.hizliresim.com/agyN64.png" class="profilimduzenlemeimg" style="top: 4px; left: 360px; margin-left: 5px;"/></a>
 		            </div>
 		       </div>
 		    <div class="profilimrezervasyonlarımdiv">
@@ -61,7 +61,7 @@
 		            		Araç Bilgileri
 		            	</div>
 		            	<div class="rIcon">
-			        		<img src="https://i.hizliresim.com/agyN64.png" class="profilimkullanicismiguncelleme"/>
+			        		<a href="javascript:void(0)"><img src="https://i.hizliresim.com/agyN64.png" class="profilimkullanicismiguncelleme"/></a>
 			        	</div>
 		            </div>
 		        </div>
@@ -91,13 +91,13 @@
 		            		İletişim Bilgileri
 		            	</div>
 		            	<div class="rIcon">
-		            		<img src="https://i.hizliresim.com/agyN64.png" class="profilimduzenlemeimg" style="top: 4px; left: 360px;"/>
+		            		<a href="javascript:void(0)"><img src="https://i.hizliresim.com/agyN64.png" class="profilimduzenlemeimg" style="top: 4px; left: 360px;"/></a>
 		            	</div>
 		            </div>
 		        </div>
 		        <div class="detailsSec">
 			        <?php
-			        	$matchText = array("Telefon No: ", "Email: ", "Bakiye: ", "İl: ");
+			        	$matchText = array("Telefon No: ", "Email: ", "İl: ", "Bakiye: ");
 						for($i = 0; $i < count($profileArray); $i++)
 						{
 							echo $matchText[$i]. " " .$profileArray[$i]. "<br>";
@@ -130,6 +130,8 @@
 		</div>
 	</div>
 </div>
+
+<a href="<?php echo isDevelopmentModeOn()."settings/profile/edit"; ?>">Profili Değiştir</a>
 
 
 
