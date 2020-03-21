@@ -3,6 +3,11 @@
 	include  'htmlStart.php';
 	maintenanceMode(); //header olmadığından ek olarak eklendi.
 	session_start();
+
+	if(isSessionActive())
+	{
+		redirectTo("cities");
+	}
 ?>
 
 
