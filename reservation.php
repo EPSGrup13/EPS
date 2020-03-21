@@ -44,6 +44,7 @@
 <div class="content">
 
 	<?php
+	// En üst kısım, tarih gün boş yer gibi bilgiler yer alıyor.
 	echo "Park Adı: ". $slug_title."<br>";
 	$availablePark = (int)$maxNumCars - (int)$currentNumCars;
 	if($availablePark == 0) //boş yer yok ise kırmızı dolu, var ise sayısını yeşil yazdırır.
@@ -63,7 +64,7 @@ echo "<form action=\"".getLink("reservationControl")."\" method=\"post\" style=\
 	<div style="display:table-cell;">
 <?php
 
-
+	// İlk 12 saat sol, sonraki 12 saat ise sağda yazdırmak için bölümlere ayrıldı
 	for($i = 0; $i < count($parkArray); $i++)
 	{
 		if($i == (count($parkArray)/2))
@@ -81,6 +82,7 @@ echo "<form action=\"".getLink("reservationControl")."\" method=\"post\" style=\
 </div>
 
 <?php
+	// Kişinin aracı ekli değil ise hata verdirtmek için. Ekli ise direk kayıt butonu çıkacak.
 	echo "<div style=\"display:table-row\">";
 	if($checkWehicles)
 	{
