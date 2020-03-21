@@ -203,12 +203,12 @@ function loginControl($getMail, $getPassword)
 	}
 }
 
-function getAllCities()
+function getAllCities($maxNum)
 {
 	global $conn;
 	$citiesArray = array();
 
-	$sql = "SELECT City.city_id, Slug.slug_title, Slug.slug_url FROM City INNER JOIN Slug ON City.slug_id = Slug.slug_id WHERE City.city_id < 82";
+	$sql = "SELECT City.city_id, Slug.slug_title, Slug.slug_url FROM City INNER JOIN Slug ON City.slug_id = Slug.slug_id WHERE City.city_id < '$maxNum'";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0)
 	{
@@ -461,7 +461,7 @@ function userProfile($person_id)
 
 			while($row = $result->fetch_assoc())
 			{
-				array_push($profileArray, $row["phoneNo"],$row["email"], $row["balance"],$row["city_name"], $row["lastName"], $row["firstName"]);
+				array_push($profileArray, $row["phoneNo"],$row["email"],$row["city_name"], $row["balance"], $row["lastName"], $row["firstName"]);
 			}
 			return $profileArray;
 		}
@@ -1176,6 +1176,16 @@ function vMon_tr($mon)
 	$mos_en = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 
 	return $mos_tr[array_search($mon, $mos_en)];
+}
+
+function personCity($person_id)
+{
+	$get = "city_id";
+	$query = "SELECT ".$get." FROM Person WHERE person_id = '$person_id'";
+
+	$data = basicSelectQueries($query, $get);
+
+	return $data[0];
 }
 
 
