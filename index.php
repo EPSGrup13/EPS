@@ -44,11 +44,20 @@
 
             <li><a href="javascript:void(0)">Nerelerdeyiz</a></li>
 
-            <li><a href="#">Otoparkımız Ol</a></li>
+            <li><a href="javascript:void(0)">Otoparkımız Ol</a></li>
 
             <li><a href="<?php echo isDevelopmentModeOn(); ?>contact">İletişim</a></li>
 
-            <li><a href="<?php echo getLink("login") ?>">Giriş Yap</a></li>
+            <?php
+                if(isSessionActive())
+                {
+                    echo "<li><a href=\"".isDevelopmentModeOn()."settings/profile\">Profil</a></li>";
+                }
+                else
+                {
+                    echo "<li><a href=\"".isDevelopmentModeOn()."login\">Giriş yap</a></li>";
+                }
+            ?>
 
         </ul>
     </div>
