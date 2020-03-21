@@ -476,6 +476,7 @@ input:checked + .slider:before {
   overflow: scroll;
   height: calc(100% - 46px);
   overflow-x: hidden;
+  overflow-y: auto;
   /*overflow-y: visible;*/
 }
 
@@ -497,6 +498,7 @@ input:checked + .slider:before {
   word-wrap: break-word;
   overflow: scroll;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .plateSec::-webkit-scrollbar {
@@ -516,6 +518,7 @@ input:checked + .slider:before {
   word-wrap: break-word;
   overflow: scroll;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .detailsSec::-webkit-scrollbar {
@@ -588,6 +591,30 @@ input:checked + .slider:before {
   border: 1px solid #ffe844;
 }
 
+.mArea
+{
+  padding-left: 10px;
+}
+
+.formInput
+{
+  display: flex;
+  padding: 0px 5px 0px 5px;
+}
+
+.profileInput
+{
+  max-width:160px;
+}
+
+.editProfileTop
+{
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 380px;
+  padding: 10px 10px 10px 10px;
+  margin-bottom: 17px;
+}
 
 
 
@@ -866,8 +893,11 @@ nav li a:hover
 .formkapsaminput
 {
     width: 90%;
-    left: 5%;
-    position: relative;
+    min-width: 73%;
+    /*left: 5%;*/
+    /*position: relative;*/
+    margin: auto;
+    display: block;
     background: none;
     outline: none;
     border: 1px solid rgba(255, 255, 255, 0.411);
