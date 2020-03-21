@@ -42,10 +42,11 @@
 ?>
 
 <div class="content">
-
+<div class="parkReservationBox">
 	<?php
-	// En üst kısım, tarih gün boş yer gibi bilgiler yer alıyor.
-	echo "Park Adı: ". $slug_title."<br>";
+	echo "<div class=\"parkReservastionInfoBox\">";
+	echo "<p class=\"parkReservastionInfo\">Park Adı: ". $slug_title . "</p>";
+	echo "<p class=\"parkReservastionInfo\">Tarih: ". $localD ." ". vMon_tr($localF) ." ". vDay_tr($localL). "</p>";
 	$availablePark = (int)$maxNumCars - (int)$currentNumCars;
 	if($availablePark == 0) //boş yer yok ise kırmızı dolu, var ise sayısını yeşil yazdırır.
 	{
@@ -53,53 +54,54 @@
 	}
 	else
 	{
-		echo "Boş yer sayısı: <span class=\"color1\">".$availablePark."</span><br>";
+		echo "<p class=\"parkReservastionInfo\">Boş yer sayısı: <span class=\"color1\">".$availablePark."</span></p>";
 
 	}
-	echo "Tarih: ". $localD ." ". vMon_tr($localF) ." ". vDay_tr($localL);
-
-
-echo "<form action=\"".getLink("reservationControl")."\" method=\"post\" style=\"display:table;width:500px;background-color:gray;\">";
+	
+	echo "</div>";
+	echo "<div class=\"parkReservationTimeBox\">";
+	echo "<form action=\"".getLink("reservationControl")."\" method=\"post\" class=\"parkReservationTimeForm\">";
 ?>
-	<div style="display:table-cell;">
+	<div style="display:table-cell; padding-left:80px;">
 <?php
 
-	// İlk 12 saat sol, sonraki 12 saat ise sağda yazdırmak için bölümlere ayrıldı
+
 	for($i = 0; $i < count($parkArray); $i++)
 	{
 		if($i == (count($parkArray)/2))
 		{
 			echo "</div>
-			<div style=\"display:table-cell;min-width:50%;\">
-			<div style=\"display:table-row;\">".$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i])."</div>";
+			<div style=\"display:table-cell;padding-right:80px;\">
+			<div style=\"display:table-row;\"><img src=\"https://i.hizliresim.com/3j0L1k.png\" class=\"parkReservationCarImg\">".$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i])."</div>";
 		}
 		else
 		{
-			echo "<div style=\"display:table-row;\">".$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i])."</div>";
+			echo "<div style=\"display:table-row;\"><img src=\"https://i.hizliresim.com/3j0L1k.png\" class=\"parkReservationCarImg\">".$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i])."</div>";
 		}
 	}
+
+	echo "</div>";
 ?>
-</div>
+
 
 <?php
-	// Kişinin aracı ekli değil ise hata verdirtmek için. Ekli ise direk kayıt butonu çıkacak.
 	echo "<div style=\"display:table-row\">";
 	if($checkWehicles)
 	{
-		echo "<input type=\"submit\" value=\"Kayıt\">";
+		echo "<input type=\"submit\" value=\"Rezervasyon Yap\" class=\"reservationButton\">";
 	}
 	else
 	{
-		echo "<input type=\"submit\" value=\"Kayıt\" disabled>
-		<br>Sistemde kayıtlı aracınız olmadan rezervasyon yapamassınız.";
+		echo "<input type=\"submit\" value=\"Rezervasyon Yap\" disabled>
+		<br>Sistemde kayıtlı aracınız olmadan rezervasyon yapamazsınız.";
 	}
 	echo "</div>";
 ?>
 
 </form>
-
 </div>
-
+</div>
+</div>
 
 <?php
 	getFooter();
