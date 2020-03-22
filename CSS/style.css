@@ -434,6 +434,7 @@ li a:hover {
     float: left;
     margin-top: 0;
     margin-left: 0;
+    margin-bottom: 15%;
     padding: 20px;
     text-align: left;
     font-family: "Montserrat", sans-serif;
@@ -489,6 +490,7 @@ li a:hover {
         float: left;
         margin-top: 0;
         margin-left: 0;
+        margin-bottom: 15%;
         padding: 20px;
         text-align: left;
         font-family: "Montserrat", sans-serif;
