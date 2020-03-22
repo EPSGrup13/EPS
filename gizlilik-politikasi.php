@@ -16,7 +16,7 @@
 
     <title>Gizlilik Politikası</title>
     <link rel="stylesheet" href="/css/all.css">
-    <link rel="stylesheet" href="/css/gizlilik-politikasi.css">
+    <link rel="stylesheet" href="/CSS/style.css">
     <link rel="icon" href="/images/logo-icon.png">
 </head>
 
