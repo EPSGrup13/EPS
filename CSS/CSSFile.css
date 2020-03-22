@@ -1403,7 +1403,7 @@ footer p
     padding-top: 5px;
   }
 
-  .parkReservationBox {
+.parkReservationBox {
   width:600px;
   height:550px;
   position:absolute;
@@ -1412,6 +1412,7 @@ footer p
   margin-top:-300px;
   margin-left:-300px;
   background-color:rgba(255, 255, 255, 0.685);  
+  
 }
 
 .parkReservastionInfoBox {
@@ -1419,6 +1420,7 @@ footer p
   position:table;
   margin-left:150px;
   margin-top:20px;
+  
 }
 
 .parkReservastionInfo {
@@ -1431,6 +1433,7 @@ footer p
   height:410px;
   display:table;
   margin-top:20px;
+  
 }
 
 .parkReservationTimeForm {
@@ -1441,6 +1444,7 @@ footer p
   padding-top:20px;
   border-top: 1px solid #b0b0b0;
   border-bottom: 1px solid #b0b0b0;
+  
 }
 
 .parkReservationCarImg {
@@ -1459,4 +1463,18 @@ footer p
   border:none;
   border-radius:5px;
   margin-bottom:15px;
+}
+
+.parkReservationNoCarMessageDiv {
+  width: 290px;
+  height: 30px;
+  position:table;
+  margin-left:150px;
+}
+
+.parkReservationNoCarMessage {
+  text-align:center;
+  color:red;
+  font-size:10px;
+  font:bold;
 }
