@@ -8,7 +8,7 @@
     <meta name="language" content="Turkish">
     <!-- SEO için Meta Etiketleri -->
     <meta name="description"
-        content="İstanbul'un Farklı Bölgelerinde en uygun fiyata E-Park ile park et. Ücretsiz mobil uygulama.Tüm Otoparklar Cebinde">
+    content="İstanbul'un Farklı Bölgelerinde en uygun fiyata E-Park ile park et. Ücretsiz mobil uygulama.Tüm Otoparklar Cebinde">
     <meta name="keywords" content="Park,E-Park,Otopark,Online Park,Ücretsiz Park">
     <meta name="author" content="EPS">
     <meta http-equiv="Content-Type" content="text/html; charset=utf8">
