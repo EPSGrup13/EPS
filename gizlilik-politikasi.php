@@ -8,14 +8,14 @@
     <meta name="language" content="Turkish">
     <!-- SEO için Meta Etiketleri -->
     <meta name="description"
-        content="İstanbul'un Farklı Bölgelerinde en uygun fiyata E-Park ile park et. Ücretsiz mobil uygulama.Tüm Otoparklar Cebinde">
+    content="İstanbul'un Farklı Bölgelerinde en uygun fiyata E-Park ile park et. Ücretsiz mobil uygulama.Tüm Otoparklar Cebinde">
     <meta name="keywords" content="Park,E-Park,Otopark,Online Park,Ücretsiz Park">
     <meta name="author" content="EPS">
     <meta http-equiv="Content-Type" content="text/html; charset=utf8">
     <meta name="robots" content="index, follow">
 
     <title>Gizlilik Politikası</title>
-    <link rel="stylesheet" href="/CSS/all.css">
+    <link rel="stylesheet" href="/css/all.css">
     <link rel="stylesheet" href="/CSS/style.css">
     <link rel="icon" href="/images/logo-icon.png">
 </head>
@@ -69,7 +69,8 @@
             <i class="far fa-arrow-alt-circle-right"></i> Güvenli sunucularda saklamaktadır.<br>
             <i class="far fa-arrow-alt-circle-right"></i> Şifreleriniz geri dönüştürülemeyecek şekilde kodlanıp
             sistemimizde tutulmaktadır.<br>
-            <i class="far fa-arrow-alt-circle-right"></i> Bazı bilgilerinizi uygulama içerisinden düzeltebilir, güncelleme talebinde
+            <i class="far fa-arrow-alt-circle-right"></i> Bazı bilgilerinizi uygulama içerisinden düzeltebilir,
+            güncelleme talebinde
             bulunabilirsiniz.<br>
             <i class="far fa-arrow-alt-circle-right"></i> Bilgilerin aktarılmasının halka açık internet üzerinden
             yapılması halinde EPS bunun %100 güvenli

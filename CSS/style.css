@@ -417,26 +417,28 @@ li a:hover {
 
 /* Gizlilik Politikası Başlangıç */
 
-
 #gizlilik {
-    background-image: url('/images/eps-arkaplan2-10yuzde.png') !important;
+    background-image: url('/images/eps-arkaplan2.png') !important;
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
 }
 
 #gizlilik-kutu {
-    background: rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0.5);
     position: absolute;
-    width: 850px;
-    height: 520px;
+    width: 50%;
+    height: 50%;
     display: table;
-    top: 60%;
-    left: 50%;
-    margin-top: -260px;
-    margin-left: -730px;
+    top: 20%;
+    float: left;
+    margin-top: 0;
+    margin-left: 0;
+    margin-bottom: 15%;
+    padding: 20px;
     text-align: left;
     font-family: "Montserrat", sans-serif;
+    border-radius: 10px;
 }
 
 #gizlilik-p {
@@ -448,17 +450,20 @@ li a:hover {
 }
 
 #gizlilik-kutu-2 {
-    background: rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0.5);
     position: absolute;
-    width: 580px;
-    height: 520px;
+    width: 40%;
+    height: 50%;
     display: table;
-    top: 60%;
-    left: 50%;
-    margin-top: -260px;
-    margin-left: 150px;
+    top: 20%;
+    float: right;
+    left: 55%;
+    margin-top: 0;
+    margin-left: 0;
+    padding: 20px;
     text-align: left;
     font-family: "Montserrat", sans-serif;
+    border-radius: 10px;
 }
 
 #gizlilik-p-2 {
@@ -469,5 +474,102 @@ li a:hover {
     font-style: italic;
 }
 
+
+
+/* Gizilik politikası Mobil Başlangıç */
+
+/* Masaüstü ve Dizüstü */
+@media screen and (min-width: 961px) {
+    #gizlilik-kutu {
+        background: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        width: 50%;
+        height: 50%;
+        display: table;
+        top: 20%;
+        float: left;
+        margin-top: 0;
+        margin-left: 0;
+        margin-bottom: 15%;
+        padding: 20px;
+        text-align: left;
+        font-family: "Montserrat", sans-serif;
+        border-radius: 10px;
+    }
+
+    #gizlilik-p {
+        font-family: "Montserrat", sans-serif;
+        text-align: justify;
+        color: white;
+        font-size: 1.1rem;
+        font-style: italic;
+    }
+
+    #gizlilik-kutu-2 {
+        background: rgba(0, 0, 0, 0.5);
+        position: absolute;
+        width: 40%;
+        height: 50%;
+        display: table;
+        top: 20%;
+        float: right;
+        left: 55%;
+        margin-top: 0;
+        margin-left: 0;
+        padding: 20px;
+        text-align: left;
+        font-family: "Montserrat", sans-serif;
+        border-radius: 10px;
+    }
+
+    #gizlilik-p-2 {
+        font-family: "Montserrat", sans-serif;
+        text-align: justify;
+        color: white;
+        font-size: 1.1rem;
+        font-style: italic;
+    }
+}
+
+
+
+
+/* Telefon ve Tablet */
+@media screen and (max-width: 960px) {
+
+    #gizlilik-kutu {
+        border: 1px solid black;
+        width: auto;
+        height: auto;
+        margin: auto;
+        margin-bottom: 2%;
+        margin-right: 1%;
+        padding: auto;
+        display: block;
+        background: rgba(0, 0, 0, 0.5);
+        font-family: "Montserrat", sans-serif;
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    #gizlilik-kutu-2 {
+        background: rgba(0, 0, 0, 0.5);
+        width: auto;
+        height: auto;
+        margin-top: 64%;
+        margin-left: -54%;
+        margin-right: 1%;
+        margin-bottom: 15%;
+        padding: auto;
+        display: block;
+        padding: 20px;
+        text-align: left;
+        font-family: "Montserrat", sans-serif;
+        border-radius: 10px;
+    }
+
+}
+
+/* Gizilik politikası Mobil Bitiş */
 
 /* Gizlilik Politikası Bitiş */
