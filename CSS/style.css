@@ -433,8 +433,8 @@ li a:hover {
     top: 20%;
     float: left;
     margin-top: 0;
-    margin-bottom: 15%;
     margin-left: 0;
+    margin-bottom: 15%;
     padding: 20px;
     text-align: left;
     font-family: "Montserrat", sans-serif;
@@ -489,8 +489,8 @@ li a:hover {
         top: 20%;
         float: left;
         margin-top: 0;
-        margin-bottom: 15%;
         margin-left: 0;
+        margin-bottom: 15%;
         padding: 20px;
         text-align: left;
         font-family: "Montserrat", sans-serif;
@@ -533,6 +533,7 @@ li a:hover {
 
 
 
+
 /* Telefon ve Tablet */
 @media screen and (max-width: 960px) {
 
@@ -566,9 +567,9 @@ li a:hover {
         font-family: "Montserrat", sans-serif;
         border-radius: 10px;
     }
+
 }
 
 /* Gizilik politikası Mobil Bitiş */
-
 
 /* Gizlilik Politikası Bitiş */
