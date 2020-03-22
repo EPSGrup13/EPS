@@ -62,7 +62,7 @@
 	echo "<div class=\"parkReservationTimeBox\">";
 	echo "<form action=\"".getLink("reservationControl")."\" method=\"post\" class=\"parkReservationTimeForm\">";
 ?>
-	<div style="display:table-cell; padding-left:80px;">
+	<div style="display:table-cell; padding-left:75px;">
 <?php
 
 
@@ -71,7 +71,7 @@
 		if($i == (count($parkArray)/2))
 		{
 			echo "</div>
-			<div style=\"display:table-cell;padding-right:80px;\">
+			<div style=\"display:table-cell; padding-right:64px;\">
 			<div style=\"display:table-row;\"><img src=\"https://i.hizliresim.com/3j0L1k.png\" class=\"parkReservationCarImg\">".$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i])."</div>";
 		}
 		else
@@ -92,8 +92,8 @@
 	}
 	else
 	{
-		echo "<input type=\"submit\" value=\"Rezervasyon Yap\" disabled>
-		<br>Sistemde kayıtlı aracınız olmadan rezervasyon yapamazsınız.";
+		echo "<input type=\"submit\" value=\"Rezervasyon Yap\" class=\"reservationButton\" disabled>
+		<div class=\"parkReservationNoCarMessageDiv\"><p class=\"parkReservationNoCarMessage\">Sistemde kayıtlı aracınız olmadan rezervasyon yapamazsınız.</p></div>";
 	}
 	echo "</div>";
 ?>
