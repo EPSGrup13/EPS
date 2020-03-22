@@ -15,8 +15,8 @@
     <meta name="robots" content="index, follow">
 
     <title>Gizlilik Politikası</title>
-    <link rel="stylesheet" href="/CSS/all.css">
-    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/css/gizlilik-politikasi.css">
     <link rel="icon" href="/images/logo-icon.png">
 </head>
 
@@ -69,7 +69,8 @@
             <i class="far fa-arrow-alt-circle-right"></i> Güvenli sunucularda saklamaktadır.<br>
             <i class="far fa-arrow-alt-circle-right"></i> Şifreleriniz geri dönüştürülemeyecek şekilde kodlanıp
             sistemimizde tutulmaktadır.<br>
-            <i class="far fa-arrow-alt-circle-right"></i> Bazı bilgilerinizi uygulama içerisinden düzeltebilir, güncelleme talebinde
+            <i class="far fa-arrow-alt-circle-right"></i> Bazı bilgilerinizi uygulama içerisinden düzeltebilir,
+            güncelleme talebinde
             bulunabilirsiniz.<br>
             <i class="far fa-arrow-alt-circle-right"></i> Bilgilerin aktarılmasının halka açık internet üzerinden
             yapılması halinde EPS bunun %100 güvenli
