@@ -1344,13 +1344,11 @@ footer p
 
 .pagination {
     display: inline-block;
-    position:absolute;
+    position:table;
     width:600px;
     height: 10px;
-    margin-left:-300px;
-    margin-top:-18px;
-    left:50%;
-    top:80%;
+    margin-top:20px;
+    
   }
   
 .pagination a {
@@ -1369,32 +1367,33 @@ footer p
 .pagination a:hover:not(.active) {background-color: rgb(243, 208, 67); border-radius: 5px;}
   
 .parkPageForCityName {
-    width:500px; 
+    width:600px; 
     height:50px; 
-    margin-left:-250px; 
-    margin-top:35px; 
-    left:50%; 
-    position:absolute;
+    margin-bottom:20px;
+    padding-top:15px;
+    position:table;
     color:white;
     text-align: center;
     font-size: 20px;
+    border-bottom:2px solid #9da4aac4;
   }
   
 .parkPageForCity {
     width:600px; 
-    height:451px; 
+    height:600px; 
     position:absolute; 
     left:50%;
     top:50%; 
-    margin-top:-250px; 
+    margin-top:-300px; 
     margin-left:-300px; 
     background: rgba(255, 255, 255, 0.685);
+    border-radius:10px;
   }
   
 .parkPageForCityReservationOptions {
     width:600px;
     height:133px; 
-    border-bottom:2px solid #9da4aac4;
+    border-bottom:1px solid rgb(0,160,198);
   }
   
 .parkPageForCityReservationOptionsText {
@@ -1402,6 +1401,7 @@ footer p
     padding-left:5px;
     padding-top: 5px;
   }
+
 
 .parkReservationBox {
   width:600px;
