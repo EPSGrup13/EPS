@@ -13,9 +13,10 @@
 
 <?php
 
+
 	//print_r($parkArray); //output test
     echo "<div class=\"parkPageForCity\">";
-    echo "<div class=\"parkPageForCityName\">".getCityTitle($getSlugCity)." Otoparkları </div>";
+	echo "<div class=\"parkPageForCityName\">".getCityTitle($getSlugCity)." Otoparkları </div>";
     
 	if(is_array($parkArray))
 	{
@@ -41,17 +42,22 @@
 		}
 		
 	}
-
-
 	else //eğer otopark bulunamadıysa veya yok ise direk hata mesajını gösterecek.
 	{
 		echo $parkArray;
     }
 
 
-    echo "<div class=\"pagination\"><a href=\"#\">«</a><a href=\"#\" class=\"active\">1</a>
-    <a href=\"#\">2</a><a href=\"#\">3</a><a href=\"#\">4</a><a href=\"#\">5</a><a href=\"#\">6</a>
-    <a href=\"#\">»</a></div>";
+    echo "<div class=\"pagination\">
+    <a href=\"#\">«</a>
+    <a href=\"#\" class=\"active\">1</a>
+    <a href=\"#\">2</a>
+    <a href=\"#\">3</a>
+    <a href=\"#\">4</a>
+    <a href=\"#\">5</a>
+    <a href=\"#\">6</a>
+    <a href=\"#\">»</a>
+    </div>";
 
     echo "</div>";
 ?>
