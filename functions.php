@@ -838,6 +838,18 @@ function parkDetailCheckBox($parkStatus, $time)
 	}
 }
 
+function returnCarImg($parkStatus)
+{
+	if($parkStatus === "BOŞ")
+	{
+		return "<img src=\"" .isDevelopmentModeOn(). "/images/car-green.png\" class=\"parkReservationCarImg\">";
+	}
+	else
+	{
+		return "<img src=\"" .isDevelopmentModeOn(). "/images/car-red.png\" class=\"parkReservationCarImg\">";
+	}
+}
+
 //include 'htmlStart.php'; , 'functions.php' veya getHeader(); satırlarından sonra eklenmelidir.
 //Kllanıcı girişi gerektiren sayfalarda, giriş yapılmamış ise login sayfasına yönlendirir.
 function pageProtection()
@@ -1186,6 +1198,18 @@ function personCity($person_id)
 	$data = basicSelectQueries($query, $get);
 
 	return $data[0];
+}
+
+function updateUserProfile($query, $person_id)
+{
+	global $conn;
+
+	$sql = "UPDATE Person SET " .$query. " WHERE person_id='$person_id'";
+
+	if (!($conn->query($sql) === TRUE))
+	{
+		reportErrorLog("updateUserProfile fonksiyonunda verileri güncellerken sorun oluştu", 1030);
+	}
 }
 
 
