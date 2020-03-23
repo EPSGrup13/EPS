@@ -87,7 +87,8 @@
 						*haricinde kullanıcının bulunduğu şehir paylaşılmış ise o seçili çıkar,
 						*seçilmemiş ise direk belirtilmemiş seçili gelir.
 						*/
-						echo "<select id=\"cities\" name=\"cities\">";
+
+						echo "<br> İl: <select id=\"cities\" name=\"cities\">";
 						if($undefinedCity[0] == $personCity)
 						{
 							echo "<option value=\"" .$undefinedCity[0]. "\" selected> " .$undefinedCity[2]. " </option>";

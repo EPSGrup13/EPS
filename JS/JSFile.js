@@ -21,18 +21,18 @@ function registration()
                 if(splitData.status === "success")
                 {
                 	// Uyarı divini ekrana eklemek için
-                    addStatusElement("alert success", splitData.message, clearForm);
+                    addStatusElement("alert success", splitData.message, clearForm); //callback fonksiyonları çağırılırken içerisine gönderilen veri callback çağırılırken verilir, callback fonksiyonunun adı gönderilirken değil.
                 }
                 else
                 {
                 	// Uyarı divini ekrana eklemek için
-                    addStatusElement("alert danger", splitData.message, clearForm);
+                    addStatusElement("alert danger", splitData.message, clearForm); //callback fonksiyonları çağırılırken içerisine gönderilen veri callback çağırılırken verilir, callback fonksiyonunun adı gönderilirken değil.
                 }
             }
         }
         //xmlHttp.open("post", "registrationTest.php");
         //xmlHttp.open("post", "registrationTest");
-        xmlHttp.open("post", "registrationControl");
+        xmlHttp.open("post", "registrationControl");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
         xmlHttp.send(formData);
 }
 
@@ -46,7 +46,7 @@ function addStatusElement(cName, message, callback) // alert alert-success gibi.
     document.querySelector("body").appendChild(newElement);
     //console.log("Element ", newElement); //output test
 
-    callback(); // clearForm() çağrılıyor.
+    callback("registrationForm"); // clearForm() çağırılıyor, içerisine de gereken form adı gönderiliyor.
     setTimeout(function(){
         //document.querySelector("body").removeChild(newElement);
         let rmElement = document.getElementsByClassName(cName)[0];
@@ -55,7 +55,7 @@ function addStatusElement(cName, message, callback) // alert alert-success gibi.
     },3000);
 }
 
-function clearForm()
+function clearForm(formName) // form adı gönderiliyor, addStatusElement içerisinde callback'e veriliyor sonra o isim
 {
 	// METOD 1
 	/*let genClass = document.getElementsByClassName("formkapsaminput");
@@ -66,7 +66,7 @@ function clearForm()
 	}*/
 
 	// METOD 2
-	document.getElementById("registrationForm").reset();
+	document.getElementById(formName).reset();
 }
 
 function formValidation()
@@ -138,8 +138,16 @@ function validate(callback)
 
 function editProfile()
 {
+	getInputValues(sendProfileData);
+}
+
+function getInputValues(callback)
+{
 	const getSelection = document.getElementById("cities");
     var formData = new FormData();
+    let dataCounter = 0; // formData'nın length fonksiyonu olmadığından counter ile veri miktarı takip ediliyor.
+
+    // İl kısmı için select, option'dan seçili olan çekiliyor.
 	for(i = 0; i < getSelection.children.length; i++)
 	{
 		//console.log(getSelection.children[i]); //output test
@@ -147,19 +155,68 @@ function editProfile()
 		{
 			console.log("seçili il: ", getSelection.children[i]);
 			console.log("name: ", getSelection.children[i].name ,"id: ", getSelection.children[i].value);
-			formData.append("cities", getSelection.children[i].value);
+			formData.append("cities", getSelection.children[i].value); // selection'da name olmadığından city -> cities şeklinde biz belirleyerek giriyoruz
 			console.log(formData.get("cities"));
+			dataCounter++;
 		}
 	}
 
+	// geriye kalan inputlar.
 	const getInputs = document.getElementsByClassName("profileInput");
 	for(i = 0; i < getInputs.length; i++)
 	{
-		if(getInputs[i].name == "pNo" || getInputs[i].name == "email" || getInputs[i].name == "city")
+		if(getInputs[i].name == "fullName" && getInputs[i].value != "" || getInputs[i].name == "pNo" && getInputs[i].value != "" || getInputs[i].name == "email" && getInputs[i].value != "") //  || getInputs[i].name == "city" && getInputs[i].value != ""
 		{
 			console.log("name: ", getInputs[i].name, " value: ", getInputs[i].value)
+			formData.append(getInputs[i].name, getInputs[i].value);
+			dataCounter++;
 		}
 	}
+
+
+	//-------------
+	console.log("formData veri sayısı: ", dataCounter);
+	//formData'daki verileri kontrol amaçlı length fonksiyonu olmadığından bu şekilde test ediliyor.
+	/*for(i = 0; i < dataCounter.length; i++) // .length olmaz ise formDAta[i] is undefined hatası veriyor.
+	{
+		console.log("Formdata name:", formData[i].name, " value:", formData[i].value);
+	}*/
+
+	callback(formData);
+
+}
+
+function sendProfileData(data)
+{
+	var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function()
+    {
+        if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
+        {
+    		//console.log("gönderildi");
+            console.log(xmlHttp.responseText);
+
+            /*let splitData = JSON.parse(xmlHttp.responseText); // Gelen JSON verisi ayrıştırılıyor.
+            console.log(splitData);*/
+            /*if(splitData.status === "success")
+            {
+            	// Uyarı divini ekrana eklemek için
+                addStatusElement("alert success", splitData.message, clearForm); //callback fonksiyonları çağırılırken içerisine gönderilen veri callback çağırılırken verilir, callback fonksiyonunun adı gönderilirken değil.
+            }
+            else
+            {
+            	// Uyarı divini ekrana eklemek için
+                addStatusElement("alert danger", splitData.message, clearForm); //callback fonksiyonları çağırılırken içerisine gönderilen veri callback çağırılırken verilir, callback fonksiyonunun adı gönderilirken değil.
+            }*/
+        }
+        else
+        {
+        	//console.log("gönderilemedi");
+        }
+    }
+    xmlHttp.open("post", "settings/profile/save"); // ana dizine atıldığında çalıştırılacak, haricinde base href alınıyor hedef olarak.
+    //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/editProfileControl");
+    xmlHttp.send(data);
 }
 
 // editProfile sonu -----------------------------------------------------------------------------------
