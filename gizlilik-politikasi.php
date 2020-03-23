@@ -15,7 +15,7 @@
     <meta name="robots" content="index, follow">
 
     <title>Gizlilik Politikası</title>
-    <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/CSS/all.css">
     <link rel="stylesheet" href="/CSS/style.css">
     <link rel="icon" href="/images/logo-icon.png">
 </head>
