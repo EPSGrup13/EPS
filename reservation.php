@@ -62,7 +62,8 @@
 	echo "<div class=\"parkReservationTimeBox\">";
 	echo "<form action=\"".getLink("reservationControl")."\" method=\"post\" class=\"parkReservationTimeForm\">";
 ?>
-	<div style="display:table-cell; padding-left:75px;">
+	<div style="display:flex; justify-content:space-between;">
+	<div style="padding-left:75px;">
 <?php
 
 
@@ -71,17 +72,18 @@
 		if($i == (count($parkArray)/2))
 		{
 			echo "</div>
-			<div style=\"display:table-cell; padding-right:64px;\">
-			<div style=\"display:table-row;\"><img src=\"https://i.hizliresim.com/3j0L1k.png\" class=\"parkReservationCarImg\">".$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i])."</div>";
+			<div style=\"padding-right:64px;\">
+			<div style=\"display:table-row;\">" .returnCarImg($parkArray[$i]). " " .$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i])."</div>";
 		}
 		else
 		{
-			echo "<div style=\"display:table-row;\"><img src=\"https://i.hizliresim.com/3j0L1k.png\" class=\"parkReservationCarImg\">".$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i])."</div>";
+			echo "<div style=\"display:table-row;\">" .returnCarImg($parkArray[$i]). " " .$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i])."</div>";
 		}
 	}
 
 	echo "</div>";
 ?>
+	</div>
 
 
 <?php
