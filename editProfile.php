@@ -73,13 +73,12 @@
 		        </div>
 
 			        <?php
-			        	$matchText = array("Telefon No: ", "Email: ", "İl: ");
-			        	$inputName = array("pNo", "email", "city");
-						for($i = 0; $i < count($profileArray); $i++)
+			        	$matchText = array("Telefon No: ", "Email: ");
+			        	$inputName = array("pNo", "email");
+						for($i = 0; $i < (count($profileArray) - 1); $i++) // city harici yapıldığından çıkarıldı
 						{
 							echo $matchText[$i]. " <input type=\"text\" name=\"" .$inputName[$i]. "\" class=\"profileInput\" placeholder=\"" .$profileArray[$i]. "\"><br>";
 						}
-						echo "Bakiye: " .$balance. "₺";
 
 						// option başlangıç
 						/*
@@ -88,7 +87,7 @@
 						*seçilmemiş ise direk belirtilmemiş seçili gelir.
 						*/
 
-						echo "<br> İl: <select id=\"cities\" name=\"cities\">";
+						echo "İl: <select id=\"cities\" name=\"cities\">";
 						if($undefinedCity[0] == $personCity)
 						{
 							echo "<option value=\"" .$undefinedCity[0]. "\" selected> " .$undefinedCity[2]. " </option>";
@@ -111,6 +110,8 @@
 						}
 						echo "</select>";
 						// option bitiş
+
+						echo "<br><br>Bakiye: " .$balance. "₺";
 					?>
 
 		    </div>
@@ -126,10 +127,12 @@
 			    	</div>
 			    </div>
 			</div>
+
+		<button class="ep-btn" onclick="editProfile(); return false;">Profili Güncelle</button>
 	</div>
 </div>
 
-<button onclick="editProfile(); return false;">Profili Güncelle</button>
+
 
 
 
