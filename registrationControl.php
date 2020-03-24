@@ -10,7 +10,7 @@
 	array_push($arrayY, "failed");
 
 	$arrayZ = array();
-	array_push($arrayZ,"tum alanlari eksiksiz doldurunuz");
+	array_push($arrayZ,"Tum alanlari eksiksiz doldurunuz");
 
 
 	if (isset($_POST['userName']) && isset($_POST['pass']) && isset($_POST['fName']) && isset($_POST['lName']) && isset($_POST['pNo']) && isset($_POST['email']))

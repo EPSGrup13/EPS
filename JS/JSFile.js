@@ -55,6 +55,43 @@ function addStatusElement(cName, message, callback) // alert alert-success gibi.
     },3000);
 }
 
+// Status elementini formsuz (sadece inputlar gönderilerek) çalıştıran şekli
+function addStatusElementWithoutForm(cName, message, callback, inputsArray)
+{
+    const newElement = document.createElement("div");
+    newElement.className = cName;
+    let newChild = document.createTextNode(message);
+    newElement.appendChild(newChild);
+    document.querySelector("body").appendChild(newElement);
+    //console.log("Element ", newElement); //output test
+
+    callback("profileInput", inputsArray); // clearInputs çağırılıyor
+    setTimeout(function(){
+        //document.querySelector("body").removeChild(newElement);
+        let rmElement = document.getElementsByClassName(cName)[0];
+        //console.log("Süre içerisinde", rmElement); //output test
+        rmElement.parentNode.removeChild(rmElement);
+    },3000);
+}
+
+// Sadece uyarı şekli ve mesajını alan şekil
+function displayWarning(cName, message)
+{
+    const newElement = document.createElement("div");
+    newElement.className = cName;
+    let newChild = document.createTextNode(message);
+    newElement.appendChild(newChild);
+    document.querySelector("body").appendChild(newElement);
+    //console.log("Element ", newElement); //output test
+
+    setTimeout(function(){
+        //document.querySelector("body").removeChild(newElement);
+        let rmElement = document.getElementsByClassName(cName)[0];
+        //console.log("Süre içerisinde", rmElement); //output test
+        rmElement.parentNode.removeChild(rmElement);
+    },3000);
+}
+
 function clearForm(formName) // form adı gönderiliyor, addStatusElement içerisinde callback'e veriliyor sonra o isim
 {
 	// METOD 1
@@ -119,23 +156,8 @@ function validate(callback)
 
 // registration sonu --------------------------------------------------------------------------------
 
-//id'yi seçmek için
-/*function editProfile()
-{
-    var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function()
-        {
-            if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            {
-            	console.log(xmlHttp.responseText);
-            }
-        }
-        //xmlHttp.open("post", "registrationTest.php");
-        //xmlHttp.open("post", "registrationTest");
-        xmlHttp.open("GET", "http://epark.sinemakulup.com/external/tkeskin/settings/profile/save");
-        xmlHttp.send();
-}*/
 
+// editProfile başlangıcı----------------------------------------------------------------------------
 function editProfile()
 {
 	getInputValues(sendProfileData);
@@ -143,20 +165,22 @@ function editProfile()
 
 function getInputValues(callback)
 {
+	let funcStatus = 1;
 	const getSelection = document.getElementById("cities");
     var formData = new FormData();
     let dataCounter = 0; // formData'nın length fonksiyonu olmadığından counter ile veri miktarı takip ediliyor.
+    let inputName = new Array(); // input'u daha sonra temizlemek için
 
-    // İl kısmı için select, option'dan seçili olan çekiliyor.
-	for(i = 0; i < getSelection.children.length; i++)
+    // İl kısmı için select, option'dan seçili olan çekiliyor. input olmadığından inputName array'ine eklenmiyor
+	for(j = 0; j < getSelection.children.length; j++)
 	{
 		//console.log(getSelection.children[i]); //output test
-		if(getSelection.children[i].selected)
+		if(getSelection.children[j].selected)
 		{
-			console.log("seçili il: ", getSelection.children[i]);
-			console.log("name: ", getSelection.children[i].name ,"id: ", getSelection.children[i].value);
-			formData.append("cities", getSelection.children[i].value); // selection'da name olmadığından city -> cities şeklinde biz belirleyerek giriyoruz
-			console.log(formData.get("cities"));
+			//console.log("seçili il: ", getSelection.children[i]);
+			//console.log("name: ", getSelection.children[i].name ,"id: ", getSelection.children[i].value);
+			formData.append("cities", getSelection.children[j].value); // selection'da name olmadığından city -> cities şeklinde biz belirleyerek giriyoruz
+			//console.log(formData.get("cities"));
 			dataCounter++;
 		}
 	}
@@ -165,58 +189,140 @@ function getInputValues(callback)
 	const getInputs = document.getElementsByClassName("profileInput");
 	for(i = 0; i < getInputs.length; i++)
 	{
-		if(getInputs[i].name == "fullName" && getInputs[i].value != "" || getInputs[i].name == "pNo" && getInputs[i].value != "" || getInputs[i].name == "email" && getInputs[i].value != "") //  || getInputs[i].name == "city" && getInputs[i].value != ""
+		// boş olmaması için de kontrol yapılıyor
+		if(getInputs[i].name == "fullName" && getInputs[i].value != "") //  || getInputs[i].name == "city" && getInputs[i].value != ""
 		{
-			console.log("name: ", getInputs[i].name, " value: ", getInputs[i].value)
+			let getVal = getInputs[i].value;
+			let valLen = getVal.split(" ");
+			if(getVal.charAt(0) == " ") // girilen ismin başında boşluk olmamalı.
+			{
+				displayWarning("alert danger", "İsim Boşluk ile başlayamaz.");
+				funcStatus = 0;
+				break;
+			}
+			else if(valLen.length < 2)
+			{
+				displayWarning("alert danger", "Adınızı tam giriniz");
+				funcStatus = 0;
+				break;
+			}
+			else
+			{
+				//console.log("name: ", getInputs[i].name, " value: ", getInputs[i].value)
+				formData.append(getInputs[i].name, getInputs[i].value);
+
+				inputName.push(getInputs[i].name); // veri girilmiş olan inputun name'i kaydedilip daha sonra o input temizlenecek
+				dataCounter++;
+			}
+		}
+		// boş olmaması için de kontrol yapılıyor
+		else if(getInputs[i].name == "pNo" && getInputs[i].value != "" || getInputs[i].name == "email" && getInputs[i].value != "")
+		{
+			//console.log("name: ", getInputs[i].name, " value: ", getInputs[i].value)
 			formData.append(getInputs[i].name, getInputs[i].value);
+
+			inputName.push(getInputs[i].name); // veri girilmiş olan inputun name'i kaydedilip daha sonra o input temizlenecek
 			dataCounter++;
 		}
+
 	}
 
 
 	//-------------
-	console.log("formData veri sayısı: ", dataCounter);
+	//console.log("formData veri sayısı: ", dataCounter);
 	//formData'daki verileri kontrol amaçlı length fonksiyonu olmadığından bu şekilde test ediliyor.
 	/*for(i = 0; i < dataCounter.length; i++) // .length olmaz ise formDAta[i] is undefined hatası veriyor.
 	{
 		console.log("Formdata name:", formData[i].name, " value:", formData[i].value);
 	}*/
 
-	callback(formData);
-
+	if(funcStatus === 1)
+	{
+		callback(formData, inputName, clearInputs); // data, inputsArray, callback <- callback içinde callback
+	}
 }
 
-function sendProfileData(data)
+function sendProfileData(data, inputsArray, callback) //callback içinde callback. inputsArray bu fonksiyon içerisinde kendi olmadığından bu fonksiyon çağrılırken buraya taşındı, buradan da callback'e gönderildi
 {
 	var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function()
     {
         if(xmlHttp.readyState == 4 && xmlHttp.status == 200)
         {
-    		//console.log("gönderildi");
-            console.log(xmlHttp.responseText);
+            //console.log(xmlHttp.responseText); // hiç veri gönderilmesse <empty string> döner.
 
-            /*let splitData = JSON.parse(xmlHttp.responseText); // Gelen JSON verisi ayrıştırılıyor.
-            console.log(splitData);*/
-            /*if(splitData.status === "success")
+            // Yeni girilen verileri sayfa yenilemeden placeholder'a eklemek için
+            let splitData = JSON.parse(xmlHttp.responseText); // Gelen JSON verisi ayrıştırılıyor.
+            //console.log(splitData);
+            if(splitData.status === "success")
             {
+                let getElement = document.getElementsByClassName("profileInput");
+                for(i = 0; i < getElement.length; i++)
+                {
+                	for(j = 0; j < inputsArray.length; j++)
+                	{
+                		//console.log(getElement[i].name, " " ,inputsArray[j]);
+                		if(getElement[i].name == inputsArray[j])
+                		{
+                			getElement[i].placeholder = data.get(inputsArray[j]);
+                		}
+                	}
+                }
+                //-------------
             	// Uyarı divini ekrana eklemek için
-                addStatusElement("alert success", splitData.message, clearForm); //callback fonksiyonları çağırılırken içerisine gönderilen veri callback çağırılırken verilir, callback fonksiyonunun adı gönderilirken değil.
+                addStatusElementWithoutForm("alert success", splitData.message, replaceInputs, inputsArray); //callback fonksiyonları çağırılırken içerisine gönderilen veri callback çağırılırken verilir, callback fonksiyonunun adı gönderilirken değil.
             }
             else
             {
             	// Uyarı divini ekrana eklemek için
-                addStatusElement("alert danger", splitData.message, clearForm); //callback fonksiyonları çağırılırken içerisine gönderilen veri callback çağırılırken verilir, callback fonksiyonunun adı gönderilirken değil.
-            }*/
+                addStatusElementWithoutForm("alert danger", splitData.message, clearInputs, inputsArray); //callback fonksiyonları çağırılırken içerisine gönderilen veri callback çağırılırken verilir, callback fonksiyonunun adı gönderilirken değil.
+            }
         }
-        else
+        /* readyState durumu 0-1-2-3-4 şeklinde ilerlediğinden else duurumu da readyState 4 olmadan çalışıyor,
+        	bu yüzden ilk hata verip sonra başarılı yazıyor. Oluşan hatadan dolayı else durumu kaldırıldı */
+        /*else
         {
-        	//console.log("gönderilemedi");
-        }
+            addStatusElementWithoutForm("alert danger", "Profili güncellerken sorun oluştu", clearInputs, inputsArray);
+        }*/
     }
     xmlHttp.open("post", "settings/profile/save"); // ana dizine atıldığında çalıştırılacak, haricinde base href alınıyor hedef olarak.
     //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/editProfileControl");
     xmlHttp.send(data);
+}
+
+// gönderilen class name'i aynı olan elementlerde inputsArray içerisinde bulunan name'leri gezerek input value temizler. Form olmayan yöntemlerde kullanılır, form için clearForm metodu kullanılır.
+function clearInputs(className, inputsArray) // (inputsArray, className)
+{
+	let element = document.getElementsByClassName(className);
+
+	for(let i = 0; i < element.length; i++)
+	{
+		for(let j = 0; j < inputsArray.length; j++)
+		{
+			if(element[i].name == inputsArray[j])
+			{
+				//console.log(element[i], " " ,inputsArray[j]);
+				element[i].value = "";
+			}
+		}
+	}
+}
+
+function replaceInputs(className, inputsArray) // (inputsArray, className)
+{
+	let element = document.getElementsByClassName(className);
+
+	for(let i = 0; i < element.length; i++)
+	{
+		for(let j = 0; j < inputsArray.length; j++)
+		{
+			if(element[i].name == inputsArray[j])
+			{
+				//console.log(element[i], " " ,inputsArray[j]);
+				element[i].value = "";
+			}
+		}
+	}
 }
 
 // editProfile sonu -----------------------------------------------------------------------------------
