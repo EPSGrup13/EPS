@@ -296,7 +296,6 @@ function userRegistration($getUserName, $getPassword, $getEmail, $getFirstName, 
 	$result1 = $conn->query($sql01);
 	if ($result1->num_rows > 0) //Eğer öyle bir mail varsa mail unique olduğundan kullanıcı kaydı oluşturmasını engellemek için.
 	{
-
 		$arr = array($array1[0]=>$array2[1], $array1[1]=>$array3[0]);
 	    return json_encode($arr);
 	}
@@ -1202,13 +1201,30 @@ function personCity($person_id)
 
 function updateUserProfile($query, $person_id)
 {
+
+	$array1 = array();
+	array_push($array1, "status");
+	array_push($array1, "message");
+
+	$array2 = array();
+	array_push($array2,"success");
+	array_push($array2,"failed");
+
 	global $conn;
 
 	$sql = "UPDATE Person SET " .$query. " WHERE person_id='$person_id'";
 
-	if (!($conn->query($sql) === TRUE))
+	if ($conn->query($sql) === TRUE)
+	{
+		$arr = array($array1[0]=>$array2[0], $array1[1]=>"Profiliniz güncellendi");
+	    return json_encode($arr);
+	}
+	else
 	{
 		reportErrorLog("updateUserProfile fonksiyonunda verileri güncellerken sorun oluştu", 1030);
+
+		$arr = array($array1[0]=>$array2[1], $array1[1]=>"Profili güncellerken sorun oluştu");
+	    return json_encode($arr);
 	}
 }
 
