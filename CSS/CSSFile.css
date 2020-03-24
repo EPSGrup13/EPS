@@ -466,7 +466,6 @@ input:checked + .slider:before {
 .isim1
 {
   text-align: center;
-  margin: 5px 5px 5px 44px;
 }
 
 .reservationSec
@@ -607,6 +606,31 @@ input:checked + .slider:before {
   max-width:160px;
 }
 
+.profileInput::-webkit-input-placeholder  /* Chrome/Opera/Safari */
+{
+	color: gray; 
+}
+
+.profileInput:-ms-input-placeholder /* Internet Explorer 10-11 */
+{
+	color: gray;
+}
+
+.profileInput::-moz-placeholder /* Firefox 19+ */
+{
+	color: gray;
+}
+
+.profileInput:-moz-placeholder /* Firefox 18- */
+{
+	color: gray;
+}
+
+.profileInput::placeholder
+{
+	color: gray;
+}
+
 .editProfileTop
 {
   border: 1px solid black;
@@ -615,6 +639,25 @@ input:checked + .slider:before {
   padding: 10px 10px 10px 10px;
   margin-bottom: 17px;
 }
+
+.ep-btn
+{
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	display:block;
+}
+
+
+
+
+
+/* Genel CSS Başlangıcı */
+.ta-center
+{
+	text-align: center;
+}
+/* Genel CSS Bitişi */
 
 
 
@@ -909,6 +952,32 @@ nav li a:hover
     transition: border-color .8s ease-out;
 }
 
+/* Chrome/Opera/Safari için placeholder renk değişikliği */
+.formkapsaminput::-webkit-input-placeholder  /* Chrome/Opera/Safari */
+{
+	color: white !important;  
+}
+
+.formkapsaminput:-ms-input-placeholder /* Internet Explorer 10-11 */
+{
+	color: white !important; 
+}
+
+.formkapsaminput::-moz-placeholder /* Firefox 19+ */
+{
+	color: white !important; 
+}
+
+.formkapsaminput:-moz-placeholder /* Firefox 18- */
+{
+	color: white !important; 
+}
+
+.formkapsaminput::placeholder
+{
+	color: white !important; 
+}
+
 
 .formTextArea
 {
@@ -930,12 +999,6 @@ nav li a:hover
 }
 
 
-
-/* Chrome/Opera/Safari için placeholder renk değişikliği */
-::-webkit-input-placeholder 
-{ 
-        color: white !important;  
-} 
 
 .formkapsaminput:focus
 {
@@ -1307,8 +1370,17 @@ footer p
 .profilimpanelsecenekleri
 {
     text-decoration: none; 
-    color: black; 
+    color: white; 
     padding-left: 5px;
+}
+
+.profilimpanelsecenekleri a
+{
+  color: white;
+}
+.profilimpanelsecenekleri a:-webkit-any-link
+{
+  color: white;
 }
 
 .profilimyeniaracdiv
@@ -1344,16 +1416,15 @@ footer p
 
 .pagination {
     display: inline-block;
-    position:table;
     width:600px;
     height: 10px;
-    margin-top:20px;
-    
+    margin-top: 20px;
+    text-align: center;
   }
   
 .pagination a {
     color: white;
-    float: left;
+    /*float: left;*/
     padding: 8px 16px;
     text-decoration: none;
   }
@@ -1369,13 +1440,12 @@ footer p
 .parkPageForCityName {
     width:600px; 
     height:50px; 
-    margin-bottom:20px;
-    padding-top:15px;
-    position:table;
+    margin-bottom: 20px;
+    padding-top: 15px;
     color:white;
     text-align: center;
     font-size: 20px;
-    border-bottom:2px solid #9da4aac4;
+    border-bottom:2px solid #9DA4AA;
   }
   
 .parkPageForCity {
@@ -1402,7 +1472,6 @@ footer p
     padding-top: 5px;
   }
 
-
 .parkReservationBox {
   width:600px;
   height:550px;
@@ -1412,28 +1481,26 @@ footer p
   margin-top:-300px;
   margin-left:-300px;
   background-color:rgba(255, 255, 255, 0.685);  
-  
+
 }
 
 .parkReservastionInfoBox {
   width:300px;
-  position:table;
   margin-left:150px;
   margin-top:20px;
-  
+
 }
 
 .parkReservastionInfo {
     text-align:center;
     line-height:5px;  
 }
-
 .parkReservationTimeBox {
   width:600px;
   height:410px;
   display:table;
   margin-top:20px;
-  
+
 }
 
 .parkReservationTimeForm {
@@ -1444,7 +1511,7 @@ footer p
   padding-top:20px;
   border-top: 1px solid #b0b0b0;
   border-bottom: 1px solid #b0b0b0;
-  
+
 }
 
 .parkReservationCarImg {
@@ -1452,24 +1519,23 @@ footer p
   height:20px;
   padding-right:10px;
 }
-
 .reservationButton {
-  position:table; 
   margin-top:15px; 
-  margin-left:240px;
   background-color:rgb(243, 208, 67);
   padding:8px;
   color:white;
   border:none;
   border-radius:5px;
   margin-bottom:15px;
-}
+  margin: auto;
+  display: block;
+} 
 
 .parkReservationNoCarMessageDiv {
   width: 290px;
   height: 30px;
-  position:table;
-  margin-left:150px;
+  margin: auto;
+  display: block;
 }
 
 .parkReservationNoCarMessage {
