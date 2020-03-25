@@ -257,9 +257,15 @@ function destroyUserSession()
 	redirectTo("cities");
 }
 
-function defineUserAuth()
+function userAuth()
 {
-
+	if(getUserLevel() != 2) {
+			if(!(isSessionActive())) {
+					destroyUserSession();
+			} else {
+					redirectTo("cities");
+			}
+	}
 }
 
 
@@ -1095,9 +1101,11 @@ function jsSource()
 	$jsArray = array();
 
 	$jsLink1 = isDevelopmentModeOn()."JS/JSFile.js";
+	$jsLink2 = isDevelopmentModeOn()."JS/prod.js";
 	$jsSrc1 = "<script src=\"".$jsLink1."\"></script>";
+	$jsSrc2 = "<script src=\"".$jsLink2."\"></script>";
 
-	array_push($jsArray, $jsSrc1);
+	array_push($jsArray, $jsSrc1, $jsSrc2);
 
 	return $jsArray;
 }
@@ -1109,9 +1117,11 @@ function cssSource()
 	$cssArray = array();
 
 	$cssLink1 = isDevelopmentModeOn()."CSS/CSSFile.css";
+	$cssLink2 = isDevelopmentModeOn()."CSS/prod.css";
 	$cssHref1 = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".$cssLink1."\"/>";
+	$cssHref2 = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".$cssLink2."\"/>";
 
-	array_push($cssArray, $cssHref1);
+	array_push($cssArray, $cssHref1, $cssHref2);
 
 	return $cssArray;
 }
@@ -1128,7 +1138,7 @@ function print_js_or_css($givenSourceArray)
 }
 
 
-//Basit select sorguları için dinamik fonksiyon.
+//Basit select sorguları için dinamik fonksiyon. Tek veri döndüren queryler için çalışıyor.
 function basicSelectQueries($query, $selection)
 {
 	global $conn;
@@ -1145,6 +1155,7 @@ function basicSelectQueries($query, $selection)
 	}
 	else
 	{
+		reportErrorLog("basicSelectQueries fonksiyonunda verileri çekerken sorun oluştu. <br> işlenmeye çalışan veri örneği;<br>" .$query. "<br>" .$selection, 1031);
 		return false;
 	}
 }
@@ -1225,6 +1236,27 @@ function updateUserProfile($query, $person_id)
 
 		$arr = array($array1[0]=>$array2[1], $array1[1]=>"Profili güncellerken sorun oluştu");
 	    return json_encode($arr);
+	}
+}
+
+function getServerSettings() {
+	global $conn;
+	$dataArray = array();
+
+	$sql = "SELECT setting_id, setting_name, setting_value FROM Settings";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0)
+	{
+		while($row = $result->fetch_assoc())
+		{
+			$dataArray = array_merge($dataArray, array(array($row["setting_id"], $row["setting_name"], $row["setting_value"])));
+		}
+		return $dataArray;
+	}
+	else
+	{
+		reportErrorLog("getServerSettings fonksiyonunda verileri çekerken sorun oluştu.", 1032);
+		return "Park Detayları bulunamadı.";
 	}
 }
 
