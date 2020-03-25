@@ -172,14 +172,14 @@ function getInputValues(callback)
     let inputName = new Array(); // input'u daha sonra temizlemek için
 
     // İl kısmı için select, option'dan seçili olan çekiliyor. input olmadığından inputName array'ine eklenmiyor
-	for(j = 0; j < getSelection.children.length; j++)
+	for(i = 0; i < getSelection.children.length; i++)
 	{
 		//console.log(getSelection.children[i]); //output test
-		if(getSelection.children[j].selected)
+		if(getSelection.children[i].selected)
 		{
 			//console.log("seçili il: ", getSelection.children[i]);
 			//console.log("name: ", getSelection.children[i].name ,"id: ", getSelection.children[i].value);
-			formData.append("cities", getSelection.children[j].value); // selection'da name olmadığından city -> cities şeklinde biz belirleyerek giriyoruz
+			formData.append("cities", getSelection.children[i].value); // selection'da name olmadığından city -> cities şeklinde biz belirleyerek giriyoruz
 			//console.log(formData.get("cities"));
 			dataCounter++;
 		}
