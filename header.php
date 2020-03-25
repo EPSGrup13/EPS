@@ -45,6 +45,11 @@
 							<a href=\"".isDevelopmentModeOn()."parkdetayi\">Park Detayları</a>
 						  ";
 				}
+				else if(getUserLevel() === 2) {
+						echo "<div class=\"uprofile-content\">
+						<a href=\"".isDevelopmentModeOn()."panel/\">Panel</a>
+						";
+				}
 				else
 				{
 					echo "<div class=\"uprofile-content\">
