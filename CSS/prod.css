@@ -1,0 +1,73 @@
+.p-sidebar {
+	width: 0px;
+	height: 100%;
+	background-color: black;
+	position: fixed;
+	z-index: 1;
+	top: 0px;
+	left: 0px;
+	transition: 0.5s;
+	overflow-x: auto;
+	padding: 0px 0px 0px 0px; /* kapalıyken*/
+}
+
+.p-btn {
+	transition: margin-left .5s;
+}
+
+.sb-a {
+	display: block;
+	padding: 2px 0px 0px 0px;
+	margin-top: 2px;
+	background-color: red;
+	width: 100%;
+	transition: margin-bottom .5s;
+}
+
+.sub-m {
+	height: 0px;
+	width: 100%;
+	position: relative;
+	z-index: 1;
+	top: 0px;
+	left: 0px;
+	transition: 0.5s;
+	overflow-x: auto;
+	overflow-y: hidden;
+	padding: 0px 0px 0px 0px; /* kapalıyken */
+}
+
+.sub-m-expand {
+	height: 52px;
+
+
+	transition: 0.5s;
+	overflow-y: hidden;
+	/*transition-delay: 0.5s;*/
+}
+
+.bd-yellow {
+	border-right: 2px solid yellow;
+}
+
+
+.btn-icon {
+	/*background-image :url('../images/arrow2.png') no-repeat right center;*/
+	background-image: url('../images/arrow2.png');
+	background-repeat: no-repeat;
+	background-position: right;
+	background-size: 20px;
+} 
+
+.show {
+	width: 250px;
+	padding: 10px 5px 10px 5px;
+}
+
+.moveR {
+	margin-left: 260px;
+}
+
+body {
+	transition: margin-left .5s;
+}
