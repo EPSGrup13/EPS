@@ -6,9 +6,10 @@ if(isset($_SESSION["person_id"]))
 {
 
 	$queryMaker = "";
-	$dbRow = array("firstName, lastName", "phoneNo", "email", "city_id");
+	// firstName, lastName birlikte [0]
+	$dbRow = array("firstName, lastName", "User.userPassword", "Person.phoneNo", "Person.email", "Person.city_id");
 
-	$dataArray = array("fullName", "pNo", "email", "cities");
+	$dataArray = array("fullName", "pass", "pNo", "email", "cities");
 	$confirmedValuesArray = array();
 	for($i = 0; $i < count($dataArray); $i++)
 	{
@@ -16,7 +17,7 @@ if(isset($_SESSION["person_id"]))
 		{
 			//echo $dataArray[$i]. " tanımlı\n"; //javascript için \n
 			//array_push($confirmedValuesArray, $_POST[$dataArray[$i]]);
-			$confirmedValuesArray = array_merge($confirmedValuesArray, array(array($dataArray[$i], $_POST[$dataArray[$i]])));
+			$confirmedValuesArray = array_merge($confirmedValuesArray, array(array($dataArray[$i], $conn->real_escape_string($_POST[$dataArray[$i]]))));
 		}
 		else
 		{
@@ -43,8 +44,6 @@ if(isset($_SESSION["person_id"]))
 			{
 				$fName = "";
 				$lName = "";
-				//$queryMaker = $queryMaker. "" .$dbRow[array_search($confirmedValuesArray[$i][0], $dataArray)]. "='" .$confirmedValuesArray[$i][1]. "', ";
-				//echo $dbRow[array_search($confirmedValuesArray[$i][0], $dataArray)]. " " .$confirmedValuesArray[$i][1];
 
 				$getEnteredFullName = $confirmedValuesArray[$i][1];
 				//echo strlen($getEnteredFullName);
@@ -52,32 +51,21 @@ if(isset($_SESSION["person_id"]))
 				{
 					if($getEnteredFullName[$j] == " ")
 					{
-						//echo $j;
 						$lName = substr($getEnteredFullName, $j+1);
-						//echo "soyisim:" .$lName. "  ";
 						$fName = substr($getEnteredFullName, 0, $j);
-						//echo "isim: " .$fName. " ";
 
-						$queryMaker = $queryMaker. " firstName='" .$fName. "', lastName='" .$lName. "', ";
+						$queryMaker = $queryMaker. " Person.firstName='" .$fName. "', Person.lastName='" .$lName. "', ";
 						break;
 					}
 				}
+			} else if($inputName == "pass") {
+				$pass = convertPassToMD5($confirmedValuesArray[$i][1]); // yeni şifre MD5 olarak çevriliyor.
+				$queryMaker = $queryMaker. "" .$dbRow[array_search($confirmedValuesArray[$i][0], $dataArray)]. "='".$pass."', ";
 			}
-			/*else if($inputName == "cities")
-			{
-				echo $dbRow[array_search($confirmedValuesArray[$i][0], $dataArray)]. " " .$confirmedValuesArray[$i][1];
-				$queryMaker = $queryMaker. "" .$dbRow[array_search($confirmedValuesArray[$i][0], $dataArray)]. "=".$confirmedValuesArray[$i][1].", ";
-			}*/
 			else
 			{
-				//echo $dbRow[array_search($confirmedValuesArray[$i][0], $dataArray)]. " " .$confirmedValuesArray[$i][1];
 				$queryMaker = $queryMaker. "" .$dbRow[array_search($confirmedValuesArray[$i][0], $dataArray)]. "='".$confirmedValuesArray[$i][1]."', ";
 			}
-
-		//}
-		//echo "\n";
-
-
 	}
 
 	$queryMaker = substr($queryMaker, 0, strlen($queryMaker)-2);

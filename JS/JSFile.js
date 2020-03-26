@@ -6,7 +6,11 @@ function registration()
     //console.log("elements len:" + elements.length); //output test
     for(var i=0; i<elements.length; i++)
     {
-        formData.append(elements[i].name, elements[i].value);
+    	// Kullanıcı kayıt olurken şifresinde escape string olmayacak böylece özel karakterleri şifrede kullanabilecek.
+    	if(elements[i].name === "password") {
+	        formData.append(elements[i].name, elements[i].value);
+    	} else
+    		formData.append(elements[i].name, cleanVal(elements[i].value));
         //console.log("name: "+ elements[i].name + ", val: " + elements[i].value); //output test
     }
     var xmlHttp = new XMLHttpRequest();
@@ -190,36 +194,47 @@ function getInputValues(callback)
 	for(i = 0; i < getInputs.length; i++)
 	{
 		// boş olmaması için de kontrol yapılıyor
-		if(getInputs[i].name == "fullName" && getInputs[i].value != "") //  || getInputs[i].name == "city" && getInputs[i].value != ""
+		if(getInputs[i].name === "fullName" && getInputs[i].value !== "") //  || getInputs[i].name == "city" && getInputs[i].value != ""
 		{
 			let getVal = getInputs[i].value;
 			let valLen = getVal.split(" ");
-			if(getVal.charAt(0) == " ") // girilen ismin başında boşluk olmamalı.
+			if(getVal.charAt(0) === " " || getVal.charAt(getVal.length - 1) === " ") // girilen ismin başında boşluk olmamalı.
 			{
-				displayWarning("alert danger", "İsim Boşluk ile başlayamaz.");
+				displayWarning("alert danger", "İsim Boşluk ile başlayamaz veya bitemez.");
 				funcStatus = 0;
 				break;
 			}
 			else if(valLen.length < 2)
 			{
-				displayWarning("alert danger", "Adınızı tam giriniz");
+				displayWarning("alert danger", "Adınızı tam giriniz.");
 				funcStatus = 0;
 				break;
 			}
 			else
 			{
 				//console.log("name: ", getInputs[i].name, " value: ", getInputs[i].value)
-				formData.append(getInputs[i].name, getInputs[i].value);
+				formData.append(getInputs[i].name, cleanVal(getInputs[i].value));
 
 				inputName.push(getInputs[i].name); // veri girilmiş olan inputun name'i kaydedilip daha sonra o input temizlenecek
 				dataCounter++;
 			}
+		} else if((getInputs[i].name === "pass" && getInputs[i].value !== "") || (getInputs[i].name === "pass" && document.getElementsByClassName("confirmPass")[0].value !== "")) {
+			if(document.getElementsByClassName("confirmPass")[0].value === getInputs[i].value) {
+				formData.append(getInputs[i].name, getInputs[i].value); // password için özel karakterler silinmeyecek.
+
+				inputName.push(getInputs[i].name); // veri girilmiş olan inputun name'i kaydedilip daha sonra o input temizlenecek
+				dataCounter++;
+			} else {
+				displayWarning("alert danger", "Şifrenizin yenilenebilmesi için iki alanında dolu ve aynı olması gerekir.");
+				funcStatus = 0;
+				break;
+			}
 		}
 		// boş olmaması için de kontrol yapılıyor
-		else if(getInputs[i].name == "pNo" && getInputs[i].value != "" || getInputs[i].name == "email" && getInputs[i].value != "")
+		else if(getInputs[i].name === "pNo" && getInputs[i].value !== "" || getInputs[i].name === "email" && getInputs[i].value !== "")
 		{
 			//console.log("name: ", getInputs[i].name, " value: ", getInputs[i].value)
-			formData.append(getInputs[i].name, getInputs[i].value);
+			formData.append(getInputs[i].name, cleanVal(getInputs[i].value));
 
 			inputName.push(getInputs[i].name); // veri girilmiş olan inputun name'i kaydedilip daha sonra o input temizlenecek
 			dataCounter++;
@@ -256,6 +271,10 @@ function sendProfileData(data, inputsArray, callback) //callback içinde callbac
             //console.log(splitData);
             if(splitData.status === "success")
             {
+            	/* Kullanıcı profilindeki verilerini güncellediği anda veriler
+            	* direk placeholder'a da eklenir böylece gösterim için de
+            	* sayfa yenilenmek zorunda kalmaz
+            	*/
                 let getElement = document.getElementsByClassName("profileInput");
                 for(i = 0; i < getElement.length; i++)
                 {
@@ -264,18 +283,35 @@ function sendProfileData(data, inputsArray, callback) //callback içinde callbac
                 		//console.log(getElement[i].name, " " ,inputsArray[j]);
                 		if(getElement[i].name == inputsArray[j])
                 		{
-                			getElement[i].placeholder = data.get(inputsArray[j]);
+                			//Metod 2
+                			if(getElement[i].name !== "pass") {
+                				// Eğer kullanıcı adı güncelleniyor ise ek olarak header'ı da güncelleyecek
+                				if(getElement[i].name === "fullName")
+                					document.getElementsByClassName("uprofile")[0].textContent = data.get(inputsArray[j]);
+            					getElement[i].placeholder = data.get(inputsArray[j]); // pass haricindeki tüm inputların placeholderları yenilenecek
+                			}
+                			// Metod 2 sonu
+
+                			// Metod 1
+                			/*// Eğer kullanıcı adı güncelleniyor ise ek olarak header'ı da güncelleyecek
+                			if(getElement[i].name === "fullName") {
+                				document.getElementsByClassName("uprofile")[0].textContent = data.get(inputsArray[j]);
+                				getElement[i].placeholder = data.get(inputsArray[j]);
+                			} else if(getElement[i].name !== "pass") // şifre için placeholde yenileme yapılmayacak (şifrenin görünmemesi için)
+                				getElement[i].placeholder = data.get(inputsArray[j]);*/
                 		}
                 	}
                 }
                 //-------------
             	// Uyarı divini ekrana eklemek için
-                addStatusElementWithoutForm("alert success", splitData.message, replaceInputs, inputsArray); //callback fonksiyonları çağırılırken içerisine gönderilen veri callback çağırılırken verilir, callback fonksiyonunun adı gönderilirken değil.
+                addStatusElementWithoutForm("alert success", splitData.message, clearInputs, inputsArray); //callback fonksiyonları çağırılırken içerisine gönderilen veri callback çağırılırken verilir, callback fonksiyonunun adı gönderilirken değil.
+				clearSpecificInput("confirmPass", 0); // confirmPass kısmı
             }
             else
             {
             	// Uyarı divini ekrana eklemek için
                 addStatusElementWithoutForm("alert danger", splitData.message, clearInputs, inputsArray); //callback fonksiyonları çağırılırken içerisine gönderilen veri callback çağırılırken verilir, callback fonksiyonunun adı gönderilirken değil.
+				clearSpecificInput("confirmPass", 0);
             }
         }
         /* readyState durumu 0-1-2-3-4 şeklinde ilerlediğinden else duurumu da readyState 4 olmadan çalışıyor,
@@ -308,21 +344,25 @@ function clearInputs(className, inputsArray) // (inputsArray, className)
 	}
 }
 
-function replaceInputs(className, inputsArray) // (inputsArray, className)
-{
-	let element = document.getElementsByClassName(className);
+function clearSpecificInput(className, index) {
+	document.getElementsByClassName(className)[index].value = "";
+}
 
-	for(let i = 0; i < element.length; i++)
-	{
-		for(let j = 0; j < inputsArray.length; j++)
-		{
-			if(element[i].name == inputsArray[j])
-			{
-				//console.log(element[i], " " ,inputsArray[j]);
-				element[i].value = "";
-			}
+// Belirtilmiş özel karakterleri gönderilen inputtan siler, koruma sağlamak amacıyla yapılmıştır
+function cleanVal(value) { //function cleanVal(value)
+	//let value = "!!+'\nasdart\r"; // örnek input, variable'a girilen \\ ile kullanıcıdan girilen \ aynıdır.
+	const spcChars = ['!','\'','^','+','%','&','/','\\','(',')','{','}','[',']',',','_','-','*','\r','\n']; // '.' ve '@' email için kaldırıldı
+	let getData = value;
+	//getData = getData.replace(/\\/g, '\\\\'); // \ -> - olarak değiştirilecek. /"/g", '\\"' şeklinde kullanımı
+	for(let i = 0; i < getData.length; i++) {
+		if(spcChars.includes(getData.charAt(i))) {
+			console.log(getData.charAt(i), " var");
+			getData = getData.slice(0,i) + getData.slice(i + 1);
+			i--;
 		}
 	}
+
+	return getData;
 }
 
 // editProfile sonu -----------------------------------------------------------------------------------
