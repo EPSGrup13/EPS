@@ -30,3 +30,4 @@ anlayabilmek adına eklenmiştir.
 1030 updateUserProfile fonksiyonunda verileri güncellerken hata.
 1031 basicSelectQueries fonksiyonunda verileri çekerken hata.
 1032 getServerSettings fonksiyonunda verileri çekerken hata.
+1033 renewSession fonksiyonunda session yenilenirken(verileri çekerken) hata.
