@@ -163,6 +163,7 @@ function redirectWithTimer($pageURL)
 }
 
 
+//Kullanıcı giriş yaparken e-mail veya id ikisinden birini kullanarak giriş yapabilir.
 //Kullanıcı giriş bilgilerini doğrular ve session oluşturur.
 function loginControl($getMail, $getPassword)
 {
@@ -1223,9 +1224,9 @@ function updateUserProfile($query, $person_id)
 
 	global $conn;
 
-	$sql = "UPDATE Person SET " .$query. " WHERE person_id='$person_id'";
+	$sql = "UPDATE Person, User SET " .$query. " WHERE Person.person_id='$person_id' AND User.person_id='$person_id'";
 
-	if ($conn->query($sql) === TRUE)
+	if ($conn->query($sql) === TRUE && renewSession($person_id) === TRUE)
 	{
 		$arr = array($array1[0]=>$array2[0], $array1[1]=>"Profiliniz güncellendi");
 	    return json_encode($arr);
@@ -1257,6 +1258,26 @@ function getServerSettings() {
 	{
 		reportErrorLog("getServerSettings fonksiyonunda verileri çekerken sorun oluştu.", 1032);
 		return "Park Detayları bulunamadı.";
+	}
+}
+
+
+function renewSession($person_id) {
+	global $conn;
+
+	$sql = "SELECT firstName, lastName, email FROM Person WHERE person_id = '$person_id'";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0) {
+		while($row = $result->fetch_assoc()) {
+			//session_start(); var olan session değerleri değiştiriliyor sadece.
+			$_SESSION["firstName"] = $row["firstName"];
+			$_SESSION["lastName"] = $row["lastName"];
+			$_SESSION["email"] = $row["email"];
+		}
+		return true;
+	} else {
+		reportErrorLog("renewSession fonksiyonunda session yenilenirken sorun oluştu", 1033);
+		return false;
 	}
 }
 
