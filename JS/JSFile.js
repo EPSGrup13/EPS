@@ -34,9 +34,8 @@ function registration()
                 }
             }
         }
-        //xmlHttp.open("post", "registrationTest.php");
-        //xmlHttp.open("post", "registrationTest");
         xmlHttp.open("post", "registrationControl");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
+        //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/registrationControl");
         xmlHttp.send(formData);
 }
 
@@ -311,7 +310,7 @@ function sendProfileData(data, inputsArray, callback) //callback içinde callbac
             {
             	// Uyarı divini ekrana eklemek için
                 addStatusElementWithoutForm("alert danger", splitData.message, clearInputs, inputsArray); //callback fonksiyonları çağırılırken içerisine gönderilen veri callback çağırılırken verilir, callback fonksiyonunun adı gönderilirken değil.
-				clearSpecificInput("confirmPass", 0);
+				clearSpecificInput("confirmPass", 0); // confirmPass kısmı
             }
         }
         /* readyState durumu 0-1-2-3-4 şeklinde ilerlediğinden else duurumu da readyState 4 olmadan çalışıyor,
@@ -351,12 +350,11 @@ function clearSpecificInput(className, index) {
 // Belirtilmiş özel karakterleri gönderilen inputtan siler, koruma sağlamak amacıyla yapılmıştır
 function cleanVal(value) { //function cleanVal(value)
 	//let value = "!!+'\nasdart\r"; // örnek input, variable'a girilen \\ ile kullanıcıdan girilen \ aynıdır.
-	const spcChars = ['!','\'','^','+','%','&','/','\\','(',')','{','}','[',']',',','_','-','*','\r','\n']; // '.' ve '@' email için kaldırıldı
+	const spcChars = ['!','\'','^','+','%','&','#','$','|','~',':',';','=','/','\\','(',')','{','}','[',']',',','_','-','*','<','>','\r','\n']; // '.' ve '@' email için kaldırıldı
 	let getData = value;
-	//getData = getData.replace(/\\/g, '\\\\'); // \ -> - olarak değiştirilecek. /"/g", '\\"' şeklinde kullanımı
+	//getData = getData.replace(/\\/g, '\\\\'); // /"/g", '\\"' şeklinde kullanımı (" -> \\" şeklinde değiştiriliyor)
 	for(let i = 0; i < getData.length; i++) {
 		if(spcChars.includes(getData.charAt(i))) {
-			console.log(getData.charAt(i), " var");
 			getData = getData.slice(0,i) + getData.slice(i + 1);
 			i--;
 		}
@@ -366,6 +364,30 @@ function cleanVal(value) { //function cleanVal(value)
 }
 
 // editProfile sonu -----------------------------------------------------------------------------------
+
+// lostPassword başlangıcı
+function generateToken() {
+	const emailInput = document.getElementsByClassName("lostPwi")[0].name;
+    var formData = new FormData();
+    formData.append(emailInput.name, emailInput.value);
+    var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+            if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                //console.log(xmlHttp.responseText); //output test
+                let splitData = JSON.parse(xmlHttp.responseText); // Gelen JSON verisi ayrıştırılıyor.
+                if(splitData.status === "success") {
+
+                } else {
+
+                }
+            }
+        }
+        xmlHttp.open("post", "password/reset");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
+        //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/lp-generate");
+        xmlHttp.send(formData);
+}
+
+// lostPassword sonu
 
 function darkMode()
 {
