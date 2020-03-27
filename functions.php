@@ -997,13 +997,15 @@ function reportList($person_id)
 {
 	$timezone=0;
 	date_default_timezone_set('Europe/Istanbul');
-	$spcDate = date("Y-m-d"); //date("d.m.Y");
+	$currentMonth = date("m");
+	$currentYear = date("Y");
 
 	$list = array();
 
 	global $conn;
 
-	$sql = "SELECT parkStatus.recDate FROM parkStatus INNER JOIN Park ON Park.park_id = parkStatus.park_id INNER JOIN Person ON Park.person_id = Person.person_id WHERE Park.person_id = '$person_id' ORDER BY parkStatus.recDate DESC";
+	//SELECT recDate FROM parkStatus WHERE MONTH(recDate) = 03 AND YEAR(recDate) = 2020 ORDER BY DAY(recDate) DESC;
+	$sql = "SELECT parkStatus.recDate FROM parkStatus INNER JOIN Park ON Park.park_id = parkStatus.park_id INNER JOIN Person ON Park.person_id = Person.person_id WHERE Park.person_id = '$person_id' AND MONTH(parkStatus.recDate)='$currentMonth' AND YEAR(parkStatus.recDate)='$currentYear' ORDER BY DAY(parkStatus.recDate) DESC";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0)
 	{
@@ -1279,6 +1281,15 @@ function renewSession($person_id) {
 		reportErrorLog("renewSession fonksiyonunda session yenilenirken sorun oluştu", 1033);
 		return false;
 	}
+}
+
+function generateTokenid() {
+	$token_id = "";
+	for($i = 0; $i < 60; $i++) {
+		$token_id = $token_id. "" .strval(rand(1,9));
+	}
+
+	return $token_id;
 }
 
 
