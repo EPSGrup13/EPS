@@ -23,7 +23,7 @@
 	        	<?php echo "<a href=\"".getLink("registration")."\" style=\"text-decoration: none; color: white;\" class=\"b-type-link\">Kayıt Ol</a>";?>
 	        </div>
 			<div style="text-align: center;">
-				<a style="text-decoration: none;color: white;font-size: 15px;" href="javascript:void(0)">Şifremi Unuttum!</a>
+				<a style="text-decoration: none;color: white;font-size: 15px;" href="<?php echo isDevelopmentModeOn(); ?>password/reset">Şifremi Unuttum!</a>
 			</div>
 	    </form>
 
