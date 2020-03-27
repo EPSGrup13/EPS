@@ -30,7 +30,7 @@
 	   	<br>
 		<?php echo "İsim Soyisim: <input type=\"text\" name=\"fullName\" class=\"profileInput\" placeholder=\"" .$firstName. " " .$lastName. "\">"; ?>
 		<br> Şifre: <input type="password" name="pass" class="profileInput" placeholder="****">
-		<br>Şifre Tekrar: <input type="password" class="confirmPass" placeholder="****">
+		<br> Şifre Tekrar: <input type="password" class="confirmPass" placeholder="****">
 	</div>
 
 

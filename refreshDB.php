@@ -1,6 +1,8 @@
 <?php
 	include 'functions.php';
-
+	/* İşlem server saatine göre 14:00:00 de yapılıyor. TR saati ile 00:00:00.
+	* -0 14 * * *-
+	*/
 	$timezone=0;
 	date_default_timezone_set('Europe/Istanbul');
 	$get_time = date("Y-m-d");

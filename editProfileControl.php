@@ -68,7 +68,7 @@ if(isset($_SESSION["person_id"]))
 			}
 	}
 
-	$queryMaker = substr($queryMaker, 0, strlen($queryMaker)-2);
+	$queryMaker = substr($queryMaker, 0, strlen($queryMaker)-2); //sondaki , ve 1space siliniyor.
 	//echo "query: " .$queryMaker;
 
 	echo updateUserProfile($queryMaker, $_SESSION["person_id"]);
