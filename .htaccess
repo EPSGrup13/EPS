@@ -17,5 +17,6 @@ RewriteRule ^parkdetayi$ parkDetails.php [L,QSA]
 RewriteRule ^parkdetayi/([0-9a-zA-Z-_]+)$ records.php?date=$1 [L,QSA]
 RewriteRule ^settings/profile/edit$ editProfile.php [L,QSA]
 RewriteRule ^settings/profile/save$ editProfileControl.php [L,QSA]
+RewriteRule ^password/reset$ lostPassword.php [L,QSA]
 
 ErrorDocument 404 /404.php
