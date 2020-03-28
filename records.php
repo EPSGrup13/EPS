@@ -13,10 +13,9 @@
 
 <div class="content">
 
-
-
-
 <?php
+echo "<div class=\"parkRecordsBox\">";
+echo "<div class=\"parkRecordsBoxInfo\">";
 //$details = array();
 $details = parkHistory($_SESSION["person_id"], $getDate);
 
@@ -33,7 +32,9 @@ if(is_array($details))
 	echo $details[count($details) - 1];
 	unset($details[count($details) - 1]);
 	echo "<br>Tarih: " .reArrangeDate($recDate). "<br><br>";
+	echo "</div>";
 
+	echo "<div class=\"parkRecordsBoxResults\">";
 	$personDetails = array();
 
 	for($i = 0; $i < count($details); $i++)
@@ -61,12 +62,14 @@ if(is_array($details))
 			}
 		}
 	}
+	echo "</div>";
 }
 else
 {
 	echo $details;
 }
 
+echo "</div>";
 ?>
 
 
