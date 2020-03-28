@@ -367,22 +367,23 @@ function cleanVal(value) { //function cleanVal(value)
 
 // lostPassword başlangıcı
 function generateToken() {
-	const emailInput = document.getElementsByClassName("lostPwi")[0].name;
+	const emailInput = document.getElementsByClassName("lostPwi")[0];
     var formData = new FormData();
-    formData.append(emailInput.name, emailInput.value);
+    formData.append(emailInput.name, cleanVal(emailInput.value));
     var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function() {
             if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
                 //console.log(xmlHttp.responseText); //output test
                 let splitData = JSON.parse(xmlHttp.responseText); // Gelen JSON verisi ayrıştırılıyor.
                 if(splitData.status === "success") {
-
+                    displayWarning("alert success", splitData.message);
+                    clearSpecificInput("lostPwi", 0);
                 } else {
-
+                    displayWarning("alert danger", splitData.message);
                 }
             }
         }
-        xmlHttp.open("post", "password/reset");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
+        xmlHttp.open("post", "lp-generate");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
         //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/lp-generate");
         xmlHttp.send(formData);
 }

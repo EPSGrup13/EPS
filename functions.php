@@ -312,7 +312,6 @@ function userRegistration($getUserName, $getPassword, $getEmail, $getFirstName, 
 		$result2 = $conn->query($sql02);
 		if ($result2->num_rows > 0) //Eğer öyle bir kullanıcı adı var ise kullanıcı kaydı oluşturtma
 		{
-
 			$arr = array($array1[0]=>$array2[1], $array1[1]=>$array3[1]);
 		    return json_encode($arr);
 		}
@@ -323,7 +322,6 @@ function userRegistration($getUserName, $getPassword, $getEmail, $getFirstName, 
 
 			if ($conn->query($sql1) === TRUE && $conn->query($sql2) === TRUE)
 			{
-
     			$arr = array($array1[0]=>$array2[0], $array1[1]=>$array3[2]);
 			    return json_encode($arr);
 
@@ -1215,7 +1213,6 @@ function personCity($person_id)
 
 function updateUserProfile($query, $person_id)
 {
-
 	$array1 = array();
 	array_push($array1, "status");
 	array_push($array1, "message");
@@ -1283,7 +1280,7 @@ function renewSession($person_id) {
 	}
 }
 
-function generateTokenid() {
+function generateToken() {
 	$token_id = "";
 	for($i = 0; $i < 60; $i++) {
 		$token_id = $token_id. "" .strval(rand(1,9));
@@ -1293,6 +1290,116 @@ function generateTokenid() {
 }
 
 
+function sendToken($email) {
+	$array1 = array();
+	array_push($array1, "status");
+	array_push($array1, "message");
+
+	$array2 = array();
+	array_push($array2,"success");
+	array_push($array2,"failed");
+
+	global $conn;
+
+	$getEmail = $conn->real_escape_string($_POST["email"]); // data js tarafından temizlenerek gelse de yine de escape string ile kontrol edilecek.
+	$token = generateToken();
+	$timezone=0;
+	date_default_timezone_set('Europe/Istanbul');
+	$spcDate = date("Y-m-d");
+	$spcTime = date("H:i:sa"); // 24 saat dilimi ile girilip 12saat dilimi olarak çekilecek.
+	$baseURL = "http://epark.sinemakulup.com/";
+	$devURL = "http://epark.sinemakulup.com/external/tkeskin/lp-validate";
+
+	$sql1 = "SELECT email FROM Person WHERE email='$getEmail'";
+	$result1 = $conn->query($sql1);
+	if ($result1->num_rows > 0) { // eğer böyle bir email sistemde kayıtlı ise
+		$sql2 = "INSERT INTO Tokens (email, token, tokenDate, tokenTime) VALUES ('$getEmail', '$token', '$spcDate', '$spcTime')";
+		if ($conn->query($sql2) === TRUE) {
+
+			$to = $email;
+			$subject = "Şifre Değiştirme Talebi";
+			$message = "
+				<html>
+				<head>
+					<meta charset=\"UTF-8\">
+					<title>Şifre Değiştirme Talebi</title>
+					<style>
+					</style>
+				</head>
+			<body>
+				<center>
+				<br><br>
+				<p> ".reArrangeDate($spcDate)." tarihinde şifrenizin değiştirilmesi için talep oluşturuldu.
+					<br>
+					Şifrenizi değiştirebilmeniz için linkiniz: " .$devURL. "?token=" .$token.
+					"<br><br>
+					Eğer bu mail sizin tarafınızdan gönderilmedi ise aşağıdaki linke tıklayınız.
+					<br>
+					<link daha belirtilmedi>
+				</p>
+				</center>
+			</body>
+			</html>
+			";
+
+			// HTML email için content-type
+			$headers = "MIME-Version: 1.0" . "\r\n"; 
+			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+			$headers .= "From: Admin ePark <admin@epark.com>" . "\r\n";
+
+			if(mail($to, $subject, $message, $headers)) { 
+				$arr = array($array1[0]=>$array2[0], $array1[1]=>"Link eposta adresinize gönderildi.");
+			    return json_encode($arr);
+			} else {
+				reportErrorLog("sendToken fonksiyonunda kişiye email gönderilirken sorun oluştu.", 1034);
+				$arr = array($array1[0]=>$array2[1], $array1[1]=>"Link eposta adresinize gönderilirken sorun oluştu.");
+		    	return json_encode($arr);
+			}
+		} else {
+			reportErrorLog("sendToken fonksiyonunda kişiye token oluşturulurken sorun oluştu.", 1036);
+
+			$arr = array($array1[0]=>$array2[1], $array1[1]=>"Link eposta adresinize gönderilirken sorun oluştu.");
+		    return json_encode($arr);
+		}
+	} else {
+		reportErrorLog("sendToken fonksiyonunda kişinin girdiği email db'de bulunamadı veya çekilemedi - bu kontrol geçici olabilir.", 1035);
+		$arr = array($array1[0]=>$array2[1], $array1[1]=>"Sistemde girilen email'e ait kayıt bulunamadı.");
+	    return json_encode($arr);
+	}
+}
+
+function tokenValidation($token) {
+	$timezone=0;
+	date_default_timezone_set('Europe/Istanbul');
+	$spcDate = date("Y-m-d");
+	$spcTime = date("h:i:sa");
+
+	global $conn;
+
+	$sql = "SELECT email, token, tokenDate, TIME_FORMAT(tokenTime, '%r') as tokenTime, is_valid FROM Tokens WHERE token='$token'";
+
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0)
+	{
+		while($row = $result->fetch_assoc())
+		{
+			echo "
+			" .$row["email"]. "
+			<br>" .$row["token"]. "
+			<br>" .$row["tokenDate"]. "
+			<br>" .$row["tokenTime"]. "
+			<br>" .$row["isValid"]. "
+			";
+		}
+	}
+	else
+	{
+		echo "Verileri çekerken sorun oluştu.";
+		reportErrorLog("tokenValidation fonksiyonunda aranan token bulunamadı veya hiç bulunmamakta.", 1037);
+	}
+	//#$conn->close();
+}
 
 
 

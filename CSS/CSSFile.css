@@ -994,9 +994,9 @@ nav li a:hover
   border-radius: 5px;
   transition: border-color .8s ease-out;
   max-height: 160px;
+  min-height: 160px;
   max-width: 384px;
   min-width: 384px;
-  min-height: 160px;
 }
 
 
