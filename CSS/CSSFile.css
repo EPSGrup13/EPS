@@ -996,6 +996,7 @@ nav li a:hover
   max-height: 160px;
   max-width: 384px;
   min-width: 384px;
+  min-height: 160px;
 }
 
 
