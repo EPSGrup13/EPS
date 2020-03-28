@@ -31,3 +31,7 @@ anlayabilmek adına eklenmiştir.
 1031 basicSelectQueries fonksiyonunda verileri çekerken hata.
 1032 getServerSettings fonksiyonunda verileri çekerken hata.
 1033 renewSession fonksiyonunda session yenilenirken(verileri çekerken) hata.
+1034 sendToken fonksiyonunda email gönderilirken hata.
+1035 sendToken fonksiyonunda kişinin girdiği email veritabanında bulunamadı veya çekilemedi. (bu kontrol geçici olabilir)
+1036 sendToken fonksiyonunda kişiye token oluşturulup veritabanına girilirken hata.
+1037 tokenValidation fonksiyonunda token çekerken hata. (hiç bulunmuyor da olabilir)
