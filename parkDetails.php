@@ -4,6 +4,10 @@
 	getHeader();
 	pageProtection();
 	isParkOwner();
+
+	$list = reportList($_SESSION["person_id"]);
+	$parkName = $list[count($list) - 1];
+	unset($list[count($list) - 1]);
 ?>
 
 <div class="content">
@@ -11,27 +15,33 @@
 <div class="parkDetailsBox">
 
 <?php
-//$list = array();
-$list = reportList($_SESSION["person_id"]);
-
 if(is_array($list))
 {
-	for($i = 0; $i < count($list); $i++)
-	{
-		echo "<div class=\"parkDetailsPartialBox\"><p class=\"parkDetailsBoxText\">
-		<img src=\"https://i.hizliresim.com/xHSA5o.png\" class=\"parkDetailsImg\">
-		<a href=\"".isDevelopmentModeOn()."parkdetayi/".$list[$i]. "\">". reArrangeDate($list[$i])."</a> Tarihli Raporu</p></div>";
-	}
+	echo "<div style=\"text-align:center; padding: 5px 0px 5px 0px;\"> Park Adı: " .$parkName. "</div>";
+	echo "<div class=pd-date>";
+		for($i = 0; $i < count($list); $i++)
+		{
+			echo "<div class=\"parkDetailsPartialBox\"><p class=\"parkDetailsBoxText\">
+			<img src=\"" .isDevelopmentModeOn(). "images/info-icon.png\" class=\"parkDetailsImg\">
+			<a href=\"".isDevelopmentModeOn()."parkdetayi/".$list[$i]. "\">". reArrangeDate($list[$i])."</a> Tarihli Raporu</p></div>";
+		}
+	echo "</div>";
 }
 else
 {
 	echo $list;
 }
 
-echo "<div class=\"pagination\" style=\"margin-top:10px;margin-left:25px;\"><a href=\"#\">«</a>
-	<a href=\"#\" class=\"active\">1</a>
-    <a href=\"#\">2</a><a href=\"#\">3</a><a href=\"#\">4</a><a href=\"#\">5</a><a href=\"#\">6</a>
-    <a href=\"#\">»</a></div>";
+    echo "<div class=\"pagination\">
+    <a href=\"javascript:void(0)\">«</a>
+    <a href=\"javascript:void(0)\" class=\"active\">1</a>
+    <a href=\"javascript:void(0)\">2</a>
+    <a href=\"javascript:void(0)\">3</a>
+    <a href=\"javascript:void(0)\">4</a>
+    <a href=\"javascript:void(0)\">5</a>
+    <a href=\"javascript:void(0)\">6</a>
+    <a href=\"javascript:void(0)\">»</a>
+    </div>";
 ?>
 
 </div>

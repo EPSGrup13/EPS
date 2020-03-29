@@ -29,7 +29,7 @@ if(is_array($details))
 	$recDate = $details[count($details) - 1];
 	unset($details[count($details) - 1]);
 
-	echo $details[count($details) - 1];
+	echo $details[count($details) - 1]; // park adı.
 	unset($details[count($details) - 1]);
 	echo "<br>Tarih: " .reArrangeDate($recDate). "<br><br>";
 	echo "</div>";
