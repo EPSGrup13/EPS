@@ -258,6 +258,12 @@ function destroyUserSession()
 	redirectTo("cities");
 }
 
+// Redirect yapmadan session sonlandırır.
+function endSession() {
+	session_unset();
+	session_destroy();
+}
+
 function userAuth()
 {
 	if(getUserLevel() != 2) {
@@ -846,11 +852,11 @@ function returnCarImg($parkStatus)
 {
 	if($parkStatus === "BOŞ")
 	{
-		return "<img src=\"" .isDevelopmentModeOn(). "/images/car-green.png\" class=\"parkReservationCarImg\">";
+		return "<img src=\"" .isDevelopmentModeOn(). "images/car-green.png\" class=\"parkReservationCarImg\">";
 	}
 	else
 	{
-		return "<img src=\"" .isDevelopmentModeOn(). "/images/car-red.png\" class=\"parkReservationCarImg\">";
+		return "<img src=\"" .isDevelopmentModeOn(). "images/car-red.png\" class=\"parkReservationCarImg\">";
 	}
 }
 
@@ -1011,6 +1017,18 @@ function reportList($person_id)
 		{
 			$list = array_merge($list, array($row["recDate"]));
 		}
+
+		$sql2 = "SELECT Slug.slug_title FROM Park INNER JOIN Slug ON Park.slug_id = Slug.slug_id WHERE person_id = '$person_id'";
+		$result2 = $conn->query($sql2);
+		if ($result2->num_rows > 0) {
+			while($row = $result2->fetch_assoc()) {
+				$list = array_merge($list, array($row["slug_title"]));
+			}
+		} else {
+			reportErrorLog("reportList fonksiyonunda park adını çekerken sorun oluştu.", 1038);
+			return "Park Adı Bulunamadı.";
+		}
+
 		return $list;
 	}
 	else
@@ -1307,8 +1325,10 @@ function sendToken($email) {
 	date_default_timezone_set('Europe/Istanbul');
 	$spcDate = date("Y-m-d");
 	$spcTime = date("H:i:sa"); // 24 saat dilimi ile girilip 12saat dilimi olarak çekilecek.
-	$baseURL = "http://epark.sinemakulup.com/";
-	$devURL = "http://epark.sinemakulup.com/external/tkeskin/lp-validate";
+	//$baseURL = "http://epark.sinemakulup.com/";
+	//$devURL = "http://epark.sinemakulup.com/external/tkeskin/lp-validate";
+	$baseURL = "http://epark.sinemakulup.com/password/change/token=";
+	$devURL = "http://epark.sinemakulup.com/external/tkeskin/password/change/token=";
 
 	$sql1 = "SELECT email FROM Person WHERE email='$getEmail'";
 	$result1 = $conn->query($sql1);
@@ -1376,29 +1396,43 @@ function tokenValidation($token) {
 	$spcTime = date("h:i:sa");
 
 	global $conn;
+	$dataArray = Array();
 
 	$sql = "SELECT email, token, tokenDate, TIME_FORMAT(tokenTime, '%r') as tokenTime, is_valid FROM Tokens WHERE token='$token'";
 
 	$result = $conn->query($sql);
-	if ($result->num_rows > 0)
-	{
-		while($row = $result->fetch_assoc())
-		{
-			echo "
-			" .$row["email"]. "
-			<br>" .$row["token"]. "
-			<br>" .$row["tokenDate"]. "
-			<br>" .$row["tokenTime"]. "
-			<br>" .$row["isValid"]. "
-			";
+	if ($result->num_rows > 0) {
+		while($row = $result->fetch_assoc()) {
+			if((int)$row["is_valid"] === 1) {
+				array_push($dataArray, $row["token_id"], $row["token"], $row["tokenDate"], $row["tokenTime"], $row["is_valid"]);
+
+				session_start(); // lp-validate'e aktarılacak veri için session oluşturuluyor, daha sonra şifre değiştirildiğinde session yeniden kapatılacak.
+				$_SESSION["token_id"] = $row["token_id"];
+
+				return $dataArray;
+			} else {
+				return "Link uzun süre kullanılamadığından dolayı silinmiş görünüyor!";
+			}
 		}
-	}
-	else
-	{
-		echo "Verileri çekerken sorun oluştu.";
+	} else {
 		reportErrorLog("tokenValidation fonksiyonunda aranan token bulunamadı veya hiç bulunmamakta.", 1037);
+		return "Hata oluştu.";
 	}
-	//#$conn->close();
+}
+
+function tokenSession($token_id, $token, $tokenDate, $tokenTime, $is_valid) {
+	global $conn;
+
+	$sql = "UPDATE Tokens SET is_valid=0 WHERE token_id='$token_id'";
+
+	if ($conn->query($sql) === TRUE) {
+
+	} else {
+
+	}
+
+
+
 }
 
 
