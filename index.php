@@ -76,7 +76,7 @@
                             </span></h1>
                         <p class="p-aciklama">E-Park mobil uygulaması her yerde rahatça ve kolayca park yeri
                             bulabilmeniz için geliştirildi.</p>
-                        <a class="buton" href="---------------.ipa"><i class="fab fa-apple"></i> İos da mevcut değil</a>
+                        <a class="buton" href="---------------.ipa"><i class="fab fa-apple"></i> App Store'da mevcut değil</a>
                         <a class="buton" href="---------------.apk"><i class="fab fa-google-play"></i> Google
                             Play İndirin</a>
                     </div>
@@ -229,7 +229,7 @@
                                 <ul>
                                     <li><a href="javascript:void(0)">Şartlar ve Koşullar</a></li>
                                     <li><a href="javascript:void(0)">Hakkımızda</a></li>
-                                    <li><a href="javascript:void(0)">Gizlilik Politikası</a></li>
+                                    <li><a href="<?php echo isDevelopmentModeOn();?>gizlilik-politikasi.php">Gizlilik Politikası</a></li>
                                     <li><a href="javascript:void(0)">S.S.S</a></li>
                                     <li><a href="javascript:void(0)">İndir</a></li>
                                 </ul>
@@ -272,5 +272,4 @@
     </script>
     
 </body>
-
 </html>
