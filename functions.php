@@ -1392,13 +1392,11 @@ function sendToken($email) {
 function tokenValidation($token) {
 	$timezone=0;
 	date_default_timezone_set('Europe/Istanbul');
-	$spcDate = date("Y-m-d");
-	$spcTime = date("h:i:sa");
 
 	global $conn;
 	$dataArray = Array();
 
-	$sql = "SELECT email, token, tokenDate, TIME_FORMAT(tokenTime, '%r') as tokenTime, is_valid FROM Tokens WHERE token='$token'";
+	$sql = "SELECT token_id, email, token, tokenDate, TIME_FORMAT(tokenTime, '%r') as tokenTime, is_valid FROM Tokens WHERE token='$token'";
 
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) {
@@ -1406,33 +1404,113 @@ function tokenValidation($token) {
 			if((int)$row["is_valid"] === 1) {
 				array_push($dataArray, $row["token_id"], $row["token"], $row["tokenDate"], $row["tokenTime"], $row["is_valid"]);
 
-				session_start(); // lp-validate'e aktarılacak veri için session oluşturuluyor, daha sonra şifre değiştirildiğinde session yeniden kapatılacak.
-				$_SESSION["token_id"] = $row["token_id"];
-
 				return $dataArray;
 			} else {
-				return "Link uzun süre kullanılamadığından dolayı silinmiş görünüyor!";
+				return "Link uzun süre kullanılmadığından dolayı silinmiş görünüyor!";
 			}
 		}
 	} else {
 		reportErrorLog("tokenValidation fonksiyonunda aranan token bulunamadı veya hiç bulunmamakta.", 1037);
-		return "Hata oluştu.";
+		return "Böyle bir link bulunmamakta.";
 	}
 }
 
-function tokenSession($token_id, $token, $tokenDate, $tokenTime, $is_valid) {
+function tokenSession($tokenDate, $tokenTime) {
+	$timezone=0;
+	date_default_timezone_set('Europe/Istanbul');
+	$today = date("Y-m-d");
+	$now = strtoupper(date("h:i:s a")); // sondaki 12 saat dilimi için AM/PM büyük gösterilmesi için strtoupper kullanıldı.
+
+	//echo "<br><br>Şuan: " .$now. "<br>Token zamanı: " .$tokenTime;
+
+	// Mevcut zaman için yapılan zaman işlemi.
+	$nowExt = substr($now, strlen($now) - 2, 2); // AM/PM çekiliyor.
+	$now = substr($now, 0, strlen($now) - 3); // Sondaki AM/PM siliniyor.
+
+	// hh:mm:ss formatında kalan ham zaman
+	//print_r(explode(":", $now));
+	$nowArray = explode(":", $now); // zaman : dan ayrılıyor.
+	$nowSec = $nowArray[2]; // saniye ayrıştırılıyor.
+	$nowMin = $nowArray[1]; // dakika ayrıştırılıyor.
+	$nowH = $nowArray[0]; // saat ayrıştırılıyor.
+
+	$nDay = date("d"); // mevcut gün
+	$nMon = date("m"); // mevcut ay
+	$nY = date("Y"); // mevcut yıl
+
+
+	// Token için yapılan zaman işlemi
+	$tokenExt = substr($tokenTime, strlen($tokenTime) - 2, 2); // AM/PM çekiliyor.
+	$tokenTime = substr($tokenTime, 0, strlen($tokenTime) - 3); // Sondaki AM/PM siliniyor.
+
+	// hh:mm:ss formatında kalan ham zaman
+	//print_r(explode(":", $tokenTime));
+	$tokenArray = explode(":", $tokenTime); // zaman : dan ayrılıyor.
+	$tokenSec = $tokenArray[2]; // saniye ayrıştırılıyor.
+	$tokenMin = $tokenArray[1]; // dakika ayrıştırılıyor.
+	$tokenH = $tokenArray[0]; // saat ayrıştırılıyor.
+
+	$tokenDateArray = explode("-", $tokenDate);
+	$tDay = $tokenDateArray[2]; // token'ın oluşturulduğu gün
+	$tMon = $tokenDateArray[1]; // token'ın oluşturulduğu ay
+	$tY = $tokenDateArray[0]; // token'ın oluşturulduğu yıl.
+
+
+
+	/*echo "<br><br>Şuan:<br>" .$nowH. "<br>" .$nowMin. "<br>" .$nowSec. "<br>" .$nowExt. "<hr>" .$nDay. "<br>" .$nMon. "<br>" .$nY;
+	echo "<br><br>Token:<br>" .$tokenH. "<br>" .$tokenMin. "<br>" .$tokenSec. "<br>" .$tokenExt. "<hr>" .$tDay. "<br>" .$tMon. "<br>" .$tY;*/
+
+
+	//echo "<br><br><br><br>";
+	$nowSum = ($nMon * 30 * 24 * 60) + ($nDay * 24 * 60) + ($nowH * 60) + $nowMin;
+	$tokenSum = ($tMon * 30 * 24 * 60) + ($tDay * 24 * 60)+ ($tokenH * 60) + $tokenMin;
+	//echo "Şuan: " .$nowSum. "<br>";
+	//echo "Token: " .$tokenSum;
+
+	// aynı yıl içerisinde mi diye kontrol ediliyor.
+	if($nY === $tY) {
+		if(!($nowSum < $tokenSum) && ($nowSum > $tokenSum && $nowSum < ($tokenSum + 16))) {
+			return true; // 15dk içerisinde ise.
+		} else {
+			return false; // 15dk içerisinde değil ise.
+		}
+	} else {
+		return false; //aynı yıl içerisinde olmuyor ise
+		/* yaşanabilecek tek sorun yılın son gününde ve son 15dk içerisinde yapılabilecek bir şifre değiştirme talebinde, yeni yıla girilmesi durumunda linki deaktif olacak. */
+	}
+}
+
+function updatePass($sessionTokenId, $password) {
+	$array1 = array();
+	array_push($array1, "status");
+	array_push($array1, "message");
+
+	$array2 = array();
+	array_push($array2,"success");
+	array_push($array2,"failed");
+
+	$password = convertPassToMD5($password);
 	global $conn;
 
-	$sql = "UPDATE Tokens SET is_valid=0 WHERE token_id='$token_id'";
-
-	if ($conn->query($sql) === TRUE) {
-
+	$sql1 = "UPDATE Tokens SET is_valid=0 WHERE token_id='$sessionTokenId'";
+	if($conn->query($sql1) === TRUE) {
+		$sql2 = "UPDATE User INNER JOIN Person ON User.person_id = Person.person_id SET User.userPassword='$password' WHERE Person.email=(SELECT email FROM Tokens WHERE token_id='$sessionTokenId')";
+		if ($conn->query($sql2) === TRUE) {
+			endSession();
+			$arr = array($array1[0]=>$array2[0], $array1[1]=>"Şifreniz Güncellendi");
+		    return json_encode($arr);
+		} else {
+			reportErrorLog("updatePass fonksiyonunda şifre güncellenirken hata oluştu.", 1040);
+			endSession(); //token session'ı sonlandırılıyor.
+			$arr = array($array1[0]=>$array2[1], $array1[1]=>"Şifre güncellenirken sorun oluştu");
+	    	return json_encode($arr);
+		}
 	} else {
-
+		reportErrorLog("updatePass fonksiyonunda is_valid 0 yapılırken hata oluştu.", 1039);
+		endSession(); //token session'ı sonlandırılıyor.
+		$arr = array($array1[0]=>$array2[1], $array1[1]=>"Şifre güncellenirken sorun oluştu");
+		return json_encode($arr);
 	}
-
-
-
 }
 
 

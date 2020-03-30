@@ -12,16 +12,12 @@
 	$arrayZ = array();
 	array_push($arrayZ,"Verileri gönderirken sorun oluştu");
 
-	if(isset($_POST["email"])) {
-		if(isSessionActive()) {
-			endSession();
-			echo sendToken($_POST["email"]);
-		} else
-			echo sendToken($_POST["email"]);
+	if(isset($_POST["password"]) && isset($_SESSION["token_id"])) {
+		echo updatePass($_SESSION["token_id"], $_POST["password"]);
 	} else {
 		$arr = array($arrayX[0]=>$arrayY[0], $arrayX[1]=>$arrayZ[0]);
 		echo json_encode($arr);
 	}
-	
+
 	closeConn();
 ?>

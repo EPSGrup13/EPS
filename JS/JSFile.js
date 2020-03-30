@@ -8,7 +8,7 @@ function registration()
     {
     	// Kullanıcı kayıt olurken şifresinde escape string olmayacak böylece özel karakterleri şifrede kullanabilecek.
     	if(elements[i].name === "password") {
-	        formData.append(elements[i].name, elements[i].value);
+	        formData.append(elements[i].name, rmSpace(elements[i].value)); // rmSpace şifrede boşluk girilirse onu kaldırır
     	} else
     		formData.append(elements[i].name, cleanVal(elements[i].value));
         //console.log("name: "+ elements[i].name + ", val: " + elements[i].value); //output test
@@ -219,7 +219,7 @@ function getInputValues(callback)
 			}
 		} else if((getInputs[i].name === "pass" && getInputs[i].value !== "") || (getInputs[i].name === "pass" && document.getElementsByClassName("confirmPass")[0].value !== "")) {
 			if(document.getElementsByClassName("confirmPass")[0].value === getInputs[i].value) {
-				formData.append(getInputs[i].name, getInputs[i].value); // password için özel karakterler silinmeyecek.
+				formData.append(getInputs[i].name, rmSpace(getInputs[i].value)); // password için özel karakterler silinmeyecek. Sadece boşluk var ise onlar kaldırılacak
 
 				inputName.push(getInputs[i].name); // veri girilmiş olan inputun name'i kaydedilip daha sonra o input temizlenecek
 				dataCounter++;
@@ -386,6 +386,82 @@ function generateToken() {
         xmlHttp.open("post", "lp-generate");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
         //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/lp-generate");
         xmlHttp.send(formData);
+}
+
+function updatePass() {
+	updateProcess();
+}
+
+function updateProcess() {
+	let counter = 0;
+	const parentNode = document.getElementById("lp-val"); //class'da children veya childNodes alamıyor, o yüzden id kullanıldı
+	const pnChildren = parentNode.children; //childNodes tüm elementleri vereceğinden sadece div ve butonlar istendiğinden children kullanıldı
+	for(let i = 0; i < pnChildren.length - 1; i++) { // buton hariç
+		//console.log(pnChildren[i].children[0]);
+		if(pnChildren[i].children[0].value.length < 1) { // button hariç
+			if(pnChildren[i].children.length === 1) {
+				const mkElement = document.createElement("span");
+				mkElement.className = "mArea";
+				const mkChild = document.createTextNode("Bu alanı boş bırakamassınız");
+				mkElement.appendChild(mkChild);
+
+				pnChildren[i].appendChild(mkElement);
+				pnChildren[i].children[0].style = "border: 1px solid red;";
+			}
+		} else {
+			if(pnChildren[i].children.length !== 1) {
+				pnChildren[i].children[0].removeAttribute("style");
+				pnChildren[i].children[1].remove();
+				counter++;
+			} else {
+				counter++;
+			}
+		}
+	}
+
+	if(counter === 2) {
+		const getOuterDiv = document.getElementById("lp-val");
+		if(rmSpace(getOuterDiv.children[0].firstElementChild.value) === rmSpace(getOuterDiv.children[1].firstElementChild.value)) {
+			sendPassData();
+		} else {
+			displayWarning("alert danger", "Şifre alanları eşit olmalı");
+		}
+	}
+}
+
+function sendPassData() {
+	const pass = document.getElementsByClassName("lp-input")[0];
+    var formData = new FormData();
+    formData.append(pass.name, cleanVal(pass.value));
+    var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+            if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                //console.log(xmlHttp.responseText); //output test
+                let splitData = JSON.parse(xmlHttp.responseText); // Gelen JSON verisi ayrıştırılıyor.
+                if(splitData.status === "success") {
+					displayWarning("alert success", splitData.message);
+					clearSpecificInput("lp-input", 0);
+					clearSpecificInput("lp-input", 1);
+                } else {
+                    displayWarning("alert danger", splitData.message);
+                }
+            }
+        }
+        xmlHttp.open("post", "lp-control");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
+        //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/lp-control");
+        xmlHttp.send(formData);
+}
+
+// Girilen şifrelerde boşluk var ise onu kaldırır
+function rmSpace(password) {
+	for(let i = 0; i < password.length; i++) {
+		if(password.charAt(i) === " ") {
+			password = password.slice(0,i) + password.slice(i + 1);
+			i--;
+		}
+	}
+
+	return password;
 }
 
 // lostPassword sonu
