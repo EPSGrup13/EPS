@@ -36,3 +36,5 @@ anlayabilmek adına eklenmiştir.
 1036 sendToken fonksiyonunda kişiye token oluşturulup veritabanına girilirken hata.
 1037 tokenValidation fonksiyonunda token çekerken hata. (hiç bulunmuyor da olabilir)
 1038 reportList fonksiyonunda park adını çekerken hata.
+1039 updatePass fonksiyonunda is_valid güncellerken hata.
+1040 updatePass fonksiyonunda şifreyi güncellerken hata.
