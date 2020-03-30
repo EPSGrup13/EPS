@@ -229,7 +229,7 @@
                                 <ul>
                                     <li><a href="javascript:void(0)">Şartlar ve Koşullar</a></li>
                                     <li><a href="javascript:void(0)">Hakkımızda</a></li>
-                                    <li><a href="<?php echo isDevelopmentModeOn();?>gizlilik-politikasi.php">Gizlilik Politikası</a></li>
+                                    <li><a href="<?php echo isDevelopmentModeOn();?>gizlilik-politikasi">Gizlilik Politikası</a></li>
                                     <li><a href="javascript:void(0)">S.S.S</a></li>
                                     <li><a href="javascript:void(0)">İndir</a></li>
                                 </ul>

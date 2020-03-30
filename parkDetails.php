@@ -18,7 +18,7 @@
 if(is_array($list))
 {
 	echo "<div style=\"text-align:center; padding: 5px 0px 5px 0px;\"> Park Adı: " .$parkName. "</div>";
-	echo "<div class=pd-date>";
+	echo "<div class=\"pd-date>\"";
 		for($i = 0; $i < count($list); $i++)
 		{
 			echo "<div class=\"parkDetailsPartialBox\"><p class=\"parkDetailsBoxText\">
