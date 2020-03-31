@@ -1,5 +1,5 @@
 <?php
-include 'functions.php';
+include '../include/functions.php';
 session_start();
 
 if(isset($_SESSION["person_id"]))

@@ -1,5 +1,5 @@
 <?php
-	include 'functions.php';
+	include '../functions.php';
 	/* İşlem server saatine göre 14:00:00 de yapılıyor. TR saati ile 00:00:00.
 	* -0 14 * * *-
 	*/

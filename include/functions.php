@@ -1325,8 +1325,6 @@ function sendToken($email) {
 	date_default_timezone_set('Europe/Istanbul');
 	$spcDate = date("Y-m-d");
 	$spcTime = date("H:i:sa"); // 24 saat dilimi ile girilip 12saat dilimi olarak çekilecek.
-	//$baseURL = "http://epark.sinemakulup.com/";
-	//$devURL = "http://epark.sinemakulup.com/external/tkeskin/lp-validate";
 	$baseURL = "http://epark.sinemakulup.com/password/change/token=";
 	$devURL = "http://epark.sinemakulup.com/external/tkeskin/password/change/token=";
 
@@ -1347,17 +1345,15 @@ function sendToken($email) {
 					</style>
 				</head>
 			<body>
-				<center>
 				<br><br>
 				<p> ".reArrangeDate($spcDate)." tarihinde şifrenizin değiştirilmesi için talep oluşturuldu.
-					<br>
-					Şifrenizi değiştirebilmeniz için linkiniz: " .$devURL. "?token=" .$token.
-					"<br><br>
-					Eğer bu mail sizin tarafınızdan gönderilmedi ise aşağıdaki linke tıklayınız.
+					<br><br>
+					Şifrenizi değiştirebilmeniz için linkiniz: " .$baseURL. "" .$token.
+					"<br><br><br><br>
+					Eğer bu mail sizin tarafınızdan gönderilmedi ise <a href=\"javascript:void(0)\">buraya</a> tıklayınız.
 					<br>
 					<link daha belirtilmedi>
 				</p>
-				</center>
 			</body>
 			</html>
 			";
@@ -1366,7 +1362,7 @@ function sendToken($email) {
 			$headers = "MIME-Version: 1.0" . "\r\n"; 
 			$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-			$headers .= "From: Admin ePark <admin@epark.com>" . "\r\n";
+			$headers .= "From: ePark <admin@epark.com>" . "\r\n";
 
 			if(mail($to, $subject, $message, $headers)) { 
 				$arr = array($array1[0]=>$array2[0], $array1[1]=>"Link eposta adresinize gönderildi.");

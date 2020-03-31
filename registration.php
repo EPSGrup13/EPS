@@ -1,6 +1,6 @@
 <?php
 	define('LOADED', TRUE);
-	include 'htmlStart.php';
+	include 'include/htmlStart.php';
 	maintenanceMode(); //header olmadığından ek olarak eklendi.
 	session_start();
 ?>

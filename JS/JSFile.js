@@ -34,8 +34,8 @@ function registration()
                 }
             }
         }
-        xmlHttp.open("post", "registrationControl");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
-        //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/registrationControl");
+        xmlHttp.open("post", "register");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
+        //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/register");
         xmlHttp.send(formData);
 }
 
@@ -321,7 +321,7 @@ function sendProfileData(data, inputsArray, callback) //callback içinde callbac
         }*/
     }
     xmlHttp.open("post", "settings/profile/save"); // ana dizine atıldığında çalıştırılacak, haricinde base href alınıyor hedef olarak.
-    //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/editProfileControl");
+    //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/settings/profile/save");
     xmlHttp.send(data);
 }
 
@@ -383,8 +383,8 @@ function generateToken() {
                 }
             }
         }
-        xmlHttp.open("post", "lp-generate");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
-        //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/lp-generate");
+        xmlHttp.open("post", "lpgen");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
+        //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/lpgen");
         xmlHttp.send(formData);
 }
 
@@ -447,8 +447,8 @@ function sendPassData() {
                 }
             }
         }
-        xmlHttp.open("post", "lp-control");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
-        //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/lp-control");
+        xmlHttp.open("post", "lpcont");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
+        //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/lpcont");
         xmlHttp.send(formData);
 }
 

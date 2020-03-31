@@ -1,6 +1,6 @@
 <?php
 	define('LOADED', TRUE);
-	include 'htmlStart.php';
+	include 'include/htmlStart.php';
 	getHeader();
 	pageProtection();
 
@@ -60,7 +60,7 @@
 	
 	echo "</div>";
 	echo "<div class=\"parkReservationTimeBox\">";
-	echo "<form action=\"".getLink("reservationControl")."\" method=\"post\" class=\"parkReservationTimeForm\">";
+	echo "<form action=\"".getLink("makeReservation")."\" method=\"post\" class=\"parkReservationTimeForm\">";
 ?>
 	<div style="display:flex; justify-content:space-between;">
 	<div style="padding-left:75px;">

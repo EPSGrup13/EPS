@@ -1,5 +1,5 @@
 <?php
-    include_once('functions.php');
+    include_once('include/functions.php');
     session_start();
 ?>
 

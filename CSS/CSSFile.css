@@ -649,7 +649,7 @@ input:checked + .slider:before {
 }
 
 .pd-date {
-  height: 86%;
+  height: 87%;
   display: flex;
   /*justify-content: flex-start;*/
   /*flex-direction: column;*/
@@ -1622,12 +1622,12 @@ footer p
 
 .parkDetailsBox {
   width: 630px;
-  height: 670px;
+  height: 700px;
   position: absolute;
   left: 50%;
   top: 50%;
   margin-left: -325px;
-  margin-top: -330px;
+  margin-top: -350px;
   background-color: rgba(255, 255, 255, 0.685);
   border-radius: 10px;
 

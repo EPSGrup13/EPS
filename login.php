@@ -1,6 +1,6 @@
 <?php
 	define('LOADED', TRUE);
-	include  'htmlStart.php';
+	include 'include/htmlStart.php';
 	maintenanceMode(); //header olmadığından ek olarak eklendi.
 	session_start();
 
@@ -11,7 +11,7 @@
 ?>
 
 
-<?php echo "<form action=\"".getLink("loginControl")."\" method=\"post\">"; ?>
+<?php echo "<form action=\"".getLink("userlogin")."\" method=\"post\">"; ?>
 	<div id="formkapsamgiris">
 	    <img id="formkapsamimggiris" src="https://i.hizliresim.com/gb4jdQ.png"/>
 	    <h3 id="formkapsamhgiris">Kullanıcı Girişi</h3>

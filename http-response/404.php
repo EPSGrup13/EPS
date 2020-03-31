@@ -9,8 +9,8 @@
 </head>
 <body>
 
-Bu sayfa bulunmamaktadır. Geri Yönlendiriliyorsunuz...
-<?php redirectWithTimer("index"); ?>
+Bu sayfa bulunmamaktadır. <!-- Geri Yönlendiriliyorsunuz... -->
+<?php //redirectWithTimer("index"); ?>
 
 </body>
 </html>
