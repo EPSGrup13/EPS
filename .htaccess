@@ -16,9 +16,16 @@ RewriteRule ^settings/profile$ profile.php [L,QSA]
 RewriteRule ^parkdetayi$ parkDetails.php [L,QSA]
 RewriteRule ^parkdetayi/([0-9a-zA-Z-_]+)$ records.php?date=$1 [L,QSA]
 RewriteRule ^settings/profile/edit$ editProfile.php [L,QSA]
-RewriteRule ^settings/profile/save$ editProfileControl.php [L,QSA]
+RewriteRule ^settings/profile/save$ source/editProfileControl.php [L,QSA]
 RewriteRule ^password/reset$ lostPassword.php [L,QSA]
-#RewriteRule ^password/change?token=([0-9a-zA-Z-_]+)$ lp-validate.php?token=$1 [L,QSA]
-RewriteRule ^password/change/token=([0-9a-zA-Z-_]+)$ lp-validate.php?token=$1 [L,QSA]
+#RewriteRule ^password/change?token=([0-9a-zA-Z-_]+)$ source/lp-validate.php?token=$1 [L,QSA]
+RewriteRule ^password/change/token=([0-9a-zA-Z-_]+)$ source/lp-validate.php?token=$1 [L,QSA]
+RewriteRule ^lpgen$ source/lp-generate.php [L,QSA]
+RewriteRule ^lpcont$ source/lp-control.php [L,QSA]
 
-ErrorDocument 404 /404.php
+RewriteRule ^userlogin$ source/loginControl.php [L,QSA]
+RewriteRule ^makeReservation$ source/reservationControl.php [L,QSA]
+RewriteRule ^register$ source/registrationControl.php [L,QSA]
+RewriteRule ^renewdb$ data/refreshDB.php [L,QSA]
+
+ErrorDocument 404 /http-response/404.php
