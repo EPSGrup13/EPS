@@ -11,7 +11,7 @@
 		$dataArray = tokenValidation($_GET["token"]);
 		if(is_array($dataArray)) {
 			//print_r($dataArray); //test output
-			$result = tokenSession($dataArray[2], $dataArray[3]); // tokenDate ve tokenTime gönderiliyor.
+			$result = tokenSession($dataArray[0], $dataArray[2], $dataArray[3]); // tokenDate ve tokenTime gönderiliyor.
 			if($result) {
 				session_start(); // lp-validate'e aktarılacak veri için session oluşturuluyor, daha sonra şifre değiştirildiğinde session yeniden kapatılacak.
 				$_SESSION["token_id"] = $dataArray[0]; // token_id için session oluşturuluyor.

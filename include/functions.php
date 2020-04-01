@@ -837,10 +837,17 @@ function getParkDetails($parkSlugURL)
 //Gönderilmiş olan rezervasyon saati dolu ise onu vurgular.
 function parkDetailCheckBox($parkStatus, $time)
 {
-	//echo $parkStatus." ".$time; //test
+	$timezone=0;
+	date_default_timezone_set('Europe/Istanbul');
+	$now = date("H"); //24 saat formatı çünkü db'de rezervasyon saatleri ve parkStatus 24 saatlik dilimde tutuluyor.
+
 	if($parkStatus === "BOŞ")
 	{
-		return "<input type=\"checkbox\" value=\"".$time."\" name=\"time[]\">"; //gönderildiği yer echo'da olduğundan echo değil, return kullanıldı.
+		if((int)$now > (int)$time) {
+			return "<input type=\"checkbox\" value=\"".$time."\" name=\"time[]\" disabled>"; //gönderildiği yer echo'da olduğundan echo değil, return kullanıldı.
+		} else {
+			return "<input type=\"checkbox\" value=\"".$time."\" name=\"time[]\">"; //gönderildiği yer echo'da olduğundan echo değil, return kullanıldı.
+	}
 	}
 	else
 	{
@@ -1299,12 +1306,29 @@ function renewSession($person_id) {
 }
 
 function generateToken() {
-	$token_id = "";
-	for($i = 0; $i < 60; $i++) {
-		$token_id = $token_id. "" .strval(rand(1,9));
-	}
+	global $conn;
 
-	return $token_id;
+	$result = 1;
+	$i = 0;
+
+	while($result > 0) {
+		$token = "";
+		for($i = 0; $i < 60; $i++) {
+			$token = $token. "" .strval(rand(1,9));
+		}
+
+		$sql = "SELECT token FROM Tokens WHERE token='$token'";
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+			continue;
+		}
+		else {
+			break;
+		}
+		$i++;
+	}
+	
+	return $token;
 }
 
 
@@ -1327,6 +1351,8 @@ function sendToken($email) {
 	$spcTime = date("H:i:sa"); // 24 saat dilimi ile girilip 12saat dilimi olarak çekilecek.
 	$baseURL = "http://epark.sinemakulup.com/password/change/token=";
 	$devURL = "http://epark.sinemakulup.com/external/tkeskin/password/change/token=";
+	$baseProt = "http://epark.sinemakulup.com/password/protection/token=";
+	$devProt = "http://epark.sinemakulup.com/external/tkeskin/password/protection/token=";
 
 	$sql1 = "SELECT email FROM Person WHERE email='$getEmail'";
 	$result1 = $conn->query($sql1);
@@ -1349,8 +1375,8 @@ function sendToken($email) {
 				<p> ".reArrangeDate($spcDate)." tarihinde şifrenizin değiştirilmesi için talep oluşturuldu.
 					<br><br>
 					Şifrenizi değiştirebilmeniz için linkiniz: " .$baseURL. "" .$token.
-					"<br><br><br><br>
-					Eğer bu mail sizin tarafınızdan gönderilmedi ise <a href=\"javascript:void(0)\">buraya</a> tıklayınız.
+					"<br><br><br>
+					Eğer bu mail sizin tarafınızdan gönderilmedi ise <a href=\"" .$baseProt. "" .$token. "\">buraya</a> tıklayınız.
 					<br>
 					<link daha belirtilmedi>
 				</p>
@@ -1402,7 +1428,7 @@ function tokenValidation($token) {
 
 				return $dataArray;
 			} else {
-				return "Link uzun süre kullanılmadığından dolayı silinmiş görünüyor!";
+				return "Bu link artık kullanılamıyor gibi görünüyor!";
 			}
 		}
 	} else {
@@ -1411,7 +1437,7 @@ function tokenValidation($token) {
 	}
 }
 
-function tokenSession($tokenDate, $tokenTime) {
+function tokenSession($token_id, $tokenDate, $tokenTime) {
 	$timezone=0;
 	date_default_timezone_set('Europe/Istanbul');
 	$today = date("Y-m-d");
@@ -1468,6 +1494,11 @@ function tokenSession($tokenDate, $tokenTime) {
 		if(!($nowSum < $tokenSum) && ($nowSum > $tokenSum && $nowSum < ($tokenSum + 16))) {
 			return true; // 15dk içerisinde ise.
 		} else {
+			global $conn;
+			$sql = "UPDATE Tokens SET is_valid=0 WHERE token_id='$token_id'";
+			if(!($conn->query($sql) === TRUE)) {
+				reportErrorLog("tokenSession fonksiyonunda is_valid=0 yapılırken sorun oluştu", 1041);
+			}
 			return false; // 15dk içerisinde değil ise.
 		}
 	} else {
@@ -1508,6 +1539,54 @@ function updatePass($sessionTokenId, $password) {
 		return json_encode($arr);
 	}
 }
+
+function removeToken($token) {
+	$timezone=0;
+	date_default_timezone_set('Europe/Istanbul');
+	$get_time=date("Y/m/d h:i:s a", time() + 3600*($timezone+date("I")));
+	$ip = isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];
+	global $conn;
+
+	$sql = "UPDATE Tokens SET is_valid=0 WHERE token='$token'";
+	if($conn->query($sql) === TRUE) {
+		return true;
+	} else {
+		reportErrorLog("removeToken fonksiyonunda is_valid 0 yapılırken hata oluştu.", 1042);
+		return false;
+	}
+}
+
+// Regular Expressions
+//--------------------------------------------------------------------------------
+// ^ ile başlıyor
+// $ ile bitiyor
+// + 1 veya daha fazla
+// {3} tane
+// \ özel karakter engelleme -> :// için \:\/\/ mecburi
+// noktalar [.] veya \. şeklinde
+// | veya
+
+function urlRE($url){
+	$pattern = "/^(https\:\/\/|http\:\/\/){1}w{3}[.]{1}[a-zA-Z0-9]+[.]{1}[a-z]+$/";
+	//$val = "https://www.test01.com";
+	if(preg_match_all($pattern, $url)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+function mailRE($mail){
+	$pattern = "/^([a-z])([a-zA-Z0-9])+\@{1}[a-z]+[.]{1}[a-z]+$/"; //başta küçük harf ile başlayıp sonda da bir veya daha fazla küçük harf ile bitmeli
+	//$val2 = "test@gmail.com";
+	if(preg_match_all($pattern, $mail)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+//--------------------------------------------------------------------------------
+
 
 
 
