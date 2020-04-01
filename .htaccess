@@ -20,6 +20,7 @@ RewriteRule ^settings/profile/save$ source/editProfileControl.php [L,QSA]
 RewriteRule ^password/reset$ lostPassword.php [L,QSA]
 #RewriteRule ^password/change?token=([0-9a-zA-Z-_]+)$ source/lp-validate.php?token=$1 [L,QSA]
 RewriteRule ^password/change/token=([0-9a-zA-Z-_]+)$ source/lp-validate.php?token=$1 [L,QSA]
+RewriteRule ^password/protection/token=([0-9a-zA-Z-_]+)$ source/lp-userProtection.php?token=$1 [L,QSA]
 RewriteRule ^lpgen$ source/lp-generate.php [L,QSA]
 RewriteRule ^lpcont$ source/lp-control.php [L,QSA]
 
