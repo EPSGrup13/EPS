@@ -22,26 +22,22 @@
 ?>
 
 <div class="content">
-	<div id="formkapsamprofilim">
+	<div id="formkapsamprofilim" style="width:820px; margin-top: -325px; border-radius: 10px;">
 
-	<div class="editProfileTop">
-	   <img src="https://i.hizliresim.com/p7PP6q.png" style="width: 70px; height: 70px; padding-top: 10px;">
-
+	<div class="editProfileTop" style="float: left; height:280px;">
+	   <img src="https://i.hizliresim.com/p7PP6q.png" class="editProfilePhoto"><input type="file" name="profilePhoto" style="padding-left: 100px; padding-bottom: 15px;">
 	   	<br>
-		<?php echo "İsim Soyisim: <input type=\"text\" name=\"fullName\" class=\"profileInput\" placeholder=\"" .$firstName. " " .$lastName. "\">"; ?>
-		<br> Şifre: <input type="password" name="pass" class="profileInput" placeholder="****">
-		<br> Şifre Tekrar: <input type="password" class="confirmPass" placeholder="****">
+		<?php echo "<div class=\"editProfileText\">İsim Soyisim:</div><div class=\"editProfileInput\"><input type=\"text\" name=\"fullName\" class=\"profileInput\" placeholder=\"" .$firstName. " " .$lastName. "\"></div>"; ?>
+		<br><div class="editProfileText"> Şifre: </div><div class="editProfileInput"><input type="password" name="pass" class="profileInput" placeholder="****"></div>
+		<br><div class="editProfileText">Şifre Tekrar:</div><div class="editProfileInput"> <input type="password" class="confirmPass" placeholder="****"></div>
 	</div>
 
 
-		    <div class="profilimbilgilerdiv">
+		    <div class="profilimbilgilerdiv" style="float: right;">
 		        <div class="profilimaracbilgileridiv">
 		            <div class="profilimaracbilgileriyazisi">
-		            	<div class="lText1">
-		            		Araç Bilgileri
-		            	</div>
-		            	<div class="rIcon">
-			        	</div>
+		            	<div class="lText1">Araç Bilgileri</div>
+		            	<!--<div class="rIcon"></div>-->
 		            </div>
 		        </div>
 
@@ -54,7 +50,7 @@
 							$lenWehiclesArray = count($wehiclesArray);
 							for($i = 0; $i < $lenWehiclesArray; $i++)
 							{
-								echo "Plaka: <input type=\"text\" class=\"profileInput\" placeholder=\"".$wehiclesArray[$i]."\"><br>";
+								echo "<div class=\"editProfileText\">Plaka:</div><div class=\"editProfileInput\"><input type=\"text\" class=\"profileInput\" placeholder=\"".$wehiclesArray[$i]."\"></div><br>";
 							}
 						}
 						else
@@ -64,22 +60,19 @@
 					?>
 
 
-		        <div class="profilimiletisimbilgilerdiv">
+		        <div class="profilimiletisimbilgilerdiv" style="margin-top: 20px;">
 		            <div class="profilimiletisimbilgileryazisi">
-		            	<div class="lText1">
-		            		İletişim Bilgileri
-		            	</div>
-		            	<div class="rIcon">
-		            	</div>
+		            	<div class="lText1">İletişim Bilgileri</div>
+		            	<!--<div class="rIcon"></div>-->
 		            </div>
 		        </div>
 
 			        <?php
-			        	$matchText = array("Telefon No: ", "Email: ");
+			        	$matchText = array("<div class=\"editProfileText\">Telefon No:</div> ", "<div class=\"editProfileText\">Email:</div> ");
 			        	$inputName = array("pNo", "email");
 						for($i = 0; $i < (count($profileArray) - 1); $i++) // city harici yapıldığından çıkarıldı
 						{
-							echo $matchText[$i]. " <input type=\"text\" name=\"" .$inputName[$i]. "\" class=\"profileInput\" placeholder=\"" .$profileArray[$i]. "\"><br>";
+							echo $matchText[$i]. "<div class=\"editProfileInput\"><input type=\"text\" name=\"" .$inputName[$i]. "\" class=\"profileInput\" placeholder=\"" .$profileArray[$i]. "\"></div><br>";
 						}
 
 						// option başlangıç
@@ -89,7 +82,7 @@
 						*seçilmemiş ise direk belirtilmemiş seçili gelir.
 						*/
 
-						echo "İl: <select id=\"cities\" name=\"cities\">";
+						echo "<div class=\"editProfileText\">İl:</div><div class=\"editProfileInput\"><select id=\"cities\" name=\"cities\">";
 						if($undefinedCity[0] == $personCity)
 						{
 							echo "<option value=\"" .$undefinedCity[0]. "\" selected> " .$undefinedCity[2]. " </option>";
@@ -110,27 +103,24 @@
 								echo "<option value=\"" .$citiesArray[$i][0]. "\"> " .$citiesArray[$i][2]. " </option>";
 							}
 						}
-						echo "</select>";
+						echo "</select></div>";
 						// option bitiş
 
-						echo "<br><br>Bakiye: " .$balance. "₺";
+						echo "<div class=\"editProfileText\">Bakiye:" .$balance. "₺</div>"  ;
 					?>
-
 		    </div>
 
 
 			<div>
-			    <div class="profilimyeniaracdiv">
-			    	<div class="newCar1">
-			        	Yeni Araç Ekle
-			    	</div>
-			    	<div class="rIcon">
+			    <div class="profilimyeniaracdiv" style="width:800px; height:200px;">
+			    	<div class="newCar1">Yeni Araç Ekle</div>
+			    	<!--<div class="rIcon">
 			        	<img src="https://i.hizliresim.com/PCeHt1.png" class="profilimyeniaracekleimg"/>
-			    	</div>
+			    	</div>-->
 			    </div>
 			</div>
 
-		<button class="ep-btn" onclick="editProfile(); return false;">Profili Güncelle</button>
+		<button class="ep-btn" id="formkapsambuttongiris" style="left:28%;" onclick="editProfile(); return false;">Profili Güncelle</button>
 	</div>
 </div>
 
