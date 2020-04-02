@@ -1685,3 +1685,27 @@ footer p
   border-radius:10px;
   text-align:center;
 } 
+
+.editProfileText {
+  width:100px;
+  float: left;
+  padding:8px;
+}
+
+.editProfileInput {
+  padding:8px;
+  width: 220px;
+  float: left;
+}
+
+.newCar1 {
+  padding-left:350px;
+}
+
+.editProfilePhoto {
+  width: 70px; 
+  height: 70px; 
+  padding-top: 10px; 
+  padding-bottom: 10px; 
+  padding-left: 150px;
+}
