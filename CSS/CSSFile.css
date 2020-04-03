@@ -1698,14 +1698,10 @@ footer p
   float: left;
 }
 
-.newCar1 {
-  padding-left:350px;
-}
-
 .editProfilePhoto {
   width: 70px; 
   height: 70px; 
   padding-top: 10px; 
   padding-bottom: 10px; 
   padding-left: 150px;
-}
+} 

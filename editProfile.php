@@ -113,7 +113,7 @@
 
 			<div>
 			    <div class="profilimyeniaracdiv" style="width:800px; height:200px;">
-			    	<div class="newCar1">Yeni Araç Ekle</div>
+			    	<div class="newCar1" style="margin-left: auto; margin-right: auto;">Yeni Araç Ekle</div>
 			    	<!--<div class="rIcon">
 			        	<img src="https://i.hizliresim.com/PCeHt1.png" class="profilimyeniaracekleimg"/>
 			    	</div>-->
