@@ -48,7 +48,7 @@
     }
 
 
-    echo "<div class=\"pagination\">
+    echo "<div class=\"pagination\" style=\"margin-top:32px;\">
     <a href=\"javascript:void(0)\">«</a>
     <a href=\"javascript:void(0)\" class=\"active\">1</a>
     <a href=\"javascript:void(0)\">2</a>
