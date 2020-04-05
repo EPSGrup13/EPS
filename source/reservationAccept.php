@@ -1,6 +1,9 @@
 <?php
+	define('LOADED', TRUE);
 	include '../include/htmlStart.php';
 	getHeader();
+	pageProtection();
+	isParkOwner();
 ?>
 
 
