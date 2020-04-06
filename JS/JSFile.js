@@ -1,3 +1,12 @@
+const dMode = false;
+function devMode() {
+	if(dMode === true) {
+		return "http://epark.sinemakulup.com/external/tkeskin/";
+	} else {
+		return "";
+	}
+}
+
 function registration()
 {
     //var elements = document.getElementsByClassName("formArea");
@@ -34,8 +43,9 @@ function registration()
                 }
             }
         }
-        xmlHttp.open("post", "register");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
+        //xmlHttp.open("post", "register");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
         //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/register");
+        xmlHttp.open("post", devMode()+"register");
         xmlHttp.send(formData);
 }
 
@@ -320,8 +330,9 @@ function sendProfileData(data, inputsArray, callback) //callback içinde callbac
             addStatusElementWithoutForm("alert danger", "Profili güncellerken sorun oluştu", clearInputs, inputsArray);
         }*/
     }
-    xmlHttp.open("post", "settings/profile/save"); // ana dizine atıldığında çalıştırılacak, haricinde base href alınıyor hedef olarak.
+    //xmlHttp.open("post", "settings/profile/save"); // ana dizine atıldığında çalıştırılacak, haricinde base href alınıyor hedef olarak.
     //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/settings/profile/save");
+    xmlHttp.open("post", devMode()+"settings/profile/save");
     xmlHttp.send(data);
 }
 
@@ -383,8 +394,9 @@ function generateToken() {
                 }
             }
         }
-        xmlHttp.open("post", "lpgen");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
+        //xmlHttp.open("post", "lpgen");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
         //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/lpgen");
+		xmlHttp.open("post", devMode()+"lpgen");
         xmlHttp.send(formData);
 }
 
@@ -447,8 +459,9 @@ function sendPassData() {
                 }
             }
         }
-        xmlHttp.open("post", "lpcont");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
+        //xmlHttp.open("post", "lpcont");  // ana dizinde normal şekilde verilebilir, haricinde base href hedef alındığından test dizininde http tam linki verilmeli.
         //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/lpcont");
+		xmlHttp.open("post", devMode()+"lpcont");
         xmlHttp.send(formData);
 }
 
