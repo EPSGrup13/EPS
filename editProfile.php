@@ -106,7 +106,7 @@
 						echo "</select></div>";
 						// option bitiş
 
-						echo "<div class=\"editProfileText\">Bakiye:" .$balance. "₺</div>"  ;
+						echo "<div class=\"\">Bakiye:" .$balance. "₺</div>"  ;
 					?>
 		    </div>
 

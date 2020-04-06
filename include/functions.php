@@ -888,50 +888,61 @@ function completeReservation($park_url, $getTime, $person_id)
 	date_default_timezone_set('Europe/Istanbul');
 	$spcDate = date("Y-m-d");
 
-	//print_r($getTime); //test
+	$balance = currentBalance($person_id);
+	$parkFee = calculateParkFee(parkIdForReservation($park_url), count($getTime));
+	if(!($balance - $parkFee < 0)) {
+		$pStatusId = parkStatusIdForReservation($park_url);
+		//echo $pStatusId; //test
 
-	$pStatusId = parkStatusIdForReservation($park_url);
-	echo $pStatusId; //test
+		global $conn;
 
-	global $conn;
+		for($i = 0; $i < count($getTime); $i++)
+		{
+			$sql = "INSERT INTO Reservation (reservation_hour, reservation_date, full_plate, person_id, parkStatus_id) VALUES ('$getTime[$i]','$spcDate', (SELECT full_plate FROM Wehicle WHERE is_main = 1 AND person_id = '$person_id'), '$person_id', '$pStatusId')";
 
-	for($i = 0; $i < count($getTime); $i++)
-	{
-		$sql = "INSERT INTO Reservation (reservation_hour, reservation_date, full_plate, person_id, parkStatus_id) VALUES ('$getTime[$i]','$spcDate', (SELECT full_plate FROM Wehicle WHERE is_main = 1 AND person_id = '$person_id'), '$person_id', '$pStatusId')";
+			if (!($conn->query($sql) === TRUE))
+			{
+				reportErrorLog("completeReservation fonksiyonunda saatleri tek tek girerken sorun oluştu", 1023);
+				destroyUserSession();
+			}
+		}
+
+
+
+		$splitTime = "";
+
+		for($i = 0; $i < count($getTime); $i++)
+		{
+			$temp = "parkStatus.h";
+			$temp = $temp . substr($getTime[$i], 0, 2); //start, length
+
+			$splitTime = $splitTime . $temp . "='$person_id', ";
+		}
+
+		$splitTime = substr($splitTime, 0, (strlen($splitTime) - 2));
+		//echo $splitTime; //test
+
+		$sql = "UPDATE parkStatus INNER JOIN Park ON parkStatus.park_id = Park.park_id INNER JOIN Slug ON Park.slug_id = Slug.slug_id SET ".$splitTime." WHERE Slug.slug_url = '$park_url' AND parkStatus.recDate = '$spcDate'";
+		//echo $sql; //test for query.
 
 		if (!($conn->query($sql) === TRUE))
 		{
-			reportErrorLog("completeReservation fonksiyonunda saatleri tek tek girerken sorun oluştu", 1023);
+			reportErrorLog("completeReservation fonksiyonunda parkStatus için saatleri güncellerken sorun oluştu", 1024);
 			destroyUserSession();
 		}
+
+
+
+		$sql = "UPDATE User INNER JOIN Person ON User.person_id = Person.person_id SET User.balance = (User.balance - '$parkFee') WHERE Person.person_id = '$person_id'";
+		if (!($conn->query($sql) === TRUE && renewSession($person_id) === TRUE)) {
+			reportErrorLog("completeReservation fonksiyonunda balance güncellerken sorun oluştu", 1045);
+			destroyUserSession();
+		}
+
+		redirectTo("cities");
+	} else {
+		echo "yeterli bakiyeniz bulunmamakta.";
 	}
-
-
-
-	$splitTime = "";
-
-	for($i = 0; $i < count($getTime); $i++)
-	{
-		$temp = "parkStatus.h";
-		$temp = $temp . substr($getTime[$i], 0, 2); //start, length
-
-		$splitTime = $splitTime . $temp . "='$person_id', ";
-	}
-
-	$splitTime = substr($splitTime, 0, (strlen($splitTime) - 2));
-	//echo $splitTime; //test
-
-	$sql = "UPDATE parkStatus INNER JOIN Park ON parkStatus.park_id = Park.park_id INNER JOIN Slug ON Park.slug_id = Slug.slug_id SET ".$splitTime." WHERE Slug.slug_url = '$park_url' AND parkStatus.recDate = '$spcDate'";
-	//echo $sql; //test for query.
-
-	if (!($conn->query($sql) === TRUE))
-	{
-		reportErrorLog("completeReservation fonksiyonunda parkStatus için saatleri güncellerken sorun oluştu", 1024);
-		destroyUserSession();
-	}
-
-	//#$conn->close();
-	redirectTo("cities");
 }
 
 
@@ -959,6 +970,71 @@ function parkStatusIdForReservation($park_url)
 		reportErrorLog("parkStatusIdForReservation fonksiyonunda veri çekilirken sorun oluştu", 1025);
 	}
 	//$conn->close(); //connection completeReservation fonksiyonu içerisinde kapatılacak.
+}
+
+function parkIdForReservation($park_url) {
+	global $conn;
+
+	$get = "park_id";
+	$query = "SELECT Park.park_id FROM Park INNER JOIN Slug ON Park.slug_id = Slug.slug_id WHERE Slug.slug_url = '$park_url'";
+
+	$data = basicSelectQueries($query, $get);
+	if(is_array($data)) {
+		return $data[0];
+	}
+
+	// Alternatif SQL
+	/*$sql = "SELECT Park.park_id FROM Park INNER JOIN Slug ON Park.slug_id = Slug.slug_id WHERE Slug.slug_url = '$park_url'";
+	echo $sql."<br>";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0) {
+		while($row = $result->fetch_assoc())
+			$val = $row["park_id"];
+		return $val;
+	}
+	else
+		reportErrorLog("parkIdForReservation fonksiyonunda veri çekilirken sorun oluştu", 1043);*/
+}
+
+function calculateParkFee($park_id, $hour) {
+	global $conn;
+
+	$hr = $hour;
+	if($hr > 12)
+		$hr = "12h_plus";
+	else
+		$hr = $hr. "hr";
+
+	$get = $hr;
+	$query = "SELECT " .$get. " FROM parkFee WHERE park_id = '$park_id'";
+
+	$data = basicSelectQueries($query, $get);
+	if(is_array($data)) {
+		return $data[0];
+	}
+
+	// Alternatif SQL
+	/*$sql = "SELECT " .$hr. " FROM parkFee WHERE park_id = '$park_id'";
+	$result = $conn->query($sql);
+	if ($result->num_rows > 0) {
+		while($row = $result->fetch_assoc())
+			$val = $row[$hr];
+		return $val;
+	}
+	else
+		reportErrorLog("calculateParkFee fonksiyonunda veri çekilirken sorun oluştu", 1044);*/
+}
+
+function currentBalance($person_id) {
+	global $conn;
+
+	$get = "balance";
+	$query = "SELECT " .$get. " FROM User WHERE person_id = '$person_id'";
+
+	$data = basicSelectQueries($query, $get);
+	if(is_array($data)) {
+		return $data[0];
+	}
 }
 
 
@@ -1289,7 +1365,7 @@ function getServerSettings() {
 function renewSession($person_id) {
 	global $conn;
 
-	$sql = "SELECT firstName, lastName, email FROM Person WHERE person_id = '$person_id'";
+	$sql = "SELECT Person.firstName, Person.lastName, Person.email, User.balance FROM Person INNER JOIN User ON Person.person_id = User.person_id WHERE Person.person_id = '$person_id'";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0) {
 		while($row = $result->fetch_assoc()) {
@@ -1297,6 +1373,7 @@ function renewSession($person_id) {
 			$_SESSION["firstName"] = $row["firstName"];
 			$_SESSION["lastName"] = $row["lastName"];
 			$_SESSION["email"] = $row["email"];
+			$_SESSION["balance"] = $row["balance"];
 		}
 		return true;
 	} else {
