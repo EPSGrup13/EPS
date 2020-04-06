@@ -40,3 +40,6 @@ anlayabilmek adına eklenmiştir.
 1040 updatePass fonksiyonunda şifreyi güncellerken hata.
 1041 tokenSession fonksiyonunda is_valid(0) güncellenirken hata.
 1042 removeToken fonksiyonunda is_valid(0) güncellenirken hata.
+1043 parkIdForReservation fonksiyonunda veri çekilirken hata.
+1044 calculateParkFee fonksiyonunda veri çekilirken hata.
+1045 completeReservation fonksiyonunda balance güncellenirken hata.
