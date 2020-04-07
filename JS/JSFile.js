@@ -1,7 +1,35 @@
+class Request {
+	constructor() {
+		this.xmlHttp = new XMLHttpRequest();
+	}
+
+	post(url, data) {
+		this.xmlHttp.onreadystatechange = function() {
+			if(this.readyState === 4 && this.status === 200) {
+				//console.log(this.responseText);
+				let splitData = JSON.parse(this.responseText);
+				if(splitData.status === "success") {
+					displayWarning("alert success", splitData.message);
+				}
+			}
+		}
+		this.xmlHttp.open("post", url);
+		this.xmlHttp.send(data);
+	}
+}
+
 const dMode = false;
 function devMode() {
 	if(dMode === true) {
 		return "http://epark.sinemakulup.com/external/tkeskin/";
+	} else {
+		return "";
+	}
+}
+
+function devURL() {
+	if(dMode === true) {
+		return "external/tkeskin/";
 	} else {
 		return "";
 	}
@@ -376,7 +404,7 @@ function cleanVal(value) { //function cleanVal(value)
 
 // editProfile sonu -----------------------------------------------------------------------------------
 
-// lostPassword başlangıcı
+// lostPassword başlangıcı ----------------------------------------------------------------------------
 function generateToken() {
 	const emailInput = document.getElementsByClassName("lostPwi")[0];
     var formData = new FormData();
@@ -477,7 +505,56 @@ function rmSpace(password) {
 	return password;
 }
 
-// lostPassword sonu
+// lostPassword sonu ----------------------------------------------------------------------------------
+
+// reservation başlangıcı
+function mkReservation() {
+	const request = new Request(); // obje oluşturuldu.
+    var formData = new FormData();
+    let dataArray = new Array();
+
+	const getForm = document.getElementsByClassName("parkReservationTimeForm")[0];
+	getForm.addEventListener("submit", run);
+	let counter = 0;
+
+	const getTime = document.getElementsByClassName("cb-time");
+	//console.log(getTime[0].children[1]);
+	for(let i = 0; i < getTime.length; i++) {
+		if(getTime[i].children[1].name !== undefined && getTime[i].children[1].value !== undefined && getTime[i].children[1].checked) {
+			console.log(getTime[i].children[1].name, " " ,getTime[i].children[1].value);
+			//formData.append(getTime[i].children[1].name, getTime[i].children[1].value);
+			dataArray.push(getTime[i].children[1].value);
+			counter++;
+		}
+	}
+
+	if(counter === 0) {
+		displayWarning("alert danger", "Saat seçiniz");
+	} else {
+		formData.append("time", dataArray);
+		console.log(formData.get("time"));
+		request.post(devMode()+"makeReservation", formData);
+
+		for(i = 0; i < getTime.length; i++) {
+			if(getTime[i].children[1].checked) {
+				getTime[i].children[0].src = devURL()+"images/car-red.png";
+				getTime[i].children[1].remove(); //inputu kaldır
+				const newChild = document.createElement("span");
+				newChild.style.color = "red";
+				newChild.appendChild(document.createTextNode("DOLU"));
+				getTime[i].appendChild(newChild); //dolu yazısını koy
+			}
+		}
+	}
+}
+
+// default submit butonunun özellikleri kaldırıldı
+function run(e) {
+	e.preventDefault();
+}
+
+// reservation bitişi
+
 
 function darkMode()
 {

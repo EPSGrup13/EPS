@@ -882,8 +882,19 @@ function pageProtection()
 /*Önce kullanıcılar için rezervasyon geçmişi için kayıt tutar, daha sonra ilgili park için
 *güncelleme yapar.
 */
-function completeReservation($park_url, $getTime, $person_id)
+function completeReservation($park_url, $arrayTime, $person_id)
 {
+	$getTime = array();
+	$getTime = explode(",", $arrayTime);
+
+	$array1 = array();
+	array_push($array1, "status");
+	array_push($array1, "message");
+
+	$array2 = array();
+	array_push($array2,"success");
+	array_push($array2,"failed");
+
 	$timezone=0;
 	date_default_timezone_set('Europe/Istanbul');
 	$spcDate = date("Y-m-d");
@@ -903,7 +914,9 @@ function completeReservation($park_url, $getTime, $person_id)
 			if (!($conn->query($sql) === TRUE))
 			{
 				reportErrorLog("completeReservation fonksiyonunda saatleri tek tek girerken sorun oluştu", 1023);
-				destroyUserSession();
+				endSession();
+				$arr = array($array1[0]=>$array2[1], $array1[1]=>"Hata oluştu");
+				return json_encode($arr);
 			}
 		}
 
@@ -928,7 +941,9 @@ function completeReservation($park_url, $getTime, $person_id)
 		if (!($conn->query($sql) === TRUE))
 		{
 			reportErrorLog("completeReservation fonksiyonunda parkStatus için saatleri güncellerken sorun oluştu", 1024);
-			destroyUserSession();
+			endSession();
+			$arr = array($array1[0]=>$array2[1], $array1[1]=>"Hata oluştu");
+			return json_encode($arr);
 		}
 
 
@@ -936,12 +951,18 @@ function completeReservation($park_url, $getTime, $person_id)
 		$sql = "UPDATE User INNER JOIN Person ON User.person_id = Person.person_id SET User.balance = (User.balance - '$parkFee') WHERE Person.person_id = '$person_id'";
 		if (!($conn->query($sql) === TRUE && renewSession($person_id) === TRUE)) {
 			reportErrorLog("completeReservation fonksiyonunda balance güncellerken sorun oluştu", 1045);
-			destroyUserSession();
+			endSession();
+			$arr = array($array1[0]=>$array2[1], $array1[1]=>"Hata oluştu");
+			return json_encode($arr);
 		}
 
-		redirectTo("cities");
+		//redirectTo("cities");
+		$arr = array($array1[0]=>$array2[0], $array1[1]=>"Rezervasyon gerçekleştirildi");
+		return json_encode($arr);
 	} else {
-		echo "yeterli bakiyeniz bulunmamakta.";
+		//echo "yeterli bakiyeniz bulunmamakta.";
+		$arr = array($array1[0]=>$array2[1], $array1[1]=>"Yeterli bakiyeniz bulunmamakta");
+		return json_encode($arr);
 	}
 }
 
