@@ -60,7 +60,8 @@
 	
 	echo "</div>";
 	echo "<div class=\"parkReservationTimeBox\">";
-	echo "<form action=\"".getLink("makeReservation")."\" method=\"post\" class=\"parkReservationTimeForm\">";
+	//echo "<form action=\"".getLink("makeReservation")."\" method=\"post\" class=\"parkReservationTimeForm\">";
+	echo "<form action=\"\" method=\"post\" class=\"parkReservationTimeForm\">";
 ?>
 	<div style="display:flex; justify-content:space-between;">
 	<div style="padding-left:75px;">
@@ -73,11 +74,11 @@
 		{
 			echo "</div>
 			<div style=\"padding-right:64px;\">
-			<div style=\"display:table-row;\">" .returnCarImg($parkArray[$i]). " " .$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i])."</div>";
+			<div class=\"cb-time\">" .returnCarImg($parkArray[$i]). " " .$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i])."</div>";
 		}
 		else
 		{
-			echo "<div style=\"display:table-row;\">" .returnCarImg($parkArray[$i]). " " .$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i])."</div>";
+			echo "<div class=\"cb-time\">" .returnCarImg($parkArray[$i]). " " .$timeArray[$i].": ".parkDetailCheckBox($parkArray[$i], $timeArray[$i])."</div>";
 		}
 	}
 
@@ -90,11 +91,11 @@
 	echo "<div style=\"display:table-row\">";
 	if($checkWehicles)
 	{
-		echo "<input type=\"submit\" value=\"Rezervasyon Yap\" class=\"reservationButton\">";
+		echo "<input type=\"submit\" value=\"Rezervasyon Yap\" class=\"reservationButton\" onclick=\"mkReservation(); return false;\">";
 	}
 	else
 	{
-		echo "<input type=\"submit\" value=\"Rezervasyon Yap\" class=\"reservationButton\" disabled>
+		echo "<input type=\"submit\" value=\"Rezervasyon Yap\" class=\"reservationButton\" onclick=\"mkReservation(); return false;\" disabled>
 		<div class=\"parkReservationNoCarMessageDiv\"><p class=\"parkReservationNoCarMessage\">Sistemde kayıtlı aracınız olmadan rezervasyon yapamazsınız.</p></div>";
 	}
 	echo "</div>";

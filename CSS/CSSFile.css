@@ -659,6 +659,10 @@ input:checked + .slider:before {
   width: 100%;
 }
 
+.cb-time {
+  display:table-row;
+}
+
 
 
 
