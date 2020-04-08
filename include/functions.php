@@ -87,6 +87,81 @@ function getLink($URL)
 }
 //-------------------------------------------------------------------
 
+class dbPro {
+	public $query;
+	public $data;
+
+	function __construct($query, $data) {
+		$this->query = $query;
+		$this->data = $data;
+	}
+
+	function mSelect() { //2D -> çoklu row ve çoklu column  |  çoklu grup veri
+		$splitData = explode(",", $this->data);
+		global $conn;
+		$dataArray = array();
+		$tmp = array();
+
+		$sql = $this->query;
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				for($i = 0; $i < count($splitData); $i++) {
+					array_push($tmp, $row[trim($splitData[$i], " ")]);
+				}
+				$dataArray = array_merge($dataArray, array($tmp));
+				unset($tmp);
+				$tmp = array();
+			}
+			return $dataArray;
+		} else {
+			reportErrorLog("mselect hata", 1501);
+		}
+	}
+
+	// rSelect ile select temelde aynı fakat farklı metodlar, 1d row veya 1d column
+	/*function rSelect() {  // 1D -> çoklu row  |  tek grup verisi
+		$splitData = explode(",", $this->data);
+		global $conn;
+		$dataArray = array();
+
+		$sql = $this->query;
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				//$normalData = $data;//array_merge($dataArray, $data);
+				//return $row[$this->data];
+				//$dataArray = array_merge($dataArray, array($row[$this->data]));
+
+				for($i = 0; $i < count($splitData); $i++) {
+					$dataArray = array_merge($dataArray, array($row[trim($splitData[$i], " ")]));
+				}
+			}
+			return $dataArray;
+		} else {
+			reportErrorLog("select hata", 1502);
+		}
+	}*/
+
+	function select() {  // 1D -> çoklu column  |  tek grup verisi
+		$splitData = explode(",", $this->data);
+		global $conn;
+		$dataArray = array();
+
+		$sql = $this->query;
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0) {
+			while($row = $result->fetch_assoc()) {
+				for($i = 0; $i < count($splitData); $i++) {
+					array_push($dataArray, $row[trim($splitData[$i], " ")]);
+				}
+			}
+			return $dataArray;
+		} else {
+			reportErrorLog("select hata", 1502);
+		}
+	}
+}
 
 
 function getHtmlEnd() //html bitişini kısaca çekebilmek için fonksiyon
@@ -1665,7 +1740,7 @@ function removeToken($token) {
 // | veya
 
 function urlRE($url){
-	$pattern = "/^(https\:\/\/|http\:\/\/){1}w{3}[.]{1}[a-zA-Z0-9]+[.]{1}[a-z]+$/";
+	$pattern = "/^(https\:\/\/|http\:\/\/){1}w{3}[.]{1}[a-zA-Z][a-zA-Z0-9]+[.]{1}[a-z]+$/";
 	//$val = "https://www.test01.com";
 	if(preg_match_all($pattern, $url)) {
 		return true;
@@ -1684,6 +1759,33 @@ function mailRE($mail){
 	}
 }
 //--------------------------------------------------------------------------------
+
+// OOP test alanı. Yeni gelecek metodlar için testler devam edecek.
+function oopSelect() {
+	$query = "SELECT firstName, lastName FROM Person LIMIT 4";
+	//$data = "firstName,lastName";
+	$data = "firstName, lastName";
+
+	$obj = new dbPro($query, $data);
+	/*getData = $obj->rselect();
+
+	echo $getData. "<br><br>";
+	print_r($getData);*/
+
+
+	echo "<br><br><br><br>";
+
+	$getData = $obj->mSelect();
+	echo $getData. "<br><br>";
+	print_r($getData);
+
+
+	echo "<br><br><br><br>";
+
+	$getData = $obj->Select();
+	echo $getData. "<br><br>";
+	print_r($getData);
+}
 
 
 

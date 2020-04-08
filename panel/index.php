@@ -35,6 +35,12 @@
 				echo $getData;
 
 	?>
+
+
+
+	<?php
+	oopSelect();
+	?>
 	
 </div>
 
