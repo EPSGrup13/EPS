@@ -1,6 +1,7 @@
 class Request {
 	constructor() {
 		this.xmlHttp = new XMLHttpRequest();
+		self.status = false; //postta değiştirilebilmesi için self yapıldı.
 	}
 
 	post(url, data) {
@@ -10,11 +11,16 @@ class Request {
 				let splitData = JSON.parse(this.responseText);
 				if(splitData.status === "success") {
 					displayWarning("alert success", splitData.message);
+					self.status = true;
+				} else {
+					displayWarning("alert danger", splitData.message);
+					self.status = false;
 				}
 			}
 		}
 		this.xmlHttp.open("post", url);
 		this.xmlHttp.send(data);
+		return self.status;
 	}
 }
 
@@ -518,11 +524,9 @@ function mkReservation() {
 	let counter = 0;
 
 	const getTime = document.getElementsByClassName("cb-time");
-	//console.log(getTime[0].children[1]);
 	for(let i = 0; i < getTime.length; i++) {
 		if(getTime[i].children[1].name !== undefined && getTime[i].children[1].value !== undefined && getTime[i].children[1].checked) {
 			console.log(getTime[i].children[1].name, " " ,getTime[i].children[1].value);
-			//formData.append(getTime[i].children[1].name, getTime[i].children[1].value);
 			dataArray.push(getTime[i].children[1].value);
 			counter++;
 		}
@@ -533,16 +537,19 @@ function mkReservation() {
 	} else {
 		formData.append("time", dataArray);
 		console.log(formData.get("time"));
-		request.post(devMode()+"makeReservation", formData);
+		const status = request.post(devMode()+"makeReservation", formData);
 
-		for(i = 0; i < getTime.length; i++) {
-			if(getTime[i].children[1].checked) {
-				getTime[i].children[0].src = devURL()+"images/car-red.png";
-				getTime[i].children[1].remove(); //inputu kaldır
-				const newChild = document.createElement("span");
-				newChild.style.color = "red";
-				newChild.appendChild(document.createTextNode("DOLU"));
-				getTime[i].appendChild(newChild); //dolu yazısını koy
+		console.log(status);
+		if(status) {
+			for(i = 0; i < getTime.length; i++) {
+				if(getTime[i].children[1].checked) {
+					getTime[i].children[0].src = devURL()+"images/car-red.png";
+					getTime[i].children[1].remove(); //inputu kaldır
+					const newChild = document.createElement("span");
+					newChild.style.color = "red";
+					newChild.appendChild(document.createTextNode("DOLU"));
+					getTime[i].appendChild(newChild); //dolu yazısını koy
+				}
 			}
 		}
 	}
