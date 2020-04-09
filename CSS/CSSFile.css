@@ -855,11 +855,11 @@ nav li a:hover
     border-radius: 10px;
 }
 
-#passwordResetBox {
+#passwordResetBox{
     width: 400px; /*form kutu genişliği*/
-    height: 400px; /*form kutu yüksekliği*/
+    height: 450px; /*form kutu yüksekliği*/
     position:absolute;
-    margin-top:-210px;
+    margin-top:-225px;
     margin-left:-200px;
     left:50%;
     top:50%;
@@ -902,7 +902,7 @@ nav li a:hover
 
 }
 
-#passwordResetImg { 
+#passwordResetImg{ 
     width: 70px; 
     height: 70px;
     margin-top:100px;
@@ -940,7 +940,7 @@ nav li a:hover
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
-#passwordResetText {
+#passwordResetText{
     width: 100%;
     text-align: center;
     color: rgb(255, 255, 255);
@@ -1068,7 +1068,8 @@ nav li a:hover
 
 }
 
-#passwordResetButton {
+#passwordResetButton
+{
     width: 42%;
     left: 25%;
     padding: 10px;
@@ -1721,7 +1722,7 @@ footer p
   padding-top: 10px; 
   padding-bottom: 10px; 
   padding-left: 150px;
-} 
+}
 
 .lostPwi {
     width: 90%;
@@ -1769,17 +1770,16 @@ footer p
   color: white !important; 
 }
 
-.alert {
-  text-align:center;
-  width:360px;
-  height:60px;
-  color: white;
-  margin-left: 20px;
-  margin-top:10px;
+.lp-alert {
+  text-align: center;
+  width: 360px;
+  border: 1px solid #70c2d7;
+  border-radius: 19px;
+  padding: 12px 5px 12px 5px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
   background-color: #70c2d7;
-  padding:0px;
-  font-size:13px;
-  border:none;
 }
 
 /*.closebtn {
@@ -1793,7 +1793,6 @@ footer p
   cursor: pointer;
   transition: 0.3s;
 }
-
 .closebtn:hover {
   color: #6abdd2;
-}*/
+}*/ 
