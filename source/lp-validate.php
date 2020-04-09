@@ -13,18 +13,22 @@
 			//print_r($dataArray); //test output
 			$result = tokenSession($dataArray[0], $dataArray[2], $dataArray[3]); // tokenDate ve tokenTime gönderiliyor.
 			if($result) {
-				session_start(); // lp-control'e aktarılacak veri için session oluşturuluyor, daha sonra şifre değiştirildiğinde session yeniden kapatılacak.
+				session_start(); // lp-validate'e aktarılacak veri için session oluşturuluyor, daha sonra şifre değiştirildiğinde session yeniden kapatılacak.
 				$_SESSION["token_id"] = $dataArray[0]; // token_id için session oluşturuluyor.
 				?>
 				<br><br>
+				<div class="lostPasswordNewPassBox">
 					<div id="lp-val">
-						<div>Yeni Şifre: <input type="password" name="password" class="lp-input"></div>
-						<div>Yeni Şifre Tekrar: <input type="password" name="password" class="lp-input"></div>
-						<button class="cp-btn" onclick="updatePass(); return false;">Değiştir</button>
+						<div><img src="https://i.hizliresim.com/TTKT7A.png" id="lostPasswordNewPassImg"></div>
+						<h3 id="lostPasswordNewPassText">Şifre Yenileme</h3>
+						<div><input type="password" name="password" class="lp-input" placeholder="Yeni Şifre"></div>
+						<div><input type="password" name="password" class="lp-input" placeholder="Yeni Şifre Tekrar"></div>
+						<button class="cp-btn" id="lostPasswordNewPassButton" onclick="updatePass(); return false;">Değiştir</button>
 					</div>
+				</div>
 				<?php
 			} else {
-				echo "Link uzun süredir kullanılmadığından geçersizdir.";
+				echo "<div class=\"lostPasswordNewPassTimeOut\"><img src=\"https://i.hizliresim.com/8uwWjx.png\"class=\"lostPasswordNewPassTimeOutImg\">Şifre sıfırlama linki uzun süredir kullanılmadığından geçersizdir.</div>";
 			}
 		} else {
 			echo $dataArray;
