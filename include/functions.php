@@ -87,7 +87,7 @@ function getLink($URL)
 }
 //-------------------------------------------------------------------
 
-class dbPro {
+class Dbpro {
 	public $query;
 	public $data;
 
@@ -1766,7 +1766,7 @@ function oopSelect() {
 	//$data = "firstName,lastName";
 	$data = "firstName, lastName";
 
-	$obj = new dbPro($query, $data);
+	$obj = new Dbpro($query, $data);
 	/*getData = $obj->rselect();
 
 	echo $getData. "<br><br>";
