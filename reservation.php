@@ -6,13 +6,7 @@
 
 	$checkWehicles = numOfWehicles($_SESSION["person_id"]);
 
-	//----
-	#opt 1145
 	$getSlugParkURL = $_GET["park"];
-	$_SESSION["park_url"] = $getSlugParkURL;
-	//----
-
-
 	//$parkArray = array();
 	$parkArray = getParkDetails($getSlugParkURL);
 
