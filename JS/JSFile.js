@@ -2,6 +2,25 @@ class Request {
 	constructor() {
 		this.xmlHttp = new XMLHttpRequest();
 		self.status = false; //postta değiştirilebilmesi için self yapıldı.
+		self.data = new Array();
+	}
+
+	get(url) {
+		this.xmlHttp.onreadystatechange = function() {
+			if(this.readyState === 4 && this.status === 200) {
+				//console.log(this.responseText);
+				let splitData = JSON.parse(this.responseText);
+				//kullanım şekli aşağıdaki gibi.
+				/*console.log(splitData);
+				console.log(splitData.website);
+				console.log(splitData.website2);
+				console.log(splitData.website.version);*/
+				self.data = splitData;
+			}
+		}
+		this.xmlHttp.open("get", url, false) // false -> asenkron değil.
+		this.xmlHttp.send();
+		return self.data;
 	}
 
 	post(url, data) {
@@ -18,7 +37,7 @@ class Request {
 				}
 			}
 		}
-		this.xmlHttp.open("post", url);
+		this.xmlHttp.open("post", url, false); // false -> asenkron değil.
 		this.xmlHttp.send(data);
 		return self.status;
 	}
@@ -414,8 +433,10 @@ function cleanVal(value) { //function cleanVal(value)
 function generateToken() {
 	const emailInput = document.getElementsByClassName("lostPwi")[0];
     var formData = new FormData();
-    formData.append(emailInput.name, cleanVal(emailInput.value));
-    var xmlHttp = new XMLHttpRequest();
+    if(emailInput.value.length !== 0) {
+    	formData.append(emailInput.name, cleanVal(emailInput.value));
+
+	    var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function() {
             if(xmlHttp.readyState == 4 && xmlHttp.status == 200) {
                 //console.log(xmlHttp.responseText); //output test
@@ -432,6 +453,9 @@ function generateToken() {
         //xmlHttp.open("post", "http://epark.sinemakulup.com/external/tkeskin/lpgen");
 		xmlHttp.open("post", devMode()+"lpgen");
         xmlHttp.send(formData);
+    } else {
+    	displayWarning("alert danger", "Alanı boş bırakmamalısınız");
+    }
 }
 
 function updatePass() {
@@ -526,7 +550,7 @@ function mkReservation() {
 	const getTime = document.getElementsByClassName("cb-time");
 	for(let i = 0; i < getTime.length; i++) {
 		if(getTime[i].children[1].name !== undefined && getTime[i].children[1].value !== undefined && getTime[i].children[1].checked) {
-			console.log(getTime[i].children[1].name, " " ,getTime[i].children[1].value);
+			//console.log(getTime[i].children[1].name, " " ,getTime[i].children[1].value);
 			dataArray.push(getTime[i].children[1].value);
 			counter++;
 		}
@@ -536,10 +560,14 @@ function mkReservation() {
 		displayWarning("alert danger", "Saat seçiniz");
 	} else {
 		formData.append("time", dataArray);
+		let getParkUrl = window.location.href.split("/");
+		formData.append("park_url", getParkUrl[getParkUrl.length - 1]);
 		console.log(formData.get("time"));
+		console.log(formData.get("park_url"));
+		console.log(getParkUrl[getParkUrl.length - 1]);
 		const status = request.post(devMode()+"makeReservation", formData);
 
-		console.log(status);
+		//console.log(status);
 		if(status) {
 			for(i = 0; i < getTime.length; i++) {
 				if(getTime[i].children[1].checked) {
@@ -562,6 +590,47 @@ function run(e) {
 
 // reservation bitişi
 
+function ckVersion() {
+	const request1 = new Request();
+	const request2 = new Request();
+	let orjVer = request1.get("https://raw.githubusercontent.com/EPSGrup13/EPS/master/config/data.json"); // splitData çekiliyor.
+	let currentVer = request2.get(devMode()+"config/data.json")
+	if((orjVer !== undefined && orjVer.website.version !== undefined) && (currentVer !== undefined && currentVer.website.version !== undefined)) {
+		if(orjVer.website.version !== currentVer.website.version) {
+			//console.log(orjVer.website.version, " ", currentVer.website.version); // versiyonları göstermek için.
+			stickyBar("sticky-bar warning ta-center", ("Orijinal versiyon: " +orjVer.website.version+ " fakat kullandığınız: " +currentVer.website.version+ " olarak görünmekte!"));
+		} else {
+			console.log("uyumlu");
+		}
+	}
+}
+
+function stickyBar(cName, message) {
+	const existingElement = document.getElementsByClassName("sticky-bar");
+	if(existingElement.length !== 1) {
+	    const newElement = document.createElement("div");
+	    newElement.className = cName;
+
+	    const subElement = document.createElement("button");
+	    subElement.className = "sb-btn";
+	    subElement.textContent = "kapat";
+	    subElement.addEventListener("click", close);
+
+	    let newChild = document.createTextNode(message);
+	    newElement.appendChild(newChild);
+	    newElement.appendChild(subElement);
+	    document.querySelector("body").appendChild(newElement);
+	}
+}
+
+function close() {
+	const element = document.getElementsByClassName("sticky-bar")[0];
+	element.classList.toggle("hide");
+
+    setTimeout(function(){
+		element.classList.toggle("close");
+    },500);
+}
 
 function darkMode()
 {
