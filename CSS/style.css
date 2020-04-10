@@ -320,6 +320,12 @@ li a:hover {
     background-color: #3e3b4d;
 }
 
+@media (min-width:1200px) {
+    .footer-hiza {
+        margin-top: -114px;
+    }
+}
+
 /* footer bitiş */
 
 
@@ -346,6 +352,7 @@ li a:hover {
     display: none;
     text-indent: -9999px;
     background: url("/images/yukari-ok.png") no-repeat;
+    cursor: pointer;
 }
 
 

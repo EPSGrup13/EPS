@@ -212,8 +212,8 @@
             <div>
                 <div class="col-md-12">
                     <div class="footer-boy">
-                        <h4 class="col-md-10" style="text-align: right;" style="text-align: left;">EPS</h4>
-                        <p class="col-md-12" style="text-align: right;" style="text-align: left;">Ayazağa, Hadım
+                        <h4 class="col-md-10" style="text-align: right;">EPS</h4>
+                        <p class="col-md-12" style="text-align: right;">Ayazağa, Hadım
                             Koruyolu Cd. No:19, 34398 Sarıyer/İSTANBUL</p>
                         <ul>
                             <li><a rel="external" href="javascript:void(0)"><span
@@ -225,7 +225,7 @@
                         </ul>
                         </p>
                         <p>
-                            <div>
+                            <div class="footer-hiza">
                                 <ul>
                                     <li><a href="javascript:void(0)">Şartlar ve Koşullar</a></li>
                                     <li><a href="javascript:void(0)">Hakkımızda</a></li>
