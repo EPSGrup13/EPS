@@ -1550,8 +1550,6 @@ function sendToken($email) {
 					Şifrenizi değiştirebilmeniz için linkiniz: " .$baseURL. "" .$token.
 					"<br><br><br>
 					Eğer bu mail sizin tarafınızdan gönderilmedi ise <a href=\"" .$baseProt. "" .$token. "\">buraya</a> tıklayınız.
-					<br>
-					<link daha belirtilmedi>
 				</p>
 			</body>
 			</html>

@@ -466,7 +466,7 @@ function updateProcess() {
 	let counter = 0;
 	const parentNode = document.getElementById("lp-val"); //class'da children veya childNodes alamıyor, o yüzden id kullanıldı
 	const pnChildren = parentNode.children; //childNodes tüm elementleri vereceğinden sadece div ve butonlar istendiğinden children kullanıldı
-	for(let i = 0; i < pnChildren.length - 1; i++) { // buton hariç
+	for(let i = 2; i < pnChildren.length - 1; i++) { // buton hariç // i = 0 -> i = 2 olarak değiştirildi, üste 2 element eklendiğinden 3. ve 4. element gerekiyor sadece (index 2,3)
 		//console.log(pnChildren[i].children[0]);
 		if(pnChildren[i].children[0].value.length < 1) { // button hariç
 			if(pnChildren[i].children.length === 1) {
@@ -491,7 +491,7 @@ function updateProcess() {
 
 	if(counter === 2) {
 		const getOuterDiv = document.getElementById("lp-val");
-		if(rmSpace(getOuterDiv.children[0].firstElementChild.value) === rmSpace(getOuterDiv.children[1].firstElementChild.value)) {
+		if(rmSpace(getOuterDiv.children[2].firstElementChild.value) === rmSpace(getOuterDiv.children[3].firstElementChild.value)) { // children[0] ve [1] değişiklikten sonra -> [2] ve [3]
 			sendPassData();
 		} else {
 			displayWarning("alert danger", "Şifre alanları eşit olmalı");
