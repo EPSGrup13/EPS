@@ -41,6 +41,7 @@
 	<?php
 	oopSelect();
 	?>
+	<button onclick="ckVersion(); return false;">ckVersion deneme butonu</button>
 	
 </div>
 

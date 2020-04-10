@@ -15,4 +15,4 @@
 				print_js_or_css(cssSource());
 			?>
 		</head>
-	<body class="font1">
+	<body class="font1" onload="ckVersion();">
