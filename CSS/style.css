@@ -320,6 +320,12 @@ li a:hover {
     background-color: #3e3b4d;
 }
 
+@media (min-width:1200px) {
+    .footer-hiza {
+        margin-top: -114px;
+    }
+}
+
 /* footer bitiş */
 
 
@@ -346,6 +352,7 @@ li a:hover {
     display: none;
     text-indent: -9999px;
     background: url("/images/yukari-ok.png") no-repeat;
+    cursor: pointer;
 }
 
 
@@ -576,3 +583,59 @@ li a:hover {
 /* Gizilik politikası Mobil Bitiş */
 
 /* Gizlilik Politikası Bitiş */
+
+
+/* Sıkça Sorular Sorular Başlangıç */
+#sss-body {
+    background-image: url('/images/eps-arkaplan2.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.sss {
+    border: 1px solid #cfcfcf;
+    clear: both;
+    padding: 5px;
+}
+
+.sss .soru {
+    position: relative;
+    font-size: 15px;
+    font-weight: bold;
+    color: #333333;
+    background: #f2f2f2;
+    padding: 15px 40px;
+    margin: 0;
+    border-top: 1px solid #cfcfcf;
+    font-family: "Montserrat", sans-serif;
+    opacity: 0.5;
+}
+
+
+
+.sss .cevap {
+    padding: 0;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    text-align: justify;
+    font-style: italic;
+}
+
+.sss .cevap>p {
+    padding: 0 30px 20px 30px;
+}
+
+.sss .cevap p:last-child {
+    margin-bottom: 10px;
+}
+
+
+.sss-tum {
+    margin-left: 250px;
+    margin-right: 250px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+/* Sıkça Sorular Sorular Bitiş */
