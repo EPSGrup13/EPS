@@ -95,7 +95,26 @@
                     gösterebilmektedir. Her kullanıcı
                     rezervasyon yaptığı tarifeden ücretlendirilmektedir.</p>
             </div>
-
+			<h3 class="soru">Uygulamada problem olduğunda ne yapmalıyım <i class="fas fa-question-circle"></i></h3>
+            <div class="cevap">
+                <p><i class="fas fa-arrow-circle-right"></i> EPS uygulamasında herhangi bir problem ile
+                    karşılaşırsınız uygulama içerisindeki
+                    iletişim bölümünden bizlere rahatça ulaşabilirsiniz.</p>
+            </div>
+            <h3 class="soru">Kişisel bilgilerim güvende mi <i class="fas fa-question-circle"></i></h3>
+            <div class="cevap">
+                <p><i class="fas fa-arrow-circle-right"></i> En sıkı güvenlik önlemleri ile kişisel bilgilerinizi
+                    korumaktayız. Kişisel bilgileriniz
+                    hiçbir şekilde başka kurum, kuruluş veya birey ile paylaşılmamaktadır.</p>
+            </div>
+            <h3 class="soru">Park etmek istediğiniz bölgede otopark yoksa ne
+                yapmalıyım <i class="fas fa-question-circle"></i></h3>
+            <div class="cevap">
+                <p><i class="fas fa-arrow-circle-right"></i> Öneri ve Şikâyetlerinizi İletişim bölümünden otopark adını
+                    veya otopark ihtiyacınız bulunan bölgeyi
+                    yazarak bize ulaşabilirsiniz. Kısa sürede ekibimiz sizin için istediğiniz noktadan
+                    hizmet almanızı sağlayacaktır.</p>
+            </div>
         </div>
     </div>
 
