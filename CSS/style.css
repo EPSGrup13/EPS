@@ -320,12 +320,35 @@ li a:hover {
     background-color: #3e3b4d;
 }
 
+/* footer mobil başlangıç */
+
 @media (min-width:1200px) {
     .footer-hiza {
         margin-top: -114px;
     }
 }
 
+@media (max-width:991px) {
+    .footer .footer-boy p {
+        margin-left: -20%;
+    }
+    .footer h4 {
+        margin-left: -35%;
+    }
+}
+
+@media screen and (max-width: 767px) and (min-width: 526px){
+    .footer .footer-boy p {
+        margin-left: -1%;
+    }
+    .footer h4 {
+        margin-left: -45%;
+    }
+
+}
+
+
+/* footer mobil bitiş */
 /* footer bitiş */
 
 
