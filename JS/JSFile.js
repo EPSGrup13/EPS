@@ -596,7 +596,7 @@ function ckVersion() {
 	let orjVer = request1.get("https://raw.githubusercontent.com/EPSGrup13/EPS/master/config/data.json"); // splitData çekiliyor.
 	let currentVer = request2.get(devMode()+"config/data.json")
 	if((orjVer !== undefined && orjVer.website.version !== undefined) && (currentVer !== undefined && currentVer.website.version !== undefined)) {
-		if(orjVer.website.version !== currentVer.website.version) {
+		if(orjVer.website.version !== currentVer.website.version && (sessionStorage.getItem("bar-warning") === "true" || sessionStorage.getItem("bar-warning") == undefined)) {
 			//console.log(orjVer.website.version, " ", currentVer.website.version); // versiyonları göstermek için.
 			stickyBar("sticky-bar warning ta-center", ("Orijinal versiyon: " +orjVer.website.version+ " fakat kullandığınız: " +currentVer.website.version+ " olarak görünmekte!"));
 		} else {
@@ -613,19 +613,22 @@ function stickyBar(cName, message) {
 
 	    const subElement = document.createElement("button");
 	    subElement.className = "sb-btn";
-	    subElement.textContent = "kapat";
+	    subElement.textContent = "Birdaha Gösterme";
 	    subElement.addEventListener("click", close);
 
 	    let newChild = document.createTextNode(message);
 	    newElement.appendChild(newChild);
 	    newElement.appendChild(subElement);
 	    document.querySelector("body").appendChild(newElement);
+
+	 	sessionStorage.setItem("bar-warning", "true");
 	}
 }
 
 function close() {
 	const element = document.getElementsByClassName("sticky-bar")[0];
 	element.classList.toggle("hide");
+	sessionStorage.setItem("bar-warning", "false");
 
     setTimeout(function(){
 		element.classList.toggle("close");
@@ -635,82 +638,43 @@ function close() {
 function darkMode()
 {
 	const getCb = document.getElementById("dm");
-	if(sessionStorage.getItem("darkMode") == "true")
-	{
-		sessionStorage.setItem("darkMode", "false");
-		isChecked();
-		setStyles();
-	}
-	else
-	{
+	if(getCb.checked === true) {
 		sessionStorage.setItem("darkMode", "true");
 		isChecked();
-		setStyles();
+	} else {
+		sessionStorage.setItem("darkMode", "false");
+		isChecked();
 	}
 }
 
 function isChecked()
 {
 	const getCb = document.getElementById("dm");
-	if(sessionStorage.getItem("darkMode") == "true" )
-	{
-
-		getCb.checked = true;
+	if(sessionStorage.getItem("darkMode") === "false" || sessionStorage.getItem("darkMode") == undefined) {
 		setStyles();
-	}
-	else
-	{
+		sessionStorage.setItem("darkMode", "false");
 		getCb.checked = false;
+	} else {
 		setStyles();
+		sessionStorage.setItem("darkMode", "true");
+		getCb.checked = true;
 	}
 }
 
 function setStyles()
 {
-	sessionStorage.setItem("bgColor","#191919");
-	sessionStorage.setItem("hdrColor","#2d2d2d");
-	let getHeader = document.querySelector("nav");
+	let getHeader = document.querySelector(".headerInline");
 	let getFooter = document.querySelector(".footer");
 	let getContent = document.querySelector(".content");
 
-	if(sessionStorage.getItem("darkMode") == "true") //darkmode kapanacak.
-	{
-		sessionStorage.setItem("darkMode", true);
-		sessionStorage.bg = 1;
-
-		/*document.body.style.color = "White";*/
-		getHeader.className = "nav";
-
-		document.body.style.background = "none";
-		document.body.style.backgroundColor = "#191919";
-
-		getHeader.style.backgroundColor = sessionStorage.getItem("hdrColor");
-		getFooter.style.backgroundColor = sessionStorage.getItem("hdrColor");
-		getContent.style.backgroundColor = sessionStorage.getItem("bgColor");
-
-		//Color normalde de beyaz olduğundan bir süreliğine deaktif edilmiştir.
-		/*let aList = document.getElementsByTagName("a");
-		for(i=0;i<aList.length;i++)
-		{
-			//console.log(aList[i]);
-			aList[i].style.color = "White";
-		}*/
-	}
-	else //darkmode açılacak.
-	{
-		sessionStorage.setItem("darkMode", false);
-		sessionStorage.bg = 0;
-
-		document.body.style.background = "url('/images/bgimg1.png')";
-
-		//Color normalde de beyaz olduğundan bir süreliğine deaktif edilmiştir.
-		/*document.body.style.color = "Black";*/
-		getHeader.removeAttribute("style");
-		getFooter.removeAttribute("style");
-		getHeader.className = "nav nav-bg";
-		getFooter.className = "footer footer-bg";
-		getContent.className = "content";
-		getContent.removeAttribute("style");
+	if(sessionStorage.getItem("darkMode") === "false") { // darkmode kapanınca
+		document.body.classList.remove("dm-v");
+		getHeader.classList.remove("dm-v2");
+		getFooter.classList.remove("dm-v2");
+	} else { // darkmode açılınca
+		document.body.classList.toggle("dm-v");
+		getHeader.classList.toggle("dm-v2");
+		getFooter.classList.toggle("dm-v2");
 	}
 }
 
