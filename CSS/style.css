@@ -639,3 +639,145 @@ li a:hover {
 }
 
 /* Sıkça Sorular Sorular Bitiş */
+
+
+/* Otoparkımız Ol Başlangıç */
+#otopark-body {
+    background-image: url('/images/eps-arkaplan2.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#form-otopark-sahibi {
+    background: rgba(255, 255, 255, 0.685);
+    position: absolute;
+    width: 850px;
+    height: 520px;
+    display: table;
+    top: 50%;
+    left: 50%;
+    margin-top: -290px;
+    margin-left: -425px;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+}
+
+#h4-otopark {
+    color: black;
+    opacity: 0.685;
+}
+
+.iletisim {
+    display: flex;
+    justify-content: center;
+}
+
+#cizgi {
+    border-left: 1px solid rgb(166, 172, 184);
+    margin-left: 40px;
+    margin-bottom: 20px;
+}
+
+.iletisimsag {
+    margin-top: 40px;
+    width: 50%;
+}
+
+.bilgi-girisi {
+    width: 90%;
+    left: 5%;
+    position: relative;
+    background: none;
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.411);
+    margin-bottom: 15px;
+    color: rgb(255, 255, 255);
+    padding: 8px 20px;
+    border-left: 3px solid rgb(110, 19, 82);
+    border-radius: 5px;
+    transition: border-color .8s ease-out;
+}
+
+.bilgi-girisi:focus {
+    border-bottom: 1px solid rgba(74, 54, 113, 0.692);
+    outline: none;
+    border-left: 3px solid #888;
+}
+
+.otopark-adresi {
+    width: 90%;
+    left: 5%;
+    position: relative;
+    background: none;
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.411);
+    margin-bottom: 15px;
+    color: rgb(255, 255, 255);
+    padding: 8px 20px;
+    border-left: 3px solid rgb(110, 19, 82);
+    border-radius: 5px;
+    transition: border-color .8s ease-out;
+    max-height: 120px;
+    max-width: 384px;
+    min-width: 384px;
+    min-height: 80px;
+}
+
+.otopark-adresi:focus {
+    border-bottom: 1px solid rgba(74, 54, 113, 0.692);
+    outline: none;
+    border-left: 3px solid #888;
+}
+
+#buton2 {
+    width: 42%;
+    left: 4%;
+    position: relative;
+    padding: 10px;
+    background-color: rgb(243, 208, 67);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    float: left;
+    margin: 10px;
+    top: -20px;
+    margin-bottom: 25px;
+}
+
+#qr-code {
+    width: 30%;
+    height: 30%;
+    margin-top: 20px;
+}
+
+#OtoParkFoto-yazi {
+    color: #888;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.bilgi-girisi2 {
+    width: 90%;
+    left: 5%;
+    position: relative;
+    background: none;
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.411);
+    margin-bottom: 10%;
+    color: rgb(255, 255, 255);
+    padding: 8px 20px;
+    border-left: 3px solid rgb(110, 19, 82);
+    border-radius: 5px;
+    transition: border-color .8s ease-out;
+}
+
+.bilgi-girisi2:focus {
+    border-bottom: 1px solid rgba(74, 54, 113, 0.692);
+    outline: none;
+    border-left: 3px solid #888;
+}
+
+/* Otoparkımız Ol Bitiş */
