@@ -697,6 +697,21 @@ input:checked + .slider:before {
   right: 50px;
 }
 
+/* normal mode */
+.nm-v {
+  background-image: url('/images/bgimg1.png');
+}
+
+/* dark mode */
+.dm-v {
+  background: none;
+  background-color: #191919;
+}
+
+.dm-v2 {
+  background-color: #2d2d2d;
+}
+
 
 
 

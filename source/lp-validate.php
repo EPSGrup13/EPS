@@ -13,13 +13,13 @@
 			//print_r($dataArray); //test output
 			$result = tokenSession($dataArray[0], $dataArray[2], $dataArray[3]); // tokenDate ve tokenTime gönderiliyor.
 			if($result) {
-				session_start(); // lp-validate'e aktarılacak veri için session oluşturuluyor, daha sonra şifre değiştirildiğinde session yeniden kapatılacak.
+				session_start(); // lp-control'e aktarılacak veri için session oluşturuluyor, daha sonra şifre değiştirildiğinde session yeniden kapatılacak.
 				$_SESSION["token_id"] = $dataArray[0]; // token_id için session oluşturuluyor.
 				?>
 				<br><br>
 				<div class="lostPasswordNewPassBox">
 					<div id="lp-val">
-						<div><img src="https://i.hizliresim.com/TTKT7A.png" id="lostPasswordNewPassImg"></div>
+						<div><img src="<?php echo isDevelopmentModeOn(); ?>images/lock-icon.png" id="lostPasswordNewPassImg"></div>
 						<h3 id="lostPasswordNewPassText">Şifre Yenileme</h3>
 						<div><input type="password" name="password" class="lp-input" placeholder="Yeni Şifre"></div>
 						<div><input type="password" name="password" class="lp-input" placeholder="Yeni Şifre Tekrar"></div>
