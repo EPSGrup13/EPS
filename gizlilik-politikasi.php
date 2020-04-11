@@ -1,24 +1,7 @@
-<!DOCTYPE html>
-<html lang="tr">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="language" content="Turkish">
-    <!-- SEO için Meta Etiketleri -->
-    <meta name="description"
-    content="İstanbul'un Farklı Bölgelerinde en uygun fiyata E-Park ile park et. Ücretsiz mobil uygulama.Tüm Otoparklar Cebinde">
-    <meta name="keywords" content="Park,E-Park,Otopark,Online Park,Ücretsiz Park">
-    <meta name="author" content="EPS">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf8">
-    <meta name="robots" content="index, follow">
-
-    <title>Gizlilik Politikası</title>
-    <link rel="stylesheet" href="/CSS/all.css">
-    <link rel="stylesheet" href="/CSS/style.css">
-    <link rel="icon" href="/images/logo-icon.png">
-</head>
+<?php
+    include_once('include/functions.php');
+    includeExtContents("gizlilik-politikasi");
+?>
 
 <body id="gizlilik">
 
@@ -92,6 +75,4 @@
 
     </div>
 
-</body>
-
-</html>
+<?php include_once('include/bs-include/end.php'); ?>

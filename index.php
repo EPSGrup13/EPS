@@ -1,31 +1,9 @@
 <?php
     include_once('include/functions.php');
     session_start();
+
+    includeExtContents("index");
 ?>
-
-<!DOCTYPE html>
-<html lang="tr">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <!-- initial-scale mobil yakınlaştırma izin verme -->
-    <meta name="language" content="Turkish">
-    <!-- SEO için Meta Etiketleri -->
-    <meta name="description"
-        content="İstanbul'un Farklı Bölgelerinde en uygun fiyata E-Park ile park et. Ücretsiz mobil uygulama.Tüm Otoparklar Cebinde">
-    <meta name="keywords" content="Park,E-Park,Otopark,Online Park,Ücretsiz Park">
-    <meta name="author" content="EPS">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf8">
-    <meta name="robots" content="index, follow">
-
-    <base href="http://epark.sinemakulup.com">
-    <title>E-Park Sistemi</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="/CSS/all.css">
-    <link rel="stylesheet" href="/CSS/style.css">
-    <link rel="icon" href="/images/logo-icon.png">
-</head>
 
 <body>
     <!--
@@ -206,50 +184,7 @@
         </div>
     </div>
 
-    <div class="footer">
-        <div class="container">
-            <!-- container bs -->
-            <div>
-                <div class="col-md-12">
-                    <div class="footer-boy">
-                        <h4 class="col-md-10" style="text-align: right;">EPS</h4>
-                        <p class="col-md-12" style="text-align: right;">Ayazağa, Hadım
-                            Koruyolu Cd. No:19, 34398 Sarıyer/İSTANBUL</p>
-                        <ul>
-                            <li><a rel="external" href="javascript:void(0)"><span
-                                        class="fab fa-facebook-f fa-lg"></span></a></li>
-                            <li><a target="self" href="javascript:void(0)"><span
-                                        class="fab fa-twitter fa-lg"></span></a></li>
-                            <li><a target="_blank" href="javascript:void(0)"><span
-                                        class="fab fa-google-play fa-lg"></span></a></li>
-                        </ul>
-                        </p>
-                        <p>
-                            <div class="footer-hiza">
-                                <ul>
-                                    <li><a href="javascript:void(0)">Şartlar ve Koşullar</a></li>
-                                    <li><a href="javascript:void(0)">Hakkımızda</a></li>
-                                    <li><a href="<?php echo isDevelopmentModeOn();?>gizlilik-politikasi">Gizlilik Politikası</a></li>
-                                    <li><a href="javascript:void(0)">S.S.S</a></li>
-                                    <li><a href="javascript:void(0)">İndir</a></li>
-                                </ul>
-                            </div>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="copyright-bolumu">
-        <div class="container">
-            <div>
-                <div class="col-lg-12">
-                    <p class="p-small">Copyright © 2020. EPS </p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php include_once('include/bs-include/footer.php') ;?>
 
     <article>
         <p class="yukari-buton"></p>
@@ -270,6 +205,5 @@
             });
         });
     </script>
-    
-</body>
-</html>
+
+<?php include_once('include/bs-include/end.php'); ?>

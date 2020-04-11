@@ -1,0 +1,3 @@
+	<?php closeConn(); ?>
+	</body>
+</html>

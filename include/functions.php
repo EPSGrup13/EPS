@@ -116,6 +116,7 @@ class Dbpro {
 			return $dataArray;
 		} else {
 			reportErrorLog("mselect hata", 1501);
+			return "Veri Hatası";
 		}
 	}
 
@@ -1324,6 +1325,21 @@ function cssSource()
 	return $cssArray;
 }
 
+//Dinamik css kaynak yönlendirme fonksiyonu - ikincil tasarım için
+function extCssSource()
+{
+	$cssArray = array();
+
+	$cssLink1 = isDevelopmentModeOn()."CSS/style.css";
+	$cssLink2 = isDevelopmentModeOn()."CSS/all.css";
+	$cssHref1 = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".$cssLink1."\"/>";
+	$cssHref2 = "<link rel=\"stylesheet\" type=\"text/css\" href=\"".$cssLink2."\"/>";
+
+	array_push($cssArray, $cssHref1, $cssHref2);
+
+	return $cssArray;
+}
+
 function print_js_or_css($givenSourceArray)
 {
 	$genArray = array();
@@ -1774,15 +1790,43 @@ function oopSelect() {
 	echo "<br><br><br><br>";
 
 	$getData = $obj->mSelect();
-	echo $getData. "<br><br>";
-	print_r($getData);
+	if(is_array($getData)) {
+		echo $getData. "<br><br>";
+		print_r($getData);
+	} else {
+		echo $getData;
+	}
 
 
 	echo "<br><br><br><br>";
 
 	$getData = $obj->Select();
-	echo $getData. "<br><br>";
-	print_r($getData);
+	if(is_array($getData)) {
+		echo $getData. "<br><br>";
+		print_r($getData);
+	} else {
+		echo $getData;
+	}
+}
+
+// Aynı başlangıca sahip sayfalara dinamik olarak title ekler
+function srchTitle($title) {
+	switch($title) {
+		case 'index':
+			return "<title>E-Park Sistemi</title>";
+		case 'gizlilik-politikasi':
+			return "<title>Gizlilik Politikası</title>";
+		case 'otoparkimiz-ol':
+			return "<title>Otoparkımız Ol</title>";
+		default:
+			return "<title>E-Park</title>"; // olur da sayfa tanımlanamaz ise.
+	}
+}
+
+// Farklı yapılmış sayfalara dinamik start ve title vermek için (sayfa adı girilince title'ı yazdırılıyor)
+function includeExtContents($page) {
+    define("TITLE", srchTitle($page));
+    include_once('include/bs-include/start.php');
 }
 
 
