@@ -20,7 +20,7 @@
 
             <li><a href="<?php echo isDevelopmentModeOn(); ?>cities">Rezervasyon Yap</a></li>
 
-            <li><a href="javascript:void(0)">Otoparkımız Ol</a></li>
+            <li><a href="<?php echo isDevelopmentModeOn(); ?>otoparkimiz-ol">Otoparkımız Ol</a></li>
 
             <li><a href="<?php echo isDevelopmentModeOn(); ?>contact">İletişim</a></li>
 
@@ -42,7 +42,7 @@
     <header id="baslik" class="baslik">
         <div class="baslik-icerik">
             <div class="container">
-                <div class="col-lg-6" style="margin-top: -60px;">
+                <div class="col-lg-6">
                     <div class="container">
                         <h1 style="color: white;">E-PARK SİSTEMİ ile <br> Rezervasyon yaptığın otoparka detaylı yol
                             tarifi al, park yerini
