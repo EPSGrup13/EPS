@@ -1,6 +1,6 @@
 <?php
 	define('LOADED', TRUE);
-	include '../include/htmlStart.php';
+	include_once(__DIR__ . '/../include/functions.php');
 	maintenanceMode(); //header olmadığından ek olarak eklendi.
 	session_start();
 
@@ -45,4 +45,3 @@
 	
 	</body>
 </html>
-

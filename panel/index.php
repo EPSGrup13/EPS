@@ -1,6 +1,6 @@
 <?php
 	define('LOADED', TRUE);
-	include '../include/htmlStart.php';
+	include_once(__DIR__ . '/../include/htmlStart.php');
 	getHeader();
 	//pageProtection();
 	userAuth(); // session bu fonksiyonda kontrol edildiğinden pageProtection bir süreliğine deaktif edildi.

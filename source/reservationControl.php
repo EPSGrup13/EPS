@@ -1,5 +1,5 @@
 <?php
-	include '../include/functions.php';
+	include_once(__DIR__ . '/../include/functions.php');
 	session_start();
 	pageProtection();
 
