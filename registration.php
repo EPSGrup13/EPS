@@ -1,6 +1,7 @@
 <?php
 	define('LOADED', TRUE);
-	include 'include/htmlStart.php';
+    include_once('include/functions.php');
+    includeContents("registration");
 	maintenanceMode(); //header olmadığından ek olarak eklendi.
 	session_start();
 ?>
