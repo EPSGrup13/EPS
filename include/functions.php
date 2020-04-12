@@ -23,6 +23,17 @@ error_reporting(E_ERROR | E_PARSE);
 	$conn->set_charset("utf8");
 
 
+// Json Cevap -------------------
+$array1 = array();
+array_push($array1, "status");
+array_push($array1, "message");
+
+$array2 = array();
+array_push($array2,"success");
+array_push($array2,"failed");
+//--------------------------------
+
+
 //Ana dizinde değişiklik yapmadan alt sayfalarda geliştirme modu
 //-------------------------------------------------------------------
 $url1 = "external/tkeskin/";
@@ -162,6 +173,24 @@ class Dbpro {
 			reportErrorLog("select hata", 1502);
 		}
 	}
+
+	// Sadece gönderilen verinin veritabanında olup olmadığını kontrol eder.
+	function contains() {  // return -> true | false
+		global $conn;
+
+		$sql = $this->query;
+		$result = $conn->query($sql);
+		if ($result->num_rows > 0)
+			return TRUE;
+		else
+			return FALSE;
+	}
+
+	// Objedeki verileri istendiğinde değiştirebilmek için.
+	function setVals($newQuery, $newData) {
+		$this->query = $newQuery;
+		$this->data = $newData;
+	}
 }
 
 
@@ -244,6 +273,9 @@ function redirectWithTimer($pageURL)
 function loginControl($getMail, $getPassword)
 {
 	global $conn;
+	global $array1;
+	global $array2;
+
 	//Kullanıcıdan gelen inputu kontrol ederek sorguya göndereceğiz.
 	$mailCheck = mysqli_real_escape_string($conn,$getMail);
 	$passwordCheck = mysqli_real_escape_string($conn,$getPassword);
@@ -254,7 +286,6 @@ function loginControl($getMail, $getPassword)
 	{
 		while($row = $result->fetch_assoc())
 		{
-
 			session_start();
 			$_SESSION["userName"] = $row["userName"];
 			$_SESSION["userPassword"] = $row["userPassword"];
@@ -268,15 +299,15 @@ function loginControl($getMail, $getPassword)
 			if((int)$_SESSION["userType"] === 2)
 			{
 				reportAuth($_SESSION["userName"],$_SESSION["firstName"],$_SESSION["lastName"],$_SESSION["person_id"]);
-				//echo $_SESSION["userType"]; //test
 			}
-			redirectTo("cities");
+			$arr = array($array1[0]=>$array2[0], $array1[1]=>"Yönlendiriliyorsunuz...");
+			return json_encode($arr);
 		}
 	}
 	else
 	{
-		echo "Giriş bilgileri doğru değil. Geri Yönlendiriliyorsunuz...";
-		redirectWithTimer("login");
+		$arr = array($array1[0]=>$array2[1], $array1[1]=>"Giriş bilgileri doğru değil.");
+		return json_encode($arr);
 	}
 }
 
@@ -1818,6 +1849,30 @@ function srchTitle($title) {
 			return "<title>Gizlilik Politikası</title>";
 		case 'otoparkimiz-ol':
 			return "<title>Otoparkımız Ol</title>";
+		case 'cities':
+			return "<title>İller</title>";
+		case 'contact':
+			return "<title>İletişim</title>";
+		case 'editProfile':
+			return "<title>Profil Güncelleme</title>";
+		case 'login':
+			return "<title>Üye Girişi</title>";
+		case 'lostPassword':
+			return "<title>Şifremi Unuttum</title>";
+		case 'maintenance':
+			return "<title>Bakımdayız</title>";
+		case 'parkDetails':
+			return "<title>Park Detayları</title>";
+		case 'parks':
+			return "<title>Parklar</title>";
+		case 'profile':
+			return "<title>Profil</title>";
+		case 'records':
+			return "<title>Kayıtlar</title>";
+		case 'registration':
+			return "<title>Üye Kaydı</title>";
+		case 'reservation':
+			return "<title>Rezervasyon</title>";
 		default:
 			return "<title>E-Park</title>"; // olur da sayfa tanımlanamaz ise.
 	}
@@ -1827,6 +1882,11 @@ function srchTitle($title) {
 function includeExtContents($page) {
     define("TITLE", srchTitle($page));
     include_once('include/bs-include/start.php');
+}
+
+function includeContents($page) {
+	define("TITLE", srchTitle($page));
+	include_once('include/htmlStart.php');
 }
 
 

@@ -1,19 +1,15 @@
 <?php
-	include '../include/functions.php';
+	include_once(__DIR__ . '/../include/functions.php');
 	session_start();
 
-
-	$getMail = $_POST["mailField"];
-	$getPassword = $_POST["passField"];
-
-	if(isNullorOnlySpace($getPassword) || isNullorOnlySpace($getMail))
+	if(isset($_POST["mailField"]) && isset($_POST["passField"]))
 	{
-		echo "Giriş bilgileri doğru değil. Geri Yönlendiriliyorsunuz...";
-		redirectWithTimer("login");
+		echo loginControl($_POST["mailField"], convertPassToMD5($_POST["passField"]));
 	}
 	else
 	{
-		loginControl($getMail,convertPassToMD5($getPassword));
+		$arr = array($array1[0]=>$array2[1], $array1[1]=>"Hata oluştu.");
+		echo json_encode($arr);
 	}
 
 

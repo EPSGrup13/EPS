@@ -6,6 +6,9 @@ class Request {
 	}
 
 	get(url) {
+		if(!url.includes("https://")) {
+			url = devMode()+url;
+		}
 		this.xmlHttp.onreadystatechange = function() {
 			if(this.readyState === 4 && this.status === 200) {
 				//console.log(this.responseText);
@@ -37,7 +40,7 @@ class Request {
 				}
 			}
 		}
-		this.xmlHttp.open("post", url, false); // false -> asenkron değil.
+		this.xmlHttp.open("post", (devMode()+url), false); // false -> asenkron değil.
 		this.xmlHttp.send(data);
 		return self.status;
 	}
@@ -562,13 +565,13 @@ function mkReservation() {
 		formData.append("time", dataArray);
 		let getParkUrl = window.location.href.split("/");
 		formData.append("park_url", getParkUrl[getParkUrl.length - 1]);
-		console.log(formData.get("time"));
+		/*console.log(formData.get("time"));
 		console.log(formData.get("park_url"));
-		console.log(getParkUrl[getParkUrl.length - 1]);
-		const status = request.post(devMode()+"makeReservation", formData);
+		console.log(getParkUrl[getParkUrl.length - 1]);*/
+		const status = request.post("makeReservation", formData);
 
 		//console.log(status);
-		if(status) {
+		if(status === "true") { // string true
 			for(i = 0; i < getTime.length; i++) {
 				if(getTime[i].children[1].checked) {
 					getTime[i].children[0].src = devURL()+"images/car-red.png";
@@ -594,13 +597,14 @@ function ckVersion() {
 	const request1 = new Request();
 	const request2 = new Request();
 	let orjVer = request1.get("https://raw.githubusercontent.com/EPSGrup13/EPS/master/config/data.json"); // splitData çekiliyor.
-	let currentVer = request2.get(devMode()+"config/data.json")
-	if((orjVer !== undefined && orjVer.website.version !== undefined) && (currentVer !== undefined && currentVer.website.version !== undefined)) {
+	let currentVer = request2.get("config/data.json")
+	if(orjVer !== undefined && currentVer !== undefined) {
 		if(orjVer.website.version !== currentVer.website.version && (sessionStorage.getItem("bar-warning") === "true" || sessionStorage.getItem("bar-warning") == undefined)) {
-			//console.log(orjVer.website.version, " ", currentVer.website.version); // versiyonları göstermek için.
+			console.log(orjVer.website.version, " ", currentVer.website.version); // versiyonları göstermek için.
 			stickyBar("sticky-bar warning ta-center", ("Orijinal versiyon: " +orjVer.website.version+ " fakat kullandığınız: " +currentVer.website.version+ " olarak görünmekte!"));
 		} else {
-			console.log("uyumlu");
+			console.log(orjVer.website.version, " ", currentVer.website.version);
+			console.log("Versiyon uyumlu veya bastırılmış");
 		}
 	}
 }
@@ -633,6 +637,45 @@ function close() {
     setTimeout(function(){
 		element.classList.toggle("close");
     },500);
+}
+
+// Login
+
+function login() {
+	const request = new Request();
+	var formData = new FormData();
+
+	$getButton = document.getElementsByClassName("l-btn")[0];
+	$getButton.addEventListener("click", function(e){
+		e.preventDefault();
+	})
+	$getEmail = document.getElementsByClassName("formkapsaminput")[0];
+	$getPass = document.getElementsByClassName("formkapsaminput")[1];
+	if($getEmail.value.length === 0 || $getPass.value.length === 0) {
+		displayWarning("alert danger", "Alanları boş bırakamassınız.");
+	} else {
+		formData.append($getEmail.name, cleanVal($getEmail.value));
+		formData.append($getPass.name, $getPass.value);
+		const status = request.post("source/loginControl", formData);
+		if(status === "true") { // string true
+			clearSpecificInput("formkapsaminput", 0);
+			clearSpecificInput("formkapsaminput", 1);
+			setTimeout(function(){
+			window.location.href = (devMode() + "cities"); // displaywarning 3sn. ama 1sn. sonra sayfa değiştirilerek displaywarning de kesilecek.
+			}, 1000);
+		} else {
+			clearSpecificInput("formkapsaminput", 1); // sadece şifreyi silmesi için
+		}
+	}
+}
+
+// Login sonu
+
+function logout() {
+	displayWarning("alert warning", "Çıkış yapılıyor...");
+	setTimeout(function(){
+	window.location.href = (devMode() + "cities?logout");
+	}, 1000); // displaywarning 3sn. ama 1sn. sonra sayfa değiştirilerek displaywarning de kesilecek.
 }
 
 function darkMode()

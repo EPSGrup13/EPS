@@ -23,7 +23,7 @@
 		<div class="linkBar2">
 			<?php
 			echo "<a href=\"".isDevelopmentModeOn()."cities\">Rezervasyon</a>";
-			echo "<a href=\"javascript:void(0)\">Otoparkımız Ol</a>";
+			echo "<a href=\"".isDevelopmentModeOn()."otoparkimiz-ol\">Otoparkımız Ol</a>";
 			echo "<a href=\"".isDevelopmentModeOn()."contact\">İletişim</a>";
 			?>
 		</div>
@@ -70,7 +70,7 @@
 
 				echo "&nbsp;&nbsp;<font color=\"white\">Bakiye: ".getUserBalance(). "</font>";
 				
-				echo "&nbsp;&nbsp;<a href=\"".getLink("cities?logout")."\" class=\"profileColor\" style=\"display:inline-block;\">Çıkış</a>";
+				echo "&nbsp;&nbsp;<a href=\"#\" class=\"profileColor\" style=\"display:inline-block;\" onclick=\"logout(); return false;\">Çıkış</a>";
 			}
 			else
 			{
