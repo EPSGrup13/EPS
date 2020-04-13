@@ -803,9 +803,9 @@ input:checked + .slider:before {
 
 /*Front End grubu css başlangıcı*/
 
-body
-{
-    background-image: url("/images/bgimg1.png"); /*web site arkaplan*/
+body {
+    /*background-color: #27496d;*/
+    /*background-image: url("https://images.wallpaperscraft.com/image/parking_cars_underground_131454_1280x720.jpg"); /*web site arkaplan*/  
     background-repeat: no-repeat; /* arkaplan tekrar etmemesi için */
     background-attachment: fixed; /*Sayfayı hareket ettirince arkaplanın sabit kalması için */
     background-position: center; /*arkaplanı sayfaya ortalamak için*/
@@ -1956,4 +1956,125 @@ footer p
   width: 18px;
   height: 18px;
   padding-right:5px;
+}
+
+/*yeni login.php için css*/
+
+.login-container  {
+  height: 100vh;
+}
+
+.login-left {
+  position: relative;
+  float: left;
+  width: 50%;
+  height: 100%;
+  min-height: 500px;
+  overflow: auto;
+}
+
+.login-image {
+  display: block;
+  position: fixed;
+  right: 0;
+  width: 50%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.login-form {
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top:0;
+  bottom: 0;
+  margin:auto;
+  height: auto;
+  max-height: 380px;
+  width: 500px;
+  max-width:90%;
+}
+
+.login-field {
+  width:330px;
+  margin: 0 auto;
+}
+
+.loginform-title {
+  text-align: left;
+  font-size: 34px;
+  font-weight: 300;
+  color: #2E384D;
+}
+
+.loginform-subtitle {
+  text-align: left;
+  color:#8798ad;
+  font-size: 14px;
+  margin-top: -15px;
+}
+
+.form-input-label {
+  text-align: left;
+  color: #69707F;
+  font-size:12px;
+  letter-spacing: 1.2px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.form-input {
+  width: 100%;
+  padding:10px 15px;
+  font-size: 15px;
+  border:1px solid rgba(46,91,255,0.08);
+  background-color: rgba(224,231,255,.2);
+  border-radius: 5px;
+}
+
+.login-button {
+  cursor: pointer;
+  width: 330px;
+  height: 50px;
+  margin-top: 25px;
+  border-radius: 3px;
+  font-size: 15px;
+  color: white;
+  background-color: #3282b8;
+  border:none;
+}
+
+.form-info-text {
+  color:#808AC9;
+  font-size: 15px;
+}
+
+.form-info-text a
+{
+  cursor: pointer;
+  text-decoration: none;
+  color:#3282b8;
+}
+
+/*responsive login form*/
+
+@media (max-width:768px)
+{
+  .login-left {
+    clear: both;
+    width:100%;
+  }
+
+  .login-image {
+    clear: both;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+  }
+
+  .login-form {
+    background-color: #FFFFFF;
+    border-radius: 5px;
+  }
 }
