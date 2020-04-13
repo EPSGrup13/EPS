@@ -198,7 +198,7 @@ function validate(callback)
 			{
 				const mkElement = document.createElement("span");
 				mkElement.className = "mArea";
-				const mkChild = document.createTextNode("Bu alanı boş bırakamassınız");
+				const mkChild = document.createTextNode("Bu alanı boş bırakamazsınız");
 				mkElement.appendChild(mkChild);
 
 				getFormChildren[i].appendChild(mkElement);
@@ -475,7 +475,7 @@ function updateProcess() {
 			if(pnChildren[i].children.length === 1) {
 				const mkElement = document.createElement("span");
 				mkElement.className = "mArea";
-				const mkChild = document.createTextNode("Bu alanı boş bırakamassınız");
+				const mkChild = document.createTextNode("Bu alanı boş bırakamazsınız");
 				mkElement.appendChild(mkChild);
 
 				pnChildren[i].appendChild(mkElement);
@@ -652,7 +652,7 @@ function login() {
 	$getEmail = document.getElementsByClassName("formkapsaminput")[0];
 	$getPass = document.getElementsByClassName("formkapsaminput")[1];
 	if($getEmail.value.length === 0 || $getPass.value.length === 0) {
-		displayWarning("alert danger", "Alanları boş bırakamassınız.");
+		displayWarning("alert danger", "Alanları boş bırakamazsınız.");
 	} else {
 		formData.append($getEmail.name, cleanVal($getEmail.value));
 		formData.append($getPass.name, $getPass.value);
