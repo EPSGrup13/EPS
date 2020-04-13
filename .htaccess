@@ -23,6 +23,7 @@ RewriteRule ^password/change/token=([0-9a-zA-Z-_]+)$ source/lp-validate.php?toke
 RewriteRule ^password/protection/token=([0-9a-zA-Z-_]+)$ source/lp-userProtection.php?token=$1 [L,QSA]
 RewriteRule ^lpgen$ source/lp-generate.php [L,QSA]
 RewriteRule ^lpcont$ source/lp-control.php [L,QSA]
+RewriteRule ^updateRv$ source/rv-update.php [L,QSA]
 
 RewriteRule ^userlogin$ source/loginControl.php [L,QSA]
 RewriteRule ^makeReservation$ source/reservationControl.php [L,QSA]

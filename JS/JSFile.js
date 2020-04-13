@@ -46,7 +46,7 @@ class Request {
 	}
 }
 
-const dMode = false;
+const dMode = true;
 function devMode() {
 	if(dMode === true) {
 		return "http://epark.sinemakulup.com/external/tkeskin/";
@@ -577,8 +577,8 @@ function mkReservation() {
 					getTime[i].children[0].src = devURL()+"images/car-red.png";
 					getTime[i].children[1].remove(); //inputu kaldır
 					const newChild = document.createElement("span");
-					newChild.style.color = "red";
-					newChild.appendChild(document.createTextNode("DOLU"));
+					newChild.style.color = "orange";
+					newChild.appendChild(document.createTextNode("Onay Bekliyor"));
 					getTime[i].appendChild(newChild); //dolu yazısını koy
 				}
 			}
@@ -661,8 +661,8 @@ function login() {
 			clearSpecificInput("formkapsaminput", 0);
 			clearSpecificInput("formkapsaminput", 1);
 			setTimeout(function(){
-			window.location.href = (devMode() + "cities"); // displaywarning 3sn. ama 1sn. sonra sayfa değiştirilerek displaywarning de kesilecek.
-			}, 1000);
+			window.location.href = (devMode() + "cities"); // displaywarning 3sn. ama 0.6sn. sonra sayfa değiştirilerek displaywarning de kesilecek.
+			}, 600);
 		} else {
 			clearSpecificInput("formkapsaminput", 1); // sadece şifreyi silmesi için
 		}
@@ -675,7 +675,22 @@ function logout() {
 	displayWarning("alert warning", "Çıkış yapılıyor...");
 	setTimeout(function(){
 	window.location.href = (devMode() + "cities?logout");
-	}, 1000); // displaywarning 3sn. ama 1sn. sonra sayfa değiştirilerek displaywarning de kesilecek.
+	}, 600); // displaywarning 3sn. ama 0.6sn. sonra sayfa değiştirilerek displaywarning de kesilecek.
+}
+
+function updateRv(boolean, rvid) {
+	const request = new Request();
+	var formData = new FormData();
+
+	if(boolean === "true") { // string olarak geliyor
+		formData.append("status", "TRUE");
+		formData.append("rvid", rvid);
+		const status = request.post("updateRv", formData);
+	} else {
+		formData.append("status", "FALSE");
+		formData.append("rvid", rvid);
+		const status = request.post("updateRv", formData);
+	}
 }
 
 function darkMode()

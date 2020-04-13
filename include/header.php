@@ -44,6 +44,9 @@
 					echo "<div class=\"uprofile-content\">
 							<a href=\"".isDevelopmentModeOn()."parkdetayi\">Park Detayları</a>
 						  ";
+						echo "<div class=\"uprofile-content\">
+							<a href=\"".isDevelopmentModeOn()."reservationAccept\">Park Talepleri</a>
+						  ";
 				}
 				else if(getUserLevel() === 2) {
 						echo "<div class=\"uprofile-content\">
@@ -70,7 +73,7 @@
 
 				echo "&nbsp;&nbsp;<font color=\"white\">Bakiye: ".getUserBalance(). "</font>";
 				
-				echo "&nbsp;&nbsp;<a href=\"#\" class=\"profileColor\" style=\"display:inline-block;\" onclick=\"logout(); return false;\">Çıkış</a>";
+				echo "&nbsp;&nbsp;<a href=\"javascript:void(0)\" class=\"profileColor\" style=\"display:inline-block;\" onclick=\"logout(); return false;\">Çıkış</a>";
 			}
 			else
 			{

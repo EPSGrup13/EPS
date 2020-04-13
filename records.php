@@ -41,12 +41,11 @@ if(is_array($details))
 	for($i = 0; $i < count($details); $i++)
 	{
 
-		if($details[$i] === "BOŞ")
-		{
+		if($details[$i] === "BOŞ") {
 			echo $timeArray[$i]. " " .$details[$i]."<br>";
-		}
-		else
-		{
+		} else if($details[$i] === "X") {
+			echo $timeArray[$i]. " <font color=\"orange\">Onay Bekliyor</font><br>";
+		} else {
 			$personDetails = parkHistoryPersonFilter((int)($details[$i]), $recDate, $timeArray[$i], $statusId);
 			if(is_array($personDetails))
 			{
