@@ -47,7 +47,7 @@ $urlSelection = $url1;
 
 function allowDMode()
 {
-	return FALSE; //geliştirme durumunda TRUE olarak değiştirilecek.
+	return TRUE; //geliştirme durumunda TRUE olarak değiştirilecek.
 }
 
 
@@ -126,7 +126,7 @@ class Dbpro {
 			}
 			return $dataArray;
 		} else {
-			reportErrorLog("mselect hata", 1501);
+			reportErrorLog("OOP mSelect hatası, örnek query: " .$this->query. " ve örnek data: " .$this->data, 1501);
 			return "Veri Hatası";
 		}
 	}
@@ -170,7 +170,8 @@ class Dbpro {
 			}
 			return $dataArray;
 		} else {
-			reportErrorLog("select hata", 1502);
+			reportErrorLog("OOP select hatası, örnek query: " .$this->query. " ve örnek data: " .$this->data, 1502);
+			return "Veri Hatası";
 		}
 	}
 
@@ -190,6 +191,30 @@ class Dbpro {
 	function setVals($newQuery, $newData) {
 		$this->query = $newQuery;
 		$this->data = $newData;
+	}
+
+	function update() {
+		global $conn;
+		$sql = $this->query;
+
+		if ($conn->query($sql) === TRUE)
+			return TRUE;
+		else {
+			reportErrorLog("OOP update hatası, örnek query: " .$this->query. " ve örnek data: " .$this->data, 1503);
+			return FALSE;
+		}
+	}
+
+	function delete() {
+		global $conn;
+		$sql = $this->query;
+
+		if ($conn->query($sql) === TRUE)
+			return TRUE;
+		else {
+			reportErrorLog("OOP delete hatası, örnek query: " .$this->query. " ve örnek data: " .$this->data, 1504);
+			return FALSE;
+		}
 	}
 }
 
@@ -954,10 +979,10 @@ function parkDetailCheckBox($parkStatus, $time)
 			return "<input type=\"checkbox\" value=\"".$time."\" name=\"time[]\" disabled>"; //gönderildiği yer echo'da olduğundan echo değil, return kullanıldı.
 		} else {
 			return "<input type=\"checkbox\" value=\"".$time."\" name=\"time[]\">"; //gönderildiği yer echo'da olduğundan echo değil, return kullanıldı.
-	}
-	}
-	else
-	{
+		}
+	} else if($parkStatus === "X") {
+		return "<span class=\"color3\">Onay Bekliyor</span>";
+	} else {
 		return "<span class=\"color2\">DOLU</span>";
 	}
 }
@@ -967,9 +992,9 @@ function returnCarImg($parkStatus)
 	if($parkStatus === "BOŞ")
 	{
 		return "<img src=\"" .isDevelopmentModeOn(). "images/car-green.png\" class=\"parkReservationCarImg\">";
-	}
-	else
-	{
+	} else if($parkStatus === "X") { // eğer beklemede ise
+		return "<img src=\"" .isDevelopmentModeOn(). "images/car-red.png\" class=\"parkReservationCarImg\">";
+	} else {
 		return "<img src=\"" .isDevelopmentModeOn(). "images/car-red.png\" class=\"parkReservationCarImg\">";
 	}
 }
@@ -1036,7 +1061,7 @@ function completeReservation($park_url, $arrayTime, $person_id)
 			$temp = "parkStatus.h";
 			$temp = $temp . substr($getTime[$i], 0, 2); //start, length
 
-			$splitTime = $splitTime . $temp . "='$person_id', ";
+			$splitTime = $splitTime . $temp . "='X', ";
 		}
 
 		$splitTime = substr($splitTime, 0, (strlen($splitTime) - 2));
@@ -1177,7 +1202,7 @@ function reservationHistory($person_id)
 
 	global $conn;
 
-	$sql = "SELECT Reservation.reservation_hour, Reservation.reservation_date, Reservation.full_plate, Slug.slug_title FROM Reservation INNER JOIN parkStatus ON Reservation.parkStatus_id = parkStatus.parkStatus_id INNER JOIN Park ON parkStatus.park_id = Park.park_id INNER JOIN Slug ON Park.slug_id = Slug.slug_id WHERE Reservation.person_id = '$person_id' ORDER BY Reservation.reservation_date DESC, Reservation.reservation_id DESC, Reservation.reservation_hour ASC LIMIT 10";
+	$sql = "SELECT Reservation.reservation_hour, Reservation.reservation_date, Reservation.full_plate, Slug.slug_title FROM Reservation INNER JOIN parkStatus ON Reservation.parkStatus_id = parkStatus.parkStatus_id INNER JOIN Park ON parkStatus.park_id = Park.park_id INNER JOIN Slug ON Park.slug_id = Slug.slug_id WHERE Reservation.person_id = '$person_id' AND Reservation.is_accepted = 1 ORDER BY Reservation.reservation_date DESC, Reservation.reservation_id DESC, Reservation.reservation_hour ASC LIMIT 10";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0)
 	{
@@ -1295,7 +1320,7 @@ function parkHistoryPersonFilter($person_id, $date, $hour, $statusId)
 
 	global $conn;
 
-	$sql = "SELECT Reservation.full_plate, Person.firstName, Person.lastName FROM Reservation INNER JOIN Person ON Reservation.person_id = Person.person_id WHERE Reservation.person_id = '$person_id' AND Reservation.reservation_date = '$date' AND Reservation.reservation_hour = '$hour' AND Reservation.parkStatus_id = '$statusId'";
+	$sql = "SELECT Reservation.full_plate, Person.firstName, Person.lastName FROM Reservation INNER JOIN Person ON Reservation.person_id = Person.person_id WHERE Reservation.person_id = '$person_id' AND Reservation.reservation_date = '$date' AND Reservation.reservation_hour = '$hour' AND Reservation.parkStatus_id = '$statusId' AND Reservation.is_accepted = 1";
 	$result = $conn->query($sql);
 	if ($result->num_rows > 0)
 	{
@@ -1322,6 +1347,13 @@ function isParkOwner()
 	{
 		destroyUserSession();
 	}
+}
+
+function booleanPOCheck() {
+	if(getUserLevel() === 1)
+		return TRUE;
+	else
+		return FALSE;
 }
 
 
@@ -1873,6 +1905,8 @@ function srchTitle($title) {
 			return "<title>Üye Kaydı</title>";
 		case 'reservation':
 			return "<title>Rezervasyon</title>";
+		case 'reservationAccept':
+			return "<title>Rezervasyon Talepleri</title>";
 		default:
 			return "<title>E-Park</title>"; // olur da sayfa tanımlanamaz ise.
 	}
@@ -1887,6 +1921,95 @@ function includeExtContents($page) {
 function includeContents($page) {
 	define("TITLE", srchTitle($page));
 	include_once('include/htmlStart.php');
+}
+
+// gelen rezervasyon taleplerini reservationAccept sayfasında gösterebilmek için.
+function reservationRequest($person_id, $date) {
+	$query = "SELECT Reservation.reservation_id, Reservation.reservation_hour, Reservation.reservation_date, Reservation.full_plate, Reservation.person_id FROM Park INNER JOIN parkStatus ON Park.park_id = parkStatus.park_id INNER JOIN Reservation ON parkStatus.parkStatus_id = Reservation.parkStatus_id WHERE Park.person_id = '$person_id' AND Reservation.reservation_date = '$date' AND Reservation.is_accepted = 0 ORDER BY Reservation.reservation_date DESC, Reservation.reservation_hour DESC";
+	$data = "person_id, full_plate, reservation_date, reservation_hour, reservation_id"; // sıralama gönderildiği gibi
+
+	$obj = new Dbpro($query, $data);
+	$getData = $obj->mSelect();
+	if(is_array($getData)) {
+		return $getData;
+	} else {
+		echo $getData;
+	}
+}
+
+function ownerRelevancy($session_person_id, $reservation_id) { // session_person_id -> kullanıcı otoparkçı ve onun session_id'si
+	global $array1;
+	global $array2;
+
+	$query = "SELECT Park.person_id FROM Park INNER JOIN parkStatus ON Park.park_id = parkStatus.park_id INNER JOIN Reservation ON parkStatus.parkStatus_id = Reservation.parkStatus_id WHERE Reservation.reservation_id = '$reservation_id'";
+	$data = "person_id";
+
+	$obj = new Dbpro($query, $data);
+	$getData = $obj->select();
+	if(is_array($getData)) {
+		if((int)$getData[0] === (int)$session_person_id)
+			return TRUE;
+		else
+			return fALSE;
+	} else
+		return FALSE;
+}
+
+function updateReservationStatus($reservation_id, $process, $status) {
+	global $array1;
+	global $array2;
+
+	$query = "UPDATE Reservation SET is_accepted = " .$status. " WHERE reservation_id = '$reservation_id'";
+	$data = ""; // update için önemsiz
+
+	$obj = new Dbpro($query, $data);
+	$ans = $obj->update();
+	if($ans && updatePStatus($reservation_id, $process)) {
+		$arr = array($array1[0]=>$array2[0], $array1[1]=>"İşlem gerçekleştirildi");
+		return json_encode($arr);
+	} else {
+		$arr = array($array1[0]=>$array2[1], $array1[1]=>"Hata oluştu.");
+		return json_encode($arr);
+	}
+}
+
+/* İşlem onaylanırsa parkSatus'e gerekli saat için person_id, reddedilirse
+geri BOŞ girilecek.
+*/
+function updatePStatus($reservation_id, $process) {
+	global $array1;
+	global $array2;
+
+	$query = "SELECT person_id, parkStatus_id, reservation_hour FROM Reservation WHERE reservation_id = '$reservation_id'";
+	$data = "person_id, parkStatus_id, reservation_hour";
+
+	$obj1 = new Dbpro($query, $data);
+	$getData = $obj1->select(); // [0]->person_id, [1]->parkStatus_id, [2]->reservation_hour
+	$rvHr = $getData[2];
+	if((int)$rvHr < 10) {
+		$rvHr = "h0".(int)$rvHr; // h00
+	} else {
+		$rvHr = "h".(int)$rvHr; // h10 gibi
+	}
+
+	if(is_array($getData)) {
+		if($process === "update")
+			$col = $getData[0];
+		else if($process === "remove")
+			$col = "BOŞ";
+		else
+			return FALSE;
+
+		$query = "UPDATE parkStatus SET " .$rvHr. " = '$col' WHERE parkStatus_id = '$getData[1]'";
+		$data = ""; // update için önemsiz
+		$obj2 = new DbPro($query, $data);
+		$status = $obj2->update();
+		if($status)
+			return TRUE;
+		else
+			return FALSE;
+	} else
+		return FALSE;
 }
 
 
