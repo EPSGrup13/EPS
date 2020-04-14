@@ -30,6 +30,7 @@
 
 <div class="reservationAcceptBoxInfo" >
 		<?php
+		if(is_array($getData)) {
 			for($i = 0; $i < count($getData); $i++) {
 				for($j = 0; $j < count($getData[$i]) - 1; $j++) { // array.length -1'e kadar. Son veri reservation_id
 					if($j === 2) // eğer tarih olan index ise.
@@ -47,7 +48,16 @@
 					</div>
 				<?php
 			}
+		} else {
+			?>
+				<div class="reservationAcceptBoxInfoPartial">Kayıt bulunmamaktadır.</div>
+				<div class="reservationAcceptBoxInfoPartial"></div>
+				<div class="reservationAcceptBoxInfoPartialImg"></div>
+				<div class="reservationAcceptBoxInfoPartialImg"></div>
+			<?php
+		}
 		?>
+
 </div>
 
 

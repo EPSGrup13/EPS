@@ -60,12 +60,10 @@ a:hover
 
 .content /* wrapper */
 {
-  /*background-color: yellow;*/
   color:white;
   display: block;
   box-sizing: border-box;
   min-height: calc(100% - 95px);
-  /*min-width: 586px;*/
   padding-bottom:10px;
 }
 
@@ -88,6 +86,10 @@ a:hover
 .color2
 {
   color:red;
+}
+
+.color3 {
+  color: orange;
 }
 
 .loginBox
@@ -608,27 +610,27 @@ input:checked + .slider:before {
 
 .profileInput::-webkit-input-placeholder  /* Chrome/Opera/Safari */
 {
-	color: gray; 
+  color: gray; 
 }
 
 .profileInput:-ms-input-placeholder /* Internet Explorer 10-11 */
 {
-	color: gray;
+  color: gray;
 }
 
 .profileInput::-moz-placeholder /* Firefox 19+ */
 {
-	color: gray;
+  color: gray;
 }
 
 .profileInput:-moz-placeholder /* Firefox 18- */
 {
-	color: gray;
+  color: gray;
 }
 
 .profileInput::placeholder
 {
-	color: gray;
+  color: gray;
 }
 
 .editProfileTop
@@ -642,10 +644,10 @@ input:checked + .slider:before {
 
 .ep-btn
 {
-	margin-top: 10px;
-	margin-left: auto;
-	margin-right: auto;
-	display:block;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  display:block;
 }
 
 .pd-date {
@@ -719,7 +721,7 @@ input:checked + .slider:before {
 /* Genel CSS Başlangıcı */
 .ta-center
 {
-	text-align: center;
+  text-align: center;
 }
 /* Genel CSS Bitişi */
 
@@ -1018,27 +1020,27 @@ nav li a:hover
 /* Chrome/Opera/Safari için placeholder renk değişikliği */
 .formkapsaminput::-webkit-input-placeholder  /* Chrome/Opera/Safari */
 {
-	color: white !important;  
+  color: white !important;  
 }
 
 .formkapsaminput:-ms-input-placeholder /* Internet Explorer 10-11 */
 {
-	color: white !important; 
+  color: white !important; 
 }
 
 .formkapsaminput::-moz-placeholder /* Firefox 19+ */
 {
-	color: white !important; 
+  color: white !important; 
 }
 
 .formkapsaminput:-moz-placeholder /* Firefox 18- */
 {
-	color: white !important; 
+  color: white !important; 
 }
 
 .formkapsaminput::placeholder
 {
-	color: white !important; 
+  color: white !important; 
 }
 
 

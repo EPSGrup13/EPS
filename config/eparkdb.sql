@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 11, 2020 at 01:53 AM
+-- Generation Time: Apr 14, 2020 at 06:40 AM
 -- Server version: 5.6.47-cll-lve
 -- PHP Version: 7.2.7
 
@@ -190,6 +190,7 @@ CREATE TABLE `Reservation` (
   `reservation_date` date NOT NULL,
   `full_plate` varchar(9) NOT NULL,
   `person_id` int(11) NOT NULL,
+  `is_accepted` tinyint(1) NOT NULL DEFAULT '0',
   `parkStatus_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 

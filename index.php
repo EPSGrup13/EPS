@@ -42,7 +42,7 @@
     <header id="baslik" class="baslik">
         <div class="baslik-icerik">
             <div class="container">
-                <div class="col-lg-6">
+                <div class="col-lg-6" style="margin-top: -60px;">
                     <div class="container">
                         <h1 style="color: white;">E-PARK SİSTEMİ ile <br> Rezervasyon yaptığın otoparka detaylı yol
                             tarifi al, park yerini

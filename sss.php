@@ -95,7 +95,7 @@
                     gösterebilmektedir. Her kullanıcı
                     rezervasyon yaptığı tarifeden ücretlendirilmektedir.</p>
             </div>
-			<h3 class="soru">Uygulamada problem olduğunda ne yapmalıyım <i class="fas fa-question-circle"></i></h3>
+            <h3 class="soru">Uygulamada problem olduğunda ne yapmalıyım <i class="fas fa-question-circle"></i></h3>
             <div class="cevap">
                 <p><i class="fas fa-arrow-circle-right"></i> EPS uygulamasında herhangi bir problem ile
                     karşılaşırsınız uygulama içerisindeki

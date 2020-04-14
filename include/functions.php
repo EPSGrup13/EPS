@@ -47,7 +47,7 @@ $urlSelection = $url1;
 
 function allowDMode()
 {
-	return TRUE; //geliştirme durumunda TRUE olarak değiştirilecek.
+	return FALSE; //geliştirme durumunda TRUE olarak değiştirilecek.
 }
 
 
@@ -1928,15 +1928,24 @@ function reservationRequest($person_id, $date) {
 	$query = "SELECT Reservation.reservation_id, Reservation.reservation_hour, Reservation.reservation_date, Reservation.full_plate, Reservation.person_id FROM Park INNER JOIN parkStatus ON Park.park_id = parkStatus.park_id INNER JOIN Reservation ON parkStatus.parkStatus_id = Reservation.parkStatus_id WHERE Park.person_id = '$person_id' AND Reservation.reservation_date = '$date' AND Reservation.is_accepted = 0 ORDER BY Reservation.reservation_date DESC, Reservation.reservation_hour DESC";
 	$data = "person_id, full_plate, reservation_date, reservation_hour, reservation_id"; // sıralama gönderildiği gibi
 
-	$obj = new Dbpro($query, $data);
-	$getData = $obj->mSelect();
-	if(is_array($getData)) {
-		return $getData;
+	$obj1 = new Dbpro($query, $data);
+	$existingRecords = $obj1->contains();
+	if($existingRecords) {
+		$obj2 = new Dbpro($query, $data);
+		$getData = $obj2->mSelect();
+		if(is_array($getData)) {
+			return $getData;
+		} else {
+			echo $getData;
+		}
 	} else {
-		echo $getData;
+		return FALSE;
 	}
+
+
 }
 
+// evet ret onayı sadece otopark sahibi tarafından yapılabilsin diye kontrol mekanizması
 function ownerRelevancy($session_person_id, $reservation_id) { // session_person_id -> kullanıcı otoparkçı ve onun session_id'si
 	global $array1;
 	global $array2;
@@ -1955,6 +1964,7 @@ function ownerRelevancy($session_person_id, $reservation_id) { // session_person
 		return FALSE;
 }
 
+// Reservasyonu 0'dan 1 veya 3'e çevirir 1-> accepted 3->rejected
 function updateReservationStatus($reservation_id, $process, $status) {
 	global $array1;
 	global $array2;
