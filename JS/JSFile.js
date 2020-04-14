@@ -46,7 +46,7 @@ class Request {
 	}
 }
 
-const dMode = true;
+const dMode = false;
 function devMode() {
 	if(dMode === true) {
 		return "http://epark.sinemakulup.com/external/tkeskin/";
@@ -709,13 +709,13 @@ function isChecked()
 {
 	const getCb = document.getElementById("dm");
 	if(sessionStorage.getItem("darkMode") === "false" || sessionStorage.getItem("darkMode") == undefined) {
-		setStyles();
 		sessionStorage.setItem("darkMode", "false");
 		getCb.checked = false;
-	} else {
 		setStyles();
+	} else {
 		sessionStorage.setItem("darkMode", "true");
 		getCb.checked = true;
+		setStyles();
 	}
 }
 
