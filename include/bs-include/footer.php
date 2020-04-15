@@ -8,7 +8,7 @@
                         <h4 class="col-md-10" style="text-align: right;">EPS</h4>
                         <p class="col-md-12" style="text-align: right;">Ayazağa, Hadım
                             Koruyolu Cd. No:19, 34398 Sarıyer/İSTANBUL</p>
-                        <ul>
+                        <ul id="sosyal-logo">
                             <li><a rel="external" href="javascript:void(0)"><span
                                         class="fab fa-facebook-f fa-lg"></span></a></li>
                             <li><a target="self" href="javascript:void(0)"><span

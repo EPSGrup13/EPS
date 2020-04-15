@@ -330,12 +330,21 @@ li a:hover {
 
 @media (max-width:991px) {
     .footer .footer-boy p {
-        margin-left: -20%;
+        margin-left: -15%;
     }
     .footer h4 {
-        margin-left: -35%;
+        margin-left: -29.9%;
     }
+	 .footer-hiza{
+        margin-left: 8.5%;
+    }
+    #sosyal-logo{
+        margin-left: 37%;
+    }
+	
 }
+
+
 
 @media screen and (max-width: 767px) and (min-width: 526px){
     .footer .footer-boy p {
@@ -344,7 +353,9 @@ li a:hover {
     .footer h4 {
         margin-left: -45%;
     }
-
+    #sosyal-logo{
+        margin-left: 33.5%;
+    }
 }
 
 @media screen and (max-width: 1199px) and (min-width: 992px){
@@ -360,6 +371,21 @@ li a:hover {
  
     }
 
+}
+
+@media (max-width:525px) {
+    .footer .footer-boy p {
+        margin-left: -7%;
+    }
+    .footer h4 {
+        margin-left: -42%;
+    }
+    .footer-hiza{
+        margin-left: 8.5%;
+    }
+    #sosyal-logo{
+        margin-left: 37%;
+    }
 }
 
 /* footer mobil bitiş */
@@ -823,6 +849,12 @@ li a:hover {
     border-left: 3px solid #888;
 }
 
+#h3-baslik{
+        color: white !important;
+        font-size: 1.17em !important;
+        font-weight: bolder !important;
+}
+
 /* Otoparkımız Ol Mobil Başlangıç */
 
 @media screen and (max-width: 961px) {
@@ -895,7 +927,7 @@ li a:hover {
 
     .bilgi-girisi2 {
         width: 90%;
-        left: 5%;
+        left: -1%;
         position: relative;
         background: none;
         outline: none;
@@ -918,7 +950,7 @@ li a:hover {
         min-width: 100%;
         min-height: 100%;
         max-width: 100%;
-        left: 45%;
+        left: 48%;
         position: relative;
         background: none;
         outline: none;
