@@ -1929,8 +1929,8 @@ function reservationRequest($person_id, $date) {
 	$data = "person_id, full_plate, reservation_date, reservation_hour, reservation_id"; // sıralama gönderildiği gibi
 
 	$obj1 = new Dbpro($query, $data);
-	$existingRecords = $obj1->contains();
-	if($existingRecords) {
+	$existingRecords = $obj1->contains(); // önce talep var mı diye kontrol ediliyor
+	if($existingRecords) { // eğer talep var ise listelemek için çekiliyor
 		$obj2 = new Dbpro($query, $data);
 		$getData = $obj2->mSelect();
 		if(is_array($getData)) {
@@ -1938,7 +1938,7 @@ function reservationRequest($person_id, $date) {
 		} else {
 			echo $getData;
 		}
-	} else {
+	} else { // eğer hiç talep yok ise reservationAccept üzerinde işleniyor
 		return FALSE;
 	}
 

@@ -66,7 +66,7 @@ function devURL() {
 function registration()
 {
     //var elements = document.getElementsByClassName("formArea");
-    var elements = document.getElementsByClassName("formkapsaminput");
+    var elements = document.getElementsByClassName("form-input");
     var formData = new FormData();
     //console.log("elements len:" + elements.length); //output test
     for(var i=0; i<elements.length; i++)
@@ -185,16 +185,15 @@ function validate(callback)
 {
 	let counter = 0;
 
-	const getForm = document.forms["registrationForm"]; // *
-	const getFormChildren = getForm.children[0].children;
-	//console.log(getFormChildren); //output test
-	for(i = 2; i < getFormChildren.length - 1; i++) // img, h3 ve submit hariç (ilk 2 son 1)
+	const getForm = document.forms["registrationForm"];
+	const getFormChildren = getForm.children;
+	for(i = 1; i < getFormChildren.length - 1; i++) // kayıt ol kısmı haric, buton kısmı hariç
 	{
-		//console.log(getFormChildren[i].firstElementChild);
-		//console.log(getFormChildren[i].children.length);
-		if(getFormChildren[i].firstElementChild.value == "")
+		//console.log(getFormChildren[i].children[1]);
+		if(getFormChildren[i].children[1].value.length === 0)
 		{
-			if(getFormChildren[i].children.length == 1) // dıştaki div alındı.
+			console.log(getFormChildren[i].children.length);
+			if(getFormChildren[i].children.length === 2) // dıştaki div length.
 			{
 				const mkElement = document.createElement("span");
 				mkElement.className = "mArea";
@@ -202,17 +201,17 @@ function validate(callback)
 				mkElement.appendChild(mkChild);
 
 				getFormChildren[i].appendChild(mkElement);
-				getFormChildren[i].firstElementChild.style = "border: 1px solid red;";
+				getFormChildren[i].children[1].style = "border: 1px solid red;";
 			}
 
 			counter++;
 		}
 		else
 		{
-			if(getFormChildren[i].children.length != 1) // dıştaki div alındı.
+			if(getFormChildren[i].children.length != 2) // dıştaki div alındı.
 			{
-				getFormChildren[i].firstElementChild.removeAttribute("style");
-				getFormChildren[i].children[1].remove();
+				getFormChildren[i].children[1].removeAttribute("style");
+				getFormChildren[i].children[2].remove();
 			}
 		}
 	}
@@ -645,26 +644,30 @@ function login() {
 	const request = new Request();
 	var formData = new FormData();
 
-	$getButton = document.getElementsByClassName("l-btn")[0];
-	$getButton.addEventListener("click", function(e){
-		e.preventDefault();
-	})
-	$getEmail = document.getElementsByClassName("formkapsaminput")[0];
-	$getPass = document.getElementsByClassName("formkapsaminput")[1];
-	if($getEmail.value.length === 0 || $getPass.value.length === 0) {
+	$getButton = document.getElementsByClassName("form-button")[0];
+	if($getButton !== undefined) {
+		$getButton.addEventListener("click", function(e){
+			e.preventDefault();
+		})
+	}
+	$getEmail = document.getElementsByClassName("form-input")[0];
+	$getPass = document.getElementsByClassName("form-input")[1];
+	if($getEmail === undefined || $getPass === undefined) {
+		displayWarning("alert danger", "Girilen inputlar ile ilgili bir sorun oluştu.");
+	} else if($getEmail.value.length === 0 || $getPass.value.length === 0) {
 		displayWarning("alert danger", "Alanları boş bırakamazsınız.");
 	} else {
 		formData.append($getEmail.name, cleanVal($getEmail.value));
 		formData.append($getPass.name, $getPass.value);
 		const status = request.post("source/loginControl", formData);
 		if(status === "true") { // string true
-			clearSpecificInput("formkapsaminput", 0);
-			clearSpecificInput("formkapsaminput", 1);
+			clearSpecificInput("form-input", 0);
+			clearSpecificInput("form-input", 1);
 			setTimeout(function(){
 			window.location.href = (devMode() + "cities"); // displaywarning 3sn. ama 0.6sn. sonra sayfa değiştirilerek displaywarning de kesilecek.
 			}, 600);
 		} else {
-			clearSpecificInput("formkapsaminput", 1); // sadece şifreyi silmesi için
+			clearSpecificInput("form-input", 1); // sadece şifreyi silmesi için
 		}
 	}
 }
