@@ -847,7 +847,7 @@ li a:hover {
     }
 
     #h3-baslik{
-        color: white;
+        color: white !important;
         font-size: 1.17em !important;
         font-weight: bolder !important;
     }
@@ -914,6 +914,58 @@ li a:hover {
         border-left: 3px solid #888;
     }
 
+    .otopark-adresi {
+        min-width: 100%;
+        min-height: 100%;
+        max-width: 100%;
+        left: 45%;
+        position: relative;
+        background: none;
+        outline: none;
+        border: 1px solid rgba(255, 255, 255, 1);
+        margin-bottom: 15px;
+        color: rgb(255, 255, 255);
+        padding: 8px 20px;
+        border-left: 3px solid #0688DF;
+        border-radius: 5px;
+        transition: border-color .8s ease-out;
+    }
+
+    .otopark-adresi:focus {
+        border-bottom: 1px solid rgba(230, 149, 113, 1);
+        outline: none;
+        border-left: 3px solid #e69471;
+    }
+
+    #buton2 {
+        left: 40%;
+        position: relative;
+        display: inline;
+        padding: 10px;
+        background-color: #0688DF;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        margin: 10px;
+        top: 1%;
+        margin-left: 40%;
+    }
+
+    #qr-code {
+        width: 30%;
+        height: 30%;
+        margin-top: 20px;
+    }
+
+    #OtoParkFoto-yazi {
+        color: rgb(255, 255, 255);
+        width: 100%;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-left: 50%;
+        font-family: "Montserrat", sans-serif;
+    }
+}
 
 /* Otoparkımız Ol Mobil Bitiş */
 
