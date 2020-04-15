@@ -54,7 +54,7 @@
                             </span></h1>
                         <p class="p-aciklama">E-Park mobil uygulaması her yerde rahatça ve kolayca park yeri
                             bulabilmeniz için geliştirildi.</p>
-                        <a class="buton" href="---------------.ipa"><i class="fab fa-apple"></i> App Store'da mevcut değil</a>
+<!--                    <a class="buton" href="---------------.ipa"><i class="fab fa-apple"></i> App Store'da mevcut değil</a> -->
                         <a class="buton" href="---------------.apk"><i class="fab fa-google-play"></i> Google
                             Play İndirin</a>
                     </div>
