@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 14, 2020 at 06:40 AM
+-- Generation Time: Apr 16, 2020 at 05:15 AM
 -- Server version: 5.6.47-cll-lve
 -- PHP Version: 7.2.7
 
@@ -48,6 +48,21 @@ CREATE TABLE `City` (
   `city_id` int(2) NOT NULL,
   `city_name` varchar(30) CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL,
   `slug_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Comments`
+--
+
+CREATE TABLE `Comments` (
+  `comment_id` int(11) NOT NULL,
+  `topic` varchar(60) CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL,
+  `comment` tinytext CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL,
+  `point` decimal(2,1) NOT NULL DEFAULT '0.0',
+  `person_id` int(11) NOT NULL,
+  `park_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -241,8 +256,8 @@ CREATE TABLE `Tokens` (
 
 CREATE TABLE `User` (
   `user_id` int(11) NOT NULL,
-  `userName` varchar(60) CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL,
-  `userPassword` varchar(60) CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL,
+  `userName` varchar(60) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `userPassword` varchar(60) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `userType` int(1) NOT NULL DEFAULT '0',
   `userStatus` int(1) NOT NULL DEFAULT '0',
   `balance` decimal(10,2) NOT NULL DEFAULT '0.00',
@@ -282,6 +297,14 @@ ALTER TABLE `AuthLog`
 ALTER TABLE `City`
   ADD PRIMARY KEY (`city_id`),
   ADD KEY `slug_id` (`slug_id`);
+
+--
+-- Indexes for table `Comments`
+--
+ALTER TABLE `Comments`
+  ADD PRIMARY KEY (`comment_id`),
+  ADD KEY `person_id` (`person_id`),
+  ADD KEY `park_id` (`park_id`);
 
 --
 -- Indexes for table `dbFeedback`
@@ -390,6 +413,12 @@ ALTER TABLE `AuthLog`
 --
 ALTER TABLE `City`
   MODIFY `city_id` int(2) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `Comments`
+--
+ALTER TABLE `Comments`
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `dbFeedback`

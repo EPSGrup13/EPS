@@ -26,7 +26,7 @@
 		{
 			echo "<div class=\"parkPageForCityReservationOptions\">";
 			$parkId = $parkArray[$i][0];
-			echo "<p class=\"parkPageForCityReservationOptionsText\">Otopark Adı: ".$parkArray[$i][1]."</p>";
+			echo "<p class=\"parkPageForCityReservationOptionsText\">Otopark Adı: ".$parkArray[$i][1]." &nbsp;&nbsp;-&nbsp;&nbsp; Puan: " .avgPoint($parkId). "</p>";
 			echo "<p class=\"parkPageForCityReservationOptionsText\">İlçe: ".$parkArray[$i][2]."</p>";
 
 			$availablePark = (int)$parkArray[$i][3] - (int)$parkArray[$i][4];
@@ -38,6 +38,7 @@
 			{
 				echo "<p class=\"parkPageForCityReservationOptionsText\">Boş yer sayısı: <span class=\"color1\">".$availablePark."</span></p>";
 				echo "<a class=\"parkPageForCityReservationOptionsText\" href=\"".isDevelopmentModeOn()."rezervasyon/".getParkTitle($parkId)."\">Rezervasyon Yap</a>";
+				echo "<a class=\"parkPageForCityReservationOptionsText\" href=\"".isDevelopmentModeOn()."comments/".getParkTitle($parkId)."\">Yorumlar ve Puanlar</a>";
 			}
 			echo "</div>";
 		}

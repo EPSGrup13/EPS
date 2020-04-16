@@ -2022,6 +2022,29 @@ function updatePStatus($reservation_id, $process) {
 		return FALSE;
 }
 
+function avgPoint($parkId) {
+	$query = "
+	SELECT
+	ROUND(AVG(point),1) AS point
+	FROM Comments
+	WHERE park_id = '$parkId'
+	"; // ',' sonra 1 digit
+	$data = "point";
+
+	$obj = new Dbpro($query, $data);
+	$getData = $obj->contains();
+
+	if($getData) { // avg olduğundan veri olmasa da sonuç döndürüyor (NULL)
+		$getAvg = $obj->select();
+		if(is_array($getAvg) && $getAvg[0] !== NULL)
+			return $getAvg[0]; // direk ort puan.
+		else
+			return "Belirsiz";
+	} else {
+		return "Belirsiz"; // eğer hiç veri yok ise.
+	}
+}
+
 
 
 
