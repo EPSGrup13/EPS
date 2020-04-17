@@ -29,7 +29,7 @@ class Request {
 	post(url, data) {
 		this.xmlHttp.onreadystatechange = function() {
 			if(this.readyState === 4 && this.status === 200) {
-				//console.log(this.responseText);
+				console.log(this.responseText);
 				let splitData = JSON.parse(this.responseText);
 				if(splitData.status === "success") {
 					displayWarning("alert success", splitData.message);
@@ -43,6 +43,22 @@ class Request {
 		this.xmlHttp.open("post", (devMode()+url), false); // false -> asenkron değil.
 		this.xmlHttp.send(data);
 		return self.status;
+	}
+
+	receiveData(url, data) { // post ile gerekli WHERE koşulu gönderilerek veri çekiliyor.
+		this.xmlHttp.onreadystatechange = function() {
+			if(this.readyState === 4 && this.status === 200) {
+				try { // eğer parse yapılabilir bir veri ise
+					let splitData = JSON.parse(this.responseText);
+					self.data = splitData;
+				} catch (e) { // eğer parse yapılamaz (hata yazısı) ise direk yazdır
+					self.data = this.responseText;
+				}
+			}
+		}
+		this.xmlHttp.open("post", (devMode()+url), false); // false -> asenkron değil.
+		this.xmlHttp.send(data);
+		return self.data;
 	}
 }
 
@@ -573,7 +589,7 @@ function mkReservation() {
 		if(status === "true") { // string true
 			for(i = 0; i < getTime.length; i++) {
 				if(getTime[i].children[1].checked) {
-					getTime[i].children[0].src = devURL()+"images/car-red.png";
+					getTime[i].children[0].src = devURL()+"images/car-orange.png";
 					getTime[i].children[1].remove(); //inputu kaldır
 					const newChild = document.createElement("span");
 					newChild.style.color = "orange";
@@ -644,21 +660,21 @@ function login() {
 	const request = new Request();
 	var formData = new FormData();
 
-	$getButton = document.getElementsByClassName("form-button")[0];
-	if($getButton !== undefined) {
-		$getButton.addEventListener("click", function(e){
+	const getButton = document.getElementsByClassName("form-button")[0];
+	if(getButton !== undefined) {
+		getButton.addEventListener("click", function(e){
 			e.preventDefault();
 		})
 	}
-	$getEmail = document.getElementsByClassName("form-input")[0];
-	$getPass = document.getElementsByClassName("form-input")[1];
-	if($getEmail === undefined || $getPass === undefined) {
+	const getEmail = document.getElementsByClassName("form-input")[0];
+	const getPass = document.getElementsByClassName("form-input")[1];
+	if(getEmail === undefined || getPass === undefined) {
 		displayWarning("alert danger", "Girilen inputlar ile ilgili bir sorun oluştu.");
-	} else if($getEmail.value.length === 0 || $getPass.value.length === 0) {
+	} else if(getEmail.value.length === 0 || getPass.value.length === 0) {
 		displayWarning("alert danger", "Alanları boş bırakamazsınız.");
 	} else {
-		formData.append($getEmail.name, cleanVal($getEmail.value));
-		formData.append($getPass.name, $getPass.value);
+		formData.append(getEmail.name, cleanVal(getEmail.value));
+		formData.append(getPass.name, getPass.value);
 		const status = request.post("source/loginControl", formData);
 		if(status === "true") { // string true
 			clearSpecificInput("form-input", 0);
@@ -668,6 +684,93 @@ function login() {
 			}, 600);
 		} else {
 			clearSpecificInput("form-input", 1); // sadece şifreyi silmesi için
+		}
+	}
+}
+
+function comments(parkId) {
+	if(document.getElementsByClassName("parkPageForCity").length == 2) {
+		const getSections = document.getElementsByClassName("parkPageForCity");
+
+	    let opacity = 0.8;
+	    for(let i = 0; i < 5; i++) {
+		    setTimeout(function() {
+		    	getSections[1].style.opacity = opacity;
+		    	opacity = opacity - 0.2;
+		    	//console.log($getCommentSection.style.opacity);
+		    }, 100);
+
+		    /*getCommentSection.style.opacity = opacity;
+		    opacity = opacity + 0.2;*/
+	    }
+
+	    setTimeout(function() {
+			getSections[1].remove();
+	    }, 500);
+
+		getSections[0].classList.toggle("move-l");
+	} else {
+		const getParkSection = document.getElementsByClassName("parkPageForCity")[0];
+		//$getParkSection.style.marginLeft = "-600px";
+		getParkSection.classList.toggle("move-l");
+
+		const newElement = document.createElement("div");
+	    newElement.className = "parkPageForCity";
+	    newElement.style.marginLeft = "23px";
+	    newElement.style.opacity = "0";
+	    //let newChild = document.createTextNode("yazı");
+	    //newElement.appendChild(newChild);
+	    document.querySelector(".content").appendChild(newElement);
+
+
+	    const getCommentSection = document.getElementsByClassName("parkPageForCity")[1];
+	    let opacity = 0.2;
+	    for(let i = 0; i < 5; i++) {
+		    setTimeout(function() {
+		    	getCommentSection.style.opacity = opacity;
+		    	opacity = opacity + 0.2;
+		    	//console.log($getCommentSection.style.opacity);
+		    }, 200);
+
+		    /*getCommentSection.style.opacity = opacity;
+		    opacity = opacity + 0.2;*/
+	    }
+
+	    loadComments(parkId);
+	}
+
+}
+
+function loadComments(parkId) {
+	const getCommentSection = document.getElementsByClassName("parkPageForCity")[1];
+	const request = new Request();
+	var formData = new FormData();
+
+	formData.append("parkId", parkId);
+	const data = request.receiveData("source/gt-comments", formData);
+	if(typeof(data) === "string") { // eğer gelen response yorumlar değilde sadece yazı (hata yazısı) ise
+		//console.log(data);
+		const newElement = document.createElement("div");
+	    let newChild = document.createTextNode(data);
+	    newElement.appendChild(newChild);
+	    getCommentSection.appendChild(newElement);
+	} else { // eğer string değilse (yani yorumlar -> object) ise.
+		for(let i = 0; i < data.length; i++) {
+			const newElement = document.createElement("div");
+			
+			// Metod 1
+			/*for(let j = 0; j < data[i].length; j++) {
+				//console.log(data[i][j]);
+				newElement.appendChild(document.createTextNode(data[i][j]));
+			}*/
+
+			// Metod 2
+			newElement.appendChild(document.createTextNode("Başlık: " + data[i][0]));
+			newElement.appendChild(document.createTextNode("Puan: " + data[i][2] + "\n"));
+			newElement.appendChild(document.createTextNode("Yorum: " + data[i][1] + "\n"));
+			newElement.appendChild(document.createTextNode("Person id: " + data[i][3] + " Ad Soyad gelecek\n"));
+
+		    getCommentSection.appendChild(newElement);
 		}
 	}
 }

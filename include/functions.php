@@ -993,7 +993,7 @@ function returnCarImg($parkStatus)
 	{
 		return "<img src=\"" .isDevelopmentModeOn(). "images/car-green.png\" class=\"parkReservationCarImg\">";
 	} else if($parkStatus === "X") { // eğer beklemede ise
-		return "<img src=\"" .isDevelopmentModeOn(). "images/car-red.png\" class=\"parkReservationCarImg\">";
+		return "<img src=\"" .isDevelopmentModeOn(). "images/car-orange.png\" class=\"parkReservationCarImg\">";
 	} else {
 		return "<img src=\"" .isDevelopmentModeOn(). "images/car-red.png\" class=\"parkReservationCarImg\">";
 	}
@@ -1907,6 +1907,8 @@ function srchTitle($title) {
 			return "<title>Rezervasyon</title>";
 		case 'reservationAccept':
 			return "<title>Rezervasyon Talepleri</title>";
+		case 'comments':
+			return "<title>Yorumlar</title>";
 		default:
 			return "<title>E-Park</title>"; // olur da sayfa tanımlanamaz ise.
 	}
@@ -2042,6 +2044,32 @@ function avgPoint($parkId) {
 			return "Belirsiz";
 	} else {
 		return "Belirsiz"; // eğer hiç veri yok ise.
+	}
+}
+
+function getComments($parkId) {
+	global $array1;
+	global $array2;
+	
+	$query = "
+	SELECT
+	topic, comment, point, person_id
+	FROM Comments
+	WHERE park_id = '$parkId'
+	"; // ',' sonra 1 digit
+	$data = "topic, comment, point, person_id";
+
+	$obj = new Dbpro($query, $data);
+	$getData = $obj->contains();
+
+	if($getData) { // eğer yorum yapılmış ise.
+		$getComments = $obj->mSelect();
+		if(is_array($getComments))
+			return $getComments; // direk ort puan.
+		else
+			return "Hata";
+	} else {
+		return "Hiç yorum bulunmamakta."; // eğer hiç veri yok ise.
 	}
 }
 

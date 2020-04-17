@@ -11,7 +11,7 @@ RewriteRule ^(.*)$ $1.php
 #RewriteRule ^parklar/([0-9a-zA-Z-_]+)$ parks.php?city=$1 [L,QSA]
 #tip3-link
 RewriteRule ^([0-9a-zA-Z-_]+)/parklar$ parks.php?city=$1 [L,QSA]
-RewriteRule ^reservation/([0-9a-zA-Z-_]+)$ reservation.php?park=$1 [L,QSA]
+RewriteRule ^park/([0-9a-zA-Z-_]+)$ reservation.php?park=$1 [L,QSA]
 RewriteRule ^settings/profile$ profile.php [L,QSA]
 RewriteRule ^parkdetayi$ parkDetails.php [L,QSA]
 RewriteRule ^parkdetayi/([0-9a-zA-Z-_]+)$ records.php?date=$1 [L,QSA]
@@ -24,6 +24,7 @@ RewriteRule ^password/protection/token=([0-9a-zA-Z-_]+)$ source/lp-userProtectio
 RewriteRule ^lpgen$ source/lp-generate.php [L,QSA]
 RewriteRule ^lpcont$ source/lp-control.php [L,QSA]
 RewriteRule ^updateRv$ source/rv-update.php [L,QSA]
+RewriteRule ^details/([0-9a-zA-Z-_]+)$ comments.php?park=$1 [L,QSA]
 
 RewriteRule ^userlogin$ source/loginControl.php [L,QSA]
 RewriteRule ^makeReservation$ source/reservationControl.php [L,QSA]

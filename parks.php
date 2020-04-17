@@ -37,8 +37,8 @@
 			else
 			{
 				echo "<p class=\"parkPageForCityReservationOptionsText\">Boş yer sayısı: <span class=\"color1\">".$availablePark."</span></p>";
-				echo "<a class=\"parkPageForCityReservationOptionsText\" href=\"".isDevelopmentModeOn()."rezervasyon/".getParkTitle($parkId)."\">Rezervasyon Yap</a>";
-				echo "<a class=\"parkPageForCityReservationOptionsText\" href=\"".isDevelopmentModeOn()."comments/".getParkTitle($parkId)."\">Yorumlar ve Puanlar</a>";
+				echo "<a class=\"parkPageForCityReservationOptionsText\" href=\"".isDevelopmentModeOn()."park/".getParkTitle($parkId)."\">Rezervasyon Yap</a>";
+				echo "<a class=\"parkPageForCityReservationOptionsText\" href=\"javascript:void(0)\" onclick=\"comments(" .$parkId. "); return false;\">Yorumlar ve Puanlar</a>";
 			}
 			echo "</div>";
 		}
