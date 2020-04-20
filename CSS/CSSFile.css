@@ -64,7 +64,6 @@ a:hover
   display: block;
   box-sizing: border-box;
   min-height: calc(100% - 95px);
-  padding-bottom:10px;
 }
 
 
@@ -1630,63 +1629,143 @@ footer p
 .pagination {
     display: inline-block;
     width:100%;
-    height: 10px;
     text-align: center;
   }
   
 .pagination a {
-    color: white;
+    color: #5c636e;
     /*float: left;*/
     padding: 8px 16px;
     text-decoration: none;
   }
   
 .pagination a.active {
-    background-color:gray ;
+    background-color:#c8c8c8 ;
     color: white;
     border-radius: 5px;
   }
   
-.pagination a:hover:not(.active) {background-color: rgb(243, 208, 67); border-radius: 5px;}
+.pagination a:hover:not(.active) {background-color: #c8c8c8; color:white; border-radius: 5px;}
   
-.parkPageForCityName {
-    width:600px; 
-    height:40px; 
-    margin-bottom: 20px;
-    padding-top: 15px;
-    text-align: center;
-    border-bottom:2px solid #9DA4AA;
-    background-color: #f0f0f0;
-    color:black;
-    border-top-left-radius: 10px; 
-    border-top-right-radius: 10px;
-  }
-  
-.parkPageForCity {
-    width:600px; 
-    height:600px; 
-    position:absolute; 
-    left:50%;
-    top:50%; 
-    margin-top:-300px; 
-    margin-left:-300px; 
-    background: rgba(255, 255, 255, 0.685);
-    border-radius:10px;
+.parkPageBox {
+  height: 88%;
+  background-image: url("https://i.hizliresim.com/wNLfJm.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
 
-    transition: 0.5s;
-  }
-  
+.parkPageForCity {
+  width:600px; 
+  height:610px; 
+  position:absolute; 
+  left:50%;
+  top:50%; 
+  margin-top:-305px; 
+  margin-left:-305px; 
+  background: rgba(247, 247, 247, 0.950);
+  border-top-left-radius:10px;
+  border-bottom-right-radius:10px;
+  transition: 0.5s;
+  box-shadow: 2px 2px 6px #000;
+
+}
+
+.parkPageButton {
+  background-color: #3282b8;
+  outline: none;
+  border:none;
+  width: 170px;
+  border-radius: 15px;
+  padding: 5px;
+  margin-left: 5px;
+  -webkit-box-shadow: 1px 0 2px #00334e;
+  -moz-box-shadow: 1px 0 2px #00334e;
+  box-shadow: 1px 0 2px #00334e;
+}
+
+.parkPageButtonText {
+  display: inline-block;
+  background-color: #3282b8;
+  border: none;
+  text-align: center;
+  width: 150px;
+  transition: all 0.5s;
+  cursor: pointer;
+  outline: none;
+  border-radius: 15px;
+  padding: 4px;
+}
+
+.parkPageButtonText span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  color: white;
+
+}
+
+.parkPageButtonText span:after {
+  content: '\00bb';
+  position: absolute;
+  right: -15px;
+  transition: 0.5s;
+}
+
+.parkPageButtonText:hover span {
+  padding-right: 25px;
+}
+
+.parkPageButtonText:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.parkPageForCityName {
+  width:600px; 
+  height:40px; 
+  margin-bottom: 20px;
+  padding-top: 15px;
+  text-align: center;
+  border-bottom:2px solid #9DA4AA;
+  background-color: #fefefe;
+  color:#5c636e;
+  border-top-left-radius: 10px; 
+}
+   
 .parkPageForCityReservationOptions {
-    width:600px;
-    height:133px; 
-    border-bottom:1px solid #9DA4AA;
-  }
+  width:600px;
+  height:150px; 
+  border-bottom:1px solid #9DA4AA;
+}
   
 .parkPageForCityReservationOptionsText {
     line-height:10px; 
-    padding-left:5px;
+    padding-left:10px;
     padding-top: 5px;
+    color:#5c636e;
+}
+
+/*responsive kısım için parks.php daha devam edilecek*/
+
+@media (max-width:768px)
+{
+  .parkPageForCity {
+    clear: both;
+    width:80%;
+    z-index: 1;
   }
+
+  .parkPageForCityName {
+    width:385px;  
+  }
+   
+  .parkPageForCityReservationOptions {
+    width:385px;
+  }
+
+}
 
 .parkReservationBox {
   width:600px;

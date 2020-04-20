@@ -11,7 +11,7 @@
 ?>
 
 <div class="content">
-
+<div class="parkPageBox">
 <?php
 
 
@@ -26,7 +26,7 @@
 		{
 			echo "<div class=\"parkPageForCityReservationOptions\">";
 			$parkId = $parkArray[$i][0];
-			echo "<p class=\"parkPageForCityReservationOptionsText\">Otopark Adı: ".$parkArray[$i][1]." &nbsp;&nbsp;-&nbsp;&nbsp; Puan: " .avgPoint($parkId). "</p>";
+			echo "<p class=\"parkPageForCityReservationOptionsText\">Otopark Adı: ".$parkArray[$i][1]." &nbsp;&nbsp;-&nbsp;&nbsp; Puan: " .avgPoint($parkId). "<img style=\" padding-left:5px; width:15px; height:15px; \"src=\"https://i.hizliresim.com/y3dKIZ.png\"></p>";
 			echo "<p class=\"parkPageForCityReservationOptionsText\">İlçe: ".$parkArray[$i][2]."</p>";
 
 			$availablePark = (int)$parkArray[$i][3] - (int)$parkArray[$i][4];
@@ -37,8 +37,8 @@
 			else
 			{
 				echo "<p class=\"parkPageForCityReservationOptionsText\">Boş yer sayısı: <span class=\"color1\">".$availablePark."</span></p>";
-				echo "<a class=\"parkPageForCityReservationOptionsText\" href=\"".isDevelopmentModeOn()."park/".getParkTitle($parkId)."\">Rezervasyon Yap</a>";
-				echo "<a class=\"parkPageForCityReservationOptionsText\" href=\"javascript:void(0)\" onclick=\"comments(" .$parkId. "); return false;\">Yorumlar ve Puanlar</a>";
+				echo "<button class=\"parkPageButton\"><a class=\"parkPageButtonText\" href=\"".isDevelopmentModeOn()."park/".getParkTitle($parkId)."\"><span>Rezervasyon Yap</span></a></button>";
+				echo "<button class=\"parkPageButton\"><a class=\"parkPageButtonText\" href=\"javascript:void(0)\" onclick=\"comments(" .$parkId. "); return false;\"><span>Yorumlar ve Puanlar</span></a></button>";
 			}
 			echo "</div>";
 		}
@@ -50,7 +50,7 @@
     }
 
 
-    echo "<div class=\"pagination\" style=\"margin-top:32px;\">
+    echo "<div class=\"pagination\" style=\"margin-top:13px;\">
     <a href=\"javascript:void(0)\">«</a>
     <a href=\"javascript:void(0)\" class=\"active\">1</a>
     <a href=\"javascript:void(0)\">2</a>
@@ -63,7 +63,7 @@
 
     echo "</div>";
 ?>
-
+</div>
 </div>
 
 <?php
