@@ -195,7 +195,7 @@
     ?>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="JS/jquery-3.4.1.min.map"></script>
-    <script src="JS/yukari-buton.js"></script>
+    <script src="JS/JScript.js"></script>
     <script>
         window.onload = YeniSekme;
         
