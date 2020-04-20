@@ -26,7 +26,7 @@
 		{
 			echo "<div class=\"parkPageForCityReservationOptions\">";
 			$parkId = $parkArray[$i][0];
-			echo "<p class=\"parkPageForCityReservationOptionsText\">Otopark Adı: ".$parkArray[$i][1]." &nbsp;&nbsp;-&nbsp;&nbsp; Puan: " .avgPoint($parkId). "<img style=\" padding-left:5px; width:15px; height:15px; \"src=\"https://i.hizliresim.com/y3dKIZ.png\"></p>";
+			echo "<p class=\"parkPageForCityReservationOptionsText\">Otopark Adı: ".$parkArray[$i][1]." &nbsp;&nbsp;-&nbsp;&nbsp; Puan: " .avgPoint($parkId). "<img style=\" padding-left:5px; width:15px; height:15px; \"src=\"" .isDevelopmentModeOn(). "images/star.png\"></p>";
 			echo "<p class=\"parkPageForCityReservationOptionsText\">İlçe: ".$parkArray[$i][2]."</p>";
 
 			$availablePark = (int)$parkArray[$i][3] - (int)$parkArray[$i][4];

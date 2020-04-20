@@ -688,6 +688,8 @@ function login() {
 	}
 }
 
+// Login sonu
+
 function comments(parkId) {
 	if(document.getElementsByClassName("parkPageForCity").length == 2) {
 		const getSections = document.getElementsByClassName("parkPageForCity");
@@ -697,11 +699,7 @@ function comments(parkId) {
 		    setTimeout(function() {
 		    	getSections[1].style.opacity = opacity;
 		    	opacity = opacity - 0.2;
-		    	//console.log($getCommentSection.style.opacity);
 		    }, 100);
-
-		    /*getCommentSection.style.opacity = opacity;
-		    opacity = opacity + 0.2;*/
 	    }
 
 	    setTimeout(function() {
@@ -711,15 +709,12 @@ function comments(parkId) {
 		getSections[0].classList.toggle("move-l");
 	} else {
 		const getParkSection = document.getElementsByClassName("parkPageForCity")[0];
-		//$getParkSection.style.marginLeft = "-600px";
 		getParkSection.classList.toggle("move-l");
 
 		const newElement = document.createElement("div");
 	    newElement.className = "parkPageForCity";
 	    newElement.style.marginLeft = "23px";
 	    newElement.style.opacity = "0";
-	    //let newChild = document.createTextNode("yazı");
-	    //newElement.appendChild(newChild);
 	    document.querySelector(".content").appendChild(newElement);
 
 
@@ -729,11 +724,7 @@ function comments(parkId) {
 		    setTimeout(function() {
 		    	getCommentSection.style.opacity = opacity;
 		    	opacity = opacity + 0.2;
-		    	//console.log($getCommentSection.style.opacity);
 		    }, 200);
-
-		    /*getCommentSection.style.opacity = opacity;
-		    opacity = opacity + 0.2;*/
 	    }
 
 	    loadComments(parkId);
@@ -751,12 +742,15 @@ function loadComments(parkId) {
 	if(typeof(data) === "string") { // eğer gelen response yorumlar değilde sadece yazı (hata yazısı) ise
 		//console.log(data);
 		const newElement = document.createElement("div");
+		newElement.style.color = "black";
+
 	    let newChild = document.createTextNode(data);
 	    newElement.appendChild(newChild);
 	    getCommentSection.appendChild(newElement);
 	} else { // eğer string değilse (yani yorumlar -> object) ise.
 		for(let i = 0; i < data.length; i++) {
 			const newElement = document.createElement("div");
+			newElement.style.color = "black";
 			
 			// Metod 1
 			/*for(let j = 0; j < data[i].length; j++) {
@@ -764,18 +758,52 @@ function loadComments(parkId) {
 				newElement.appendChild(document.createTextNode(data[i][j]));
 			}*/
 
-			// Metod 2
+			// Metod 2 - Dağınık veri listeleme yapılabilmesi mümkün olan
 			newElement.appendChild(document.createTextNode("Başlık: " + data[i][0]));
 			newElement.appendChild(document.createTextNode("Puan: " + data[i][2] + "\n"));
 			newElement.appendChild(document.createTextNode("Yorum: " + data[i][1] + "\n"));
 			newElement.appendChild(document.createTextNode("Person id: " + data[i][3] + " Ad Soyad gelecek\n"));
+			newElement.appendChild(document.createTextNode("Tarih: " + data[i][4] + "\n"));
+			newElement.appendChild(document.createTextNode("Saat: " + data[i][5] + "\n"));
 
 		    getCommentSection.appendChild(newElement);
 		}
 	}
 }
 
-// Login sonu
+function addCarSection() {
+	const outerDiv = document.getElementsByClassName("nc-inline")[0];
+
+	const newElement = document.createElement("input");
+	newElement.setAttribute("type", "text");
+	newElement.setAttribute("class", "n-car");
+	newElement.setAttribute("name", "newCar[]");
+	newElement.setAttribute("placeholder", "Örnek: 34ABC123");
+	newElement.style.display = "block";
+	outerDiv.appendChild(newElement);
+}
+
+function addCar() {
+	const request = new Request();
+	var formData = new FormData();
+	let dataArray = new Array();
+	const pattern = /^([0-9]{2})([a-zA-Z]{1,3})([0-9]{1,3})$/; // 34ABC123 MAX LENGTH
+
+	const getInputs = document.getElementsByClassName("n-car");
+	if(getInputs.length !== 0) {
+		for(let i = 0; i < getInputs.length; i++) {
+			if(getInputs[i].value.length !== 0 && getInputs[i].value.match(pattern)) {
+				dataArray.push(cleanVal(getInputs[i].value));
+			}
+		}
+	}
+
+	if(dataArray.length !== 0) {
+		console.log("data uzunluğu: ", dataArray.length);
+		formData.append("newCar", dataArray);
+		request.post("source/add-car", formData);
+	}
+}
 
 function logout() {
 	displayWarning("alert warning", "Çıkış yapılıyor...");
@@ -835,10 +863,16 @@ function setStyles()
 		document.body.classList.remove("dm-v");
 		getHeader.classList.remove("dm-v2");
 		getFooter.classList.remove("dm-v2");
+		if(document.getElementsByClassName("parkPageBox")[0] !== undefined && document.getElementsByClassName("parkPageBox")[0].style.background !== "none") {
+			document.getElementsByClassName("parkPageBox")[0].style.background = "url("+devURL()+"images/parks-img1.jpg)";
+		}
 	} else { // darkmode açılınca
 		document.body.classList.toggle("dm-v");
 		getHeader.classList.toggle("dm-v2");
 		getFooter.classList.toggle("dm-v2");
+		if(document.getElementsByClassName("parkPageBox")[0] !== undefined) {
+			document.getElementsByClassName("parkPageBox")[0].style.background = "none";
+		}
 	}
 }
 

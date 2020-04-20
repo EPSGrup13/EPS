@@ -48,3 +48,4 @@ anlayabilmek adına eklenmiştir.
 1502 OOP select hatası.
 1503 OOP update hatası.
 1504 OOP delete hatası.
+1505 OOP insert hatası.

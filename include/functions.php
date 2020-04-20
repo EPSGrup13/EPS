@@ -216,6 +216,18 @@ class Dbpro {
 			return FALSE;
 		}
 	}
+
+	function insert() {
+		global $conn;
+		$sql = $this->query;
+
+		if ($conn->query($sql) === TRUE)
+			return TRUE;
+		else {
+			reportErrorLog("OOP insert hatası, örnek query: " .$this->query. " ve örnek data: " .$this->data, 1505);
+			return FALSE;
+		}
+	}
 }
 
 
@@ -2048,16 +2060,13 @@ function avgPoint($parkId) {
 }
 
 function getComments($parkId) {
-	global $array1;
-	global $array2;
-	
 	$query = "
 	SELECT
-	topic, comment, point, person_id
+	topic, comment, point, person_id, comment_date, comment_time
 	FROM Comments
 	WHERE park_id = '$parkId'
 	"; // ',' sonra 1 digit
-	$data = "topic, comment, point, person_id";
+	$data = "topic, comment, point, person_id, comment_date, comment_time";
 
 	$obj = new Dbpro($query, $data);
 	$getData = $obj->contains();
@@ -2071,6 +2080,37 @@ function getComments($parkId) {
 	} else {
 		return "Hiç yorum bulunmamakta."; // eğer hiç veri yok ise.
 	}
+}
+
+function addCar($plateArray, $person_id) {
+	$query = "";
+	$data = ""; // INSERT için önemli değil.
+	$obj = new Dbpro($query, $data); // boş obje
+
+	$plateArray = explode(",", $plateArray); // tek indexte gelen array, çok hücreli array'e çevrilip işleniyor.
+	for($i = 0; $i < count($plateArray); $i++) {
+			$dataArray = array();
+			array_push($dataArray, $plateArray[$i]); // -> full_plate
+			array_push($dataArray, substr($plateArray[$i], 2)); // -> raw_plate | 34ABC123 / ABC123
+			array_push($dataArray, substr($plateArray[$i], 0, 2)); // -> city_id | 34ABC123 / 34
+
+			$query = "
+			INSERT INTO Wehicle (full_plate, raw_plate, city_id, person_id)
+			VALUES ('$dataArray[0]','$dataArray[1]','$dataArray[2]','$person_id')
+			";
+
+			$obj->setVals($query, $data);
+			$result = $obj->insert();
+			if($result)
+				unset($dataArray);
+			else
+				return FALSE;
+	}
+
+	if($result) // son result baz alınacak.
+		return TRUE;
+ 	else
+ 		return FALSE;
 }
 
 

@@ -41,7 +41,7 @@
 		            	<!--<div class="rIcon"></div>-->
 		            </div>
 		        </div>
-
+		        <div class="plate-ar scrollable">
 
 			        <?php
 						//print_r(getWehicles($person_id));
@@ -59,6 +59,7 @@
 							echo $wehiclesArray;
 						}
 					?>
+				</div>
 
 
 		        <div class="profilimiletisimbilgilerdiv" style="margin-top: 20px;">
@@ -107,17 +108,17 @@
 						echo "</select></div>";
 						// option bitiş
 
-						echo "<div class=\"\">Bakiye:" .$balance. "₺</div>"  ;
+						echo "<div class=\"editProfileInput\">Bakiye:" .$balance. "₺</div>"  ;
 					?>
 		    </div>
 
 
 			<div>
 			    <div class="profilimyeniaracdiv" style="width:800px; height:200px;">
-			    	<div class="newCar1" style="margin-left: auto; margin-right: auto;">Yeni Araç Ekle</div>
-			    	<!--<div class="rIcon">
-			        	<img src="https://i.hizliresim.com/PCeHt1.png" class="profilimyeniaracekleimg"/>
-			    	</div>-->
+			    	<div class="nc-inline scrollable">
+				    	<div class="newCar1" onclick="addCarSection(); return false;">Yeni Araç Ekle</div>
+				    	<button onclick="addCar(); return false;">Kayıt</button>
+				    </div>
 			    </div>
 			</div>
 
