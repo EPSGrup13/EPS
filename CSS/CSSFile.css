@@ -2215,3 +2215,44 @@ footer p
   height: 18px;
   padding-right:5px;
 }
+
+
+/*Otopark yorum bölümü*/
+
+.cmt-head{
+  font-weight: bold;
+  padding: 5px !important;
+}
+
+.cmt-topic{
+  padding: 5px;
+  margin-bottom: 5px !important;
+  border-radius: 5px !important;
+  margin-left: 5px !important;
+}
+
+input[type=text] {
+  width: 100px;
+  -webkit-transition: width .35s ease-in-out;
+  transition: width .35s ease-in-out;
+}
+input[type=text]:focus {
+  width: 250px;
+}
+
+.cmt-message{
+  border-radius: 5px !important;
+  padding-left: 5px !important;
+  padding-top: 10px !important;
+  margin-bottom: 5px !important;
+  min-width: 250px !important;
+  max-height: 50px !important;
+  margin-left: 5px !important;
+}
+
+.cmt-submit{
+  border-radius: 5px;
+  margin-left: 5px !important;
+}
+
+/*Otopark yorum bölümü*/
