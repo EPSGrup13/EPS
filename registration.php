@@ -39,7 +39,9 @@
                     <h5 class="form-input-label">Telefon Numarası</h5>
                     <input class="form-input" type="tel" name="pNo" placeholder="Telefon Numarası 530-123-45-67" pattern="[0-9]{3} [0-9]{3} [0-9]{2} [0-9]{2}"/>
                 </div>
-
+				<div><input type="checkbox" id="kullanim-kosullari" name="kullanim-kosullari" checked="" disabled="" style="margin-top: 10px;">
+				<label><a href="http://epark.sinemakulup.com/kullanim-kosullari" style="color: black; text-decoration: underline;">Kullanım Koşullarını</a> kabul ediyorum.</label><br>
+				</div>
                 <div class="form-field">
                     <input type="submit" value="Üye Ol" class="form-button" onclick="formValidation(); return false;">
                     <p class="form-info-text"><?php echo "<a href=\"".getLink("login")."\">Geri Dön</a>"; ?></p>
