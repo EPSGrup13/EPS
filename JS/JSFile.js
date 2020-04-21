@@ -747,6 +747,9 @@ function loadComments(parkId) {
 	    let newChild = document.createTextNode(data);
 	    newElement.appendChild(newChild);
 	    getCommentSection.appendChild(newElement);
+
+		// yorum yapma aktifleştirilecek
+	    mkComment();
 	} else { // eğer string değilse (yani yorumlar -> object) ise.
 		for(let i = 0; i < data.length; i++) {
 			const newElement = document.createElement("div");
@@ -768,9 +771,58 @@ function loadComments(parkId) {
 
 		    getCommentSection.appendChild(newElement);
 		}
+
+		// yorum yapma aktifleştirilecek
+	    mkComment();
 	}
 }
 
+function mkComment() {
+	const getCommentSection = document.getElementsByClassName("parkPageForCity")[1];
+	if(getCommentSection !== undefined) {
+		const newElement = document.createElement("div");
+		newElement.style.color = "black";
+
+		//newElement.appendChild(document.createTextNode("Yorum Ekle:"));
+		const cmtHead = document.createElement("span");
+		cmtHead.appendChild(document.createTextNode("Yorum Ekle:"));
+		cmtHead.setAttribute("class", "cmt-head");
+		newElement.appendChild(cmtHead);
+
+		// topic ----------
+		const topic = document.createElement("input");
+		topic.setAttribute("type", "text");
+		topic.setAttribute("class", "cmt-topic");
+		topic.setAttribute("name", "topic");
+		topic.setAttribute("placeholder", "Konu Adı");
+		// end-topic ------
+
+		// message --------
+		const message = document.createElement("textarea");
+		//message.setAttribute("type", "text");
+		message.setAttribute("class", "cmt-message");
+		message.setAttribute("name", "message");
+		message.setAttribute("placeholder", "Mesaj Alanı...");
+		// end-message ----
+
+		newElement.appendChild(topic);
+		newElement.appendChild(message);
+
+		const submitBtn = document.createElement("button");
+		submitBtn.textContent = "Gönder";
+		submitBtn.class = "cmt-submit";
+		submitBtn.setAttribute("onclick", "sendComment(); return false;");
+
+		newElement.appendChild(submitBtn);
+		getCommentSection.appendChild(newElement);
+	}
+}
+
+function sendComment() {
+	console.log("test output");
+}
+
+// Yeni araç eklemek için dinamik input oluşturma alanı
 function addCarSection() {
 	const outerDiv = document.getElementsByClassName("nc-inline")[0];
 
@@ -783,6 +835,7 @@ function addCarSection() {
 	outerDiv.appendChild(newElement);
 }
 
+
 function addCar() {
 	const request = new Request();
 	var formData = new FormData();
@@ -790,19 +843,40 @@ function addCar() {
 	const pattern = /^([0-9]{2})([a-zA-Z]{1,3})([0-9]{1,3})$/; // 34ABC123 MAX LENGTH
 
 	const getInputs = document.getElementsByClassName("n-car");
+	console.log(getInputs);
 	if(getInputs.length !== 0) {
 		for(let i = 0; i < getInputs.length; i++) {
 			if(getInputs[i].value.length !== 0 && getInputs[i].value.match(pattern)) {
 				dataArray.push(cleanVal(getInputs[i].value));
+			} else if(getInputs[i].value.length === 0) {
+				getInputs[i].remove();
+				i--; // node silindiğinden arada bir i kaçırılmış oluyor.
+			} else {
+				getInputs[i].value = "";
 			}
 		}
 	}
 
 	if(dataArray.length !== 0) {
-		console.log("data uzunluğu: ", dataArray.length);
 		formData.append("newCar", dataArray);
-		request.post("source/add-car", formData);
+		const status = request.post("source/add-car", formData);
+		if(status === "true") {
+			// tüm inputları silecek.
+			i = 0;
+			while(getInputs !== undefined) {
+				getInputs[i].remove();
+				//i++; // i hiç arttırılmayacak, firstChild işlevi görecek.
+			}
+		}
 	}
+}
+
+function mkMain(plate) {
+	const request = new Request();
+	var formData = new FormData();
+
+	formData.append("plate", plate);
+	const status = request.post("source/chg-main", formData);
 }
 
 function logout() {

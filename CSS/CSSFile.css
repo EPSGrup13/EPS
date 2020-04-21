@@ -742,6 +742,27 @@ input:checked + .slider:before {
   width: 220px;
 }
 
+.cmt-head {
+  margin-top: 20px;
+  display: block;
+}
+
+.cmt-topic {
+  display: block;
+}
+
+.cmt-message {
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 250px;
+  min-height: 175px;
+  display: block;
+}
+
+.cmt-submit {
+  display: block;
+}
+
 
 
 
@@ -2020,6 +2041,7 @@ footer p
   padding:8px;
   width: 220px;
   float: left;
+  display: flex;
 }
 
 .editProfilePhoto {

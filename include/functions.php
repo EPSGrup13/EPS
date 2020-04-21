@@ -2113,6 +2113,24 @@ function addCar($plateArray, $person_id) {
  		return FALSE;
 }
 
+function changeMain($plate, $person_id) {
+	$query = "UPDATE Wehicle SET is_main = 0 WHERE person_id = '$person_id'";
+	$data = ""; // update için önemsiz
+
+	$obj = new Dbpro($query, $data);
+	$ans = $obj->update();
+	if($ans) {
+		$query = "UPDATE Wehicle SET is_main = 1 WHERE person_id = '$person_id' AND full_plate = '$plate'";
+		$obj->setVals($query, $data);
+		$ans = $obj->update();
+		if($ans)
+			return TRUE;
+		else
+			return FALSE;
+	} else
+		return FALSE;
+}
+
 
 
 

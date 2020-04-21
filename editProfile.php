@@ -51,7 +51,8 @@
 							$lenWehiclesArray = count($wehiclesArray);
 							for($i = 0; $i < $lenWehiclesArray; $i++)
 							{
-								echo "<div class=\"editProfileText\">Plaka:</div><div class=\"editProfileInput\"><input type=\"text\" class=\"profileInput\" placeholder=\"".$wehiclesArray[$i]."\"></div><br>";
+								echo "<div class=\"editProfileText\">Plaka:</div><div class=\"editProfileInput\">".$wehiclesArray[$i];
+								echo "<button  onclick=\"mkMain('" .$wehiclesArray[$i]. "'); return false;\">Seç</button></div>";
 							}
 						}
 						else
