@@ -17,7 +17,7 @@
 	<div id="formkapsamprofilim">
 		<div class="ust">
 		       <div class="profilimkullanicifoto">
-			       <img src="https://i.hizliresim.com/p7PP6q.png" style="width: 180px; height: 180px;display: block; margin: auto; padding-top: 10px;">
+			       <img src="<?php echo isDevelopmentModeOn();?>images/default-p-avatar.png" style="width: 180px; height: 180px;display: block; margin: auto; padding-top: 10px;">
 			       <div style="display:block; margin:auto; margin-top:16px;">
 			        	<div class="isim1"><?php echo $userName. " " .$lastName; ?></div>
 		            </div>

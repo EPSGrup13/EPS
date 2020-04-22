@@ -7,6 +7,6 @@
 	<span style="display: table-cell;vertical-align: middle;padding-left: 10px;">Copyright © 2019 - 2020 epark.com | Tüm hakları saklıdır</span>
 
     <div class="app-logo">
-        <img src="https://i.hizliresim.com/0rVv8Y.png" class="logo-size1">
+        <img src="<?php echo isDevelopmentModeOn(); ?>images/gp-logo.png" class="logo-size1">
     </div>
 </div>

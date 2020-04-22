@@ -732,6 +732,8 @@ function comments(parkId) {
 
 }
 
+
+// Yapılmış yorumları listelemek için
 function loadComments(parkId) {
 	const getCommentSection = document.getElementsByClassName("parkPageForCity")[1];
 	const request = new Request();
@@ -742,6 +744,7 @@ function loadComments(parkId) {
 	if(typeof(data) === "string") { // eğer gelen response yorumlar değilde sadece yazı (hata yazısı) ise
 		//console.log(data);
 		const newElement = document.createElement("div");
+		newElement.style.padding = "10px";
 		newElement.style.color = "black";
 
 	    let newChild = document.createTextNode(data);
@@ -751,10 +754,41 @@ function loadComments(parkId) {
 		// yorum yapma aktifleştirilecek
 	    mkComment();
 	} else { // eğer string değilse (yani yorumlar -> object) ise.
+		/* data max length [8] */
 		for(let i = 0; i < data.length; i++) {
+			// outer div
 			const newElement = document.createElement("div");
+			newElement.className = "ext-cmt";
 			newElement.style.color = "black";
-			
+
+			// inner
+			const extTopic = document.createElement("div");
+			extTopic.className = "ext-cmt-topic";
+
+			const extTopicL = document.createElement("span");
+			extTopicL.className = "ext-cmt-topic-l";
+
+			extTopicL.appendChild(document.createTextNode(data[i][5] + " " + data[i][6] + " - " + data[i][1])); // [5] -> ad, [6] -> soyad | [1] -> puan
+			// puan için star icon
+			const icon = document.createElement("img");
+			icon.src = devURL() + "images/star.png";
+			icon.className = "star-icon";
+			extTopicL.appendChild(icon);
+			// --
+
+			const extTopicR = document.createElement("span");
+			extTopicR.className = "ext-cmt-topic-r";
+			extTopicR.appendChild(document.createTextNode("Tarih: " + data[i][4] + " " + data[i][3])); // [4] -> saat, [5] -> tarih
+
+			extTopic.appendChild(extTopicL);
+			extTopic.appendChild(extTopicR);
+			newElement.appendChild(extTopic);
+
+			const extMessage = document.createElement("div");
+			extMessage.className = "ext-cmt-message";
+			extMessage.appendChild(document.createTextNode(data[i][0])); // [0] -> comment
+			newElement.appendChild(extMessage);
+
 			// Metod 1
 			/*for(let j = 0; j < data[i].length; j++) {
 				//console.log(data[i][j]);
@@ -762,12 +796,12 @@ function loadComments(parkId) {
 			}*/
 
 			// Metod 2 - Dağınık veri listeleme yapılabilmesi mümkün olan
-			newElement.appendChild(document.createTextNode("Başlık: " + data[i][0]));
+			/*newElement.appendChild(document.createTextNode("Başlık: " + data[i][0]));
 			newElement.appendChild(document.createTextNode("Puan: " + data[i][2] + "\n"));
 			newElement.appendChild(document.createTextNode("Yorum: " + data[i][1] + "\n"));
 			newElement.appendChild(document.createTextNode("Person id: " + data[i][3] + " Ad Soyad gelecek\n"));
 			newElement.appendChild(document.createTextNode("Tarih: " + data[i][4] + "\n"));
-			newElement.appendChild(document.createTextNode("Saat: " + data[i][5] + "\n"));
+			newElement.appendChild(document.createTextNode("Saat: " + data[i][5] + "\n"));*/
 
 		    getCommentSection.appendChild(newElement);
 		}
@@ -777,25 +811,28 @@ function loadComments(parkId) {
 	}
 }
 
+// Yeni yorum yapabilmek için alan
 function mkComment() {
 	const getCommentSection = document.getElementsByClassName("parkPageForCity")[1];
 	if(getCommentSection !== undefined) {
+		// outer div
 		const newElement = document.createElement("div");
 		newElement.style.color = "black";
+		newElement.className = "cmt-mainSection";
 
-		//newElement.appendChild(document.createTextNode("Yorum Ekle:"));
+		// inner
 		const cmtHead = document.createElement("span");
 		cmtHead.appendChild(document.createTextNode("Yorum Ekle:"));
 		cmtHead.setAttribute("class", "cmt-head");
 		newElement.appendChild(cmtHead);
 
-		// topic ----------
+		/* topic ----------
 		const topic = document.createElement("input");
 		topic.setAttribute("type", "text");
 		topic.setAttribute("class", "cmt-topic");
 		topic.setAttribute("name", "topic");
 		topic.setAttribute("placeholder", "Konu Adı");
-		// end-topic ------
+		// end-topic ------ */
 
 		// message --------
 		const message = document.createElement("textarea");
@@ -805,12 +842,12 @@ function mkComment() {
 		message.setAttribute("placeholder", "Mesaj Alanı...");
 		// end-message ----
 
-		newElement.appendChild(topic);
+		//newElement.appendChild(topic);
 		newElement.appendChild(message);
 
 		const submitBtn = document.createElement("button");
 		submitBtn.textContent = "Gönder";
-		submitBtn.class = "cmt-submit";
+		submitBtn.className = "cmt-submit";
 		submitBtn.setAttribute("onclick", "sendComment(); return false;");
 
 		newElement.appendChild(submitBtn);
@@ -835,7 +872,7 @@ function addCarSection() {
 	outerDiv.appendChild(newElement);
 }
 
-
+// Araç ekleme sistemi için veriyi işleyip gönderen kısım
 function addCar() {
 	const request = new Request();
 	var formData = new FormData();
@@ -843,7 +880,6 @@ function addCar() {
 	const pattern = /^([0-9]{2})([a-zA-Z]{1,3})([0-9]{1,3})$/; // 34ABC123 MAX LENGTH
 
 	const getInputs = document.getElementsByClassName("n-car");
-	console.log(getInputs);
 	if(getInputs.length !== 0) {
 		for(let i = 0; i < getInputs.length; i++) {
 			if(getInputs[i].value.length !== 0 && getInputs[i].value.match(pattern)) {
@@ -871,6 +907,7 @@ function addCar() {
 	}
 }
 
+// Araç is_main yapmak için. (selected alıp, person_id -> is_main hepsini 0 sonra selected is_main-> 1)
 function mkMain(plate) {
 	const request = new Request();
 	var formData = new FormData();
@@ -937,8 +974,12 @@ function setStyles()
 		document.body.classList.remove("dm-v");
 		getHeader.classList.remove("dm-v2");
 		getFooter.classList.remove("dm-v2");
+		// Parks kısmında eklenen harici bg'a aynı özelliklerini sağlamak için
 		if(document.getElementsByClassName("parkPageBox")[0] !== undefined && document.getElementsByClassName("parkPageBox")[0].style.background !== "none") {
 			document.getElementsByClassName("parkPageBox")[0].style.background = "url("+devURL()+"images/parks-img1.jpg)";
+			document.getElementsByClassName("parkPageBox")[0].style.backgroundRepeat = "no-repeat";
+			document.getElementsByClassName("parkPageBox")[0].style.backgroundSize = "cover";
+			document.getElementsByClassName("parkPageBox")[0].style.backgroundAttachment = "fixed";
 		}
 	} else { // darkmode açılınca
 		document.body.classList.toggle("dm-v");

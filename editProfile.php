@@ -26,7 +26,7 @@
 	<div id="formkapsamprofilim" style="width:820px; margin-top: -325px; border-radius: 10px;">
 
 	<div class="editProfileTop" style="float: left; height:280px;">
-	   <img src="https://i.hizliresim.com/p7PP6q.png" class="editProfilePhoto"><input type="file" name="profilePhoto" style="padding-left: 100px; padding-bottom: 15px;">
+	   <img src="<?php echo isDevelopmentModeOn();?>images/default-p-avatar.png" class="editProfilePhoto"><input type="file" name="profilePhoto" style="padding-left: 100px; padding-bottom: 15px;">
 	   	<br>
 		<?php echo "<div class=\"editProfileText\">İsim Soyisim:</div><div class=\"editProfileInput\"><input type=\"text\" name=\"fullName\" class=\"profileInput\" placeholder=\"" .$firstName. " " .$lastName. "\"></div>"; ?>
 		<br><div class="editProfileText"> Şifre: </div><div class="editProfileInput"><input type="password" name="pass" class="profileInput" placeholder="****"></div>
