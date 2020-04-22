@@ -2298,3 +2298,17 @@ footer p
   height: 18px;
   padding-right:5px;
 }
+
+/*Contact*/
+#form-elemanlari {
+  padding-top: 100px;
+  padding-right: 150px;
+  padding-left: 150px;
+  padding-bottom: 1%;
+  background: url('/images/.jpg') center center no-repeat;
+  background-size: cover;
+  background: #3a6186; /* Eski Tarayıcılar için */
+  background: -webkit-linear-gradient(to left, #3a6186 , #89253e);
+  background: linear-gradient(to left, #ededee , #c5e8c5);
+  color : black;    
+/*Contact*/
