@@ -1921,6 +1921,8 @@ function srchTitle($title) {
 			return "<title>Rezervasyon Talepleri</title>";
 		case 'comments':
 			return "<title>Yorumlar</title>";
+		case 'sss':
+			return "<title>Sıkça Sorulan Sorular</title>";
 		default:
 			return "<title>E-Park</title>"; // olur da sayfa tanımlanamaz ise.
 	}
@@ -2062,11 +2064,12 @@ function avgPoint($parkId) {
 function getComments($parkId) {
 	$query = "
 	SELECT
-	topic, comment, point, person_id, comment_date, comment_time
+	Comments.comment, Comments.point, Comments.person_id, Comments.comment_date, Comments.comment_time, Person.firstName, Person.lastName
 	FROM Comments
-	WHERE park_id = '$parkId'
+	INNER JOIN Person ON Comments.person_id = Person.person_id
+	WHERE Comments.park_id = '$parkId'
 	"; // ',' sonra 1 digit
-	$data = "topic, comment, point, person_id, comment_date, comment_time";
+	$data = "comment, point, person_id, comment_date, comment_time, firstName, lastName";
 
 	$obj = new Dbpro($query, $data);
 	$getData = $obj->contains();
@@ -2090,7 +2093,7 @@ function addCar($plateArray, $person_id) {
 	$plateArray = explode(",", $plateArray); // tek indexte gelen array, çok hücreli array'e çevrilip işleniyor.
 	for($i = 0; $i < count($plateArray); $i++) {
 			$dataArray = array();
-			array_push($dataArray, $plateArray[$i]); // -> full_plate
+			array_push($dataArray, $plateArray[$i]); // -> full_plate || 34ABC123
 			array_push($dataArray, substr($plateArray[$i], 2)); // -> raw_plate | 34ABC123 / ABC123
 			array_push($dataArray, substr($plateArray[$i], 0, 2)); // -> city_id | 34ABC123 / 34
 
