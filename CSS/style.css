@@ -904,5 +904,69 @@ li a:hover {
 
 /* Otoparkımız Ol Mobil Bitiş */
 
-
 /* Otoparkımız Ol Bitiş */
+
+
+/* Kullanım Koşulları Başlangıç */
+
+#kullanim {
+    background-image: url('/images/eps-arkaplan2.png') !important;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+#kullanim-kutu {
+    background: rgba(0, 0, 0, 0.5);
+    text-align: left;
+    font-family: "Montserrat", sans-serif;
+    width: 90% !important;
+    margin: auto !important;
+    margin-left: 3% !important;
+    margin-right: 3% !important;
+    padding: 2%;
+    margin-top: 10% !important;
+    display: grid;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+#kullanim-p {
+    font-family: "Montserrat", sans-serif;
+    text-align: justify;
+    color: white;
+    font-size: 1.1rem;
+    font-style: italic;
+
+}
+
+#kullanim-kutu-2 {
+    background: rgba(0, 0, 0, 0.5);
+    text-align: left;
+    font-family: "Montserrat", sans-serif;
+    width: 90% !important;
+    margin-left: 3% !important;
+    margin-right: 3% !important;
+    margin-top: 4% !important;
+    display: grid;
+    padding: 2%;
+    margin-bottom: 10% !important;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+#kullanim-p-2 {
+    font-family: "Montserrat", sans-serif;
+    text-align: justify;
+    color: white;
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+/* Kullanım Koşulları Bitiş */
