@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 16, 2020 at 05:15 AM
+-- Generation Time: Apr 23, 2020 at 04:07 PM
 -- Server version: 5.6.47-cll-lve
 -- PHP Version: 7.2.7
 
@@ -58,9 +58,11 @@ CREATE TABLE `City` (
 
 CREATE TABLE `Comments` (
   `comment_id` int(11) NOT NULL,
-  `topic` varchar(60) CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL,
+  `topic` varchar(60) CHARACTER SET utf8 COLLATE utf8_turkish_ci DEFAULT NULL,
   `comment` tinytext CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL,
   `point` decimal(2,1) NOT NULL DEFAULT '0.0',
+  `comment_date` date NOT NULL,
+  `comment_time` time NOT NULL,
   `person_id` int(11) NOT NULL,
   `park_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -128,6 +130,20 @@ CREATE TABLE `parkFee` (
   `12hr` decimal(5,2) NOT NULL DEFAULT '0.00',
   `12h_plus` decimal(5,2) NOT NULL DEFAULT '0.00',
   `park_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parkForm`
+--
+
+CREATE TABLE `parkForm` (
+  `pform_id` int(11) NOT NULL,
+  `park_name` varchar(60) CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `phone_no` int(14) NOT NULL,
+  `address` varchar(255) CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -335,6 +351,12 @@ ALTER TABLE `parkFee`
   ADD KEY `park_id` (`park_id`);
 
 --
+-- Indexes for table `parkForm`
+--
+ALTER TABLE `parkForm`
+  ADD PRIMARY KEY (`pform_id`);
+
+--
 -- Indexes for table `parkStatus`
 --
 ALTER TABLE `parkStatus`
@@ -443,6 +465,12 @@ ALTER TABLE `Park`
 --
 ALTER TABLE `parkFee`
   MODIFY `parkFee_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `parkForm`
+--
+ALTER TABLE `parkForm`
+  MODIFY `pform_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `parkStatus`

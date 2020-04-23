@@ -61,6 +61,8 @@ class Request {
 		return self.data;
 	}
 
+	/* sadece TRUE - FALSE için değil, aynı zamanda ekrana yazdırılabilecek herhangi bir
+	veriyi çekmek için de kullanılabilir bir hal almıştır. */
 	booleanControl(url) {
 		if(!url.includes("https://")) {
 			url = devMode()+url;
@@ -636,6 +638,8 @@ function ckVersion() {
 			console.log(orjVer.website.version, " ", currentVer.website.version);
 			console.log("Versiyon uyumlu veya bastırılmış");
 		}
+	} else {
+		console.log("orjVer or currentVer is undefined");
 	}
 }
 
@@ -770,8 +774,13 @@ function loadComments(parkId) {
 	    newElement.appendChild(newChild);
 	    getCommentSection.appendChild(newElement);
 
-		// yorum yapma aktifleştirilecek
-	    mkComment();
+		// Eğer kişi kullanıcı girişi yapmış ise yorum yapabilecek
+		const ans = request.booleanControl("source/ck-session");
+		if(ans == 1) { // eğer TRUE ise ama === olarak değil
+	    	mkComment(parkId);
+		}/* else {
+			console.log("load error");
+		}*/
 	} else { // eğer string değilse (yani yorumlar -> object) ise.
 		/* data max length [8] */
 		for(let i = 0; i < data.length; i++) {
@@ -837,6 +846,7 @@ function loadComments(parkId) {
 
 // Yeni yorum yapabilmek için alan
 function mkComment(parkId) {
+	const MAX_LENGTH = 255;
 	const getCommentSection = document.getElementsByClassName("parkPageForCity")[1];
 	if(getCommentSection !== undefined) {
 		// outer div
@@ -849,6 +859,32 @@ function mkComment(parkId) {
 		cmtHead.appendChild(document.createTextNode("Yorum Ekle:"));
 		cmtHead.setAttribute("class", "cmt-head");
 		newElement.appendChild(cmtHead);
+
+
+		// slider ve puan birlikte --------------------------
+		const outerRange = document.createElement("div");
+		outerRange.className = "outerRange";
+
+		const rangeSlider = document.createElement("input");
+		rangeSlider.className = "point-slider";
+		rangeSlider.setAttribute("type", "range");
+		rangeSlider.setAttribute("min", "0");
+		rangeSlider.setAttribute("max", "50");
+		rangeSlider.setAttribute("value", "50");
+		// değişimden sonra range değerini göstermek için
+		rangeSlider.oninput = function() {
+			rangeDisplay.textContent = "Puan: " + (rangeSlider.value / 10).toFixed(1); // float'a çevrilip ',' den sonra 1 digit
+		}
+		outerRange.appendChild(rangeSlider);
+
+		// başlangıçta range değerini göstermek için
+		const rangeDisplay = document.createElement("div");
+		rangeDisplay.className = "point-display";
+		rangeDisplay.textContent = "Puan: " + (rangeSlider.value / 10).toFixed(1); // float'a çevrilip ',' den sonra 1 digit
+		outerRange.appendChild(rangeDisplay);
+
+		newElement.appendChild(outerRange);
+		// slider outer bitiş --------------------------------
 
 		/* topic ----------
 		const topic = document.createElement("input");
@@ -864,6 +900,14 @@ function mkComment(parkId) {
 		message.setAttribute("class", "cmt-message");
 		message.setAttribute("name", "message");
 		message.setAttribute("placeholder", "Mesaj Alanı...");
+		message.addEventListener("keyup", function() { // keydown sonra işlediğinden 1 eksik çıkar
+			if(this.value.length <= MAX_LENGTH) {
+				chLeft.textContent = MAX_LENGTH - this.value.length + " karakter hakkınız kaldı.";
+			} else {
+				this.value = this.value.slice(0, MAX_LENGTH);
+				//chLeft.textContent = MAX_LENGTH - this.value.length + " karakter hakkınız kaldı.";
+			}
+		})
 		// end-message ----
 
 		//newElement.appendChild(topic);
@@ -879,8 +923,13 @@ function mkComment(parkId) {
 		clearBtn.className = "cmt-btn";
 		clearBtn.setAttribute("onclick", "clTextArea(); return false;");
 
+		const chLeft = document.createElement("span");
+		chLeft.textContent = "255 karakter hakkınız kaldı.";
+		chLeft.className = "";
+
 		newElement.appendChild(submitBtn);
 		newElement.appendChild(clearBtn);
+		newElement.appendChild(chLeft);
 		getCommentSection.appendChild(newElement);
 	}
 }
@@ -889,14 +938,68 @@ function mkComment(parkId) {
 function sendComment(parkId) {
 	const request = new Request();
 	var formData = new FormData();
-	const pattern = /^([a-zA-Z]{1,})/; // Minimum 1 karakter a-zA-Z ile başlamalı.
+	const pattern = /^([a-zçğıöşüA-ZÇĞİÖŞÜ]{1,})/; // Minimum 1 karakter a-zA-Z ile başlamalı. (TR karakterler de eklendi)
 
 	const textArea = document.getElementsByClassName("cmt-message")[0];
 	const comment = cleanVal(textArea.value);
+	// point için
+	const getPointArea = document.getElementsByClassName("point-slider")[0].value;
+	const getPoint = (getPointArea / 10).toFixed(1);
+	// point sonu
 	if(comment.match(pattern)) {
 		formData.append("comment", comment);
 		formData.append("park_id", parkId);
+		formData.append("point", getPoint);
 		request.post("source/snd-message", formData);
+
+		// Yorum başarılı olduğuna direk listeye eklenecek
+		const fName = request.booleanControl("source/gt-session-pfname"); // Kişinin adını session'dan alıyor.
+		const getCommentSection = document.getElementsByClassName("parkPageForCity")[1];
+		// eğer Yorum bulunmamaktadır yazıyorsa o silinecek.
+		if(getCommentSection.children[0].className === "") {
+			getCommentSection.children[0].remove();
+		}
+
+		const newElement = document.createElement("div");
+		newElement.className = "ext-cmt";
+		newElement.style.color = "black";
+
+		// inner
+		const extTopic = document.createElement("div");
+		extTopic.className = "ext-cmt-topic";
+
+		const extTopicL = document.createElement("span");
+		extTopicL.className = "ext-cmt-topic-l";
+
+		// point alanı
+		extTopicL.appendChild(document.createTextNode(fName + " - " + getPoint)); // -> ad, -> soyad | -> puan
+		// puan için star icon
+		const icon = document.createElement("img");
+		icon.src = devURL() + "images/star.png";
+		icon.className = "star-icon";
+		extTopicL.appendChild(icon);
+		// --
+
+		let dNow = new Date();
+		const extTopicR = document.createElement("span");
+		extTopicR.className = "ext-cmt-topic-r";
+		extTopicR.appendChild(document.createTextNode("Tarih: " + dNow.getHours() + ":" + dNow.getMinutes() + ":" + dNow.getSeconds() + " " + dNow.getDate() + "-" + dNow.getMonth() + "-" + dNow.getFullYear())); // -> saat, -> tarih
+
+		extTopic.appendChild(extTopicL);
+		extTopic.appendChild(extTopicR);
+		newElement.appendChild(extTopic);
+
+		const getCurrentComment = document.getElementsByClassName("cmt-message")[0].value; // textArea'daki veri çekiliyor.
+		const extMessage = document.createElement("div");
+		extMessage.className = "ext-cmt-message";
+		extMessage.appendChild(document.createTextNode(getCurrentComment)); // -> comment
+		newElement.appendChild(extMessage);
+
+		// Yorum ekle kısmının üzerine eklenmesi için son index öncesine ekleniyor.
+    	getCommentSection.insertBefore(newElement, getCommentSection.childNodes[getCommentSection.childNodes.length - 1]);
+
+    	// yorum alanını temizlemek için
+    	clTextArea();
 	} else {
 		displayWarning("alert danger", "Hatalı input");
 	}
@@ -905,6 +1008,8 @@ function sendComment(parkId) {
 function clTextArea() {
 	const textArea = document.getElementsByClassName("cmt-message")[0];
 	textArea.value = "";
+	document.getElementsByClassName("point-slider")[0].value = 50;
+	document.getElementsByClassName("point-display")[0].textContent = "Puan 5.0";
 }
 
 // Yeni araç eklemek için dinamik input oluşturma alanı
@@ -991,6 +1096,39 @@ function reArrangeDate(date) {
 	const newDate = dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
 	return newDate;
 }
+
+/* Park Form başlangıcı */
+function parkForm() {
+	const request = new Request();
+	var formData = new FormData();
+	/* hepsi tek tek alınacak (validation için) */
+	let status = 0;
+	let parkName = document.getElementsByClassName("bilgi-girisi")[0].value;
+	let email = document.getElementsByClassName("bilgi-girisi")[1].value;
+	let phoneNo = document.getElementsByClassName("bilgi-girisi")[2].value;
+	let address = document.getElementsByClassName("otopark-adresi")[0].value;
+	const pattern1 = /^([a-zçğıöşüA-ZÇĞİÖŞÜ0-9]{1})([a-zçğıöşüA-ZÇĞİÖŞÜ0-9.,/: ])+$/; // otopark adı ve adres için.
+	const pattern2 = /^([a-z])([a-zA-Z0-9])+\@{1}[a-z]+[.]{1}[a-z]+$/; // email için
+	const pattern3 = /^[0-9]{3} [0-9]{3} [0-9]{2} [0-9]{2}$/; // phoneNo için
+
+	// Conditional (Ternary) şeklinde
+	parkName.match(pattern1) ? (email.match(pattern2) ? (phoneNo.match(pattern3) ? (address.match(pattern1) ? status = 1 : displayWarning("alert danger", "Hatalı adres girişi")) : displayWarning("alert danger", "Hatalı telefon numarası girişi")): displayWarning("alert danger", "Hatalı email girişi")) : displayWarning("alert danger", "Hatalı park adı girişi");
+	if(status === 1) {
+		formData.append("parkName", parkName);
+		formData.append("email", email);
+		formData.append("phoneNo", phoneNo);
+		formData.append("address", address);
+		const status = request.post("source/snd-parkform", formData);
+		if(status === "true") {
+			document.forms[0].reset();
+		} else {
+			console.log("failed");
+		}
+	}
+}
+
+
+/* Park Form sonu */
 
 function darkMode()
 {

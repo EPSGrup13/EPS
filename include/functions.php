@@ -2070,6 +2070,7 @@ function getComments($parkId) {
 	FROM Comments
 	INNER JOIN Person ON Comments.person_id = Person.person_id
 	WHERE Comments.park_id = '$parkId'
+	ORDER BY comment_date ASC, comment_time ASC;
 	"; // ',' sonra 1 digit
 	$data = "comment, point, person_id, comment_date, comment_time, firstName, lastName";
 
@@ -2136,14 +2137,29 @@ function changeMain($plate, $person_id) {
 		return FALSE;
 }
 
-function addComment($comment, $park_id, $person_id) {
+function addComment($comment, $park_id, $point, $person_id) {
 	$timezone = 3; // TR
 	$date = date("Y-m-d");
 	$time = date("H:i:s");
 
 	$query = "
-	INSERT INTO Comments (comment, comment_date, comment_time, person_id, park_id)
-	VALUES ('$comment', '$date', '$time', '$person_id', '$park_id')
+	INSERT INTO Comments (comment, point, comment_date, comment_time, person_id, park_id)
+	VALUES ('$comment', '$point', '$date', '$time', '$person_id', '$park_id')
+	";
+	$data = ""; // insert için önemsiz
+
+	$obj = new Dbpro($query, $data);
+	$ans = $obj->insert();
+	if($ans)
+		return TRUE;
+	else
+		return FALSE;
+}
+
+function addParkForm($park_name, $email, $phone_no, $address) {
+	$query = "
+	INSERT INTO parkForm (park_name, email, phone_no, address)
+	VALUES ('$park_name', '$email', '$phone_no', '$address')
 	";
 	$data = ""; // insert için önemsiz
 

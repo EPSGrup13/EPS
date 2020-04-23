@@ -7,8 +7,8 @@ $_POST["message"] -> kullanıcının yaptığı yorum */
 	session_start();
 	pageProtection();
 
-	if(isset($_POST["comment"]) && isset($_POST["park_id"])) {
-		$result = addComment($_POST["comment"], $_POST["park_id"], $_SESSION["person_id"]);
+	if(isset($_POST["comment"]) && isset($_POST["park_id"]) && isset($_POST["point"])) {
+		$result = addComment($_POST["comment"], $_POST["park_id"], $_POST["point"], $_SESSION["person_id"]);
 		if($result) {
 			$arr = array($array1[0]=>$array2[0], $array1[1]=>"İşleminiz gerçekleşti.");
 			echo json_encode($arr);

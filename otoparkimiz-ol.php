@@ -19,14 +19,14 @@
                     <div><input class="bilgi-girisi" type="text" name="OtoParkName" placeholder="Otopark Adı" />
                     </div>
                     <div><input class="bilgi-girisi" type="email" name="Mail" placeholder="E-mail" /></div>
-                    <div><input class="bilgi-girisi" type="number" name="TelNo" placeholder="Telefon Numarası" pattern="[0-9]{3} [0-9]{3} [0-9]{2} [0-9]{2}"/>
+                    <div><input class="bilgi-girisi" type="text" name="TelNo" placeholder="Telefon Numarası" pattern="[0-9]{3} [0-9]{3} [0-9]{2} [0-9]{2}"/>
                     </div>
                     <div><textarea class="otopark-adresi" placeholder="Otopark Adresi.."></textarea></div>
                     <div>
                         <p id="OtoParkFoto-yazi">Otoparkınızın Fotoğraflarını Yükleyiniz<input class="bilgi-girisi2"
                                 type="file" name="OtoParkFoto" /></p>
                     </div>
-                    <div><input id="buton2" type="submit" value="Gönder"></div>
+                    <div><input id="buton2" type="submit" value="Gönder" onclick="parkForm(); return false;"></div>
                     <div><button id="buton2"><a href="" style="text-decoration: none; color: white;">Geri
                                 Dön</a></button></div>
                 </form>
