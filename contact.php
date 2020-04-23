@@ -56,18 +56,18 @@
             <div class="form-group">
                 <center><label for="exampleFormControlTextarea1">Mesajınız</label></center>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Mesajınız..."
-                    style=" max-height: 120px;
+                    style=" max-height: 130px;
                 max-width: 384px;
-                margin: auto;"></textarea>
+                margin: auto; min-height: 130px; resize: none"></textarea>
             </div>
-            <center><button class="btn btn-primary" type="submit">Gönder</button></center>
+            <center><button class="btn btn-primary" type="submit">Gönder</button></center><br>
         </form>
     </div>
     <div>
         <div>
             <iframe
                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6011.603485079791!2d29.000843917321603!3d41.11702075758409!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x31560b35ad4848d0!2sBeykent%20%C3%9Cniversitesi!5e0!3m2!1str!2str!4v1586915768366!5m2!1str!2str"
-                width="100%" height="300px" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+                width="100%" height="400px" frameborder="0" style="border:0" allowfullscreen=""></iframe>
         </div>
     </div>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
