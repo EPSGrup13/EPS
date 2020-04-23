@@ -9,7 +9,7 @@
 ?>
 
 <div class="content">
-
+<div class="citiesBox">
 	<center class="citiesTop"> Bulunduğunuz şehri seçiniz </center>
 	<?php //cityFrame div'i tüm şehirlerin listelendiği genel div ?>
 	<div class="cityFrame">
@@ -25,7 +25,7 @@
 				?>
 	</div>
 
-
+</div>
 </div>
 
 
