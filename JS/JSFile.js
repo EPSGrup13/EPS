@@ -29,7 +29,7 @@ class Request {
 	post(url, data) {
 		this.xmlHttp.onreadystatechange = function() {
 			if(this.readyState === 4 && this.status === 200) {
-				console.log(this.responseText);
+				//console.log(this.responseText);
 				let splitData = JSON.parse(this.responseText);
 				if(splitData.status === "success") {
 					displayWarning("alert success", splitData.message);
@@ -58,6 +58,21 @@ class Request {
 		}
 		this.xmlHttp.open("post", (devMode()+url), false); // false -> asenkron değil.
 		this.xmlHttp.send(data);
+		return self.data;
+	}
+
+	booleanControl(url) {
+		if(!url.includes("https://")) {
+			url = devMode()+url;
+		}
+		this.xmlHttp.onreadystatechange = function() {
+			if(this.readyState === 4 && this.status === 200) {
+				//console.log(this.responseText);
+				self.data = this.responseText;
+			}
+		}
+		this.xmlHttp.open("get", url, false) // false -> asenkron değil.
+		this.xmlHttp.send();
 		return self.data;
 	}
 }
@@ -699,11 +714,15 @@ function comments(parkId) {
 		    setTimeout(function() {
 		    	getSections[1].style.opacity = opacity;
 		    	opacity = opacity - 0.2;
-		    }, 100);
+		    }, 10);
 	    }
 
 	    setTimeout(function() {
-			getSections[1].remove();
+	    	try {
+				getSections[1].remove();
+	    	} catch (e) {
+				getSections[0].classList.toggle("move-l");
+	    	}
 	    }, 500);
 
 		getSections[0].classList.toggle("move-l");
@@ -712,7 +731,7 @@ function comments(parkId) {
 		getParkSection.classList.toggle("move-l");
 
 		const newElement = document.createElement("div");
-	    newElement.className = "parkPageForCity";
+	    newElement.className = "parkPageForCity scrollable";
 	    newElement.style.marginLeft = "23px";
 	    newElement.style.opacity = "0";
 	    document.querySelector(".content").appendChild(newElement);
@@ -727,7 +746,7 @@ function comments(parkId) {
 		    }, 200);
 	    }
 
-	    loadComments(parkId);
+    	loadComments(parkId);
 	}
 
 }
@@ -778,7 +797,7 @@ function loadComments(parkId) {
 
 			const extTopicR = document.createElement("span");
 			extTopicR.className = "ext-cmt-topic-r";
-			extTopicR.appendChild(document.createTextNode("Tarih: " + data[i][4] + " " + data[i][3])); // [4] -> saat, [5] -> tarih
+			extTopicR.appendChild(document.createTextNode("Tarih: " + data[i][4] + " " + reArrangeDate(data[i][3]))); // [4] -> saat, [5] -> tarih
 
 			extTopic.appendChild(extTopicL);
 			extTopic.appendChild(extTopicR);
@@ -806,13 +825,18 @@ function loadComments(parkId) {
 		    getCommentSection.appendChild(newElement);
 		}
 
-		// yorum yapma aktifleştirilecek
-	    mkComment();
+		// Eğer kişi kullanıcı girişi yapmış ise yorum yapabilecek
+		const ans = request.booleanControl("source/ck-session");
+		if(ans == 1) { // eğer TRUE ise ama === olarak değil
+	    	mkComment(parkId);
+		}/* else {
+			console.log("load error");
+		}*/
 	}
 }
 
 // Yeni yorum yapabilmek için alan
-function mkComment() {
+function mkComment(parkId) {
 	const getCommentSection = document.getElementsByClassName("parkPageForCity")[1];
 	if(getCommentSection !== undefined) {
 		// outer div
@@ -847,16 +871,40 @@ function mkComment() {
 
 		const submitBtn = document.createElement("button");
 		submitBtn.textContent = "Gönder";
-		submitBtn.className = "cmt-submit";
-		submitBtn.setAttribute("onclick", "sendComment(); return false;");
+		submitBtn.className = "cmt-btn";
+		submitBtn.setAttribute("onclick", "sendComment(" + parkId + "); return false;");
+
+		const clearBtn = document.createElement("button");
+		clearBtn.textContent = "Temizle";
+		clearBtn.className = "cmt-btn";
+		clearBtn.setAttribute("onclick", "clTextArea(); return false;");
 
 		newElement.appendChild(submitBtn);
+		newElement.appendChild(clearBtn);
 		getCommentSection.appendChild(newElement);
 	}
 }
 
-function sendComment() {
-	console.log("test output");
+// Yorum yapma sistemi - yapılan yorumu çekip gönderiyor
+function sendComment(parkId) {
+	const request = new Request();
+	var formData = new FormData();
+	const pattern = /^([a-zA-Z]{1,})/; // Minimum 1 karakter a-zA-Z ile başlamalı.
+
+	const textArea = document.getElementsByClassName("cmt-message")[0];
+	const comment = cleanVal(textArea.value);
+	if(comment.match(pattern)) {
+		formData.append("comment", comment);
+		formData.append("park_id", parkId);
+		request.post("source/snd-message", formData);
+	} else {
+		displayWarning("alert danger", "Hatalı input");
+	}
+}
+
+function clTextArea() {
+	const textArea = document.getElementsByClassName("cmt-message")[0];
+	textArea.value = "";
 }
 
 // Yeni araç eklemek için dinamik input oluşturma alanı
@@ -936,6 +984,12 @@ function updateRv(boolean, rvid) {
 		formData.append("rvid", rvid);
 		const status = request.post("updateRv", formData);
 	}
+}
+
+function reArrangeDate(date) {
+	const dateArray = date.split("-");
+	const newDate = dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
+	return newDate;
 }
 
 function darkMode()

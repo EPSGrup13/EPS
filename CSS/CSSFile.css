@@ -814,9 +814,10 @@ input:checked + .slider:before {
   padding: 10px;
 }
 
-.cmt-submit {
-  display: block;
+.cmt-btn {
+  /*display: block;*/
   padding: 5px 10px 5px 10px;
+  margin: 2px 2px 2px 0px;
 }
 /* Yorum alanı sonu */
 
@@ -2311,4 +2312,4 @@ footer p
   background: -webkit-linear-gradient(to left, #3a6186 , #89253e);
   background: linear-gradient(to left, #ededee , #c5e8c5);
   color : black;    
-/*Contact*/
+/*Contact*/ 

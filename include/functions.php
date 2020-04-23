@@ -1923,6 +1923,8 @@ function srchTitle($title) {
 			return "<title>Yorumlar</title>";
 		case 'sss':
 			return "<title>Sıkça Sorulan Sorular</title>";
+		case 'kullanim-kosullari':
+			return "<title>Kullanım Koşulları</title>";
 		default:
 			return "<title>E-Park</title>"; // olur da sayfa tanımlanamaz ise.
 	}
@@ -2131,6 +2133,25 @@ function changeMain($plate, $person_id) {
 		else
 			return FALSE;
 	} else
+		return FALSE;
+}
+
+function addComment($comment, $park_id, $person_id) {
+	$timezone = 3; // TR
+	$date = date("Y-m-d");
+	$time = date("H:i:s");
+
+	$query = "
+	INSERT INTO Comments (comment, comment_date, comment_time, person_id, park_id)
+	VALUES ('$comment', '$date', '$time', '$person_id', '$park_id')
+	";
+	$data = ""; // insert için önemsiz
+
+	$obj = new Dbpro($query, $data);
+	$ans = $obj->insert();
+	if($ans)
+		return TRUE;
+	else
 		return FALSE;
 }
 
