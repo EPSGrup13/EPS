@@ -166,6 +166,8 @@ a:hover
 }
 .linkBar2 a:hover
 {
+	color: rgb(26, 103, 187);
+	text-decoration: underline;
         background: rgba(194, 196, 202, 0.5); /*menü elemanı üzerine gelindiğinde renk alması için*/
     transition-duration: 0.5s; /*menü elemanı üzerine gelindiğinde efektli renk alması için*/
     -webkit-transition-duration: 0.5s; /*tarayıcılara uyması için */
