@@ -193,6 +193,15 @@ a:hover
   justify-content: center;
 }
 
+.citiesBox {
+  height:88%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: #e8e8e8;
+}
+
+
 .city
 {
   min-width:130px;
@@ -206,8 +215,13 @@ a:hover
   text-align: center;
   padding: 15px;
   margin: 1px;
-  background-color: rgba(163, 69, 124, 0.452);
+  background:#125792;
 }
+
+.city:hover {
+  background-color: #2367a2;
+}
+
 
 .cityNum
 {
@@ -224,6 +238,11 @@ a:hover
   font-size:10pt;
   display:table-cell;
   /*padding:2px 5px 2px 2px;*/
+}
+
+.cityName a:hover, .cityName a:active {
+  font-size: 110%;
+  color: white;
 }
 
 .profileColor
@@ -467,6 +486,8 @@ input:checked + .slider:before {
 .isim1
 {
   text-align: center;
+  color:#5c636e;
+  font-size: 18px;
 }
 
 .reservationSec
@@ -478,6 +499,7 @@ input:checked + .slider:before {
   overflow-x: hidden;
   overflow-y: auto;
   /*overflow-y: visible;*/
+  color:#5c636e; 
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -499,6 +521,7 @@ input:checked + .slider:before {
   overflow: scroll;
   overflow-x: hidden;
   overflow-y: auto;
+  color:#5c636e;
 }
 
 .plateSec::-webkit-scrollbar {
@@ -519,6 +542,8 @@ input:checked + .slider:before {
   overflow: scroll;
   overflow-x: hidden;
   overflow-y: auto;
+  line-height: 30px; 
+  color:#5c636e;
 }
 
 .detailsSec::-webkit-scrollbar {
@@ -537,9 +562,12 @@ input:checked + .slider:before {
   justify-content: center;
 }
 
-.newCar1 {
+.newCar1
+{
   cursor:pointer;
+  color:#5c636e;
 }
+
 
 .lText1
 {
@@ -941,7 +969,7 @@ nav{
     /*min-width: 586px;*/
     text-align: left; /*Yazıları ortalamak için */
     width: 100%; /*sayfayı tamamen kaplaması için*/
-    opacity: 0.9;
+    /*opacity: 0.9;*/
 }
 
 nav ul{
@@ -1010,7 +1038,6 @@ nav li a:hover
 
 #formkapsambuttongiris
 {
-    cursor:pointer;
     width: 42%;
     left: 3%;
     position: relative;
@@ -1505,58 +1532,144 @@ footer p
   
   .dropdown:hover .dropdown-content {display: block;} /*Açılır menüde seçeneklerin alt alta gelmesi için*/
   
-/*Profilim sayfası css kodları*/
+/*profile.php sayfası için css kodları*/
 
-#formkapsamprofilim{
-    width: 900px; /*form kutu genişliği*/
-    height: 600px; /*form kutu yüksekliği*/
-    background: rgba(255, 255, 255, 0.685); /*form arkaplan rengi*/
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-top: -315px;
-    margin-left: -450px;
-    /* transform: translate(300px,90px); */
-    /* top: -15px; */
-    display: table;
-    padding: 15px;
-    border-radius: 10px;
+.profileBox {
+  height: 88%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: #e8e8e8;
 }
 
-.profilimkullanicifoto
-{
-    border:1px solid rgba(112, 112, 129, 0.692);
-    width: 200px;
-    height: 200px;
+.profileUserMenu {
+    position: absolute;
+    width: 15%; 
+    height: 50%; 
+    background-color: #f6f6f6;
+    padding: 10px;
+    display: table;
+    margin-left: 13%;
+    margin-top: 11px;
+    border-radius: 5px;
+}
+
+.profileUserImgDiv {
+    /*border: 1px solid rgba(112, 112, 129, 0.692);*/
+    width: 180px;
+    height: 180px;
     border-radius: 100px;
+    margin-left: 10%;
     /* position: absolute; */
     /* left: 40px; */
     /* top: 20px; */
     /* display: table-cell; */
 }
 
-.profilimkullanicismiguncelleme
+.profileUserImg {
+  width: 150px; 
+  height: 150px;
+  display: block; 
+  margin: auto; 
+  padding-top: 10px;
+}
+
+.profileMenu {
+  width: 100%;
+  margin-top: 50px;
+}
+
+.profileMainMenu, .profileSubMenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profileMainMenu a {
+  display: block;
+  background-color: #ebebeb;
+  text-decoration: none;
+  padding: 10px;
+  color: #000;
+}
+
+.profileMainMenu a:hover {
+    background-color: #3282b8;
+    color: white;
+}
+
+.profileMainMenu li:hover .profileSubMenu {
+  display: block;
+  max-height: 200px;
+}
+
+.profileSubMenu a {
+  background-color: #dadada;
+}
+
+.profileSubMenu a:hover {
+  background-color: #4f97c7;
+}
+
+.profileSubMenu {
+  overflow: hidden;
+  max-height: 0;
+  -webkit-transition: all 0.5s ease-out;
+}
+
+.profileBoxDiv {
+    width: 55%; 
+    height: 77.5%;
+    background-color: #f6f6f6;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -21%;
+    margin-left: -20%;
+    /* transform: translate(300px,90px); */
+    /* top: -15px; */
+    display: table;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.profileWelcomeDiv {
+  width: 99%; 
+  height: 10%; 
+  background-color: #f6f6f6; 
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(-45deg, #3de6d7, #3282b8);
+  border-image-slice:1; 
+}
+
+.profileWelcomeText {
+  text-align: left;
+  color:#5c636e;
+  font-size: 20px;
+  padding-top: 3%;
+}
+
+/*.profilimkullanicismiguncelleme
 {
     width:30px;
     height:30px;
-    /* position: absolute; */
-    /* top: 8px; */
-    /* left: 85px; */
-}
+    position: absolute;
+    top: 8px;
+    left: 85px;
+}*/
 
-.profilimrezervasyonlarımdiv
-{
-    border:1px solid black;
-    width: 550px;
+.profileMainDiv { /*Ana div*/
+    border:1px solid #d4d7dd;
+    width: 400px;
     height: 200px;
     border-radius: 10px;
-    height: 100%;
+    background-color: white;
+    box-shadow: 3px 3px 4px #d4d7dd;
+    float: left;
 }
 
-.profilimrezervasyonlarımicdiv
-{
-    background-color:rgba(173, 173, 182, 0.74); 
-    width: 550px; 
+.profileMainInnerDiv { /*başlık kısmı için*/
+    background: #3282b8;
     height: 40px; 
     margin: 0px; 
     padding: 0px; 
@@ -1565,104 +1678,53 @@ footer p
     text-align: center; 
 }
 
-.profilimrezervasyonlarımyazisi
-{
-    width: 50px;
+.profileMainInnerDivTitle { /*title yazılı olan div */
+    width: 130px;
     height: 30px;
+    margin-left: 135px;
+    padding-top: 5px;
     /* position: absolute; */
     /* top: 10px; */
     /* left: 200px; */
 }
 
-.profilimbilgilerdiv
-{
-    border:1px solid black;
-    width: 400px;
-    height: 300px;
-    /* position: absolute; */
-    /* left: 40px; */
-    /* top: 270px; */
-    border-radius: 10px;
-    /* display: table-cell; */
-}
-
-.profilimaracbilgileridiv
-{
-    background-color: rgba(173, 173, 182, 0.74);
-    width: 400px;
-    /* height: 37px; */
-    margin: 0px;
-    /* padding: 0px; */
-    text-align: center;
-    border-bottom: 1px solid rgb(243, 208, 67);
-    /* display: flex; */
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-.profilimaracbilgileriyazisi
-{
-    /* width: 130px; */
-    /* height: 30px; */
-    /* position: absolute; */
-    /* top: 137px; */
-    /* left: 130px; */
+/*.profileCarInfoDivTitle {
+    width: 130px; 
+    height: 30px;
+    position: absolute; 
+    top: 137px; 
+    left: 130px; 
     display: flex;
     justify-content: center;
     width: 100%;
-    /* height: 100%; */
+    height: 100%; 
     padding: 4px 0px 8px 0px;
-}
+}*/
 
-.profilimduzenlemeimg
+/*.profilimduzenlemeimg
 {
     width:30px;
     height:30px;
-    /* position: absolute; */
-}
+    position: absolute; 
+}*/
 
-.profilimiletisimbilgilerdiv
-{
-    background-color: rgba(173, 173, 182, 0.74);
-    width: 400px;
-    /* height: 37px; */
-    margin: 0px;
-    /* padding: 0px; */
-    text-align: center;
-    border-bottom: 1px solid rgb(243, 208, 67);
-    /* display: flex; */
-}
-
-.profilimiletisimbilgileryazisi
-{
-    /*width: 130px; */
-    /* height: 30px; */
-    /* position: absolute; */
-    /* top: 137px; */
-    /* left: 130px; */
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    /* height: 100%; */
-    padding: 4px 0px 8px 0px;
-}
-
-.profilimpaneldiv
-{
-    border:1px solid black;
+/*.profilePanelDiv {
+    border:1px solid #d4d7dd;
     width: 400px;
     height: 210px;
-    /* position: absolute; */
-    /* left: 450px; */
-    /* top: 270px; */
+    position: absolute; 
+    left: 450px; 
+    top: 270px; 
     border-radius: 10px;
-    /* display: table-row; */
+    display: table-row; 
     margin-bottom: 17px;
-}
+    box-shadow: 3px 3px 4px #d4d7dd;
+    background-color: white;
+    float: left;
+}*/
 
-.profilimpanelicdiv
-{
-    background-color:rgba(173, 173, 182, 0.74);
+/*.profilePanelInnerDiv {
+    background: #3282b8;
     width: 400px;
     height: 40px;
     margin: 0px;
@@ -1670,41 +1732,39 @@ footer p
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     text-align: center;
-    border-bottom: 1px solid rgb(243, 208, 67);
-    /* text-align: center; */
+    border-bottom: : 1px solid #d4d7dd;
+    text-align: center; 
     display: table-cell;
     vertical-align: middle;
-}
+}*/
 
-.profilimpanelyazisi
-{
-    /* width: 50px; */
-    /* height: 30px; */
-    /* position: absolute; */
-    /* top: 10px; */
-    /* left: 165px; */
-}
+/*.profilePanelDivTitle {
+    width: 50px; 
+    height: 30px; 
+    position: absolute; 
+    top: 10px; 
+    left: 165px; 
+}*/
 
-.profilimpanelsecenekleri
-{
+.profilePanelOptionsText {
     text-decoration: none; 
-    color: white; 
+    color:#5c636e; 
     padding-left: 5px;
 }
 
-.profilimpanelsecenekleri a
-{
-  color: white;
-}
-.profilimpanelsecenekleri a:-webkit-any-link
-{
+.profilePanelOptionsText a {
   color: white;
 }
 
-.profilimyeniaracdiv
-{
-    border:1px solid black;
-    width: 380px;
+.profilePanelOptionsText a:-webkit-any-link {
+  color: white;
+}
+
+.profileNewCarDiv {
+    background-color: white;
+    border:1px solid #d4d7dd;
+    width: 250px;
+    height: 155px;
     /*height: 70px;*/
     /* position: absolute; */
     /* left: 450px; */
@@ -1712,25 +1772,67 @@ footer p
     border-radius: 10px;
     /* display: table-row; */
     display: flex;
-    margin-top: 17px;
     padding: 23px 10px 23px 10px;
+    box-shadow: 3px 3px 4px #d4d7dd;
+    float: left;
 }
 
-.profilimyeniaracekleyazisi
-{
+.profileNewCarDivText {
     /* padding-left: 5px; */
     /* position: absolute; */
     /* top: 10px; */
 }
 
-.profilimyeniaracekleimg
-{
+.profileNewCarDivImg {
     width:25px;
     height:25px;
     /* position: absolute; */
     /* top: 21px; */
     /* left: 112px; */
 }
+
+.icon-bar {
+  position: fixed;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.icon-bar a {
+  display: block;
+  text-align: center;
+  padding: 16px;
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 20px;
+}
+
+.icon-bar a:hover {
+  background-color: #000;
+}
+
+.facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.youtube {
+  background: #bb0000;
+  color: white;
+}
+
+/*pagination için css kodu*/
 
 .pagination {
     display: inline-block;
@@ -1753,13 +1855,15 @@ footer p
   
 .pagination a:hover:not(.active) {background-color: #c8c8c8; color:white; border-radius: 5px;}
   
+/*parks.php sayfası için css*/
+
 .parkPageBox {
   height: 88%;
-  background-image: url("/images/parks-img1.jpg");
+  background-image: url("https://i.hizliresim.com/wNLfJm.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  min-height: calc(100% - 96px);
+  
 }
 
 .parkPageForCity {
@@ -1782,7 +1886,7 @@ footer p
   background-color: #3282b8;
   outline: none;
   border:none;
-  width: 170px;
+  width: 180px;
   border-radius: 15px;
   padding: 5px;
   margin-left: 5px;
@@ -1873,6 +1977,7 @@ footer p
   }
 
 }
+
 
 .parkReservationBox {
   width:600px;
@@ -2093,7 +2198,10 @@ footer p
   text-align:center;
 } 
 
+/*editProfile.php sayfası için css*/
+
 .editProfileText {
+  color:#5c636e;
   width:100px;
   float: left;
   padding:8px;
@@ -2103,7 +2211,7 @@ footer p
   padding:8px;
   width: 220px;
   float: left;
-  display: flex;
+  color: #5c636e;
 }
 
 .editProfilePhoto {
@@ -2185,6 +2293,7 @@ footer p
   cursor: pointer;
   transition: 0.3s;
 }
+
 .closebtn:hover {
   color: #6abdd2;
 }*/ 
