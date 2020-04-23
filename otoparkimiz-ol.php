@@ -1,6 +1,8 @@
 <?php
-    include_once('include/functions.php');
-    includeExtContents("otoparkimiz-ol");
+	define('LOADED', TRUE);
+	include_once('include/functions.php');
+	includeContents("otoparkimiz-ol");
+	getHeader();
 ?>
 
 <body id="otopark-body" onload="ckVersion();">
@@ -34,4 +36,7 @@
         </div>
     </div>
 
-<?php include_once('include/bs-include/end.php'); ?>
+<?php
+	getFooter();
+	getHtmlEnd();
+?>
