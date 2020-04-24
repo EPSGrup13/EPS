@@ -36,6 +36,13 @@
             ?>
 
         </ul>
+		
+		        <div class="ust-menu-logo">
+            <a href="http://epark.sinemakulup.com/"><img src="/images/logo.png" alt="EPS LOGO" /> <a class="marka"
+                    href="index.html" style="text-decoration: none;">
+                </a>
+				</div>
+				
     </div>
 
     <!-- Header -->
@@ -196,6 +203,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="JS/jquery-3.4.1.min.map"></script>
     <script src="JS/JScript.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         window.onload = YeniSekme;
         
@@ -204,6 +212,17 @@
                 $(this).next("ul").toggle(200);
             });
         });
+    </script>
+	<script>
+        $(document).on('scroll', function () {
+            if ($(document).scrollTop() > 0) {
+                $('.menu').addClass('scrolled');
+            } else {
+                $('.menu').removeClass('scrolled');
+            }
+        });
+
+        $('body').css($('.menu').height() + 10);
     </script>
 
 <?php include_once('include/bs-include/end.php'); ?>

@@ -1,5 +1,5 @@
 .baslik {
-    background: url('../images/eps-arkaplan2.png') center center no-repeat;
+    background: url('../images/eps-arkaplan.jpg') center center no-repeat;
     background-size: cover;
 }
 
@@ -970,3 +970,65 @@ li a:hover {
 }
 
 /* Kullanım Koşulları Bitiş */
+
+
+/* üst menü */
+
+.menu{
+    padding: 20px;
+    padding-bottom: 10px;
+    width: 100%;
+    background-color: rgba(59,49,154,0.5);
+    -webkit-box-shadow: 0px 0px 53px -10px rgba(47,44,61,0.5);
+    -moz-box-shadow: 0px 0px 53px -10px rgba(47,44,61,0.5);
+    box-shadow: 0px 0px 53px -10px rgba(47,44,61,0.5);
+    position: fixed;
+    z-index: 1;
+}
+
+.ust-menu-logo{
+    margin-top: -20px;
+    margin-left: 50px;
+}
+.ust-menu-logo img{
+width: 256px;
+height: 96.5px;
+}
+
+/* üst menü */
+
+
+/* üst menü responsive başlangıç */
+@media screen and (max-width: 908px) and (min-width: 769px){
+    .ust-menu-logo img{
+        display: none;
+        }
+}
+
+@media screen and (max-width: 545px){
+    .ust-menu-logo img{
+        display: none;
+        }
+}
+/* üst menü responsive bitiş */
+
+
+/* Menünün Scroll aktif olması için */
+
+.menu.scrolled{
+    padding:0 5px;
+    background-color: #2f2c3d;
+    font-size:16px;
+    padding-top: 20px;
+}
+   
+.menu.scrolled ul li a{
+    color:white;
+}
+   
+.menu.scrolled ul li a:hover{
+    border-bottom:2px solid white;
+}
+
+/* Menünün Scroll aktif olması için */
+
