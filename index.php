@@ -36,6 +36,12 @@
             ?>
 
         </ul>
+		        <div class="ust-menu-logo">
+
+            <a href="http://epark.sinemakulup.com/"><img src="/images/logo.png" alt="EPS LOGO" /> <a class="marka"
+                    href="index.html" style="text-decoration: none;">
+                </a>
+				</div>
     </div>
 
     <!-- Header -->
