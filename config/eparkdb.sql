@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 23, 2020 at 04:07 PM
+-- Generation Time: Apr 24, 2020 at 04:21 PM
 -- Server version: 5.6.47-cll-lve
 -- PHP Version: 7.2.7
 
@@ -65,6 +65,22 @@ CREATE TABLE `Comments` (
   `comment_time` time NOT NULL,
   `person_id` int(11) NOT NULL,
   `park_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contactForm`
+--
+
+CREATE TABLE `contactForm` (
+  `contact_id` int(11) NOT NULL,
+  `firstName` varchar(60) CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL,
+  `lastName` varchar(60) CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `phoneNo` varchar(14) NOT NULL,
+  `city` varchar(30) CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL,
+  `message` tinytext CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -323,6 +339,12 @@ ALTER TABLE `Comments`
   ADD KEY `park_id` (`park_id`);
 
 --
+-- Indexes for table `contactForm`
+--
+ALTER TABLE `contactForm`
+  ADD PRIMARY KEY (`contact_id`);
+
+--
 -- Indexes for table `dbFeedback`
 --
 ALTER TABLE `dbFeedback`
@@ -441,6 +463,12 @@ ALTER TABLE `City`
 --
 ALTER TABLE `Comments`
   MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `contactForm`
+--
+ALTER TABLE `contactForm`
+  MODIFY `contact_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `dbFeedback`

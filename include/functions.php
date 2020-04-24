@@ -2171,6 +2171,20 @@ function addParkForm($park_name, $email, $phone_no, $address) {
 		return FALSE;
 }
 
+function addContactForm($firstName, $lastName, $email, $phoneNo, $city, $message) {
+	$query = "
+	INSERT INTO contactForm (firstName, lastName, phoneNo, email, city)
+	VALUES ('$firstName', '$lastName', '$phoneNo', '$email', '$message')
+	";
+	$data = ""; // insert için önemsiz
+
+	$obj = new Dbpro($query, $data);
+	$ans = $obj->insert();
+	if($ans)
+		return TRUE;
+	else
+		return FALSE;
+}
 
 
 

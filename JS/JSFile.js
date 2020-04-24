@@ -1103,10 +1103,10 @@ function parkForm() {
 	var formData = new FormData();
 	/* hepsi tek tek alınacak (validation için) */
 	let status = 0;
-	let parkName = document.getElementsByClassName("bilgi-girisi")[0].value;
-	let email = document.getElementsByClassName("bilgi-girisi")[1].value;
-	let phoneNo = document.getElementsByClassName("bilgi-girisi")[2].value;
-	let address = document.getElementsByClassName("otopark-adresi")[0].value;
+	const parkName = document.getElementsByClassName("bilgi-girisi")[0].value;
+	const email = document.getElementsByClassName("bilgi-girisi")[1].value;
+	const phoneNo = document.getElementsByClassName("bilgi-girisi")[2].value;
+	const address = document.getElementsByClassName("otopark-adresi")[0].value;
 	const pattern1 = /^([a-zçğıöşüA-ZÇĞİÖŞÜ0-9]{1})([a-zçğıöşüA-ZÇĞİÖŞÜ0-9.,/: ])+$/; // otopark adı ve adres için.
 	const pattern2 = /^([a-z])([a-zA-Z0-9])+\@{1}[a-z]+[.]{1}[a-z]+$/; // email için
 	const pattern3 = /^[0-9]{3} [0-9]{3} [0-9]{2} [0-9]{2}$/; // phoneNo için
@@ -1127,8 +1127,43 @@ function parkForm() {
 	}
 }
 
-
 /* Park Form sonu */
+
+/* Contact Form başlangıcı */
+function contactForm() {
+	const request = new Request();
+	var formData = new FormData();
+	// hepsi tek tek alınacak.
+	let status = 0;
+	const firstName = document.getElementById("validationTooltip01").value;
+	const lastName = document.getElementById("validationTooltip02").value;
+	const email = document.getElementById("contactEmail").value;
+	const phoneNo = document.getElementById("validationTooltip03").value;
+	const city = document.getElementById("validationTooltip04").value;
+	const message = document.getElementById("contactTextArea").value;
+	const pattern1 = /^([a-zçğıöşüA-ZÇĞİÖŞÜ0-9]{1})([a-zçğıöşüA-ZÇĞİÖŞÜ0-9.,/: ])+$/; // ad, soyad, şehir ve mesaj için
+	const pattern2 = /^([a-z])([a-zA-Z0-9])+\@{1}[a-z]+[.]{1}[a-z]+$/; // email için
+	const pattern3 = /^[0-9]{3} [0-9]{3} [0-9]{2} [0-9]{2}$/; // phoneNo için
+
+	// Conditional (Ternary) şeklinde
+	firstName.match(pattern1) ? (lastName.match(pattern1) ? (email.match(pattern2) ? (phoneNo.match(pattern3) ? (city.match(pattern1) ? (message.match(pattern1) ? status = 1 : displayWarning("alert danger", "Mesajınızı şartlara uygun doldurunuz")) : displayWarning("alert danger", "Şehirinizi şartlara uygun doldurunuz")) : displayWarning("alert danger", "Telefonunuzu şartlara uygun doldurunuz")) : displayWarning("alert danger", "Mailinizi şartlara uygun doldurunuz")) : displayWarning("alert danger", "Soyisminizi şartlara uygun doldurunuz")) : displayWarning("alert danger", "İsminizi şartlara uygun doldurunuz");
+	if(status === 1) {
+		formData.append("firstName", firstName);
+		formData.append("lastName", lastName);
+		formData.append("email", email);
+		formData.append("phoneNo", phoneNo);
+		formData.append("city", city);
+		formData.append("message", message);
+		const status = request.post("source/snd-contact-form", formData);
+		if(status === "true") {
+			document.forms[0].reset();
+		} else {
+			console.log("failed");
+		}
+	}
+}
+
+/* Contact Form sonu */
 
 function darkMode()
 {

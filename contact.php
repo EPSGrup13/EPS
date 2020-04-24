@@ -1,8 +1,8 @@
 <?php
-	define('LOADED', TRUE);
-	include_once('include/functions.php');
-	includeContents("contact");
-	getHeader();
+    define('LOADED', TRUE);
+    include_once('include/functions.php');
+    includeContents("contact");
+    getHeader();
 ?>
 
    <div id="form-elemanlari">
@@ -12,7 +12,7 @@
         <form class="needs-validation" novalidate>
             <div class="form-row">
                 <div class="col-md-4 mb-3">
-                    <label for="validationTooltip01">Adnınız</label>
+                    <label for="validationTooltip01">Adınız</label>
                     <input type="text" class="form-control" id="validationTooltip01" placeholder="Adınız" required>
                     <div class="valid-tooltip">
                     </div>
@@ -24,12 +24,12 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="validationTooltipUsername">E-mail</label>
+                    <label for="contactEmail">E-mail</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
                         </div>
-                        <input type="text" class="form-control" id="validationTooltipUsername"
+                        <input type="text" class="form-control" id="contactEmail"
                             placeholder="E-Posta adresiniz" aria-describedby="validationTooltipUsernamePrepend"
                             required>
                         <div class="invalid-tooltip">
@@ -40,7 +40,7 @@
             <div class="form-row">
                 <div class="col-md-6 mb-3">
                     <label for="validationTooltip03">Telefon Numarası</label>
-                    <input type="text" class="form-control" id="validationTooltip03" placeholder="0-(555)-555-5555"
+                    <input type="text" class="form-control" id="validationTooltip03" placeholder="555 555 55 55"
                         required>
                     <div class="invalid-tooltip">
                     </div>
@@ -54,13 +54,13 @@
                 </div>
             </div>
             <div class="form-group">
-                <center><label for="exampleFormControlTextarea1">Mesajınız</label></center>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Mesajınız..."
+                <center><label for="contactTextArea">Mesajınız</label></center>
+                <textarea class="form-control" id="contactTextArea" rows="3" placeholder="Mesajınız..."
                     style=" max-height: 130px;
                 max-width: 384px;
                 margin: auto; min-height: 130px; resize: none"></textarea>
             </div>
-            <center><button class="btn btn-primary" type="submit">Gönder</button></center><br>
+            <center><button class="btn btn-primary" type="submit" onclick="contactForm(); return false;">Gönder</button></center><br>
         </form>
     </div>
     <div>
@@ -73,6 +73,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
 <?php
-	getFooter();
-	getHtmlEnd();
+    getFooter();
+    getHtmlEnd();
 ?>
