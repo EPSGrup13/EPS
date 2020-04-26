@@ -628,6 +628,11 @@ input:checked + .slider:before {
 .profileInput
 {
   max-width:160px;
+  margin-top: 3px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  padding: 5px;
+  border:1px solid gray;
 }
 
 .profileInput::-webkit-input-placeholder  /* Chrome/Opera/Safari */
@@ -2337,14 +2342,7 @@ footer p
   color:#5c636e;
   width:100px;
   float: left;
-  padding:8px;
-}
-
-.editProfileInput {
-  padding:8px;
-  width: 220px;
-  float: left;
-  color: #5c636e;
+  padding:5px;
 }
 
 .editProfilePhoto {
@@ -2353,6 +2351,22 @@ footer p
   padding-top: 10px; 
   padding-bottom: 10px; 
   padding-left: 150px;
+}
+
+.editProfileSelectButton {
+  width:60px; 
+  height: 25px;
+  background-color:#c8c8c8;
+  color: black;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 15px;
+  border: none;
+}
+
+.editProfileSelectButton:hover {
+  background-color: #4f97c7;
+  color:white;
 }
 
 /*Şifre değiştirme sayfası (lp-validate.php)*/
