@@ -192,6 +192,10 @@ a:hover
   background-size: cover;
   background-attachment: fixed;
   background-color: #e8e8e8;
+    color: white;
+    display: block;
+    box-sizing: border-box;
+    min-height: calc(100% - 96px);
 }
 
 .cityFrame
@@ -734,11 +738,11 @@ input:checked + .slider:before {
 /* dark mode */
 .dm-v {
   background: none;
-  background-color: #191919;
+  background-color: #191919 !important;
 }
 
 .dm-v2 {
-  background-color: #2d2d2d;
+  background-color: #2d2d2d !important;
 }
 
 .move-l {
@@ -755,7 +759,7 @@ input:checked + .slider:before {
 
 /* plate-area */
 .plate-ar {
-  max-height: 41px;
+  max-height: 249px;
 }
 
 .scrollable {
@@ -870,6 +874,13 @@ input:checked + .slider:before {
   justify-content: space-around;
 }
 
+/* edit profile */
+.ep-plate {
+	color: #5c636e;
+	width: 60px;
+	float: left;
+	padding: 5px;
+}
 
 /* hazır slider tasarımı */
 .point-slider {
@@ -1997,11 +2008,11 @@ footer p
 
 .parkPageBox {
   height: 88%;
-  background-image: url("https://i.hizliresim.com/wNLfJm.jpg");
+  background-image: url("/images/parks-img1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  
+  min-height: calc(100% - 96px);
 }
 
 .parkPageForCity {
@@ -2360,8 +2371,9 @@ footer p
   color: black;
   border-radius: 5px;
   cursor: pointer;
-  margin-left: 15px;
+  margin: 5px 10px 0px 15px;
   border: none;
+  float:right;
 }
 
 .editProfileSelectButton:hover {

@@ -6,7 +6,7 @@
 	pageProtection();
 
 	$profileArray = userProfile($_SESSION["person_id"]);
-	$userName = $profileArray[count($profileArray) - 1];
+	$firstName = $profileArray[count($profileArray) - 1];
 	unset($profileArray[count($profileArray) - 1]);
 	$lastName = $profileArray[count($profileArray) - 1];
 	unset($profileArray[count($profileArray) - 1]);
@@ -18,10 +18,10 @@
 	<!--yeni class eklendi sol taraftaki profil kısmı ve açılır dikey menü için-->
 	<div class="wrapperProfile">
 	<div class="profileUserMenu">
-		<div class="profileUserImgDiv"><!--class ismi değişti profilimkullanicifoto yerine profileUserImgDiv -->
-			       <img class="profileUserImg" src="https://i.hizliresim.com/TeGNar.png"><!--profil resmi için class eklendi profileUserImg-->
+		<div class="profileUserImgDiv">
+			       <img class="profileUserImg" src="<?php echo isDevelopmentModeOn();?>images/default-p-avatar.png">
 			       <div style="display:block; margin:auto; margin-top:20px;">
-			        	<div class="isim1"><?php echo $userName. " " .$lastName; ?></div>
+			        	<div class="isim1"><?php echo $firstName. " " .$lastName; ?></div>
 		           </div>
 		 </div>
 		<!--Açılır menü başlangıç-->
@@ -43,16 +43,16 @@
 	</div>
 	
 	<!--sağ tarafaki div başlangıç-->
-	<div class="profileBoxDiv"><!--id değişti class yapılıp formkapsamprofilim yerine profileBoxDiv -->
+	<div class="profileBoxDiv">
 	
 	<!--Yeni eklendi bu kısım-->
 	<div class="profileWelcomeDiv ">
-		<div class="profileWelcomeText">Hoşgeldin <?php echo $userName. " " .$lastName; ?></div>
+		<div class="profileWelcomeText">Hoşgeldin <?php echo $firstName. " " .$lastName; ?></div>
 	</div>
 		    
-	<div class="profileMainDiv" style="margin-bottom:3%; margin-right:3%; margin-top: 3%;"> <!--class ismi değişti profilimbilgilerdiv yerine profileMainDiv -->
-		        <div class="profileMainInnerDiv"><!--class ismi değişti profilimaracbilgileridiv yerine profileMainInnerDiv -->
-		            <div class="profileMainInnerDivTitle"><!--class ismi değişti profilimaracbilgileriyazisi yerine profileMainInnerDivTitle -->
+	<div class="profileMainDiv" style="margin-bottom:3%; margin-right:3%; margin-top: 3%;">
+		        <div class="profileMainInnerDiv">
+		            <div class="profileMainInnerDivTitle">
 		            	<div class="lText1">
 		            		Araç Bilgileri
 		            	</div>
@@ -79,9 +79,9 @@
 				</div>
 			</div>
 
-		        <div class="profileMainDiv" style="margin-top: 3%;"><!--class ismi değişti profilimiletisimbilgilerdiv yerine profileMainDiv -->
-		        	<div class="profileMainInnerDiv"><!--class ismi değişti profilimaracbilgileridiv yerine profileMainInnerDiv -->
-		            <div class="profileMainInnerDivTitle"><!--class ismi değişti profilimiletisimbilgileryazisi yerine profileMainInnerDivTitle -->
+		        <div class="profileMainDiv" style="margin-top: 3%;">
+		        	<div class="profileMainInnerDiv">
+		            <div class="profileMainInnerDivTitle">
 		            	<div class="lText1">
 		            		İletişim Bilgileri
 		            	</div>
@@ -100,10 +100,10 @@
 				</div>
 		    </div>
 
-			<div class="profileMainDiv" style="width: 530px;  margin-bottom: 3%;"> <!--class ismi değişti profilimrezervasyonlarımdiv yerine profileMainDiv -->
-		        <div class="profileMainInnerDiv"> <!--class ismi değişti profilimrezervasyonlarımicdiv yerine profileMainInnerDiv -->
+			<div class="profileMainDiv" style="width: 530px;  margin-bottom: 3%;">
+		        <div class="profileMainInnerDiv">
 		           <div class="profileMainInnerDivTitle" style="margin-left: 200px;">Rezervasyonlarım</div>
-		        </div><!--class eklendi profileMainInnerDivTitle -->
+		        </div>
 		        <div class="reservationSec">
 			        <?php
 						$history = reservationHistory($_SESSION["person_id"]);
@@ -129,23 +129,12 @@
 
 		    </div>
 				
-				<!--profilePanelDiv kısım kullanılmıyor -->
-			    <!--<div class="profilePanelDiv">
-			        <div class="profilePanelInnerDiv">
-			            <div class="profilimpanelyazisi">Panel</div>
-			        </div>
-			        <p><a href="javascript:void(0)" class="profilePanelOptionsText">Eski Rezervasyonlarım</a></p>
-			        <p><a href="javascript:void(0)" class="profilePanelOptionsText">Ödemelerim</a></p>
-			        <p><a href="javascript:void(0)" class="profilePanelOptionsText">Faturalarım</a></p>
-			        <p><a href="javascript:void(0)" class="profilePanelOptionsText">Yorumlarım</a></p>
-			 	</div>-->
-
-			    <div class="profileNewCarDiv" style="margin-left: 3%;"><!--class ismi değişti profilimyeniaracdiv yerine profileNewCarDiv -->
+			    <div class="profileNewCarDiv" style="margin-left: 3%;">
 			    	<div class="newCar1">
 			        	Yeni Araç Ekle
 			    	</div>
 			    	<div class="rIcon">
-			        	<a href="#"><img src="https://i.hizliresim.com/Eor59u.png" class="profileNewCarDivImg"/></a><!--class ismi değişti rofilimyeniaracekleimg yerine profileNewCarDivImg -->
+			        	<a href="#"><img src="<?php echo isDevelopmentModeOn(); ?>images/plus-icon.png" class="profileNewCarDivImg"/></a>
 			    	</div>
 			    </div>
 	</div>
@@ -162,8 +151,6 @@
 
 </div>
 </div>
-
-
 
 <?php
 	getFooter();

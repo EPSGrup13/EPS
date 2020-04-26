@@ -1208,12 +1208,24 @@ function setStyles()
 			document.getElementsByClassName("parkPageBox")[0].style.backgroundSize = "cover";
 			document.getElementsByClassName("parkPageBox")[0].style.backgroundAttachment = "fixed";
 		}
+		if(document.getElementsByClassName("profileBox")[0] !== undefined) {
+			document.getElementsByClassName("profileBox")[0].classList.toggle("dm-v");
+		}
+		if(document.getElementsByClassName("citiesBox")[0] !== undefined) {
+			document.getElementsByClassName("citiesBox")[0].classList.toggle("dm-v");
+		}
 	} else { // darkmode açılınca
 		document.body.classList.toggle("dm-v");
 		getHeader.classList.toggle("dm-v2");
 		getFooter.classList.toggle("dm-v2");
 		if(document.getElementsByClassName("parkPageBox")[0] !== undefined) {
 			document.getElementsByClassName("parkPageBox")[0].style.background = "none";
+		}
+		if(document.getElementsByClassName("profileBox")[0] !== undefined) {
+			document.getElementsByClassName("profileBox")[0].classList.toggle("dm-v");
+		}
+		if(document.getElementsByClassName("citiesBox")[0] !== undefined) {
+			document.getElementsByClassName("citiesBox")[0].classList.toggle("dm-v");
 		}
 	}
 }

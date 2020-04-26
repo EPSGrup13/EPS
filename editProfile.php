@@ -28,10 +28,10 @@
 	<div class="wrapperProfile">
 	<!--yeni class eklendi sol taraftaki profil kısmı ve açılır dikey menü için-->
 	<div class="profileUserMenu">
-		<div class="profileUserImgDiv"><!--class ismi değişti profilimkullanicifoto yerine profileUserImgDiv -->
-			<img class="profileUserImg" src="https://i.hizliresim.com/TeGNar.png"><!--profil resmi için class eklendi profileUserImg-->
+		<div class="profileUserImgDiv">
+			<img class="profileUserImg" src="<?php echo isDevelopmentModeOn();?>images/default-p-avatar2.png"><!--profil resmi için class eklendi profileUserImg-->
 			<div style="display:block; margin:auto; margin-top:20px;">
-			<div class="isim1"><?php echo $userName. " " .$lastName; ?></div>
+			<div class="isim1"><?php echo $firstName. " " .$lastName; ?></div>
 		</div>
 	</div>
 		<!--Açılır menü başlangıç-->
@@ -53,7 +53,7 @@
 	</div>
 
 
-	<div class="profileBoxDiv" style="height:630px;"><!--id değişti class yapılıp formkapsamprofilim yerine profileBoxDiv -->
+	<div class="profileBoxDiv" style="height:630px;">
 
 	<div class="profileMainDiv" style="height:290px; ">
 		<div class="profileMainInnerDiv">
@@ -69,12 +69,12 @@
 	</div>
 
 
-		    <div class="profileMainDiv" style=" margin-left:3%; height:290px;"><!--class ismi değişti profilimbilgilerdiv yerine profileMainDiv -->
-		        <div class="profileMainInnerDiv"><!--class ismi değişti profilimaracbilgileridiv yerine profileMainInnerDiv -->
-		            <div class="profileMainInnerDivTitle">Araç Bilgileri</div><!--class ismi değişti profilimaracbilgileriyazisi yerine profileMainInnerDivTitle ve lText1 class ı kalktı  -->		            
+		    <div class="profileMainDiv" style=" margin-left:3%; height:290px;">
+		        <div class="profileMainInnerDiv">
+		            <div class="profileMainInnerDivTitle">Araç Bilgileri</div>     
 		        </div>
 		        
-		        <div class="plate-ar scrollable">
+		        <div class="plate-ar scrollable" style="display: flex; flex-direction: column;">
 
 			        <?php
 						//print_r(getWehicles($person_id));
@@ -84,7 +84,7 @@
 							$lenWehiclesArray = count($wehiclesArray);
 							for($i = 0; $i < $lenWehiclesArray; $i++)
 							{
-								echo "<div class=\"editProfileText\">Plaka: </div><div style=\"color:#5c636e; padding-top:5px;\">".$wehiclesArray[$i];
+								echo "<div style=\"color:#5c636e; padding-top:5px;\"><div class=\"ep-plate\">Plaka: </div><div class=\"ep-plate\" style=\"width: 100px !important;\">".$wehiclesArray[$i]. "</div>";
 								echo "<button class=\"editProfileSelectButton\" onclick=\"mkMain('" .$wehiclesArray[$i]. "'); return false;\">Seç</button></div>";
 							}
 						}
@@ -96,9 +96,9 @@
 				</div>
 			</div>
 
-		        <div class="profileMainDiv" style="margin-top: 15px; margin-right:100px; height:250px;"><!--class ismi değişti profilimiletisimbilgilerdiv yerine profileMainDiv -->
-		            <div class="profileMainInnerDiv"><!--class ismi değişti profilimiletisimbilgileryazisi yerine profileMainInnerDiv -->
-		            	<div class="profileMainInnerDivTitle">İletişim Bilgileri</div><!--class ismi değişti profilimiletisimbilgileryazisi yerine profileMainInnerDiv ve lText1 class ı kalktı -->	
+		        <div class="profileMainDiv" style="margin-top: 15px; margin-right:100px; height:250px;">
+		            <div class="profileMainInnerDiv">
+		            	<div class="profileMainInnerDivTitle">İletişim Bilgileri</div>
 		            </div>
 		        
 
@@ -146,7 +146,7 @@
 		   		</div>
 		   
 			
-			    <div class="profileNewCarDiv" style="margin-top: 15px; width: 380px; margin-left: -76px; height: 203px;"><!--class ismi değişti profilimyeniaracdiv yerine profileNewCarDiv -->
+			    <div class="profileNewCarDiv" style="margin-top: 15px; width: 380px; margin-left: -76px; height: 203px;">
 			    	<div class="nc-inline scrollable">
 				    	<div class="newCar1" onclick="addCarSection(); return false;">Yeni Araç Ekle <button class="editProfileSelectButton" onclick="addCar(); return false;">Kayıt</button></div>
 				    	
@@ -170,9 +170,6 @@
 
 </div>
 </div>
-
-
-
 
 <?php
 	getFooter();
