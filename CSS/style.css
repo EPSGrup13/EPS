@@ -388,6 +388,51 @@ li a:hover {
     }
 }
 
+@media (max-width:500px) {
+    .footer .footer-boy p {
+        margin-left: -2%;
+    }
+    .footer h4 {
+        margin-left: -42%;
+    }
+    .footer-hiza{
+        margin-left: 30%;
+    }
+    #sosyal-logo{
+        margin-left: 42%;
+    }
+}
+
+@media (max-width:460px) {
+    .footer .footer-boy p {
+        margin-left: -2%;
+    }
+    .footer h4 {
+        margin-left: -42%;
+    }
+    .footer-hiza{
+        margin-left: 25%;
+    }
+    #sosyal-logo{
+        margin-left: 42%;
+    }
+}
+
+@media (max-width:410px) {
+    .footer .footer-boy p {
+        margin-left: -2%;
+    }
+    .footer h4 {
+        margin-left: -42%;
+    }
+    .footer-hiza{
+        margin-left: 20%;
+    }
+    #sosyal-logo{
+        margin-left: 38%;
+    }
+}
+
 /* footer mobil bitiş */
 /* footer bitiş */
 
