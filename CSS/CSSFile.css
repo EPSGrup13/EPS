@@ -2504,4 +2504,26 @@ footer p
   background: -webkit-linear-gradient(to left, #3a6186 , #89253e);
   background: linear-gradient(to left, #ededee , #c5e8c5);
   color : black;    
+  
+/*Contact mobil başlangıç*/ 
+
+@media (max-width:490px) {
+    #form-elemanlari {
+        padding-top: 100px;
+        padding-right: 100px;
+        padding-left: 100px;
+        padding-bottom: 1%;
+    }
+}
+
+@media (max-width:390px) {
+    #form-elemanlari {
+        padding-top: 80px;
+        padding-right: 50px;
+        padding-left: 50px;
+        padding-bottom: 1%;
+    }
+}
+
+/*Contact mobil bitiş*/ 
 /*Contact*/ 
