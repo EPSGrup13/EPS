@@ -220,7 +220,7 @@ function validate(callback)
 
 	const getForm = document.forms["registrationForm"];
 	const getFormChildren = getForm.children;
-	for(i = 1; i < getFormChildren.length - 1; i++) // kayıt ol kısmı haric, buton kısmı hariç
+	for(i = 1; i < getFormChildren.length - 2; i++) // kayıt ol kısmı haric, buton kısmı hariç , daha sonra checkbox deaktif edildi (-2 yapıldı)
 	{
 		//console.log(getFormChildren[i].children[1]);
 		if(getFormChildren[i].children[1].value.length === 0)

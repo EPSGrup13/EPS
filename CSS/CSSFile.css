@@ -167,8 +167,8 @@ a:hover
 .linkBar2 a:hover
 {
         background: rgba(194, 196, 202, 0.5); /*menü elemanı üzerine gelindiğinde renk alması için*/
-	color: rgb(255, 255, 255) !important;
-	text-decoration: none !important;
+  color: rgb(255, 255, 255) !important;
+  text-decoration: none !important;
     transition-duration: 0.5s; /*menü elemanı üzerine gelindiğinde efektli renk alması için*/
     -webkit-transition-duration: 0.5s; /*tarayıcılara uyması için */
     -moz-transition-duration: 0.5s; /*tarayıcılara uyması için */
@@ -249,9 +249,10 @@ a:hover
 
 .profileColor
 {
-    background-color: rgb(243, 208, 67);
-    /* color: white; */
-     padding: 13px;
+  background-color: rgb(243, 208, 67);
+  color: white !important;
+  padding: 13px;
+  text-decoration: none !important;
 }
 
 .uprofile
@@ -876,10 +877,10 @@ input:checked + .slider:before {
 
 /* edit profile */
 .ep-plate {
-	color: #5c636e;
-	width: 60px;
-	float: left;
-	padding: 5px;
+  color: #5c636e;
+  width: 60px;
+  float: left;
+  padding: 5px;
 }
 
 /* hazır slider tasarımı */
@@ -2488,7 +2489,7 @@ footer p
   background: -webkit-linear-gradient(to left, #3a6186 , #89253e);
   background: linear-gradient(to left, #ededee , #c5e8c5);
   color : black;    
-  
+
 /*Contact mobil başlangıç*/ 
 
 @media (max-width:490px) {
