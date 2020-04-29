@@ -1,6 +1,15 @@
 <?php
 	define('LOADED', TRUE);
 	include_once(__DIR__ . '/../include/functions.php');
+
+	?>
+<html>
+	<head>
+			<base href="http://epark.sinemakulup.com">
+			<?php print_js_or_css(cssSource()); ?>
+	</head>
+<body>
+	<?php
 	maintenanceMode(); //header olmadığından ek olarak eklendi.
 	session_start();
 
