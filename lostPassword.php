@@ -18,7 +18,7 @@
 	    <img id="lostPasswordResetImg" src="https://i.hizliresim.com/Wo6WBE.png" />
 	    <h3 id="lostPasswordResetText">Şifremi Unuttum</h3>
 	    <form method="POST" action="">
-			<div><input class="lostPwi" type="text" name="email" placeholder="E-mail"></div>
+			<div class="forResponsive"><input class="lostPwi" type="text" name="email" placeholder="E-mail"></div>
 			<div><button class="ep-btn" id="lostPasswordResetButton"  id="passwordResetButton" onclick="generateToken(); return false;">Şifre Yenile</button><!--gerekli değil ise passwordResetButton id kaldırabilirsin kullanılmıyor-->
 			<button class="ep-btn" id="lostPasswordResetButton"  id="passwordResetButton">Geri Dön</button></div>
 	    </form>
