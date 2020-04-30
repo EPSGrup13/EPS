@@ -223,6 +223,12 @@ li a:hover {
     margin-right: 1rem;
 }
 
+@media screen and (max-width: 991px){
+    .sol-bolum{
+        margin-left: 7%;
+        }
+}
+
 .ozellikler-bolumu #ozellik-1 img {
     display: block;
     margin: 2rem auto 3rem auto;
@@ -399,7 +405,10 @@ li a:hover {
         margin-left: 30%;
     }
     #sosyal-logo{
-        margin-left: 42%;
+        margin-left: 32%;
+    }
+    #sosyal-logo  li a{
+        float: left;
     }
 }
 
@@ -414,7 +423,7 @@ li a:hover {
         margin-left: 25%;
     }
     #sosyal-logo{
-        margin-left: 42%;
+        margin-left: 29%;
     }
 }
 
@@ -426,10 +435,22 @@ li a:hover {
         margin-left: -42%;
     }
     .footer-hiza{
-        margin-left: 20%;
+        margin-left: 18%;
     }
     #sosyal-logo{
-        margin-left: 38%;
+        margin-left: 28%;
+    }
+}
+
+@media (max-width:390px) {
+    #sosyal-logo{
+        margin-left: 24%;
+    }
+}
+
+@media (max-width:321px) {
+    #sosyal-logo{
+        margin-left: 17%;
     }
 }
 
