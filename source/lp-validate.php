@@ -25,19 +25,20 @@
 				session_start(); // lp-control'e aktarılacak veri için session oluşturuluyor, daha sonra şifre değiştirildiğinde session yeniden kapatılacak.
 				$_SESSION["token_id"] = $dataArray[0]; // token_id için session oluşturuluyor.
 				?>
-				<br><br>
+				<div class="lostPasswordPage">
 				<div class="lostPasswordNewPassBox">
 					<div id="lp-val">
 						<div><img src="<?php echo isDevelopmentModeOn(); ?>images/lock-icon.png" id="lostPasswordNewPassImg"></div>
 						<h3 id="lostPasswordNewPassText">Şifre Yenileme</h3>
-						<div><input type="password" name="password" class="lp-input" placeholder="Yeni Şifre"></div>
-						<div><input type="password" name="password" class="lp-input" placeholder="Yeni Şifre Tekrar"></div>
+						<div class="forResponsive"><input type="password" name="password" class="lp-input" placeholder="Yeni Şifre"></div>
+						<div class="forResponsive"><input type="password" name="password" class="lp-input" placeholder="Yeni Şifre Tekrar"></div>
 						<button class="cp-btn" id="lostPasswordNewPassButton" onclick="updatePass(); return false;">Değiştir</button>
 					</div>
 				</div>
+				</div>
 				<?php
 			} else {
-				echo "<div class=\"lostPasswordNewPassTimeOut\"><img src=\"https://i.hizliresim.com/8uwWjx.png\"class=\"lostPasswordNewPassTimeOutImg\">Şifre sıfırlama linki uzun süredir kullanılmadığından geçersizdir.</div>";
+				echo "<div class=\"lostPasswordPage\"><div class=\"lostPasswordNewPassTimeOut\"><img src=\"https://i.hizliresim.com/8uwWjx.png\"class=\"lostPasswordNewPassTimeOutImg\">Şifre sıfırlama linki uzun süredir kullanılmadığından geçersizdir.</div></div>";
 			}
 		} else {
 			echo $dataArray;
