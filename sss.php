@@ -64,7 +64,7 @@
 			<li>
 				<h4 class="sss-question"> Herhangi bir problem durumunda ne yapmam gerekir?</h4>
 				<p class="sss-answer">EPS uygulamasında herhangi bir problem ile
-					karşılaşırsınız uygulama içerisindeki
+					karşılaşırsanız uygulama içerisindeki
 				iletişim bölümünden bizlere rahatça ulaşabilirsiniz.</p>
 			</li>
 
