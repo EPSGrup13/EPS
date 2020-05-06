@@ -618,57 +618,61 @@ li a:hover {
 
 
 /* Sıkça Sorular Sorular Başlangıç */
-#sss-body {
-    background-image: url('/images/eps-arkaplan2.png');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+
+.accordion-sss {
+    width: 60%;
+    margin: 50px auto;
+    margin-top:10%;
+    margin-bottom:10%;    
 }
 
-.sss {
-    border: 1px solid #cfcfcf;
-    clear: both;
-    padding: 5px;
+.ul-sss {
+   list-style: none;
+   display: grid !important;
 }
 
-.sss .soru {
-    position: relative;
+.accordion-sss ul li .sss-question {
+    border-bottom:1px solid rgb(190, 190, 190);
+    padding: 20px;
+    cursor: pointer;
+    background-color: #dbdbdb;
+    text-align: left;
     font-size: 15px;
-    font-weight: bold;
-    color: #333333;
-    background: #f2f2f2;
-    padding: 15px 40px;
+    font-family:"Montserrat", sans-serif;
+    margin:0px;
+    color: #3b3f46;
+ }
+
+.accordion-sss ul li .sss-answer {
     margin: 0;
-    border-top: 1px solid #cfcfcf;
-    font-family: "Montserrat", sans-serif;
-    opacity: 0.5;
+   display: none;
+   padding: 20px;
+   text-align: justify;
+   font-family:"Montserrat", sans-serif;
+   background-color: #eeeeee;
 }
 
 
+.active, ul li .sss-question:hover {
+    background-color: #0688DF;
+    transition: 0.4s;     
+}
 
-.sss .cevap {
-    padding: 0;
+.accordion-sss ul li .sss-question:hover{
     color: white;
-    font-family: "Montserrat", sans-serif;
-    text-align: justify;
-    font-style: italic;
 }
 
-.sss .cevap>p {
-    padding: 0 30px 20px 30px;
+.accordion-sss ul li .sss-question:after {
+    content: '\002B';
+    color: #3b3f46;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
 }
 
-.sss .cevap p:last-child {
-    margin-bottom: 10px;
-}
-
-
-.sss-tum {
-    margin-left: 250px;
-    margin-right: 250px;
-    margin-top: 100px;
-    margin-bottom: 100px;
-}
+.active:after {
+  content: "\2212";
+}  
 
 /* Sıkça Sorular Sorular Bitiş */
 
