@@ -1208,10 +1208,10 @@ function setStyles()
 			document.getElementsByClassName("parkPageBox")[0].style.backgroundSize = "cover";
 			document.getElementsByClassName("parkPageBox")[0].style.backgroundAttachment = "fixed";
 		}
-		if(document.getElementsByClassName("profileBox")[0] !== undefined) {
+		if(document.getElementsByClassName("profileBox")[0] !== undefined && document.getElementsByClassName("profileBox")[0].classList.contains("dm-v")) {
 			document.getElementsByClassName("profileBox")[0].classList.toggle("dm-v");
 		}
-		if(document.getElementsByClassName("citiesBox")[0] !== undefined) {
+		if(document.getElementsByClassName("citiesBox")[0] !== undefined && document.getElementsByClassName("citiesBox")[0].classList.contains("dm-v")) {
 			document.getElementsByClassName("citiesBox")[0].classList.toggle("dm-v");
 		}
 	} else { // darkmode açılınca

@@ -141,7 +141,7 @@
 						echo "</select></div>";
 						// option bitiş
 
-						echo "<div class=\"editProfileText\" style=\"margin-left:-110px; width:110px;\">Bakiye: </div><div style=\"color:#5c636e; padding-top:5px;\">" .$balance. "₺</div>"  ;
+						echo "<div class=\"editProfileText\" style=\"width:110px;\">Bakiye: </div><div style=\"color:#5c636e; padding-top:5px;\"> " .$balance. "₺</div>"  ;
 					?>
 		   		</div>
 		   
