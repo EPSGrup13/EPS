@@ -37,6 +37,7 @@
 ?>
 
 <div class="content">
+<div class="wrapperReservation">
 <div class="parkReservationBox">
 	<?php
 	echo "<div class=\"parkReservastionInfoBox\">";
@@ -97,6 +98,7 @@
 ?>
 
 </form>
+</div>
 </div>
 </div>
 </div>
