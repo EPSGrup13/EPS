@@ -1245,6 +1245,47 @@ nav li a:hover
   }
 }
 
+@media screen and (max-width: 375px){
+    .form-field .form-title{
+      padding-left: 32%;
+    }
+   .form-field .form-subtitle{
+     font-size: 14px;
+     padding-left: 5%;
+   }
+   .form-field .form-input-label{
+     padding-left: 5%;
+   }
+    .form-field .form-button{
+     width: 85%;
+     margin-left: -1%
+   }
+}
+
+@media screen and (max-width: 320px){
+    .form-field .form-title{
+      padding-left: 25%;
+    }
+   .form-field .form-subtitle{
+     font-size: 13px;
+     padding-left: 2%;
+   }
+   .form-field .form-input-label{
+     padding-left: 5%;
+   }
+   .form-field .form-input{
+     width: 75%;
+     margin-left: -16%
+   }
+   .form-field .form-button{
+     width: 75%;
+     margin-left: -16%
+   }
+   .form-field .form-info-text{
+     margin-left: -15%
+   }
+}
+
 /*registration.php için eski css*/
 
 #formkapsamkayit {
