@@ -1,6 +1,8 @@
 <?php
+    define('LOADED', TRUE);
     include_once('include/functions.php');
     includeExtContents("sss");
+    getHeader();
 ?>
 
 <body id="sss-body" style="background-color: #e8e8e8;" onload="ckVersion();">
@@ -101,4 +103,7 @@
 
 	</script>
 
-<?php include_once('include/bs-include/end.php'); ?>
+<?php
+    getFooter();
+    include_once('include/bs-include/end.php');
+?>
