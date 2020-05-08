@@ -2186,7 +2186,27 @@ function addContactForm($firstName, $lastName, $email, $phoneNo, $city, $message
 		return FALSE;
 }
 
+// Gönderilen css isimlerine göre ekler
+function cssSourceSelection() {
+	$size = func_num_args(); // num of args
+	$argv = func_get_args(); // args as array
 
+	for($i = 0; $i < $size; $i++) {
+		echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"".isDevelopmentModeOn(). "CSS/" .$argv[$i].".css\"/>";
+	}
+}
+
+// Gönderilen js isimlerine göre ekler
+function jsSourceSelection() {
+	$size = func_num_args(); // num of args
+	$argv = func_get_args(); // args as array
+
+	if(!$size === 0) {
+		for($i = 0; $i < $size; $i++) {
+			echo "<script src=\"".$argv[$i]."\"></script>";
+		}
+	}
+}
 
 
 

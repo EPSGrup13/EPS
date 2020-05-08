@@ -1,10 +1,13 @@
 <?php
+    define('LOADED', TRUE);
     include_once('include/functions.php');
     includeExtContents("otoparkimiz-ol");
+    getHeader();
 ?>
 
 <body id="otopark-body" onload="ckVersion();">
 
+<div class="content">
     <div id="form-otopark-sahibi">
         <h3 id="h3-baslik">Daha fazla müşteriye ulaşmak için EPS otoparkı olun!</h3>
         <h4 id="h4-otopark">Aşağıdaki formu doldurarak siz de EPS ailesine katılabilir, EPS müşterilerine hizmet vermeye
@@ -33,5 +36,9 @@
             </div>
         </div>
     </div>
+</div>
 
-<?php include_once('include/bs-include/end.php'); ?>
+<?php
+    getFooter();
+    include_once('include/bs-include/end.php');
+?>

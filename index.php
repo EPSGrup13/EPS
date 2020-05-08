@@ -1,4 +1,5 @@
 <?php
+    define('LOADED', TRUE);
     include_once('include/functions.php');
     session_start();
 
@@ -36,12 +37,12 @@
             ?>
 
         </ul>
-		        <div class="ust-menu-logo">
+                <div class="ust-menu-logo">
 
             <a href="http://epark.sinemakulup.com/"><img src="/images/logo.png" alt="EPS LOGO" /> <a class="marka"
                     href="index.html" style="text-decoration: none;">
                 </a>
-				</div>
+                </div>
     </div>
 
     <!-- Header -->
@@ -196,9 +197,8 @@
         <p class="yukari-buton"></p>
     </article>
         
-    <?php
-        print_js_or_css(jsSource());
-    ?>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <?php jsSourceSelection(); ?>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="JS/jquery-3.4.1.min.map"></script>
     <script src="JS/JScript.js"></script>
@@ -210,6 +210,19 @@
                 $(this).next("ul").toggle(200);
             });
         });
+
+        /*index.php için, rel external olanlar _blank açtırılıyor.*/
+        function YeniSekme() {
+            if (!document.getElementsByTagName) return;
+            var linkler = document.getElementsByTagName("a");
+            var linklerAdet = linkler.length;
+            for (var i = 0; i < linklerAdet; i++) {
+                var tekLink = linkler[i];
+                if (tekLink.getAttribute("href") && tekLink.getAttribute("rel") == "external") {
+                    tekLink.target = "_blank";
+                }
+            }
+        }
     </script>
 
 <?php include_once('include/bs-include/end.php'); ?>

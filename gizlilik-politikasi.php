@@ -1,6 +1,8 @@
 <?php
+    define('LOADED', TRUE);
     include_once('include/functions.php');
     includeExtContents("gizlilik-politikasi");
+    getHeader();
 ?>
 
 <body id="gizlilik">
@@ -75,4 +77,7 @@
 
     </div>
 
-<?php include_once('include/bs-include/end.php'); ?>
+<?php
+    getFooter();
+    include_once('include/bs-include/end.php');
+?>

@@ -1239,15 +1239,3 @@ if(document.getElementsByClassName("dba")[0] != undefined)
 // Ayrılmış alan ------------------------------------------------------------------
 
 
-/*index.php için, rel external olanlar _blank açtırılıyor.*/
-function YeniSekme() {
-    if (!document.getElementsByTagName) return;
-    var linkler = document.getElementsByTagName("a");
-    var linklerAdet = linkler.length;
-    for (var i = 0; i < linklerAdet; i++) {
-        var tekLink = linkler[i];
-        if (tekLink.getAttribute("href") && tekLink.getAttribute("rel") == "external") {
-            tekLink.target = "_blank";
-        }
-    }
-}

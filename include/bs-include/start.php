@@ -1,4 +1,7 @@
-<?php include_once(__DIR__ . '/../functions.php'); // üst klsörde __DIR__ ve / ?>
+<?php
+    include_once(__DIR__ . '/../functions.php'); // üst klsörde __DIR__ ve /
+    checkDirectAccessToIncludeFile();
+?>
 
 <!DOCTYPE html>
 <html lang="tr">
@@ -24,7 +27,7 @@
             echo "<title>E-Park</title>";
         }
     ?>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <?php print_js_or_css(extCssSource()); ?>
+    <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+    <?php cssSourceSelection("CSSFile", "all", "style"); ?>
     <link rel="icon" href="/images/logo-icon.png">
 </head>

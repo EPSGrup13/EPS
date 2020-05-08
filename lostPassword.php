@@ -11,7 +11,7 @@
 <div class="lostPasswordPage">
 	<div id="lostPasswordResetBox">
 
-	    <img id="lostPasswordResetImg" src="https://i.hizliresim.com/Wo6WBE.png" />
+	    <img id="lostPasswordResetImg" src="<?php echo isDevelopmentModeOn(); ?>images/lock-img.png" />
 	    <h3 id="lostPasswordResetText">Şifremi Unuttum</h3>
 	    <form method="POST" action="">
 			<div class="forResponsive"><input class="lostPwi" type="text" name="email" placeholder="E-mail"></div>

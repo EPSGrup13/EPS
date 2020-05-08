@@ -16,9 +16,7 @@
 			?>
 
  			<!-- dinamik link rel -->
-			<?php 
-				print_js_or_css(cssSource());
-			?>
+			<?php cssSourceSelection("CSSFile"); ?>
 		    <link rel="icon" href="/images/logo-icon.png">
 		</head>
 	<body class="font1" onload="ckVersion();">

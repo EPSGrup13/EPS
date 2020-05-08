@@ -6,7 +6,8 @@
 	pageProtection();
 	isParkOwner();
 
-	$today = date("Y-m-d");
+	$timezone = 3;
+	$today=date("Y-m-d", time() + 3600*($timezone+date("I")));
 	$getData = reservationRequest($_SESSION["person_id"], $today);
 	// index 0 -> person_id
 	// index 1 -> full_plate
