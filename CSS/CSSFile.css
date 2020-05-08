@@ -695,6 +695,7 @@ input:checked + .slider:before {
 
 .cb-time {
   display:table-row;
+  color: #2E384D;
 }
 
 .sticky-bar {
@@ -2196,6 +2197,13 @@ footer p
 }
 
 
+/*reservation.php için css*/
+
+.wrapperReservation {
+  height: 100vh;
+  background-color: #e8e8e8;
+}
+
 .parkReservationBox {
   width:600px;
   height:550px;
@@ -2204,16 +2212,17 @@ footer p
   top:50%;
   margin-top:-300px;
   margin-left:-300px;
-  background-color:rgba(255, 255, 255, 0.685);
+  background-color:#f1f1f1;
   border-radius:10px;
+  box-shadow: 2px 2px 6px #8b8b8b;
 }
 
 .parkReservastionInfoBox {
   width:600px;
-  background-color: #f0f0f0;
-  color:black;
+  background: #3282b8;
+  color:white;
   padding: 5px 0px 5px 0px;
-  border-bottom:2px solid #9DA4AA;
+  border-bottom:1px solid #9DA4AA;
   border-top-left-radius: 10px; 
   border-top-right-radius: 10px;
 
@@ -2238,7 +2247,6 @@ footer p
   height:360px;
   background-color:(255, 255, 255, 0.685);
   padding-top:10px;
-  border-bottom: 1px solid #b0b0b0;
 }
 
 .parkReservationCarImg {
@@ -2246,17 +2254,23 @@ footer p
   height:20px;
   padding-right:10px;
 }
+
 .reservationButton {
-  margin-top:15px; 
-  background-color:rgb(243, 208, 67);
-  padding:8px;
-  color:white;
+  cursor: pointer;
+  width: 180px;
+  height: 40px;
+  margin-top: 50px;
+  margin-left:210px;
+  border-radius: 5px;
+  font-size: 15px;
+  color: white;
+  background-color: #3282b8;
   border:none;
-  border-radius:5px;
-  margin-bottom:15px;
-  margin: auto;
-  display: block;
 } 
+
+.reservationButton:hover {
+  background-color: #377eae;
+}
 
 .parkReservationNoCarMessageDiv {
   width: 290px;
@@ -2271,6 +2285,7 @@ footer p
   font-size:10px;
   font:bold;
 }
+
 
 .reservationAcceptBox { /*en dış div*/
   width:1150px;
