@@ -687,13 +687,12 @@ li a:hover {
 
 #form-otopark-sahibi {
     background: rgba(0, 0, 0, 0.75);
-    position: absolute;
+    position: relative;
     width: 850px;
     height: 520px;
     display: table;
     top: 50%;
     left: 50%;
-    margin-top: -290px;
     margin-left: -425px;
     text-align: center;
     font-family: "Montserrat", sans-serif;
@@ -828,19 +827,23 @@ li a:hover {
         font-weight: bolder !important;
 }
 
+.otopark-hiza{
+    margin-bottom: 10% !important;
+    margin-top: 11% !important;
+}
+
 /* Otoparkımız Ol Mobil Başlangıç */
 
 @media screen and (max-width: 961px) {
 
     #form-otopark-sahibi {
         background: rgba(0, 0, 0, 0.75);
-        position: absolute;
+        position: relative;
         width: 80%;
         height: 80%;
         display: table;
         top: 50%;
         left: 50%;
-        margin-top: -30%;
         margin-bottom: 15%;
         margin-left: -40%;
         text-align: center;
@@ -971,6 +974,11 @@ li a:hover {
         font-family: "Montserrat", sans-serif;
     }
 }
+
+    .otopark-hiza{
+		margin-bottom: 16% !important;
+		margin-top: 15% !important;
+    }
 
 /* Otoparkımız Ol Mobil Bitiş */
 

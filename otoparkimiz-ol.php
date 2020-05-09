@@ -7,7 +7,7 @@
 
 <body id="otopark-body" onload="ckVersion();">
 
-<div class="content">
+<div class="otopark-hiza">
     <div id="form-otopark-sahibi">
         <h3 id="h3-baslik">Daha fazla müşteriye ulaşmak için EPS otoparkı olun!</h3>
         <h4 id="h4-otopark">Aşağıdaki formu doldurarak siz de EPS ailesine katılabilir, EPS müşterilerine hizmet vermeye
