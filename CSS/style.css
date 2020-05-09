@@ -307,20 +307,20 @@ li a:hover {
 
 
 /* footer başlangıç */
-.footer .footer-boy {
+.footer2 .footer-boy {
     margin-bottom: 2.25rem;
 }
 
-.footer h4 {
+.footer2 h4 {
     margin-bottom: 1rem;
     color: white;
 }
 
-.footer p {
+.footer2 p {
     color: white;
 }
 
-.footer {
+.footer2 {
     padding-top: 1.5rem;
     padding-bottom: 2.25rem;
     background-color: #3e3b4d;
@@ -335,13 +335,13 @@ li a:hover {
 }
 
 @media (max-width:991px) {
-    .footer .footer-boy p {
+    .footer2 .footer-boy p {
         margin-left: -15%;
     }
-    .footer h4 {
+    .footer2 h4 {
         margin-left: -29.9%;
     }
-	 .footer-hiza{
+	.footer-hiza{
         margin-left: 8.5%;
     }
     #sosyal-logo{
@@ -353,10 +353,10 @@ li a:hover {
 
 
 @media screen and (max-width: 767px) and (min-width: 526px){
-    .footer .footer-boy p {
+    .footer2 .footer-boy p {
         margin-left: -1%;
     }
-    .footer h4 {
+    .footer2 h4 {
         margin-left: -45%;
     }
     #sosyal-logo{
@@ -369,10 +369,10 @@ li a:hover {
         margin-top: -114px;
         margin-left: -100px;
     }
-    .footer .footer-boy p {
+    .footer2 .footer-boy p {
         margin-left: 80px;
     }
-    .footer h4 {
+    .footer2 h4 {
         margin-left: 35px;
  
     }
@@ -380,10 +380,10 @@ li a:hover {
 }
 
 @media (max-width:525px) {
-    .footer .footer-boy p {
+    .footer2 .footer-boy p {
         margin-left: -7%;
     }
-    .footer h4 {
+    .footer2 h4 {
         margin-left: -42%;
     }
     .footer-hiza{
@@ -395,10 +395,10 @@ li a:hover {
 }
 
 @media (max-width:500px) {
-    .footer .footer-boy p {
+    .footer2 .footer-boy p {
         margin-left: -2%;
     }
-    .footer h4 {
+    .footer2 h4 {
         margin-left: -42%;
     }
     .footer-hiza{
@@ -413,10 +413,10 @@ li a:hover {
 }
 
 @media (max-width:460px) {
-    .footer .footer-boy p {
+    .footer2 .footer-boy p {
         margin-left: -2%;
     }
-    .footer h4 {
+    .footer2 h4 {
         margin-left: -42%;
     }
     .footer-hiza{
@@ -428,10 +428,10 @@ li a:hover {
 }
 
 @media (max-width:410px) {
-    .footer .footer-boy p {
+    .footer2 .footer-boy p {
         margin-left: -2%;
     }
-    .footer h4 {
+    .footer2 h4 {
         margin-left: -42%;
     }
     .footer-hiza{

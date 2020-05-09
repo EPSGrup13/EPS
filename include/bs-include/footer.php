@@ -1,5 +1,5 @@
 <?php include_once(__DIR__. '/../functions.php'); ?>
-<div class="footer">
+<div class="footer2">
         <div class="container">
             <!-- container bs -->
             <div>
