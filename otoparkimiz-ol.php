@@ -9,13 +9,12 @@
 
 <div class="otopark-hiza">
     <div id="form-otopark-sahibi">
-        <h3 id="h3-baslik">Daha fazla müşteriye ulaşmak için EPS otoparkı olun!</h3>
-        <h4 id="h4-otopark">Aşağıdaki formu doldurarak siz de EPS ailesine katılabilir, EPS müşterilerine hizmet vermeye
-            hemen başlayabilirsiniz. Formu doldurduktan sonra ekibimiz sizinle iletişime geçerek işleminizi
-            tamamlayacaktır.</h4>
+        <h3 id="h3-baslik">EPS otoparkı olup daha fazla müşteriye ve daha fazla kazanca sahip olun!</h3>
+        <h4 id="h4-otopark">Formu doldurarak anlaşmalı EPS otoparkı olmak için başvuru yapabilir ve hizmet vermeye
+            başlayabilirsiniz. Başvurunuz değerlendirilip en kısa süre içerisinde size geri dönüş yapılacaktır.</h4>
         <div class="iletisim">
 
-            <img src="/images/qr2.png" id="qr-code" alt="E-Park QR Code" />
+            <img src="/images/qr3.png" id="qr-code" alt="E-Park QR Code" />
             <div id="cizgi"></div>
             <div class="iletisimsag">
                 <form method="POST" action="">
