@@ -32,7 +32,7 @@
                 }
                 else
                 {
-                    echo "<li><a href=\"".isDevelopmentModeOn()."login\">Giriş yap</a></li>";
+                    echo "<li><a href=\"".isDevelopmentModeOn()."login\"><i class="fas fa-sign-in-alt"></i> Giriş yap</a></li>";
                 }
             ?>
 
@@ -51,16 +51,16 @@
             <div class="container">
                 <div class="col-lg-6" style="margin-top: -60px;">
                     <div class="container">
-                        <h1 style="color: white;">E-PARK SİSTEMİ ile <br> Rezervasyon yaptığın otoparka detaylı yol
-                            tarifi al, park yerini
-                            aramakla vakit kaybetme.
+                        <h1 style="color: white;">E-PARK ile <br> Uygun durumdaki otoparkları gör,
+                            online olarak yerini al,
+                            park yeri aramakla vaktini harcama.
                             <br>
-                            <span style="font-size: 1.5rem;">Nişantaşı’ndan Kadıköy’e Bebek’ten Bağdat Caddesi’ne
-                                çevrendeki tüm otoparkları
+                            <span style="font-size: 1.5rem;">İstanbul’dan Ankara'ya İzmir’den Antalya’ya
+                                Türkiye'nin tüm şehir ve ilçelerinde yerini
                                 <br> E-Park ile gör!
                             </span></h1>
-                        <p class="p-aciklama">E-Park mobil uygulaması her yerde rahatça ve kolayca park yeri
-                            bulabilmeniz için geliştirildi.</p>
+                        <p class="p-aciklama">Türkiye'nin her tarafındaki anlaşmalı olduğumuz otoparklara
+                        tek tık ile rezervasyon yap.</p>
 <!--                    <a class="buton" href="---------------.ipa"><i class="fab fa-apple"></i> App Store'da mevcut değil</a> -->
                         <a class="buton" href="---------------.apk"><i class="fab fa-google-play"></i> Google
                             Play İndirin</a>
@@ -77,7 +77,7 @@
             <div>
                 <div class="col-lg-12">
                     <h2 style="color: white;">ÖZELLİKLER</h2>
-                    <div class="p-aciklama" style="text-align: center;">E-Park kullanarak neler yapabilirsin?
+                    <div class="p-aciklama" style="text-align: center;">E-Park ile neler yapabilirsin?
                     </div>
                 </div> <!-- col bitiş bs-->
             </div>
@@ -100,9 +100,9 @@
                                     <div class="deneme">
                                         <div class="sol-bolum">
                                             <div class="yazi-aciklama">
-                                                <h4 class="konu">Otoparkları İncele</h4>
-                                                <p class="ozellikler-p">Anlaşmalı otoparkların fiyat ve konum
-                                                    bilgilerini incele</p>
+                                                <h4 class="konu">Otoparkları Gör</h4>
+                                                <p class="ozellikler-p">EPS Otoparklarının konumlarını, ücretini
+                                                    ve puanlarını gör</p>
                                             </div>
                                             <div class="simge">
                                                 <i class="fas fa-search"></i>
@@ -112,9 +112,8 @@
                                     <div class="sol-bolum">
                                         <div class="bosluk">
                                             <div class="yazi-aciklama">
-                                                <h4 class="konu">Rezervasyon Yap</h4>
-                                                <p class="ozellikler-p">Otoparka gideceğin saati belirleyerek yerini
-                                                    önceden ayır</p>
+                                                <h4 class="konu">Yerini Ayır</h4>
+                                                <p class="ozellikler-p">Seçtiğin otoparka istediğin saatte rezervasyon yap</p>
                                             </div>
                                             <div class="simge">
                                                 <i class="fas fa-car"></i>
@@ -124,12 +123,12 @@
                                     <div class="sol-bolum">
                                         <div class="bosluk">
                                             <div class="yazi-aciklama">
-                                                <h4 class="konu">Yol Tarifi Al</h4>
-                                                <p class="ozellikler-p">Rezervasyon yaptığın otoparka detaylı yol tarifi
-                                                    al</p>
+                                                <h4 class="konu">Navigasyon Hizmeti</h4>
+                                                <p class="ozellikler-p">Çevrendeki en yakın otoparkı gör veya istediğin otoparka doğru
+                                                    rotanı belirle</p>
                                             </div>
                                             <div class="simge">
-                                                <i class="far fa-compass"></i>
+                                                <i class="fas fa-location-arrow"></i>
                                             </div>
                                         </div>
                                     </div>
@@ -148,12 +147,12 @@
                                     <div class="sag-bolum">
                                         <div class="bosluk">
                                             <div class="simge">
-                                                <i class="fas fa-coins"></i>
+                                                <i class="fas fa-hourglass-half"></i>
                                             </div>
                                             <div class="yazi-aciklama">
-                                                <h4 class="konu">İndirimli Park Et</h4>
-                                                <p class="ozellikler-p">Rezervasyon yaparak indirimli fiyatlar ile park
-                                                    et</p>
+                                                <h4 class="konu">Zaman Kazan</h4>
+                                                <p class="ozellikler-p">Park yeri aramakla vaktini harcama
+                                                 zaman kazan</p>
                                             </div>
                                         </div>
                                     </div>
@@ -163,9 +162,9 @@
                                                 <i class="far fa-credit-card"></i>
                                             </div>
                                             <div class="yazi-aciklama">
-                                                <h4 class="konu">Kredi Kartınla Öde</h4>
-                                                <p class="ozellikler-p">Otopark ücretini mobil uygulama üzerinden yap,
-                                                    otoparka hiçbir ücret ödeme</p>
+                                                <h4 class="konu">Kart İle Ödeme Yap</h4>
+                                                <p class="ozellikler-p">Otopark ücretini kredi kartı ya da banka kartın ile
+                                                    hızlı ve güvenli şekilde online öde</p>
                                             </div>
                                         </div>
                                     </div>
@@ -175,10 +174,10 @@
                                                 <i class="fas fa-phone"></i>
                                             </div>
                                             <div class="yazi-aciklama">
-                                                <h4 class="konu">Bize Ulaşın</h4>
-                                                <p class="ozellikler-p">EPS Mobil Uygulama ile ilgili geri dönüşlerinizi
-                                                    buradan
-                                                    yapabilirsiniz.</p>
+                                                <h4 class="konu">İletişime Geç</h4>
+                                                <p class="ozellikler-p">İnternet sitemizin veya mobil uygulamamızın
+                                                    iletişim bölümünden
+                                                    bize ulaş.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -202,27 +201,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="JS/jquery-3.4.1.min.map"></script>
     <script src="JS/JScript.js"></script>
-    <script>
-        window.onload = YeniSekme;
-        
-        $(function () {
-            $(".mobil-menu").click(function () {
-                $(this).next("ul").toggle(200);
-            });
-        });
 
-        /*index.php için, rel external olanlar _blank açtırılıyor.*/
-        function YeniSekme() {
-            if (!document.getElementsByTagName) return;
-            var linkler = document.getElementsByTagName("a");
-            var linklerAdet = linkler.length;
-            for (var i = 0; i < linklerAdet; i++) {
-                var tekLink = linkler[i];
-                if (tekLink.getAttribute("href") && tekLink.getAttribute("rel") == "external") {
-                    tekLink.target = "_blank";
-                }
-            }
-        }
-    </script>
 
 <?php include_once('include/bs-include/end.php'); ?>
