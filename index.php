@@ -13,7 +13,7 @@
             <h3 class="proje-isim">e-park</h3>
         </a></div>
 -->
-    <div class="menu" style="float: right;">
+    <div class="menu" id="menu_scroll" style="float: right;">
         <div class="mobil-menu"><i class="fa fa-bars fa-2x" aria-hidden="true" style="color: white;"></i></div>
         <ul style="float: right;">
 

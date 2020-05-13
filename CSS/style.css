@@ -1099,3 +1099,11 @@ height: 96.5px;
 /* üst menü responsive bitiş */
 
 
+/* Scroll menü rengi değişme */
+:root {
+    --color1: rgba(59,49,154,0.7);
+    --color2: #2f2c3d;
+}   
+/* Scroll menü rengi değişme */
+
+
