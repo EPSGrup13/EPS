@@ -307,20 +307,20 @@ li a:hover {
 
 
 /* footer başlangıç */
-.footer .footer-boy {
+.footer2 .footer-boy {
     margin-bottom: 2.25rem;
 }
 
-.footer h4 {
+.footer2 h4 {
     margin-bottom: 1rem;
     color: white;
 }
 
-.footer p {
+.footer2 p {
     color: white;
 }
 
-.footer {
+.footer2 {
     padding-top: 1.5rem;
     padding-bottom: 2.25rem;
     background-color: #3e3b4d;
@@ -335,13 +335,13 @@ li a:hover {
 }
 
 @media (max-width:991px) {
-    .footer .footer-boy p {
+    .footer2 .footer-boy p {
         margin-left: -15%;
     }
-    .footer h4 {
+    .footer2 h4 {
         margin-left: -29.9%;
     }
-	 .footer-hiza{
+	.footer-hiza{
         margin-left: 8.5%;
     }
     #sosyal-logo{
@@ -353,10 +353,10 @@ li a:hover {
 
 
 @media screen and (max-width: 767px) and (min-width: 526px){
-    .footer .footer-boy p {
+    .footer2 .footer-boy p {
         margin-left: -1%;
     }
-    .footer h4 {
+    .footer2 h4 {
         margin-left: -45%;
     }
     #sosyal-logo{
@@ -369,10 +369,10 @@ li a:hover {
         margin-top: -114px;
         margin-left: -100px;
     }
-    .footer .footer-boy p {
+    .footer2 .footer-boy p {
         margin-left: 80px;
     }
-    .footer h4 {
+    .footer2 h4 {
         margin-left: 35px;
  
     }
@@ -380,10 +380,10 @@ li a:hover {
 }
 
 @media (max-width:525px) {
-    .footer .footer-boy p {
+    .footer2 .footer-boy p {
         margin-left: -7%;
     }
-    .footer h4 {
+    .footer2 h4 {
         margin-left: -42%;
     }
     .footer-hiza{
@@ -395,10 +395,10 @@ li a:hover {
 }
 
 @media (max-width:500px) {
-    .footer .footer-boy p {
+    .footer2 .footer-boy p {
         margin-left: -2%;
     }
-    .footer h4 {
+    .footer2 h4 {
         margin-left: -42%;
     }
     .footer-hiza{
@@ -413,10 +413,10 @@ li a:hover {
 }
 
 @media (max-width:460px) {
-    .footer .footer-boy p {
+    .footer2 .footer-boy p {
         margin-left: -2%;
     }
-    .footer h4 {
+    .footer2 h4 {
         margin-left: -42%;
     }
     .footer-hiza{
@@ -428,10 +428,10 @@ li a:hover {
 }
 
 @media (max-width:410px) {
-    .footer .footer-boy p {
+    .footer2 .footer-boy p {
         margin-left: -2%;
     }
-    .footer h4 {
+    .footer2 h4 {
         margin-left: -42%;
     }
     .footer-hiza{
@@ -679,7 +679,7 @@ li a:hover {
 
 /* Otoparkımız Ol Başlangıç */
 #otopark-body {
-    background-image: url('/images/otopark-ol2.jpg');
+    background-image: url('/images/otopark-ol3.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -687,13 +687,12 @@ li a:hover {
 
 #form-otopark-sahibi {
     background: rgba(0, 0, 0, 0.75);
-    position: absolute;
+    position: relative;
     width: 850px;
     height: 520px;
     display: table;
     top: 50%;
     left: 50%;
-    margin-top: -290px;
     margin-left: -425px;
     text-align: center;
     font-family: "Montserrat", sans-serif;
@@ -828,19 +827,23 @@ li a:hover {
         font-weight: bolder !important;
 }
 
+.otopark-hiza{
+    margin-bottom: 10% !important;
+    margin-top: 11% !important;
+}
+
 /* Otoparkımız Ol Mobil Başlangıç */
 
 @media screen and (max-width: 961px) {
 
     #form-otopark-sahibi {
         background: rgba(0, 0, 0, 0.75);
-        position: absolute;
+        position: relative;
         width: 80%;
         height: 80%;
         display: table;
         top: 50%;
         left: 50%;
-        margin-top: -30%;
         margin-bottom: 15%;
         margin-left: -40%;
         text-align: center;
@@ -971,6 +974,11 @@ li a:hover {
         font-family: "Montserrat", sans-serif;
     }
 }
+
+    .otopark-hiza{
+		margin-bottom: 16% !important;
+		margin-top: 15% !important;
+    }
 
 /* Otoparkımız Ol Mobil Bitiş */
 
