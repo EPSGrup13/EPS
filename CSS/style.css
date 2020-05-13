@@ -167,9 +167,13 @@ li a:hover {
 
 .ozellikler-bolumu .nav-link.active,
 .ozellikler-bolumu .nav-link:hover {
-    border-bottom: 0.1875rem solid #00c9db;
-    background-color: transparent;
-    color: #00c9db;
+    border-bottom: 0.1875rem solid #00c9db !important;
+    background-color: transparent !important;
+    color: #00c9db !important;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    cursor: context-menu;
 }
 
 .ozellikler-bolumu .nav-link {
@@ -669,10 +673,6 @@ li a:hover {
     float: right;
     margin-left: 5px;
 }
-
-.active:after {
-  content: "\2212";
-}  
 
 /* Sıkça Sorular Sorular Bitiş */
 
