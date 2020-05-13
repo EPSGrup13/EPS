@@ -32,7 +32,7 @@
                 }
                 else
                 {
-                    echo "<li><a href=\"".isDevelopmentModeOn()."login\"><i class="fas fa-sign-in-alt"></i> Giriş yap</a></li>";
+                    echo "<li><a href=\"".isDevelopmentModeOn()."login\"><i class=\"fas fa-sign-in-alt\"></i> Giriş yap</a></li>";
                 }
             ?>
 
@@ -177,7 +177,7 @@
                                                 <h4 class="konu">İletişime Geç</h4>
                                                 <p class="ozellikler-p">İnternet sitemizin veya mobil uygulamamızın
                                                     iletişim bölümünden
-                                                    bize ulaş.</p>
+                                                    bize ulaş</p>
                                             </div>
                                         </div>
                                     </div>
