@@ -36,19 +36,21 @@
 		<?php
 		if(is_array($getData)) {
 			for($i = 0; $i < count($getData); $i++) {
-				for($j = 0; $j < count($getData[$i]) - 1; $j++) { // array.length -1'e kadar. Son veri reservation_id
-					if($j === 2) // eğer tarih olan index ise.
-						echo "<div class=\"reservationAcceptBoxInfoPartial\">" .reArrangeDate($getData[$i][$j]). "</div>";
-					else
-						echo "<div class=\"reservationAcceptBoxInfoPartial\">" .$getData[$i][$j]. "</div>";
-				}
-				?>
-					<div class="reservationAcceptBoxInfoPartial">Belirlenmedi</div>
-					<div class="reservationAcceptBoxInfoPartialImg">
-						<a href="javascript:void(0)" onclick="updateRv('false', <?php echo $getData[$i][4]; ?>)"><img src="<?php echo isDevelopmentModeOn(); ?>images/reject-icon.png" class="reservationAcceptBoxInfoImg"></a>
-					</div>
-					<div class="reservationAcceptBoxInfoPartialImg">
-						<a href="javascript:void(0)" onclick="updateRv('true', <?php echo $getData[$i][4]; ?>)"><img src="<?php echo isDevelopmentModeOn(); ?>images/accept-icon.png" class="reservationAcceptBoxInfoImg"></a>
+				echo "<div style=\"display: block; width: 100%; height: 100%;\">";
+					for($j = 0; $j < count($getData[$i]) - 1; $j++) { // array.length -1'e kadar. Son veri reservation_id
+							if($j === 2) // eğer tarih olan index ise.
+								echo "<div class=\"reservationAcceptBoxInfoPartial\">" .reArrangeDate($getData[$i][$j]). "</div>";
+							else
+								echo "<div class=\"reservationAcceptBoxInfoPartial\">" .$getData[$i][$j]. "</div>";
+						}
+						?>
+							<div class="reservationAcceptBoxInfoPartial">Belirlenmedi</div>
+							<div class="reservationAcceptBoxInfoPartialImg">
+								<a href="javascript:void(0)" onclick="updateRv('false', <?php echo $getData[$i][4]; ?>)"><img src="<?php echo isDevelopmentModeOn(); ?>images/reject-icon.png" class="reservationAcceptBoxInfoImg"></a>
+							</div>
+							<div class="reservationAcceptBoxInfoPartialImg">
+								<a href="javascript:void(0)" onclick="updateRv('true', <?php echo $getData[$i][4]; ?>)"><img src="<?php echo isDevelopmentModeOn(); ?>images/accept-icon.png" class="reservationAcceptBoxInfoImg"></a>
+							</div>
 					</div>
 				<?php
 			}
@@ -58,6 +60,7 @@
 				<div class="reservationAcceptBoxInfoPartial"></div>
 				<div class="reservationAcceptBoxInfoPartialImg"></div>
 				<div class="reservationAcceptBoxInfoPartialImg"></div>
+				</div> <!-- scrollable bir alt. -->
 			<?php
 		}
 		?>

@@ -2201,9 +2201,9 @@ function jsSourceSelection() {
 	$size = func_num_args(); // num of args
 	$argv = func_get_args(); // args as array
 
-	if(!$size === 0) {
+	if(!$size == 0) {
 		for($i = 0; $i < $size; $i++) {
-			echo "<script src=\"".$argv[$i]."\"></script>";
+			echo "<script src=\"" .isDevelopmentModeOn(). "JS/" .$argv[$i].".js\"></script>";
 		}
 	}
 }

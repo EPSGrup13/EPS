@@ -925,7 +925,7 @@ function mkComment(parkId) {
 
 		const chLeft = document.createElement("span");
 		chLeft.textContent = "255 karakter hakkınız kaldı.";
-		chLeft.className = "";
+		chLeft.className = "cmt-cnt-ch";
 
 		newElement.appendChild(submitBtn);
 		newElement.appendChild(clearBtn);
@@ -1009,7 +1009,8 @@ function clTextArea() {
 	const textArea = document.getElementsByClassName("cmt-message")[0];
 	textArea.value = "";
 	document.getElementsByClassName("point-slider")[0].value = 50;
-	document.getElementsByClassName("point-display")[0].textContent = "Puan 5.0";
+	document.getElementsByClassName("point-display")[0].textContent = "Puan: 5.0";
+	document.getElementsByClassName("cmt-cnt-ch")[0].textContent = "255 karakter hakkınız kaldı.";
 }
 
 // Yeni araç eklemek için dinamik input oluşturma alanı
@@ -1214,6 +1215,9 @@ function setStyles()
 		if(document.getElementsByClassName("citiesBox")[0] !== undefined && document.getElementsByClassName("citiesBox")[0].classList.contains("dm-v")) {
 			document.getElementsByClassName("citiesBox")[0].classList.toggle("dm-v");
 		}
+		if(document.getElementsByClassName("wrapperReservation")[0] !== undefined && document.getElementsByClassName("wrapperReservation")[0].classList.contains("dm-v")) {
+			document.getElementsByClassName("wrapperReservation")[0].classList.toggle("dm-v");
+		}
 	} else { // darkmode açılınca
 		document.body.classList.toggle("dm-v");
 		getHeader.classList.toggle("dm-v2");
@@ -1226,6 +1230,9 @@ function setStyles()
 		}
 		if(document.getElementsByClassName("citiesBox")[0] !== undefined) {
 			document.getElementsByClassName("citiesBox")[0].classList.toggle("dm-v");
+		}
+		if(document.getElementsByClassName("wrapperReservation")[0] !== undefined) {
+			document.getElementsByClassName("wrapperReservation")[0].classList.toggle("dm-v");
 		}
 	}
 }
