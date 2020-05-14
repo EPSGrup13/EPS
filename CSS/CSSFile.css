@@ -2319,14 +2319,13 @@ footer p
 .reservationAcceptBoxInfo {
   height:40px;
   width:100%;
-  border-bottom:1px solid #9DA4AA;
 }
 
 .reservationAcceptBoxInfoPartial {
   margin:0px;
   padding:10px;
   color:black;
-  width:180px;
+  width:225px;
   height: 20px;
   float:left;
   text-align: center;
@@ -2337,8 +2336,9 @@ footer p
   padding:10px;
   width:30px;
   height:20px;
-  float:right;
+  float:left;
   text-align: center;
+  margin-left:50px;
 }
 
 .reservationAcceptBoxInfoImg {
