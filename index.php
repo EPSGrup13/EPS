@@ -13,7 +13,7 @@
             <h3 class="proje-isim">e-park</h3>
         </a></div>
 -->
-    <div class="menu" style="float: right;">
+    <div class="menu" id="menu_scroll" style="float: right;">
         <div class="mobil-menu"><i class="fa fa-bars fa-2x" aria-hidden="true" style="color: white;"></i></div>
         <ul style="float: right;">
 
@@ -32,7 +32,7 @@
                 }
                 else
                 {
-                    echo "<li><a href=\"".isDevelopmentModeOn()."login\"><i class="fas fa-sign-in-alt"></i> Giriş yap</a></li>";
+                    echo "<li><a href=\"".isDevelopmentModeOn()."login\"><i class=\"fas fa-sign-in-alt\"></i> Giriş yap</a></li>";
                 }
             ?>
 
@@ -177,7 +177,7 @@
                                                 <h4 class="konu">İletişime Geç</h4>
                                                 <p class="ozellikler-p">İnternet sitemizin veya mobil uygulamamızın
                                                     iletişim bölümünden
-                                                    bize ulaş.</p>
+                                                    bize ulaş</p>
                                             </div>
                                         </div>
                                     </div>
