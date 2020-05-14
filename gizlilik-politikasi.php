@@ -17,8 +17,11 @@
             Kişisel bilgilerinizi (Ad, Soyad, Telefon No, E-posta, Plaka), işletim sistemi, konum bilgileri, otoparklar
             için yapılan yorumlarınızı, puanlamalarınızı, iletişim bölümünden yaptığınız her türlü öneri, bilgi edinme,
             istek, şikayet, teşekkür ve yaptığınız rezervasyon işlemlerinizi saklamaktadır.<br><br>
-
-
+        </p>
+    </div>
+	
+	<div id="gizlilik-kutu-2">
+		<p id="gizlilik-p">
             <i class="fas fa-paperclip"></i> EPS topladığı bilgileri; <br>
             Kullanıcıların kimliğini doğrulama, güncellemeler veya hatalar hakkında bilgilendirmede, herhangi bir sorun
             olduğu şartlarda kullanıcı ile iletişim halinde bulunabilmek için kullanacaktır. Kullanıcı sisteme
@@ -27,16 +30,18 @@
             sahiptir. Kullanıcılar uygulamaya kayıt olup kullanmakla tüm bu şartları kabul etmiş sayılacaktır. EPS
             üyeleri kendilerine e-posta ya da mesaj atılmasını istemiyorsa sistem içerisinde bulunan geri bildirim
             bölümünden durumu bize bildirebilir.<br><br>
-
+        </p>
+    </div>
+	
+		<div id="gizlilik-kutu-3">
+		<p id="gizlilik-p">
             <i class="fas fa-paperclip"></i> Bildirimler; <br>
             EPS sistem içindeki güncellemeler ve yeniliklerden sizleri haberdar etmek için size sistem içi bildirimler
             ve mailler gönderebilir. Kullanıcı bildirimleri uygulamayı kullandığı cihazdan veya internet sitesi
             üzerinden kapatabilme hakkına sahiptir.
             EPS gizlilik politikasını değiştirme hakkını her zaman saklı tutar. Herhangi bir değişiklik durumunda
             değişikliklere taraflara bildirilecektir. <br><br>
-
         </p>
-
     </div>
 
 <?php
