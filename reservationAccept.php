@@ -18,6 +18,7 @@
 
 
 <div class="content">
+<div class="wrapperReservation">
 <div class="reservationAcceptBox">
 
 <div class="reservationAcceptBoxMenu">
@@ -26,10 +27,12 @@
 		<div class="reservationAcceptBoxMenuOption">Rezervasyon Tarihi</div>
 		<div class="reservationAcceptBoxMenuOption">Rezervasyon Saati</div>
 		<div class="reservationAcceptBoxMenuOption">Ödeme</div>
+		<div class="reservationAcceptBoxMenuOption">Onay/Ret</div>
 </div>
 
 
 <div class="reservationAcceptBoxInfo" >
+	<div class="scrollable">
 		<?php
 		if(is_array($getData)) {
 			for($i = 0; $i < count($getData); $i++) {
@@ -58,12 +61,12 @@
 			<?php
 		}
 		?>
-
+	</div>	
 </div>
 
 
 
-
+</div>
 </div>
 </div>
 
