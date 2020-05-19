@@ -14,9 +14,9 @@
                     Gizlilik Politikası </span></strong><br>
 
             <i class="fas fa-paperclip"></i> EPS sistemi;<br>
-            Kişisel bilgilerinizi (Ad, Soyad, Telefon No, E-posta, Plaka), işletim sistemi, konum bilgileri, otoparklar
+            Kişisel bilgilerinizi (Ad, Soyad, Telefon No, E-mail, Plaka), işletim sistemi, konum bilgileri, otoparklar
             için yapılan yorumlarınızı, puanlamalarınızı, iletişim bölümünden yaptığınız her türlü öneri, bilgi edinme,
-            istek, şikayet, teşekkür ve yaptığınız rezervasyon işlemlerinizi saklamaktadır.<br><br>
+            istek, şikayet, teşekkür ve gerçekleştirmiş olduğunuz rezervasyon işlemlerinin tümünü saklamaktadır.<br><br>
         </p>
     </div>
 	
@@ -24,7 +24,7 @@
 	<p id="gizlilik-p">
 
             <i class="fas fa-paperclip"></i> EPS topladığı bilgileri; <br>
-            Kullanıcıların kimliğini doğrulama, güncellemeler veya hatalar hakkında bilgilendirmede, herhangi bir sorun
+            Kullanıcıların kimliğini teyit etmek, kullanıcılara performans ve hertülü güncelleme durumunda haber vermek, herhangi bir sorun
             olduğu şartlarda kullanıcı ile iletişim halinde bulunabilmek için kullanacaktır. Kullanıcı sisteme
             kaydettiği e-mail adresi ve telefon numarasına EPS tarafından gönderilecek bilgilendirme mesajları, reklam
             vb. mail ve mesajların gelmesini onaylamış kabul edilir. EPS, üyelerine mail veya sms gönderme yetkisine
