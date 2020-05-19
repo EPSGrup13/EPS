@@ -17,7 +17,7 @@
 
 			<li>
 				<h4 class="sss-question">EPS uygulasına herhangi bir ücret öder miyim?</h4>
-				<p class="sss-answer">EPS'yi ücretsiz olarak web sitemizden veya cep telefonunuza uygulamamızı indirerek kullanmaya başlayabilirsiniz.</p>
+				<p class="sss-answer">EPS'yi ücretsiz olarak web sitemizden veya android cep telefonunuza uygulamamızı indirerek kullanmaya başlayabilirsiniz.</p>
 			</li>
 
 			<li>
@@ -42,7 +42,8 @@
 
 			<li>
 				<h4 class="sss-question">Rezervasyon ücretini nakit ödeyebilir miyim?</h4>
-				<p class="sss-answer"> Rezervasyon ücreti olarak nakit ödeme kabul edilmemektedir. Rezervasyon ücreti yalnızca kredi kartı veya banka kartı ile yapabilirsiniz.</p>
+				<p class="sss-answer"> Rezervasyon işlemi için nakit para olarak ödeme seçeneği yoktur. Rezervasyon ücreti
+                yalnızca kredi kartı veya banka kartı ile yapabilirsiniz.</p>
 			</li>
 
 			<li>
@@ -51,8 +52,8 @@
 			</li>
 
 			<li>
-				<h4 class="sss-question"> Rezervasyon iptal işlemlerini nasıl
-				gerçekleştirebilirim?</h4>
+				<h4 class="sss-question"> Rezervasyonu nasıl iptal
+				edebilirim?</h4>
 				<p class="sss-answer">E-Park uygulamasında rezervasyon iptali sürecini
 				rezervasyon saatine 10 dakika kalıncaya kadar iptal edebilirler. Otoparka geç kalma durumunda ödeme iade edilmez.</p>
 			</li>
@@ -65,8 +66,8 @@
 
 			<li>
 				<h4 class="sss-question"> Herhangi bir problem durumunda ne yapmam gerekir?</h4>
-				<p class="sss-answer">EPS uygulamasında herhangi bir problem ile
-					karşılaşırsanız uygulama içerisindeki
+				<p class="sss-answer">EPS uygulamasında karşılasacağınız her türlü sorun
+                ile ilgili bizlere mobil uygulamamızdan ya da internet sitemizde bulunan
 				iletişim bölümünden bizlere rahatça ulaşabilirsiniz.</p>
 			</li>
 

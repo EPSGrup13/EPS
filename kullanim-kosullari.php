@@ -13,7 +13,7 @@
             Kullanıcının uyması gereken birtakım yükümlülükler bulunmaktadır: <br><br>
             
             1.1 Kullanıcı EPS mobil uygulama veya web sitemiz üzerinden, sisteme kaydolması için gerekli olan formu doldurup şifresini belirledikten sonra kayıt olmuş olur ve sözleşmeyi kabul etmiş sayılır. Kabul ettiği sözleşme kurallarınca sistemi kullanmaya başlayabilir.<br>
-            1.2 Kullanıcı kayıt esnasında verdiği tüm bilgilerin eksiksiz, gerçek ve güncel olduğunu kabul eder.<br>
+            1.2 Kullanıcı sisteme kayıt olurken verdiği bütün bilgilerin eksiksiz, gerçek ve güncel olduğunu kabul eder.<br>
             1.3 Kullanıcı yararlanacağı otopark hizmeti ile ilgili ücreti yalnızca uygulama üzerinden ödeyeceğini kabul etmiş sayılır.<br>
         </p>
     </div>
@@ -23,9 +23,9 @@
         <p id="kullanim-p"><strong>2. Uygulama Kullanımı ;</strong><br><br>
             • 2.0.1 Kullanıcı sisteme giriş yaptıktan sonra rezervasyon yapmak istediği otoparkı seçip, rezervasyon talebinde bulunur. Otopark görevlisinin rezervasyonu onaylaması ile rezervasyon işlemi tamamlanmış sayılır.<br>
 
-            • 2.0.2 EPS, kullanıcıların otoparklara yaptığı rezervasyon taleplerinin kabul edileceği konusunda güvence vermez. Otopark görevlisi rezervasyon işlemini kabul etmediği zaman, kullanıcıya rezervasyonun reddedildiği bildirilir.<br>
+            • 2.0.2 EPS, kullanıcıların otoparklara yaptığı rezervasyon taleplerinin kabul edileceği konusunda güvence vermemektedir. Otopark görevlisi rezervasyon işlemini kabul etmediği zaman, kullanıcıya rezervasyonun reddedildiği bildirilir.<br>
 
-            • 2.0.3 Kullanıcı seçtiği otoparka rezervasyon talebi gönderip otopark yetkilisin de talebi onayladığı halde kullanıcı otoparka gitmediği zaman rezervasyon işleminin uygunsuz biçimde kullanılmasını engellemek adına alınacak blokasyon ücreti iade edilmez.<br>
+            • 2.0.3 Kullanıcı seçtiği otoparka rezervasyon talebi gönderip otopark yetkilisin de talebi onayladığı halde kullanıcı otoparka gitmez ise rezervasyon işleminin uygunsuz biçimde kullanılmasını engellemek adına alınacak blokasyon ücreti iade edilmez.<br>
 
             • 2.0.4 Kullanıcı, otopark rezervasyon ücretini sisteme önceden yüklemiş olduğu bakiyeden kullanarak öder.<br>
 
@@ -33,7 +33,7 @@
 
             • 2.0.6 Kullanıcının sisteme bakiye yükleme amacıyla kullanacağı kart bilgileri EPS sunucularında tutulmaz.<br>
 
-            • 2.0.7 Kullanıcılar şikayetçi olduğu otoparklarla ilgili uygulama içerisinde her otoparka ayrılan yorum bölümünde yorum yapabilir ve otoparkları puanlayabilir. Kullanıcı eğer isterse mobil uygulamamız ya da web sitemizde bulunan iletişim bölümünden bizlere ulaşabilir. Çok fazla sayıda şikayet gelen otoparklarla ilgili gerekli çalışmalar yapılır gerekirse otoparklar ile EPS arasındaki anlaşma feshedilebilir.<br>
+            • 2.0.7 Kullanıcılar şikayetçi olduğu otoparklarla ilgili uygulama içerisinden ya da internet sitemizde bulunan her otoparka ayrılan yorum bölümünde yorum yapabilir ve otoparkları puanlayabilir. Kullanıcı eğer isterse mobil uygulamamız ya da web sitemizde bulunan iletişim bölümünden bizlere ulaşabilir. Çok fazla sayıda şikayet gelen otoparklarla ilgili gerekli çalışmalar yapılır gerekirse otoparklar ile EPS arasındaki anlaşma feshedilebilir.<br>
 
             • 2.0.8 Kullanıcılar sistemi yasal ve amacı doğrultusunda kullanmayı kabul etmiş sayılır. Yasal ve hukuki olmayan işlemlerden EPS sorumlu tutulamaz, kullanıcıların kendi sorumluluğundadır.<br>
 
