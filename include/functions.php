@@ -2173,8 +2173,8 @@ function addParkForm($park_name, $email, $phone_no, $address) {
 
 function addContactForm($firstName, $lastName, $email, $phoneNo, $city, $message) {
 	$query = "
-	INSERT INTO contactForm (firstName, lastName, phoneNo, email, city)
-	VALUES ('$firstName', '$lastName', '$phoneNo', '$email', '$message')
+	INSERT INTO contactForm (firstName, lastName, phoneNo, email, city, message)
+	VALUES ('$firstName', '$lastName', '$phoneNo', '$email', '$city', '$message')
 	";
 	$data = ""; // insert için önemsiz
 
