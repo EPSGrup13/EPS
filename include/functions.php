@@ -2040,6 +2040,27 @@ function updatePStatus($reservation_id, $process) {
 		return FALSE;
 }
 
+
+// Parktaki araç miktarını reservasyon kabul edildikçe 1 artırıyor.
+function decreaseParkCapacity($reservation_id) {
+	$query = "SELECT parkStatus.park_id FROM Reservation INNER JOIN parkStatus ON Reservation.parkStatus_id = parkStatus.parkStatus_id WHERE Reservation.reservation_id = '$reservation_id'";
+	$data = "park_id";
+
+	$obj = new Dbpro($query, $data);
+	$ans = $obj->select();
+	if(is_array($ans)) {
+		$query = "UPDATE Park SET currentNumCars = (currentNumCars + 1) WHERE park_id = '$ans[0]'";
+		$data = "";
+		$obj->setVals($query, $data);
+		$ans2 = $obj->update();
+		if($ans2)
+			return TRUE;
+		else
+			return FALSE;
+	} else
+		return FALSE;
+}
+
 function avgPoint($parkId) {
 	$query = "
 	SELECT

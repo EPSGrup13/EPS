@@ -21,7 +21,7 @@ class Request {
 				self.data = splitData;
 			}
 		}
-		this.xmlHttp.open("get", url, false) // false -> asenkron değil.
+		this.xmlHttp.open("get", url, false); // false -> asenkron değil.
 		this.xmlHttp.send();
 		return self.data;
 	}
@@ -1037,7 +1037,7 @@ function addCar() {
 	if(getInputs.length !== 0) {
 		for(let i = 0; i < getInputs.length; i++) {
 			if(getInputs[i].value.length !== 0 && getInputs[i].value.match(pattern)) {
-				dataArray.push(cleanVal(getInputs[i].value));
+				dataArray.push(cleanVal(getInputs[i].value.toUpperCase()));
 			} else if(getInputs[i].value.length === 0) {
 				getInputs[i].remove();
 				i--; // node silindiğinden arada bir i kaçırılmış oluyor.

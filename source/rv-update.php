@@ -5,8 +5,10 @@
 	if(isset($_POST["status"]) && isset($_POST["rvid"])) {
 		//echo $_POST["status"];
 		if(isSessionActive() && booleanPOCheck() && ownerRelevancy($_SESSION["person_id"], $_POST["rvid"])) {
-			if($_POST["status"] === "TRUE")
+			if($_POST["status"] === "TRUE") {
+				decreaseParkCapacity($_POST["rvid"]);
 				echo updateReservationStatus($_POST["rvid"], "update", 1);
+			}
 			else if($_POST["status"] === "FALSE")
 				echo updateReservationStatus($_POST["rvid"], "remove", 3);
 			else {
