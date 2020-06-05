@@ -1145,7 +1145,7 @@ height: 96.5px;
   font-weight: 900;
   letter-spacing: 20px;
   margin: 0;
-  background: url(404.jpg) center no-repeat;
+  background: url("/images/404.jpg") center no-repeat;
   -webkit-text-fill-color: transparent;
   -webkit-background-clip: text;
 }
