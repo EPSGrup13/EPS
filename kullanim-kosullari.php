@@ -10,7 +10,7 @@
     <div id="kullanim-kutu">
 
         <p id="kullanim-p"><strong>1. Başvuru ve Üyelik ;</strong><br>
-            Kullanıcının uyması gereken birtakım yükümlülükler bulunmaktadır: <br><br>
+            Kullanıcıların uyması gereken birtakım yükümlülükler bulunmaktadır: <br><br>
             
             1.1 Kullanıcı EPS mobil uygulama veya web sitemiz üzerinden, sisteme kaydolması için gerekli olan formu doldurup şifresini belirledikten sonra kayıt olmuş olur ve sözleşmeyi kabul etmiş sayılır. Kabul ettiği sözleşme kurallarınca sistemi kullanmaya başlayabilir.<br>
             1.2 Kullanıcı sisteme kayıt olurken verdiği bütün bilgilerin eksiksiz, gerçek ve güncel olduğunu kabul eder.<br>
