@@ -12,7 +12,7 @@
 ?>
 
 <div class="content">
-
+<div class="wrapperReservation">
 <div class="parkDetailsBox">
 
 <?php
@@ -47,7 +47,7 @@ else
 
 </div>
 </div>
-
+</div>
 
 <?php
 	getFooter();
