@@ -1183,3 +1183,35 @@ height: 96.5px;
 }
 
 /* 404 sayfası bitiş */
+
+
+/*Bakım Sayfası Başlangıç*/ 
+
+  #bakim-body { 
+    text-align: center; 
+    padding: 150px; 
+	font: 20px 'Roboto Mono'; 
+    color: white;
+    background: url('/images/bakim.jpg') center center no-repeat;
+    background-size: cover;	
+}
+  
+  #bakim-h1 { 
+    font-size: 50px;
+    margin-left: 7%; 
+}
+  
+  #bakim-article { 
+    display: block; 
+    text-align: left; 
+    width: 650px; 
+    margin: 0 auto; 
+}
+
+  #bakim-p {
+  text-align: center;
+  font: 60px 'Roboto Mono'; color: white;
+  margin-top: -40px;
+}
+
+/*Bakım Sayfası Bitiş*/ 
