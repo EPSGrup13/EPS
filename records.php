@@ -13,6 +13,7 @@
 ?>
 
 <div class="content">
+<div class="wrapperReservation">
 
 <?php
 echo "<div class=\"parkRecordsBox\">";
@@ -74,7 +75,7 @@ echo "</div>";
 
 
 </div>
-
+</div>
 
 <?php
 	getFooter();
