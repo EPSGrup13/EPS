@@ -1,11 +1,18 @@
 <?php
-	include '../include/functions.php';
+	define('LOADED', TRUE);
+	include_once('include/functions.php');
 ?>
+<html>
+		<head>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<!-- tüm sayfalar için aynı kök uzantı-->
+			<base href="http://epark.sinemakulup.com">
+			<title>Bakım Aşamasında</title>
 
-<head>
-	<link rel="stylesheet" type="text/css" href="/CSS/style.css">
-	<title>Bakım Aşamasında</title>
-</head>
+ 			<!-- dinamik link rel -->
+			<?php cssSourceSelection("style"); ?>
+		    <link rel="icon" href="/images/logo-icon.png">
+		</head>
 
 <body id="bakim-body">
 
