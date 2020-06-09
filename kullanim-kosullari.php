@@ -10,18 +10,18 @@
     <div id="kullanim-kutu">
 
         <p id="kullanim-p"><strong>1. Başvuru ve Üyelik ;</strong><br>
-            Kullanıcının uyması gereken birtakım yükümlülükler bulunmaktadır: <br><br>
+            Kullanıcıların uyması gereken birtakım yükümlülükler bulunmaktadır: <br><br>
             
             1.1 Kullanıcı EPS mobil uygulama veya web sitemiz üzerinden, sisteme kaydolması için gerekli olan formu doldurup şifresini belirledikten sonra kayıt olmuş olur ve sözleşmeyi kabul etmiş sayılır. Kabul ettiği sözleşme kurallarınca sistemi kullanmaya başlayabilir.<br>
             1.2 Kullanıcı sisteme kayıt olurken verdiği bütün bilgilerin eksiksiz, gerçek ve güncel olduğunu kabul eder.<br>
-            1.3 Kullanıcı yararlanacağı otopark hizmeti ile ilgili ücreti yalnızca uygulama üzerinden ödeyeceğini kabul etmiş sayılır.<br>
+            1.3 Kullanıcı yararlanacağı otopark hizmeti ile ilgili ücreti yalnızca uygulama üzerinden ve online bir şekilde ödeyeceğini kabul etmiş sayılır.<br>
         </p>
     </div>
 
     <div id="kullanim-kutu-2">
 
         <p id="kullanim-p"><strong>2. Uygulama Kullanımı ;</strong><br><br>
-            • 2.0.1 Kullanıcı sisteme giriş yaptıktan sonra rezervasyon yapmak istediği otoparkı seçip, rezervasyon talebinde bulunur. Otopark görevlisinin rezervasyonu onaylaması ile rezervasyon işlemi tamamlanmış sayılır.<br>
+            • 2.0.1 Kullanıcı sisteme giriş yaptıktan sonra rezervasyon yapmak istediği otoparkı seçip, rezervasyon talebinde bulunur. Otopark sorumlusunun rezervasyonu onaylaması ile rezervasyon işlemi tamamlanmış sayılır.<br>
 
             • 2.0.2 EPS, kullanıcıların otoparklara yaptığı rezervasyon taleplerinin kabul edileceği konusunda güvence vermemektedir. Otopark görevlisi rezervasyon işlemini kabul etmediği zaman, kullanıcıya rezervasyonun reddedildiği bildirilir.<br>
 
@@ -33,7 +33,7 @@
 
             • 2.0.6 Kullanıcının sisteme bakiye yükleme amacıyla kullanacağı kart bilgileri EPS sunucularında tutulmaz.<br>
 
-            • 2.0.7 Kullanıcılar şikayetçi olduğu otoparklarla ilgili uygulama içerisinden ya da internet sitemizde bulunan her otoparka ayrılan yorum bölümünde yorum yapabilir ve otoparkları puanlayabilir. Kullanıcı eğer isterse mobil uygulamamız ya da web sitemizde bulunan iletişim bölümünden bizlere ulaşabilir. Çok fazla sayıda şikayet gelen otoparklarla ilgili gerekli çalışmalar yapılır gerekirse otoparklar ile EPS arasındaki anlaşma feshedilebilir.<br>
+            • 2.0.7 Kullanıcılar şikayetçi olduğu otoparklarla ilgili EPS mobil uygulama içerisinden ya da internet sitemizde bulunan her otoparka ayrılan yorum bölümünde yorum yapabilir ve otoparkları puanlayabilir. Kullanıcı eğer isterse mobil uygulamamız ya da web sitemizde bulunan iletişim bölümünden bizlere ulaşabilir. Çok fazla sayıda şikayet gelen otoparklarla ilgili gerekli çalışmalar yapılır gerekirse otoparklar ile EPS arasındaki anlaşma feshedilebilir.<br>
 
             • 2.0.8 Kullanıcılar sistemi yasal ve amacı doğrultusunda kullanmayı kabul etmiş sayılır. Yasal ve hukuki olmayan işlemlerden EPS sorumlu tutulamaz, kullanıcıların kendi sorumluluğundadır.<br>
 
@@ -52,13 +52,13 @@
 
 
     	• 3.1 Fikri Mülkiyet Hakları <br>
-    	○ Mobil uygulamanın ya da internet sitesinin tasarımı, metinleri, tüm kodları ve tüm ögeleri EPS'nin telif hakları kapsamı içerisindedir. Kullanıcılar, EPS hizmetlerini, bilgilerini ticari amaçla kullanması yasaktır. Kullanıcılar EPS'nin izni olmadan, tüm bu telif hakkı içinde bulunan bilgileri ve her türlü ögeyi çoğaltması, dağıtması, 3. Şahıs ya da kurumlarla paylaşması yasaktır. Tüm hakları saklıdır. <br>
+    	○ Mobil uygulamanın ya da internet sitesinin tasarımı, yazıları, tüm kodları ve tüm ögeleri EPS'nin telif hakları kapsamı içerisindedir. Kullanıcılar, EPS hizmetlerini, bilgilerini her türlü maddi ve manevi kazanç getirecek amaçla kullanması, satışını yapması yasaktır. Kullanıcılar EPS'nin izni olmadan, tüm bu telif hakkı içinde bulunan bilgileri ve her türlü ögeyi çoğaltması, dağıtması, 3. Şahıs ya da kurumlarla paylaşması yasaktır. Tüm hakları saklıdır. <br>
 
     	• 3.2 Sözleşme Değişiklikleri <br>
     	○ EPS, tek taraflı olarak kendi isteğiyle sözleşmeyi, istediği bir zamanda değiştirme hakkına sahiptir. Sözleşmedeki şartlar değiştikten ve değişiklikler ilan edildiği günden sonra yeni kurallar geçerlidir ve kullanıcılar bunu kabul etmiş sayılır. <br>
 
     	• 3.3 Mücbir Sebepler <br>
-		○ Her türlü doğal afet (sel, savaş, deprem, yangın vb.), iletişim sorunları, park halinde kaza, kundaklama, arabada maddi hasar gibi durumlarda EPS sorumluluk kabul etmemektedir. Kullanıcıların bu ve benzeri durumlarda tazminat talep etme hakkı yoktur. <br>
+		○ Her türlü doğal afet (sel, savaş, deprem, yangın vb.), iletişim sorunları, park halinde kaza, kundaklama, arabada maddi hasar gibi durumlarda EPS sorumluluk kabul etmemektedir. Kullanıcıların bu ve benzeri durumlarda zararın karşılanması için herhangi bir maddi ödeme talep etme hakkı yoktur. <br>
 
 		• 3.4 Sözleşmenin Feshi <br>
 		○ Bu koşullar kullanıcının üyeliği sona erinceye kadar EPS ve kullanıcı arasında geçerli sayılacaktır. EPS, kullanıcının aykırı hareket etmesini tespit etmesi durumunda sözleşmeyi tek taraflı feshetme hakkına sahiptir. <br>
